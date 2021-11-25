@@ -359,6 +359,10 @@ export class BombFinance {
         tokenPrice = await this.getLPTokenPrice(token, this.BOMB, true);
       } else if (tokenName === 'BSHARE-BNB-LP') {
         tokenPrice = await this.getLPTokenPrice(token, this.BSHARE, false);
+      } else if (tokenName === 'BSHARE-BNB-APELP') {
+        tokenPrice = await this.getApeLPTokenPrice(token, this.BSHARE, false);
+      } else if (tokenName === 'BOMB-BTCB-APELP') {
+        tokenPrice = await this.getApeLPTokenPrice(token, this.BOMB, true);
       } else {
         tokenPrice = await this.getTokenPriceFromPancakeswap(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -430,6 +434,26 @@ export class BombFinance {
    * @returns price of the LP token
    */
   async getLPTokenPrice(lpToken: ERC20, token: ERC20, isBomb: boolean): Promise<string> {
+    const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
+    //Get amount of tokenA
+    const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
+    const stat = isBomb === true ? await this.getBombStat() : await this.getShareStat();
+    const priceOfToken = stat.priceInDollars;
+    const tokenInLP = Number(tokenSupply) / Number(totalSupply);
+    const tokenPrice = (Number(priceOfToken) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
+      .toString();
+    return tokenPrice;
+  }
+
+  /**
+   * Calculates the price of an LP token
+   * Reference https://github.com/DefiDebauchery/discordpricebot/blob/4da3cdb57016df108ad2d0bb0c91cd8dd5f9d834/pricebot/pricebot.py#L150
+   * @param lpToken the token under calculation
+   * @param token the token pair used as reference (the other one would be BNB in most cases)
+   * @param isBomb sanity check for usage of bomb token or tShare
+   * @returns price of the LP token
+   */
+  async getApeLPTokenPrice(lpToken: ERC20, token: ERC20, isBomb: boolean): Promise<string> {
     const totalSupply = getFullDisplayBalance(await lpToken.totalSupply(), lpToken.decimal);
     //Get amount of tokenA
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);

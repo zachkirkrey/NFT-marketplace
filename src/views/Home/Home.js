@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-LP');
-  const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
+  const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-APELP');
+  const tShareFtmLpStats = useLpStats('BSHARE-BNB-APELP');
   const bombStats = useBombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
@@ -72,9 +72,9 @@ const Home = () => {
   }
 
   const buyBombAddress =
-    'https://pancakeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' +
+    'https://app.apeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' +
     bomb.address;
-  const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
+  const buyBShareAddress = 'https://app.apeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -175,12 +175,11 @@ const Home = () => {
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
               <p>
-                The first algorithmic stablecoin on Binance Smart Chain, pegged to the <br />
-                price of 10,000 BOMB : 1 BTC via seigniorage.
+                We are a tomb.finance clone on BSC, but with a price that follows BTC.  Get amazing rewards and exposure to BTC!
               </p>
-              <p>
-                Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards. Then stake your earned BSHARE in the
-                Boardroom to earn more BOMB!
+              <p><strong>BOMB is pegged via algorithm to a 10,000:1 ratio to BTC.  $100k BTC = $10 BOMB PEG</strong>
+                {/* Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards. Then stake your earned BSHARE in the
+                Boardroom to earn more BOMB! */}
               </p>
             </Box>
           </Paper>

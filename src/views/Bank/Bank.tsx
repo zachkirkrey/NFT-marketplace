@@ -108,16 +108,16 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   let uniswapUrl: string;
   if (bank.depositTokenName.includes('BOMB')) {
     pairName = 'BOMB-BTCB pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
+    uniswapUrl = 'https://app.apeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
   } else {
     pairName = 'BSHARE-BNB pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/BNB/' + bshareAddr;
+    uniswapUrl = 'https://app.apeswap.finance/add/ETH/' + bshareAddr;
   }
   return (
     <Card>
       <CardContent>
         <StyledLink href={uniswapUrl} target="_blank">
-          {`Provide liquidity for ${pairName} now on PancakeSwap`}
+          {`Provide liquidity for ${pairName} now on ApeSwap`}
         </StyledLink>
       </CardContent>
     </Card>

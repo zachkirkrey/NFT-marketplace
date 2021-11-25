@@ -33,6 +33,8 @@ const logosBySymbol: { [title: string]: string } = {
   'BOMB-BNB-LP': bombFtmLpLogo,
   'BOMB-BTCB-LP': bombFtmLpLogo,
   'BSHARE-BNB-LP': bshareFtmLpLogo,
+  'BSHARE-BNB-APELP': bshareFtmLpLogo,
+      'BOMB-BTCB-APELP': bombFtmLpLogo,
 };
 
 type LogoProps = {

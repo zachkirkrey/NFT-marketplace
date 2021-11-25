@@ -88,7 +88,7 @@ const Providers: React.FC = ({ children }) => {
             walletlink: {
               url: config.defaultProvider,
               appName: 'Bomb Money',
-              appLogoUrl: 'https://github.com/bombmoney/bomb-assets/blob/master/logo_tomb_NoBG.png',
+              appLogoUrl: 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bomb-512.png',
             },
           }}
         >

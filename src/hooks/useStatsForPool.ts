@@ -14,7 +14,7 @@ const useStatsForPool = (bank: Bank) => {
   }, [bombFinance, bank]);
 
   useEffect(() => {
-    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch BBOND price: ${err.stack}`));
+    fetchAPRsForPool().catch((err) => console.error(`Failed to fetch APR info: ${err.stack}`));
     const refreshInterval = setInterval(fetchAPRsForPool, config.refreshInterval);
     return () => clearInterval(refreshInterval);
   }, [setPoolAPRs, bombFinance, fetchAPRsForPool]);
