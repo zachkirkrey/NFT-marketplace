@@ -53,10 +53,8 @@ const Farm = () => {
                     Earn BSHARE by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.<br />
-                    <br />
-                    <strong>** Make sure you are only in ApeSwap LP farms.  PancakeSwap farms will have 0 rewards soon. **
-                    </strong>
+                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.
+
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks

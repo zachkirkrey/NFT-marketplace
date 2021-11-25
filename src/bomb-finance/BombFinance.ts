@@ -54,7 +54,7 @@ export class BombFinance {
     this.BTC = this.externalTokens['BTCB'];
 
     // Uniswap V2 Pair
-    this.BOMBBTCB_LP = new Contract(externalTokens['BOMB-BTCB-LP'][0], IUniswapV2PairABI, provider);
+    this.BOMBBTCB_LP = new Contract(externalTokens['BOMB-BTCB-APELP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -103,7 +103,6 @@ export class BombFinance {
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
     const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
     const priceInBTC = await this.getTokenPriceFromPancakeswapBTC(this.BOMB);
-    console.log('PriceInBTC', priceInBTC);
     const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
 
@@ -160,17 +159,12 @@ export class BombFinance {
     const btcAmountBN = await this.BTC.balanceOf(lpToken.address);
     const btcAmount = getDisplayBalance(btcAmountBN, 18);
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
-    console.log('tokenAmountInOneLP:', tokenAmountInOneLP);
     const ftmAmountInOneLP = Number(btcAmount) / Number(lpTokenSupply);
-    console.log('ftmAmountInOneLP:', ftmAmountInOneLP);
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
-    console.log('lpTokenPrice:', lpTokenPrice);
 
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
-    console.log('lpTokenPriceFixed:', lpTokenPriceFixed);
 
     const liquidity = (Number(lpTokenSupply) * Number(lpTokenPrice)).toFixed(2).toString();
-    console.log('liquidity:', liquidity);
 
     return {
       tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
@@ -561,7 +555,7 @@ export class BombFinance {
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
-      console.log('priceInBUSD', priceInBUSD);
+      // console.log('priceInBUSD', priceInBUSD);
       return priceInBUSD.midPrice.toFixed(4);
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
