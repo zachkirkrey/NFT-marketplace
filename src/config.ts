@@ -120,7 +120,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     earnTokenName: 'BOMB',
     finished: false,
     sort: 7,
-    closedForStaking: false,
+    closedForStaking: true,
   },
   BombCakeRewardPool: {
     name: 'Earn BOMB by CAKE',
