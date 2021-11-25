@@ -126,7 +126,7 @@ const Boardroom = () => {
             <Grid container justify="center">
               <Box mt={3} style={{ width: '600px' }}>
                 <Alert variant="filled" severity="warning">
-                  Nov 23rd boardroom contract was upgraded.  All BSHARE stakers have been sent BSHARE back to their wallets. Please restake in the new Boardroom.
+                  After EPOCH 12 the bootstrap phase of boardroom will be complete.  Boardroom will stop paying BOMB rewards until it is above its peg price (1.0 BOMB PEG).
                 </Alert>
               </Box>
             </Grid>
