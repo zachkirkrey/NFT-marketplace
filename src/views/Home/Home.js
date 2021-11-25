@@ -348,10 +348,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BOMB-BTCB PancakeSwap LP</h2>
+              <h2>BOMB-BTCB ApeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BOMB-BTCB-LP" />
+                  <TokenSymbol symbol="BOMB-BTCB-APELP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -376,10 +376,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BSHARE-BNB PancakeSwap LP</h2>
+              <h2>BSHARE-BNB ApeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BSHARE-BNB-LP" />
+                  <TokenSymbol symbol="BSHARE-BNB-APELP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>

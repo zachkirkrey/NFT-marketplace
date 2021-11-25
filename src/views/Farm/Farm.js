@@ -55,7 +55,7 @@ const Farm = () => {
                   <Alert variant="filled" severity="warning">
                     BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.<br />
                     <br />
-                    <strong>                    ** Remove all funds from PancakeSwap, soon only ApeSwap pools will have rewards **
+                    <strong>** Remove all funds from PancakeSwap, soon only ApeSwap pools will have rewards **
                     </strong>
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
@@ -75,7 +75,7 @@ const Farm = () => {
                   </Typography>
                   <Alert variant="filled" severity="info">
                     Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.<br /><br />
-                    ** Remove all funds from PancakeSwap, soon only ApeSwap pools will have rewards **
+                    <strong>** Remove all funds from PancakeSwap, soon only ApeSwap pools will have rewards **</strong>
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
