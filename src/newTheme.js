@@ -26,12 +26,12 @@ const newTheme = createMuiTheme({
     action: {
       disabledBackground: '#CDCDCD',
       active: '#000',
-      hover: '#000',
+      hover: '#fff',
     },
   },
   typography: {
     color: '#2c2560',
-    fontFamily: ['"Poppins"', 'sans-serif'].join(','),
+    fontFamily: ['"Tahoma"', 'sans-serif'].join(','),
   },
 });
 

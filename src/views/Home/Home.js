@@ -211,14 +211,14 @@ const Home = () => {
           <Card style={{ height: '100%' }}>
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
-              <Button color="" href="/boardroom" variant="contained" style={{ marginRight: '10px' }}>
+              <Button color="default" href="/boardroom" variant="contained" style={{ marginRight: '10px' }}>
                 Stake Now
               </Button>
               <Button href="/farm" variant="contained" style={{ marginRight: '10px' }}>
                 Farm Now
               </Button>
               <Button
-                color=""
+                color="default"
                 target="_blank"
                 href={buyBombAddress}
                 variant="contained"
