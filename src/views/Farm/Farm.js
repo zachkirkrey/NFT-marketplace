@@ -52,8 +52,8 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn BSHARE by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    BSHARE FARMS START November 25 23:00 UTC and continue for 365 days.
+                  <Alert variant="filled" severity="info">
+                    BSHARE farms are running! They will end November 25 23:00 UTC 2022.
 
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
@@ -72,7 +72,7 @@ const Farm = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="info">
-                    Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.<br /><br />
+                    BOMB ApeLP reward pool is RUNNING!  It will end November 30th at 23:00 UTC.<br /><br />
                     <strong>** Make sure you are only in ApeSwap LP farms.  PancakeSwap farms have 0 rewards. **</strong>
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>

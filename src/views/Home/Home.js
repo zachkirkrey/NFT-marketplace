@@ -151,17 +151,17 @@ const Home = () => {
         <Grid item xs={12} sm={4}>
           <Paper>
             <Box p={4}>
-              <h2>Schedule</h2>
+              <h2>Launch Schedule</h2>
               <p></p>
               <ul>
                 <li>
-                  <strong>Genesis Farm:</strong> Nov 20 23:00 - FINISHED
+                  <strong>Genesis Farms:</strong> FINISHED
                 </li>
                 <li>
-                  <strong>Bomb Farm:</strong> Nov 21 23:00 - 9 days
+                  <strong>BOMB Farm:</strong> Nov 21 - Nov 30
                 </li>
                 <li>
-                  <strong>BSHARE Farm:</strong> Nov 25 23:00 - 365 days
+                  <strong>BSHARE Farms:</strong> Nov 25 - 365 days
                 </li>
 
               </ul>
