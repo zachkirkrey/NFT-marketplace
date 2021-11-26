@@ -73,7 +73,7 @@ const Farm = () => {
                   </Typography>
                   <Alert variant="filled" severity="info">
                     Bomb reward pools are RUNNING!  They will end November 30th at 23:00 UTC.<br /><br />
-                    <strong>** Make sure you are only in ApeSwap LP farms.  PancakeSwap farms will have 0 rewards soon. **</strong>
+                    <strong>** Make sure you are only in ApeSwap LP farms.  PancakeSwap farms have 0 rewards. **</strong>
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
