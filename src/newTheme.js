@@ -12,9 +12,9 @@ const newTheme = createMuiTheme({
       paper: 'rgba(255, 255, 255, 0.9)',
     },
     primary: {
-      light: '#757ce8',
-      main: '#571eb1',
-      dark: '#2c2560',
+      light: '#ffe066',
+      main: '#2c2560',
+      dark: '#b38f00',
       contrastText: '#000',
     },
     secondary: {

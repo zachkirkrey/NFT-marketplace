@@ -11,6 +11,12 @@ export const purple = {
   700: '#7b1fa2',
 };
 
+export const yellow = {
+  200: '#ffdb4d',
+  400: '#ab47bc',
+  700: '#e6b800',
+};
+
 export const red = {
   100: '#C1C1FF',
   200: '#7575FF',

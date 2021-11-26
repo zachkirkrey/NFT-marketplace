@@ -60,7 +60,7 @@ const Footer = () => {
               <img alt="twitter" src={TwitterImage} className={classes.img} />
             </a>
             <a
-              href="https://github.com/bombmoney/bomb-frontend"
+              href="https://github.com/bombmoney"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.link}
@@ -77,10 +77,10 @@ const Footer = () => {
               className={classes.link}
             >
               <img alt="youtube" src={YoutubeImage} className={classes.img} />
-            </a>
+            </a> */}
             <a href="http://discord.bomb.money/" rel="noopener noreferrer" target="_blank" className={classes.link}>
               <img alt="discord" src={DiscordImage} className={classes.img} />
-            </a> */}
+            </a>
           </Grid>
         </Grid>
       </Container>
