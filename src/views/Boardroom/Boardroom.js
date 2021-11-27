@@ -125,8 +125,8 @@ const Boardroom = () => {
 
             <Grid container justify="center">
               <Box mt={3} style={{ width: '600px' }}>
-                <Alert variant="filled" severity="warning">
-                  After EPOCH 12 the bootstrap phase of boardroom will be complete.  Boardroom will stop paying BOMB rewards until it is above its peg price (1.01+ BOMB PEG).
+                <Alert variant="filled" severity="info">
+                  Boardroom will resume printing BOMB once the price of BOMB is above its peg of 1.01.
                 </Alert>
               </Box>
             </Grid>

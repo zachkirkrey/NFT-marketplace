@@ -52,10 +52,10 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn BSHARE by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="info">
+                  {/* <Alert variant="filled" severity="info">
                     BSHARE farms are running! They will end November 25 23:00 UTC 2022.
 
-                  </Alert>
+                  </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
@@ -71,10 +71,10 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn BOMB by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="info">
-                    BOMB ApeLP reward pool is RUNNING!  It will end November 30th at 23:00 UTC.<br /><br />
-                    <strong>** Make sure you are only in ApeSwap LP farms.  PancakeSwap farms have 0 rewards. **</strong>
-                  </Alert>
+                  {/* <Alert variant="filled" severity="info">
+                    BOMB ApeLP reward pool is running!  It will end November 30th at 23:00 UTC.<br /><br />
+
+                  </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
@@ -90,7 +90,7 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Genesis Pools
                   </Typography>
-                  <Alert variant="filled" severity="error">
+                  <Alert variant="filled" severity="warning">
                     Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
