@@ -22,14 +22,12 @@ import useBanks from '../../hooks/useBanks';
 //   }
 // `;
 
-
 const BackgroundImage = createGlobalStyle`
   body {
     background-color: grey;
     background-size: cover !important;
   }
 `;
-
 
 const Farm = () => {
   const [banks] = useBanks();

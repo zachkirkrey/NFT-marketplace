@@ -44,10 +44,10 @@ const Bond: React.FC = () => {
   const bombStat = useBombStats();
   const cashPrice = useCashPriceInLastTWAP();
 
-  const  bondsPurchasable  = useBondsPurchasable();
-  
+  const bondsPurchasable = useBondsPurchasable();
+
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
- // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
+  // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {

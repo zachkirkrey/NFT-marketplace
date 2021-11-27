@@ -42,7 +42,6 @@ const BackgroundImage = createGlobalStyle`
   }
 `;
 
-
 const useStyles = makeStyles((theme) => ({
   button: {
     [theme.breakpoints.down('415')]: {
@@ -163,7 +162,6 @@ const Home = () => {
                 <li>
                   <strong>BSHARE Farms:</strong> Nov 25 - 365 days
                 </li>
-
               </ul>
             </Box>
           </Paper>
@@ -176,9 +174,11 @@ const Home = () => {
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
               <p>
-                We are a tomb.finance clone on BSC, but with a price that follows BTC.  Get amazing rewards and exposure to BTC!
+                We are a tomb.finance clone on BSC, but with a price that follows BTC. Get amazing rewards and exposure
+                to BTC!
               </p>
-              <p><strong>BOMB is pegged via algorithm to a 10,000:1 ratio to BTC.  $100k BTC = $10 BOMB PEG</strong>
+              <p>
+                <strong>BOMB is pegged via algorithm to a 10,000:1 ratio to BTC. $100k BTC = $10 BOMB PEG</strong>
                 {/* Stake your BOMB-BTC LP in the Farm to earn BSHARE rewards. Then stake your earned BSHARE in the
                 Boardroom to earn more BOMB! */}
               </p>
