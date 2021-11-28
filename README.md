@@ -35,4 +35,4 @@ npx prettier --write .
 - [Our project documentation](https://docs.bomb.money/) will help you understand before start contributing
 - Join our [Discord](https://discord.bomb.money) community
 - Or if you are more of a [Telegram Zombie](https://t.me/bombmoneybsc) we have that too
-- Bugs? Use the [Issues](https://github.com/bombmoney/frontend/issues) section of our github to report them
+- Bugs? Use the [Issues](https://github.com/bombmoney/bomb-frontend/issues) section of our github to report them
