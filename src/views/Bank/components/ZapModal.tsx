@@ -117,8 +117,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       </StyledDescriptionText>
       <StyledDescriptionText>
         {' '}
-        ({Number(estimate.token0)} {BNB_TICKER} / {Number(estimate.token1)}{' '}
-        {tokenName.startsWith(BOMB_TICKER) ? BOMB_TICKER : BSHARE_TICKER}){' '}
+        ({Number(estimate.token0)} {tokenName.startsWith(BSHARE_TICKER) ? BSHARE_TICKER : BNB_TICKER} / {Number(estimate.token1)}{' '}
+        {tokenName.startsWith(BSHARE_TICKER) ? BNB_TICKER : BSHARE_TICKER}){' '}
       </StyledDescriptionText>
       <ModalActions>
         <Button
