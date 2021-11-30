@@ -50,10 +50,17 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn BSHARE by staking LP
                   </Typography>
-                  {/* <Alert variant="filled" severity="info">
-                    BSHARE farms are running! They will end November 25 23:00 UTC 2022.
+                  <Alert variant="filled" severity="warning">
+                    <p>
+                      Our reward farms are all switching to PancakeSwap from ApeSwap.  The PancakeSwap farms will begin receiving
+                      rewards November 30th 23:00 UTC.  Rewards will be gradually switched from ApeSwap farms to PancakeSwap over 6 hours.
+                    </p><p>
+                      <b>    PancakeSwap Farms end with LP<br />
+                        ApeSwap farms end in APELP</b>
+                    </p>
 
-                  </Alert> */}
+
+                  </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
@@ -112,7 +119,7 @@ const Farm = () => {
           <Bank />
         </Route>
       </Page>
-    </Switch>
+    </Switch >
   );
 };
 

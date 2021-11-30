@@ -265,7 +265,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'BSHARE-BNB-APELP',
     earnTokenName: 'BSHARE',
     finished: false,
-    sort: 2,
+    sort: 5,
     closedForStaking: false,
   },
   BombBtcbApeLPBShareRewardPool: {
@@ -276,7 +276,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     depositTokenName: 'BOMB-BTCB-APELP',
     earnTokenName: 'BSHARE',
     finished: false,
-    sort: 1,
+    sort: 4,
     closedForStaking: false,
   },
   BshareBnbLPBShareRewardPool: {
@@ -286,9 +286,9 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     contract: 'BshareBnbLPBShareRewardPool',
     depositTokenName: 'BSHARE-BNB-LP',
     earnTokenName: 'BSHARE',
-    finished: true,
-    sort: 8,
-    closedForStaking: true,
+    finished: false,
+    sort: 2,
+    closedForStaking: false,
   },
   BombBtcbLPBShareRewardPool: {
     name: 'Earn BSHARE by BOMB-BTCB LP',
@@ -297,9 +297,9 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     contract: 'BombBtcbLPBShareRewardPool',
     depositTokenName: 'BOMB-BTCB-LP',
     earnTokenName: 'BSHARE',
-    finished: true,
-    sort: 7,
-    closedForStaking: true,
+    finished: false,
+    sort: 1,
+    closedForStaking: false,
   },
 };
 

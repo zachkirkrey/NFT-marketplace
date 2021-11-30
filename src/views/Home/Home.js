@@ -110,37 +110,37 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  // const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-LP' });
-  // const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
+  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-APELP' });
+  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-APELP' });
 
   // const StyledLink = styled.a`
   //   font-weight: 700;
   //   text-decoration: none;
   // `;
 
-  // const [onPresentBombZap, onDissmissBombZap] = useModal(
-  //   <ZapModal
-  //     decimals={18}
-  //     onConfirm={(zappingToken, tokenName, amount) => {
-  //       if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-  //       bombLpZap.onZap(zappingToken, tokenName, amount);
-  //       onDissmissBombZap();
-  //     }}
-  //     tokenName={'BOMB-BTCB-LP'}
-  //   />,
-  // );
+  const [onPresentBombZap, onDissmissBombZap] = useModal(
+    <ZapModal
+      decimals={18}
+      onConfirm={(zappingToken, tokenName, amount) => {
+        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        bombLpZap.onZap(zappingToken, tokenName, amount);
+        onDissmissBombZap();
+      }}
+      tokenName={'BOMB-BTCB-APELP'}
+    />,
+  );
 
-  // const [onPresentBshareZap, onDissmissBshareZap] = useModal(
-  //   <ZapModal
-  //     decimals={18}
-  //     onConfirm={(zappingToken, tokenName, amount) => {
-  //       if (Number(amount) <= 0 || isNaN(Number(amount))) return;
-  //       bshareLpZap.onZap(zappingToken, tokenName, amount);
-  //       onDissmissBshareZap();
-  //     }}
-  //     tokenName={'BSHARE-BNB-LP'}
-  //   />,
-  // );
+  const [onPresentBshareZap, onDissmissBshareZap] = useModal(
+    <ZapModal
+      decimals={18}
+      onConfirm={(zappingToken, tokenName, amount) => {
+        if (Number(amount) <= 0 || isNaN(Number(amount))) return;
+        bshareLpZap.onZap(zappingToken, tokenName, amount);
+        onDissmissBshareZap();
+      }}
+      tokenName={'BSHARE-BNB-APELP'}
+    />,
+  );
 
   return (
     <Page>
@@ -186,15 +186,16 @@ const Home = () => {
           </Paper>
         </Grid>
 
-        {/* <Grid container spacing={3}>
+        <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
-            <Alert variant="filled" severity="error">
+            <Alert variant="filled" severity="warning">
               <b>
-                We are in the process of upgrading our boardroom smart contract. If you have staked BSHARE in the boardroom, kindly remove at your earliest convenience.
+                Our reward farms are all switching to PancakeSwap from ApeSwap.  The PancakeSwap farms will begin receiving
+                rewards November 30th 23:00 UTC.  Rewards will be gradually switched from ApeSwap farms to PancakeSwap over 6 hours.
               </b>
             </Alert>
           </Grid>
-        </Grid> */}
+        </Grid>
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>
@@ -356,9 +357,9 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                {/* <Button color="primary" disabled={true} onClick={onPresentBombZap} variant="contained">
+                <Button color="primary" onClick={onPresentBombZap} variant="contained">
                   Zap In
-                </Button> */}
+                </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>
@@ -384,9 +385,9 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                {/* <Button color="primary" onClick={onPresentBshareZap} variant="contained">
+                <Button color="primary" onClick={onPresentBshareZap} variant="contained">
                   Zap In
-                </Button> */}
+                </Button>
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>

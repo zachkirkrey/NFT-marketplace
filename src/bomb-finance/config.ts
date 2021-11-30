@@ -29,7 +29,7 @@ export type EthereumConfig = {
 export const defaultEthereumConfig = {
   testing: false,
   autoGasMultiplier: 1.5,
-  defaultConfirmations: 1,
+  defaultConfirmations: 3,
   defaultGas: '6000000',
   defaultGasPrice: '7000000000000',
   ethereumNodeTimeout: 10000,

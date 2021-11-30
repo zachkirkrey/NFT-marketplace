@@ -15,7 +15,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance';
 import useBombFinance from '../../../hooks/useBombFinance';
 import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
-import { BOMB_TICKER, BSHARE_TICKER, BNB_TICKER } from '../../../utils/constants';
+import { BOMB_TICKER, BSHARE_TICKER, BNB_TICKER, BTC_TICKER } from '../../../utils/constants';
 import { Alert } from '@material-ui/lab';
 
 interface ZapProps extends ModalProps {
@@ -35,8 +35,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be BNB in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
-  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
-  const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
+  const bombFtmLpStats = useLpStats('BOMB-BTCB-APELP');
+  const tShareFtmLpStats = useLpStats('BSHARE-BNB-APELP');
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const ftmAmountPerLP = tokenName.startsWith(BOMB_TICKER) ? bombLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
@@ -80,12 +80,6 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   return (
     <Modal>
       <ModalTitle text={`Zap in ${tokenName}`} />
-      <Typography variant="h6" align="center">
-        Powered by{' '}
-        <a target="_blank" rel="noopener noreferrer" href="https://mlnl.finance">
-          mlnl.finance
-        </a>
-      </Typography>
 
       <StyledActionSpacer />
       <InputLabel style={{ color: '#2c2560' }} id="label">
@@ -117,8 +111,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       </StyledDescriptionText>
       <StyledDescriptionText>
         {' '}
-        ({Number(estimate.token0)} {BNB_TICKER} / {Number(estimate.token1)}{' '}
-        {tokenName.startsWith(BOMB_TICKER) ? BOMB_TICKER : BSHARE_TICKER}){' '}
+        ({Number(estimate.token0)} {tokenName.startsWith(BOMB_TICKER) ? BOMB_TICKER : BSHARE_TICKER} / {Number(estimate.token1)}{' '}
+        {tokenName.startsWith(BOMB_TICKER) ? BTC_TICKER : BNB_TICKER}){' '}
       </StyledDescriptionText>
       <ModalActions>
         <Button
