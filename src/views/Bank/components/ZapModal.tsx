@@ -30,6 +30,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
   const bombBalance = useTokenBalance(bombFinance.BOMB);
   const bshareBalance = useTokenBalance(bombFinance.BSHARE);
+    const btcBalance = useTokenBalance(bombFinance.BTC);
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(BNB_TICKER);
   const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
@@ -59,7 +60,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
     }
     if (event.target.value === BTC_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
+      setZappingTokenBalance(getDisplayBalance(btcBalance, decimals));
     }
 
   };
@@ -132,8 +133,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       </ModalActions>
 
       <StyledActionSpacer />
-      <Alert variant="filled" severity="warning">
-        Beta feature. Use at your own risk!
+      <Alert variant="filled" severity="info">
+        New feature. Use at your own risk!
       </Alert>
     </Modal>
   );
