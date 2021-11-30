@@ -76,10 +76,10 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn BOMB by staking LP
                   </Typography>
-                  {/* <Alert variant="filled" severity="info">
-                    BOMB ApeLP reward pool is running!  It will end November 30th at 23:00 UTC.<br /><br />
+                  <Alert variant="filled" severity="info">
+                    BOMB paying farms end November 30th at 23:00 UTC.<br /><br />
 
-                  </Alert> */}
+                  </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
