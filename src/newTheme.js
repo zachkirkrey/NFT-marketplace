@@ -31,7 +31,7 @@ const newTheme = createMuiTheme({
   },
   typography: {
     color: '#2c2560',
-    fontFamily: ['"Tahoma"', 'sans-serif'].join(','),
+    fontFamily: ['"Rubik"', 'sans-serif'].join(','),
   },
 });
 

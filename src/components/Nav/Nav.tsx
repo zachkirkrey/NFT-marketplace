@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   toolbarTitle: {
-    fontFamily: '"Tahoma", cursive',
+    fontFamily: "Rubik",
     fontSize: '0px',
     flexGrow: 1,
   },

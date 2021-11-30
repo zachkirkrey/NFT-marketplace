@@ -5,7 +5,7 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: 'Tahoma', sans-serif !important;
+  font-family: 'Rubik', sans-serif;
   /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif; */
@@ -45,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Tahoma', cursive !important;
+  font-family: 'Rubik', cursive !important;
 }
 
 footer .a:hover {
@@ -64,12 +64,12 @@ footer .a:hover {
 }
 
 code {
-  font-family: 'Tahoma', monospace;
+  font-family: 'Rubik', monospace;
 }
 
 .wallet-button {
   color: #5f6025 !important;
-  font-family: 'Tahoma', sans-serif !important;
+  font-family: 'Rubik', sans-serif !important;
   font-size: 1.2rem !important;
   text-align: left !important;
   justify-content: flex-start !important;

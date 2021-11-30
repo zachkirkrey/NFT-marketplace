@@ -17,6 +17,7 @@ import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
 import { Bank as BankEntity } from '../../bomb-finance';
 import useBombFinance from '../../hooks/useBombFinance';
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -71,6 +72,14 @@ const Bank: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
+      <Box mt={5}>
+                <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
+
+        <Alert variant="filled" severity="warning">
+                    PancakeSwap Farms start paying Nov 30 23:00 UTC. ApeSwap farms are paying 100% of rewards until then.
+
+        </Alert></Grid>
+        </Box>
       <Box mt={5}>
         <StyledBank>
           <StyledCardsWrapper>
