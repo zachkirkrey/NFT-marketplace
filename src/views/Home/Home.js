@@ -53,8 +53,8 @@ const useStyles = makeStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-APELP');
-  const tShareFtmLpStats = useLpStats('BSHARE-BNB-APELP');
+  const bombFtmLpStats = useLpStatsBTC('BOMB-BTCB-LP');
+  const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
   const bombStats = useBombStats();
   const tShareStats = usetShareStats();
   const tBondStats = useBondStats();
@@ -71,9 +71,9 @@ const Home = () => {
   }
 
   const buyBombAddress =
-    'https://app.apeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' +
+    'https://pancakeswap.finance/swap?inputCurrency=0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c&outputCurrency=' +
     bomb.address;
-  const buyBShareAddress = 'https://app.apeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
+  const buyBShareAddress = 'https://pancakeswap.finance/swap?outputCurrency=0x531780FAcE85306877D7e1F05d713D1B50a37F7A';
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
@@ -110,8 +110,8 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-APELP' });
-  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-APELP' });
+  const bombLpZap = useZap({ depositTokenName: 'BOMB-BTCB-LP' });
+  const bshareLpZap = useZap({ depositTokenName: 'BSHARE-BNB-LP' });
 
   // const StyledLink = styled.a`
   //   font-weight: 700;
@@ -126,7 +126,7 @@ const Home = () => {
         bombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBombZap();
       }}
-      tokenName={'BOMB-BTCB-APELP'}
+      tokenName={'BOMB-BTCB-LP'}
     />,
   );
 
@@ -138,7 +138,7 @@ const Home = () => {
         bshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBshareZap();
       }}
-      tokenName={'BSHARE-BNB-APELP'}
+      tokenName={'BSHARE-BNB-LP'}
     />,
   );
 
@@ -157,7 +157,7 @@ const Home = () => {
                   <strong>Genesis Farms:</strong> FINISHED
                 </li>
                 <li>
-                  <strong>BOMB Farm:</strong> Nov 21 - Nov 30
+                  <strong>BOMB Farm:</strong> FINISHED
                 </li>
                 <li>
                   <strong>BSHARE Farms:</strong> Nov 25 - 365 days
@@ -193,9 +193,9 @@ const Home = () => {
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="warning">
               <b>
-                Our reward farms are all switching to PancakeSwap from ApeSwap.  The PancakeSwap farms will begin receiving
-                rewards November 30th 23:00 UTC.  Rewards will be gradually switched from ApeSwap farms to PancakeSwap over 6 hours.
-              </b>
+                Our reward farms are currently transitioning to PancakeSwap from ApeSwap.</b><br />
+              Rewards will be completely removed from all ApeSwap farms Dec 1st 05:00 UTC.
+
             </Alert>
           </Grid>
         </Grid>
@@ -353,10 +353,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BOMB-BTCB ApeSwap LP</h2>
+              <h2>BOMB-BTCB PancakeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BOMB-BTCB-APELP" />
+                  <TokenSymbol symbol="BOMB-BTCB-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>
@@ -381,10 +381,10 @@ const Home = () => {
         <Grid item xs={12} sm={6}>
           <Card>
             <CardContent align="center">
-              <h2>BSHARE-BNB ApeSwap LP</h2>
+              <h2>BSHARE-BNB PancakeSwap LP</h2>
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="BSHARE-BNB-APELP" />
+                  <TokenSymbol symbol="BSHARE-BNB-LP" />
                 </CardIcon>
               </Box>
               <Box mt={2}>

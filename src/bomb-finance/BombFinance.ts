@@ -54,7 +54,7 @@ export class BombFinance {
     this.BTC = this.externalTokens['BTCB'];
 
     // Uniswap V2 Pair
-    this.BOMBBTCB_LP = new Contract(externalTokens['BOMB-BTCB-APELP'][0], IUniswapV2PairABI, provider);
+    this.BOMBBTCB_LP = new Contract(externalTokens['BOMB-BTCB-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -473,7 +473,7 @@ export class BombFinance {
         return await pool.pendingShare(poolId, account);
       }
     } catch (err) {
-      console.error(`Failed to call earned() on pool ${pool.address}: ${err.stack}`);
+      console.error(`Failed to call pendingShare() on pool ${pool.address}: ${err.stack}`);
       return BigNumber.from(0);
     }
   }
@@ -484,7 +484,7 @@ export class BombFinance {
       let userInfo = await pool.userInfo(poolId, account);
       return await userInfo.amount;
     } catch (err) {
-      console.error(`Failed to call balanceOf() on pool ${pool.address}: ${err.stack}`);
+      console.error(`Failed to call userInfo() on pool ${pool.address}: ${err.stack}`);
       return BigNumber.from(0);
     }
   }
@@ -550,7 +550,7 @@ export class BombFinance {
     //const { chainId } = this.config;
     const { WBNB } = this.config.externalTokens;
 
-    const wftm = new Token(56, WBNB[0], WBNB[1]);
+    const wftm = new Token(56, WBNB[0], WBNB[1], 'WBNB');
     const token = new Token(56, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);

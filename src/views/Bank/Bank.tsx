@@ -76,7 +76,9 @@ const Bank: React.FC = () => {
                 <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
 
         <Alert variant="filled" severity="warning">
-                    PancakeSwap Farms start paying Nov 30 23:00 UTC. ApeSwap farms are paying 100% of rewards until then.
+            Our reward farms are currently transitioning to PancakeSwap from ApeSwap.
+            ApeSwap farms will no longer have rewards Dec 1st 05:00 UTC
+
 
         </Alert></Grid>
         </Box>

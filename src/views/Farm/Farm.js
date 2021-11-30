@@ -52,8 +52,7 @@ const Farm = () => {
                   </Typography>
                   <Alert variant="filled" severity="warning">
                     <p>
-                      Our reward farms are all switching to PancakeSwap from ApeSwap.  The PancakeSwap farms will begin receiving
-                      rewards November 30th 23:00 UTC.  Rewards will be gradually switched from ApeSwap farms to PancakeSwap over 6 hours.
+                      Our reward farms are currently transitioning to PancakeSwap from ApeSwap.  ApeSwap farms will no longer have rewards Dec 1st 05:00 UTC
                     </p><p>
                       <b>    PancakeSwap Farms end with LP<br />
                         ApeSwap farms end in APELP</b>
@@ -76,8 +75,8 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
                     Earn BOMB by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="info">
-                    BOMB paying farms end November 30th at 23:00 UTC.<br /><br />
+                  <Alert variant="filled" severity="warning">
+                    BOMB Paying Farms have ended.
 
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
