@@ -97,7 +97,7 @@ const Nav = () => {
             <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Bomb Money</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
-                <img src="/bomb-256.png" height="60px" />
+                <img alt="bomb.money" src="/bomb-256.png" height="60px" />
               </Link>
             </Typography>
             <Box mr={5}>
