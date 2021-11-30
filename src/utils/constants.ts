@@ -3,7 +3,7 @@ export const BSHARE_TICKER = 'BSHARE';
 export const BBOND_TICKER = 'BBOND';
 export const BNB_TICKER = 'BNB';
 export const WBNB_TICKER = 'WBNB';
-export const BTC_TICKER = 'BTC';
+export const BTC_TICKER = 'BTCB';
 
 export const SPOOKY_ROUTER_ADDR = '0xcF0feBd3f17CEf5b47b0cD257aCf6025c5BFf3b7';
 export const ZAPPER_ROUTER_ADDR = '0xA0C5F779e52A8D9a81aF17Dd910577946B6810F6';

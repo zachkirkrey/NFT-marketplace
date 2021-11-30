@@ -58,6 +58,10 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
     if (event.target.value === BOMB_TICKER) {
       setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
     }
+    if (event.target.value === BTC_TICKER) {
+      setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
+    }
+
   };
 
   const handleChange = async (e: any) => {
@@ -94,6 +98,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       >
         <StyledMenuItem value={BNB_TICKER}>BNB</StyledMenuItem>
         <StyledMenuItem value={BSHARE_TICKER}>BSHARE</StyledMenuItem>
+                {/* <StyledMenuItem value={BTC_TICKER}>BTC</StyledMenuItem> */}
         {/* Bomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={BOMB_TICKER}>BOMB</StyledMenuItem> */}
       </Select>

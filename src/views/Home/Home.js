@@ -360,9 +360,9 @@ const Home = () => {
                 </CardIcon>
               </Box>
               <Box mt={2}>
-                <Button color="primary" onClick={onPresentBombZap} variant="contained">
+                {/* <Button color="primary" onClick={onPresentBombZap} variant="contained">
                   Zap In
-                </Button>
+                </Button> */}
               </Box>
               <Box mt={2}>
                 <span style={{ fontSize: '26px' }}>

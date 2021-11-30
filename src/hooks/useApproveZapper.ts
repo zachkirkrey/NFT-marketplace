@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
 import ERC20 from '../bomb-finance/ERC20';
-import { BNB_TICKER, BOMB_TICKER, BSHARE_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
+import { BNB_TICKER, BOMB_TICKER, BSHARE_TICKER, BTC_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
 import useBombFinance from './useBombFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
@@ -23,6 +23,7 @@ function useApproveZapper(zappingToken: string): [ApprovalState, () => Promise<v
   if (zappingToken === BNB_TICKER) token = bombFinance.BNB;
   else if (zappingToken === BOMB_TICKER) token = bombFinance.BOMB;
   else if (zappingToken === BSHARE_TICKER) token = bombFinance.BSHARE;
+  else if (zappingToken === BTC_TICKER) token = bombFinance.externalTokens[BTC_TICKER];
   const pendingApproval = useHasPendingApproval(token.address, ZAPPER_ROUTER_ADDR);
   const currentAllowance = useAllowance(token, ZAPPER_ROUTER_ADDR, pendingApproval);
 
