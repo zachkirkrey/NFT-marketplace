@@ -52,10 +52,11 @@ const Farm = () => {
                   </Typography>
                   <Alert variant="filled" severity="warning">
                     <p>
-                      Our reward farms are currently transitioning to PancakeSwap from ApeSwap.  ApeSwap farms will no longer have rewards Dec 1st 05:00 UTC
+                      Our reward farms have transitioned to PancakeSwap LPs from ApeSwap.  ApeSwap LP based farms no longer have rewards.<br />
+                      <b>Ensure all ApeSwap LP is removed from the farms, and re-allocated to equivilent farm on PancakeSwap to continue to earn rewards.</b>
                     </p><p>
-                      <b>    PancakeSwap Farms end with LP<br />
-                        ApeSwap farms end in APELP</b>
+                      -PancakeSwap Farms end with -LP<br />
+                      -ApeSwap farms end with -APELP
                     </p>
 
 
@@ -76,7 +77,7 @@ const Farm = () => {
                     Earn BOMB by staking LP
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BOMB Paying Farms have ended.
+                    BOMB Paying Farms have ended. Please remove your LP and get LP applicable to above farms.
 
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>

@@ -160,7 +160,7 @@ const Home = () => {
                   <strong>BOMB Farm:</strong> FINISHED
                 </li>
                 <li>
-                  <strong>BSHARE Farms:</strong> Nov 25 - 365 days
+                  <strong>BSHARE Farms:</strong> Nov 25 - 1 year
                 </li>
               </ul>
             </Box>
@@ -193,8 +193,7 @@ const Home = () => {
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="warning">
               <b>
-                Our reward farms are currently transitioning to PancakeSwap from ApeSwap.</b><br />
-              Rewards will be completely removed from all ApeSwap farms Dec 1st 05:00 UTC.
+                Our reward farms have been migrated to PancakeSwap. Please ensure all ApeSwap LP is removed, as it no longer earns rewards.</b><br />
 
             </Alert>
           </Grid>

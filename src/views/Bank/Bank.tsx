@@ -76,8 +76,7 @@ const Bank: React.FC = () => {
                 <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
 
         <Alert variant="filled" severity="warning">
-            Our reward farms are currently transitioning to PancakeSwap from ApeSwap.
-            ApeSwap farms will no longer have rewards Dec 1st 05:00 UTC
+            Our reward farms have transitioned to PancakeSwap LPs from ApeSwap.<br /> ApeSwap LP based farms no longer have rewards.
 
 
         </Alert></Grid>
