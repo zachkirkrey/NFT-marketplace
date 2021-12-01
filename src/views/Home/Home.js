@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import Page from '../../components/Page';
-import HomeImage from '../../assets/img/home.png';
+import HomeImage from '../../assets/img/bombbg.jpg';
 import CashImage from '../../assets/img/crypto_tomb_cash.svg';
 import Image from 'material-ui-image';
 import styled from 'styled-components';
@@ -30,7 +30,7 @@ import useBombFinance from '../../hooks/useBombFinance';
 
 // const BackgroundImage = createGlobalStyle`
 //   body {
-//     background: url(${HomeImage}) no-repeat !important;
+//     background: url(${HomeImage}) repeat !important;
 //     background-size: cover !important;
 //   }
 // `;
