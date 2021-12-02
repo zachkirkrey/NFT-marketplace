@@ -118,6 +118,11 @@ export class BombFinance {
     };
   }
 
+  async getBTCPriceUSD(): Promise<Number> {
+    const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
+    return Number(priceOfOneBTC);
+  }
+
   /**
    * Calculates various stats for the requested LP
    * @param name of the LP token to load stats for

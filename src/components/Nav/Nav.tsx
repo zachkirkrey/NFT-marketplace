@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import {
@@ -16,6 +16,9 @@ import {
 } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
+import useBombStats from '../../hooks/useBombStats';
+import useBtcStats from '../../hooks/useBtcStats';
+import useShareStats from '../../hooks/usetShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -75,11 +78,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const Nav = () => {
   const matches = useMediaQuery('(min-width:900px)');
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  // const bombStats = useBombStats();
+  // const btcStats = useBtcStats();
+  // const shareStats = useShareStats();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -89,6 +97,18 @@ const Nav = () => {
     setOpen(false);
   };
 
+  // const btcPriceInDollars = useMemo(
+  //   () => (bombStats ? Number(btcStats).toFixed(2) : null),
+  //   [bombStats],
+  // );
+  // const bombPriceInDollars = useMemo(
+  //   () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
+  //   [bombStats],
+  // );
+  // const sharePriceInDollars = useMemo(
+  //   () => (bombStats ? Number(shareStats.priceInDollars).toFixed(2) : null),
+  //   [bombStats],
+  // );
   return (
     <AppBar position="sticky" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -99,8 +119,13 @@ const Nav = () => {
               <Link to="/" color="inherit" className={classes.brandLink}>
                 <img alt="bomb.money" src="/bomb-256.png" height="60px" />
               </Link>
+              {/* <span className={classes.link}>BOMB: ${bombPriceInDollars} | BSHARE: ${sharePriceInDollars}</span> */}
+             {/* <span className={classes.link}>BTC: ${btcPriceInDollars}</span> |  */}
+
             </Typography>
             <Box mr={5}>
+     
+
               <Link color="textPrimary" to="/" className={classes.link}>
                 Home
               </Link>

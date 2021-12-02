@@ -48,7 +48,7 @@ const Farm = () => {
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom>
-                    Earn BSHARE by staking LP
+                    Earn BSHARE by staking PancakeSwap LP
                   </Typography>
                   <Alert variant="filled" severity="info">
                     <h4>

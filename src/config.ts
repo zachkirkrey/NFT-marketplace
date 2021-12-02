@@ -264,7 +264,7 @@ export const bankDefinitions: { [contractName: string]: BankInfo } = {
     contract: 'BshareBnbApeLPBShareRewardPool',
     depositTokenName: 'BSHARE-BNB-APELP',
     earnTokenName: 'BSHARE',
-    finished: false,
+    finished: true,
     sort: 5,
     closedForStaking: true,
   },
