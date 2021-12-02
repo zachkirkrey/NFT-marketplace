@@ -72,7 +72,7 @@ const Bank: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-      <Box mt={5}>
+      {/* <Box mt={5}>
                 <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
 
         <Alert variant="filled" severity="warning">
@@ -80,7 +80,7 @@ const Bank: React.FC = () => {
 
 
         </Alert></Grid>
-        </Box>
+        </Box> */}
       <Box mt={5}>
         <StyledBank>
           <StyledCardsWrapper>
