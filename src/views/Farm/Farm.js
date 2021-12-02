@@ -50,14 +50,10 @@ const Farm = () => {
                   <Typography color="textPrimary" variant="h4" gutterBottom>
                     Earn BSHARE by staking LP
                   </Typography>
-                  <Alert variant="filled" severity="warning">
-                    <p>
-                      Our reward farms have transitioned to PancakeSwap LPs from ApeSwap.  ApeSwap LP based farms no longer have rewards.<br />
-                      <b>Ensure all ApeSwap LP is removed from the farms, and re-allocated to equivilent farm on PancakeSwap to continue to earn rewards.</b>
-                    </p><p>
-                      -PancakeSwap Farms end with -LP<br />
-                      -ApeSwap farms end with -APELP
-                    </p>
+                  <Alert variant="filled" severity="info">
+                    <h4>
+                      Farms started November 25th 2021 and will continue running for 1 full year.</h4>
+
 
 
                   </Alert>
@@ -74,11 +70,10 @@ const Farm = () => {
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
                   <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
-                    Earn BOMB by staking LP
+                    Inactive ApeSwap Farms
                   </Typography>
                   <Alert variant="filled" severity="warning">
-                    BOMB Paying Farms have ended. Please remove your LP and get LP applicable to above farms.
-
+                    Please remove funds from all farms which are not active.
                   </Alert>
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks

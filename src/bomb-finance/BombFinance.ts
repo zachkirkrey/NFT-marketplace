@@ -105,8 +105,9 @@ export class BombFinance {
     const priceInBTC = await this.getTokenPriceFromPancakeswapBTC(this.BOMB);
     const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
-
-    const priceOfBombInDollars = (Number(priceInBNB) * Number(priceOfOneBNB)).toFixed(2);
+    const priceInDollars = await this.getTokenPriceFromPancakeswapBOMBUSD();
+    const priceOfBombInDollars = ((Number(priceInBTC) * Number(priceOfOneBTC)) / 10000).toFixed(2);
+    //console.log('priceOfBombInDollars', priceOfBombInDollars);
 
     return {
       //  tokenInFtm: (Number(priceInBNB) * 100).toString(),
@@ -555,7 +556,6 @@ export class BombFinance {
     try {
       const wftmToToken = await Fetcher.fetchPairData(wftm, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
-      // console.log('priceInBUSD', priceInBUSD);
       return priceInBUSD.midPrice.toFixed(4);
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
@@ -574,11 +574,33 @@ export class BombFinance {
     try {
       const wftmToToken = await Fetcher.fetchPairData(btcb, token, this.provider);
       const priceInBUSD = new Route([wftmToToken], token);
+      //   console.log('priceInBUSDBTC', priceInBUSD.midPrice.toFixed(12));
+
       const priceForPeg = Number(priceInBUSD.midPrice.toFixed(12)) * 10000;
-      // console.log('priceInBUSDBTC', priceInBUSD.midPrice.toFixed(12));
       return priceForPeg.toFixed(4);
     } catch (err) {
       console.error(`Failed to fetch token price of ${tokenContract.symbol}: ${err}`);
+    }
+  }
+
+  async getTokenPriceFromPancakeswapBOMBUSD(): Promise<string> {
+    const ready = await this.provider.ready;
+    if (!ready) return;
+    //const { chainId } = this.config;
+    const { BOMB, WBNB } = this.config.externalTokens;
+
+    const wbnb = new Token(56, WBNB[0], WBNB[1]);
+    const btcb = new Token(56, this.BTC.address, this.BTC.decimal, 'BTCB', 'BTCB');
+    const token = new Token(56, this.BOMB.address, this.BOMB.decimal, this.BOMB.symbol);
+    try {
+      const wftmToToken = await Fetcher.fetchPairData(btcb, token, this.provider);
+      const priceInBUSD = new Route([wftmToToken], token);
+      // console.log('test', priceInBUSD.midPrice.toFixed(12));
+
+      const priceForPeg = Number(priceInBUSD.midPrice.toFixed(12)) * 10000;
+      return priceForPeg.toFixed(4);
+    } catch (err) {
+      console.error(`Failed to fetch token price of ${this.BOMB.symbol}: ${err}`);
     }
   }
 
@@ -625,18 +647,37 @@ export class BombFinance {
   async getBTCBPriceFromPancakeswap(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { BTCB, FUSDT } = this.externalTokens;
+    const { BTCB } = this.externalTokens;
     try {
-      const fusdt_btcb_lp_pair = this.externalTokens['USDT-BTCB-LP'];
-      let ftm_amount_BN = await BTCB.balanceOf(fusdt_btcb_lp_pair.address);
-      let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, BTCB.decimal));
-      let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_btcb_lp_pair.address);
-      let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
-      return (fusdt_amount / ftm_amount).toString();
+      const btcPriceInBNB = await this.getTokenPriceFromPancakeswap(BTCB);
+
+      const wbnbPrice = await this.getWBNBPriceFromPancakeswap();
+
+      const btcprice = (Number(btcPriceInBNB) * Number(wbnbPrice)).toFixed(2).toString();
+      //console.log('btcprice', btcprice);
+      return btcprice;
     } catch (err) {
       console.error(`Failed to fetch token price of BTCB: ${err}`);
     }
   }
+
+  // async getBTCBPriceFromPancakeswap(): Promise<string> {
+  //   const ready = await this.provider.ready;
+  //   if (!ready) return;
+  //   const { BTCB, FUSDT } = this.externalTokens;
+  //   try {
+  //     const fusdt_btcb_lp_pair = this.externalTokens['USDT-BTCB-LP'];
+  //     let ftm_amount_BN = await BTCB.balanceOf(fusdt_btcb_lp_pair.address);
+  //     let ftm_amount = Number(getFullDisplayBalance(ftm_amount_BN, BTCB.decimal));
+  //     let fusdt_amount_BN = await FUSDT.balanceOf(fusdt_btcb_lp_pair.address);
+  //     let fusdt_amount = Number(getFullDisplayBalance(fusdt_amount_BN, FUSDT.decimal));
+  //     console.log('BTCB price', (fusdt_amount / ftm_amount).toString());
+  //     return (fusdt_amount / ftm_amount).toString();
+  //     console.log('BTCB price');
+  //   } catch (err) {
+  //     console.error(`Failed to fetch token price of BTCB: ${err}`);
+  //   }
+  // }
 
   //===================================================================
   //===================================================================

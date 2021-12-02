@@ -160,7 +160,7 @@ const Home = () => {
                   <strong>BOMB Farm:</strong> FINISHED
                 </li>
                 <li>
-                  <strong>BSHARE Farms:</strong> Nov 25 - 1 year
+                  <strong>BSHARE Farms:</strong> Nov 25 2021 - 1 year
                 </li>
               </ul>
             </Box>
@@ -174,8 +174,7 @@ const Home = () => {
             <Box p={4}>
               <h2>Welcome to Bomb Money</h2>
               <p>
-                We are a tomb.finance clone on BSC, but with a price that follows BTC. Get amazing rewards and exposure
-                to BTC!
+                BOMB is an algocoin which is designed to follow the price of BTC. Enjoy high yields normally only found on high risk assets, but with exposure to BTC instead!
               </p>
               <p>
                 <strong>BOMB is pegged via algorithm to a 10,000:1 ratio to BTC. $100k BTC = $10 BOMB PEG</strong>
@@ -183,13 +182,13 @@ const Home = () => {
                 Boardroom to earn more BOMB! */}
               </p>
               <p>
-                <img alt="telegram" src="/static/media/telegram.28146bd8.svg" class="makeStyles-img-50" /> Join our <a href="https://t.me/bombmoneybsc" rel="noopener noreferrer" target="_blank">Telegram</a> to find out more!
+                <img alt="telegram" src="/static/media/telegram.28146bd8.svg" className="makeStyles-img-50" /> Join our <a href="https://t.me/bombmoneybsc" rel="noopener noreferrer" target="_blank">Telegram</a> to find out more!
               </p>
             </Box>
           </Paper>
         </Grid>
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
             <Alert variant="filled" severity="warning">
               <b>
@@ -197,7 +196,7 @@ const Home = () => {
 
             </Alert>
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>
