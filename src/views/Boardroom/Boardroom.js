@@ -129,10 +129,9 @@ const Boardroom = () => {
                   Boardroom will resume printing BOMB once the price of BOMB is above its peg of 1.01.
                 </Alert> */}
                 <Alert variant="filled" severity="warning">
-                  An issue related to boardroom payout has been detected and already corrected. Updated Smart contract has been deployed but not yet active on site. <br />
-                  <b>Please unstake all BSHARE for now.<br />
-                    We are very sorry for the inconvenience.</b><br /><br />
-                  Timer to withdraw is going to be removed shortly.
+                  <b> Boardroom smart contract has been updated! </b><br />
+                  If you have BSHARE in the previous Boardroom, visit here to retrieve it:<br />
+                  <a href="https://61aadb35c5a5c50007c2a61b--bomb-money.netlify.app/boardroom">https://61aadb35c5a5c50007c2a61b--bomb-money.netlify.app/boardroom</a><br /><br />
                 </Alert>
 
               </Box>

@@ -188,17 +188,17 @@ const Home = () => {
           </Paper>
         </Grid>
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
 
             <Alert variant="filled" severity="warning">
-              An issue related to boardroom payout has been detected and already corrected. Updated Smart contract has been deployed but not yet active on site. <br />
+              Board<br />
               <b>Please unstake all BSHARE for now. Timer to withdraw will be removed shortly. </b><br />We are very sorry for the inconvenience.
 
             </Alert>
 
           </Grid>
-        </Grid>
+        </Grid> */}
 
         {/* TVL */}
         <Grid item xs={12} sm={4}>
