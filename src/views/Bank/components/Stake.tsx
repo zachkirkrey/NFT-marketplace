@@ -101,7 +101,7 @@ const Stake: React.FC<StakeProps> = ({bank}) => {
             <Value value={getDisplayBalance(stakedBalance, bank.depositToken.decimal)} />
 
             
-            <Label text={`≈ $${earnedInDollars}`} />
+            {/* <Label text={`≈ $${earnedInDollars}`} /> */}
 
                  <Typography style={{textTransform: 'uppercase', color: '#fffff'}}>
                       {`≈ $${earnedInDollars}`}
