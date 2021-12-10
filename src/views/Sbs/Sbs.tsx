@@ -1,19 +1,19 @@
-import React, { /*useCallback, useEffect, */ useMemo, useState } from 'react';
+import React, {/*useCallback, useEffect, */ useMemo, useState} from 'react';
 import Page from '../../components/Page';
 import BondImage from '../../assets/img/pit.png';
-import { createGlobalStyle } from 'styled-components';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useWallet } from 'use-wallet';
+import {createGlobalStyle} from 'styled-components';
+import {Route, Switch, useRouteMatch} from 'react-router-dom';
+import {useWallet} from 'use-wallet';
 import UnlockWallet from '../../components/UnlockWallet';
 import PageHeader from '../../components/PageHeader';
-import { Box, /* Paper, Typography,*/ Button, Grid } from '@material-ui/core';
+import {Box, /* Paper, Typography,*/ Button, Grid} from '@material-ui/core';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBombFinance from '../../hooks/useBombFinance';
-import { getDisplayBalance /*, getBalance*/ } from '../../utils/formatBalance';
-import { BigNumber /*, ethers*/ } from 'ethers';
+import {getDisplayBalance /*, getBalance*/} from '../../utils/formatBalance';
+import {BigNumber /*, ethers*/} from 'ethers';
 import useSwapBBondToBShare from '../../hooks/BShareSwapper/useSwapBBondToBShare';
-import useApprove, { ApprovalState } from '../../hooks/useApprove';
+import useApprove, {ApprovalState} from '../../hooks/useApprove';
 import useBShareSwapperStats from '../../hooks/BShareSwapper/useBShareSwapperStats';
 import TokenInput from '../../components/TokenInput';
 import Card from '../../components/Card';
@@ -33,14 +33,14 @@ function isNumeric(n: any) {
 }
 
 const Sbs: React.FC = () => {
-  const { path } = useRouteMatch();
-  const { account } = useWallet();
+  const {path} = useRouteMatch();
+  const {account} = useWallet();
   const bombFinance = useBombFinance();
   const [bbondAmount, setBbondAmount] = useState('');
   const [bshareAmount, setBshareAmount] = useState('');
 
   const [approveStatus, approve] = useApprove(bombFinance.BBOND, bombFinance.contracts.BShareSwapper.address);
-  const { onSwapBShare } = useSwapBBondToBShare();
+  const {onSwapBShare} = useSwapBBondToBShare();
   const bshareSwapperStat = useBShareSwapperStats(account);
 
   const bshareBalance = useMemo(

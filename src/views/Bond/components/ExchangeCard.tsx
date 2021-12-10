@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button, Card } from '@material-ui/core';
+import {Button, Card} from '@material-ui/core';
 
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
@@ -9,13 +9,13 @@ import CardContent from '../../../components/CardContent';
 import useBombFinance from '../../../hooks/useBombFinance';
 import Label from '../../../components/Label';
 import TokenSymbol from '../../../components/TokenSymbol';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 import useModal from '../../../hooks/useModal';
 import ExchangeModal from './ExchangeModal';
 import ERC20 from '../../../bomb-finance/ERC20';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useApprove, { ApprovalState } from '../../../hooks/useApprove';
+import useApprove, {ApprovalState} from '../../../hooks/useApprove';
 import useCatchError from '../../../hooks/useCatchError';
 
 interface ExchangeCardProps {
@@ -43,7 +43,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
 }) => {
   const catchError = useCatchError();
   const {
-    contracts: { Treasury },
+    contracts: {Treasury},
   } = useBombFinance();
   const [approveStatus, approve] = useApprove(fromToken, Treasury.address);
 
@@ -87,14 +87,18 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED && !disabled ? (
               <Button
-              className="shinyButton"
+                className="shinyButton"
                 disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
                 onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
               >
                 {`Approve ${fromTokenName}`}
               </Button>
             ) : (
-              <Button className={disabled ? "shinyButtonDisabled" : "shinyButton"} onClick={onPresent} disabled={disabled}>
+              <Button
+                className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
+                onClick={onPresent}
+                disabled={disabled}
+              >
                 {disabledDescription || action}
               </Button>
             )}

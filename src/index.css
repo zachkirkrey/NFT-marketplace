@@ -91,10 +91,10 @@ code {
   padding-bottom: 5px;
 
   border-radius: 15px;
-  font-size: 1rem !important; 
-  padding-left: 5px; 
+  font-size: 1rem !important;
+  padding-left: 5px;
   color: #f9d749 !important;
-  box-shadow: 0px 0px 5px 0px rgba(251,221,76,1);
+  box-shadow: 0px 0px 5px 0px rgba(251, 221, 76, 1);
 }
 
 .shinyButtonDisabled {
@@ -112,10 +112,10 @@ code {
 .shinyButtonSecondary {
   padding-top: 5px;
   padding-bottom: 5px;
-  
+
   border-radius: 15px;
-  font-size: 1rem !important; 
-  padding-left: 5px; 
+  font-size: 1rem !important;
+  padding-left: 5px;
   background-color: #f9d749 !important;
   color: #171923 !important;
   /* box-shadow: 0px 0px 5px 0px rgba(251,221,76,1); */
@@ -131,13 +131,12 @@ code {
 .shinyButtonSecondary:hover {
   background-color: #f9d749 !important;
   color: #171923 !important;
-  box-shadow: 0px 0px 5px 0px rgba(251,221,76,1);
-
+  box-shadow: 0px 0px 5px 0px rgba(251, 221, 76, 1);
 }
 
 .navTokenPrice {
   padding-top: 5px;
-  padding-right: 15px; 
+  padding-right: 15px;
   color: #fff;
 }
 
@@ -152,13 +151,13 @@ code {
 }
 
 .bomb {
-  background-image: url("/bomb1.png");
+  background-image: url('/bomb1.png');
 }
 
 .bshare {
-  background-image: url("/bomb2.png");
+  background-image: url('/bomb2.png');
 }
 
 .btc {
-  background-image: url("/bomb3.png");
+  background-image: url('/bomb3.png');
 }

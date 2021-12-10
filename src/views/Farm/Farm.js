@@ -1,17 +1,17 @@
 import React from 'react';
-import { useWallet } from 'use-wallet';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import {useWallet} from 'use-wallet';
+import {Route, Switch, useRouteMatch} from 'react-router-dom';
 import Bank from '../Bank';
 
-import { Box, Container, Typography, Grid } from '@material-ui/core';
+import {Box, Container, Typography, Grid} from '@material-ui/core';
 
-import { Alert } from '@material-ui/lab';
+import {Alert} from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import FarmCard from './FarmCard';
 import FarmImage from '../../assets/img/farm.png';
-import { createGlobalStyle } from 'styled-components';
+import {createGlobalStyle} from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
 
@@ -26,8 +26,8 @@ const BackgroundImage = createGlobalStyle`
 
 const Farm = () => {
   const [banks] = useBanks();
-  const { path } = useRouteMatch();
-  const { account } = useWallet();
+  const {path} = useRouteMatch();
+  const {account} = useWallet();
   const activeBanks = banks.filter((bank) => !bank.finished);
   return (
     <Switch>
@@ -52,7 +52,7 @@ const Farm = () => {
 
 
                   </Alert> */}
-                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
+                  <Grid container spacing={3} style={{marginTop: '20px'}}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
                       .map((bank) => (
@@ -64,13 +64,13 @@ const Farm = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography color="textPrimary" variant="h4" gutterBottom style={{marginTop: '20px'}}>
                     Inactive ApeSwap Farms
                   </Typography>
                   <Alert variant="filled" severity="warning">
                     Please remove funds from all farms which are not active.
                   </Alert>
-                  <Grid container spacing={3} style={{ marginTop: '20px', display: "flex", alignItems: "center" }}>
+                  <Grid container spacing={3} style={{marginTop: '20px', display: 'flex', alignItems: 'center'}}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
                       .map((bank) => (
@@ -82,13 +82,13 @@ const Farm = () => {
                 </div>
 
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                  <Typography color="textPrimary" variant="h4" gutterBottom style={{marginTop: '20px'}}>
                     Genesis Pools
                   </Typography>
                   <Alert variant="filled" severity="warning">
                     Genesis pools have ended. Please claim all rewards and remove funds from Genesis pools.
                   </Alert>
-                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
+                  <Grid container spacing={3} style={{marginTop: '20px'}}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 0)
                       .map((bank) => (
@@ -109,7 +109,7 @@ const Farm = () => {
           <Bank />
         </Route>
       </Page>
-    </Switch >
+    </Switch>
   );
 };
 

@@ -1,5 +1,5 @@
 //Your theme for the new stuff using material UI has been copied here so it doesn't conflict
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 const newTheme = createMuiTheme({
   palette: {
@@ -7,7 +7,7 @@ const newTheme = createMuiTheme({
     text: {
       primary: '#dddfee',
       secondary: 'white',
-      yellow: '#f9d749'
+      yellow: '#f9d749',
     },
     background: {
       default: '#121212',

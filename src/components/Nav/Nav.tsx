@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect } from 'react';
+import React, {useMemo, useEffect} from 'react';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -23,11 +23,11 @@ import useShareStats from '../../hooks/usebShareStats';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {makeStyles, useTheme} from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 
 import bombLogo from '../../assets/img/bomb-logo.png';
-import { roundAndFormatNumber } from '../../0x';
+import {roundAndFormatNumber} from '../../0x';
 import TokenSymbol from '../TokenSymbol';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   toolbarTitle: {
-    fontFamily: "Rubik",
+    fontFamily: 'Rubik',
     fontSize: '0px',
     flexGrow: 1,
   },
@@ -83,8 +83,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const Nav = () => {
   const matches = useMediaQuery('(min-width:900px)');
   const classes = useStyles();
@@ -104,10 +102,7 @@ const Nav = () => {
     setOpen(false);
   };
 
-  const btcPriceInDollars = useMemo(
-    () => (bombStats ? Number(btcStats).toFixed(2) : null),
-    [bombStats],
-  );
+  const btcPriceInDollars = useMemo(() => (bombStats ? Number(btcStats).toFixed(2) : null), [bombStats]);
   const bombPriceInDollars = useMemo(
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
@@ -122,19 +117,25 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="inherit" noWrap style={{ flexGrow: "0" }} className={classes.toolbarTitle}>
+            <Typography variant="h6" color="inherit" noWrap style={{flexGrow: '0'}} className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Bomb Money</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 <img alt="bomb.money" src={bombLogo} height="60px" />
               </Link>
             </Typography>
-            <Box style={{ paddingLeft: "15px", paddingTop: "10px", fontSize: "1rem", flexGrow: "1" }}>
-
-
-              <Link to="/" className={"navLink " + classes.link}>Home</Link>
-              <Link to="/farm" className={"navLink " + classes.link}>Farm</Link>
-              <Link to="/boardroom" className={"navLink " + classes.link}>Boardroom</Link>
-              <Link to="/bond" className={"navLink " + classes.link}>Bond</Link>
+            <Box style={{paddingLeft: '15px', paddingTop: '10px', fontSize: '1rem', flexGrow: '1'}}>
+              <Link to="/" className={'navLink ' + classes.link}>
+                Home
+              </Link>
+              <Link to="/farm" className={'navLink ' + classes.link}>
+                Farm
+              </Link>
+              <Link to="/boardroom" className={'navLink ' + classes.link}>
+                Boardroom
+              </Link>
+              <Link to="/bond" className={'navLink ' + classes.link}>
+                Bond
+              </Link>
 
               {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
@@ -145,13 +146,28 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://docs.bomb.money" className={"navLink " + classes.link} rel="noopener" target="_blank">Docs</a>
+              <a href="https://docs.bomb.money" className={'navLink ' + classes.link} rel="noopener" target="_blank">
+                Docs
+              </a>
             </Box>
 
-            <Box style={{ flexGrow: "0", paddingLeft: "15px", paddingTop: "5px", fontSize: "1rem", paddingRight: "15px", height: "30px", display: "flex" }}>
-              <div className="navTokenIcon bomb"></div> <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
-              <div className="navTokenIcon bshare"></div> <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
-              <div className="navTokenIcon btc"></div> <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+            <Box
+              style={{
+                flexGrow: '0',
+                paddingLeft: '15px',
+                paddingTop: '5px',
+                fontSize: '1rem',
+                paddingRight: '15px',
+                height: '30px',
+                display: 'flex',
+              }}
+            >
+              <div className="navTokenIcon bomb"></div>{' '}
+              <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+              <div className="navTokenIcon bshare"></div>{' '}
+              <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
+              <div className="navTokenIcon btc"></div>{' '}
+              <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -167,7 +183,11 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
 
-            <img alt="bomb.money" src={bombLogo} style={{ height: "40px", marginTop: "-10px", marginLeft: "10px", marginRight: "15px" }} />
+            <img
+              alt="bomb.money"
+              src={bombLogo}
+              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
+            />
             <AccountButton text="Connect" />
             <Drawer
               className={classes.drawer}
@@ -182,7 +202,11 @@ const Nav = () => {
             >
               <div>
                 <IconButton onClick={handleDrawerClose}>
-                  {theme.direction === 'rtl' ? <ChevronRightIcon htmlColor="white" /> : <ChevronLeftIcon htmlColor="white" />}
+                  {theme.direction === 'rtl' ? (
+                    <ChevronRightIcon htmlColor="white" />
+                  ) : (
+                    <ChevronLeftIcon htmlColor="white" />
+                  )}
                 </IconButton>
               </div>
               <Divider />

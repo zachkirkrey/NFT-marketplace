@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import {useCallback} from 'react';
 import useBombFinance from './useBombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
@@ -10,7 +10,7 @@ const useRedeemOnBoardroom = (description?: string) => {
     const alertDesc = description || 'Redeem BSHARE from Boardroom';
     handleTransactionReceipt(bombFinance.exitFromBoardroom(), alertDesc);
   }, [bombFinance, description, handleTransactionReceipt]);
-  return { onRedeem: handleRedeem };
+  return {onRedeem: handleRedeem};
 };
 
 export default useRedeemOnBoardroom;

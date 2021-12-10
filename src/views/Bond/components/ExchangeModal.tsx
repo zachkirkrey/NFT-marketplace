@@ -1,11 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import Button from '../../../components/Button';
-import Modal, { ModalProps } from '../../../components/Modal';
+import Modal, {ModalProps} from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
 import ModalTitle from '../../../components/ModalTitle';
 import TokenInput from '../../../components/TokenInput';
-import { getFullDisplayBalance } from '../../../utils/formatBalance';
-import { BigNumber } from 'ethers';
+import {getFullDisplayBalance} from '../../../utils/formatBalance';
+import {BigNumber} from 'ethers';
 import Label from '../../../components/Label';
 
 interface ExchangeModalProps extends ModalProps {
@@ -47,7 +47,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({
       />
       <Label text={description} />
       <ModalActions>
-        <Button text="Cancel"  onClick={onDismiss} />
+        <Button text="Cancel" onClick={onDismiss} />
         <Button text={action} onClick={() => onConfirm(val)} />
       </ModalActions>
     </Modal>

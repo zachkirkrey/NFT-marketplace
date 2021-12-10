@@ -7,7 +7,7 @@ interface PageHeaderProps {
   title?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({icon, subtitle, title}) => {
   return (
     <StyledPageHeader>
       {/* <StyledIcon>{icon}</StyledIcon> */}
@@ -29,7 +29,7 @@ const StyledPageHeader = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-  color: "#f9d749";
+  color: '#f9d749';
   font-size: 36px;
   font-weight: 700;
   margin: 0;

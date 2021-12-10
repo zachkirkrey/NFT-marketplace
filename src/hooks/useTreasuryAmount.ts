@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { BigNumber } from 'ethers';
+import {useEffect, useState} from 'react';
+import {BigNumber} from 'ethers';
 import useBombFinance from './useBombFinance';
 
 const useTreasuryAmount = () => {
@@ -8,7 +8,7 @@ const useTreasuryAmount = () => {
 
   useEffect(() => {
     if (bombFinance) {
-      const { Treasury } = bombFinance.contracts;
+      const {Treasury} = bombFinance.contracts;
       bombFinance.BOMB.balanceOf(Treasury.address).then(setAmount);
     }
   }, [bombFinance]);

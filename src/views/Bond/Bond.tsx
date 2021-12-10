@@ -1,8 +1,8 @@
-import React, { useCallback, useMemo } from 'react';
+import React, {useCallback, useMemo} from 'react';
 import Page from '../../components/Page';
-import { createGlobalStyle } from 'styled-components';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useWallet } from 'use-wallet';
+import {createGlobalStyle} from 'styled-components';
+import {Route, Switch, useRouteMatch} from 'react-router-dom';
+import {useWallet} from 'use-wallet';
 import UnlockWallet from '../../components/UnlockWallet';
 import PageHeader from '../../components/PageHeader';
 import ExchangeCard from './components/ExchangeCard';
@@ -12,12 +12,12 @@ import useBondStats from '../../hooks/useBondStats';
 import useBombStats from '../../hooks/useBombStats';
 import useBombFinance from '../../hooks/useBombFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
-import { useTransactionAdder } from '../../state/transactions/hooks';
+import {useTransactionAdder} from '../../state/transactions/hooks';
 import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
-import { getDisplayBalance } from '../../utils/formatBalance';
-import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
+import {getDisplayBalance} from '../../utils/formatBalance';
+import {BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN} from '../../bomb-finance/constants';
 
 import HomeImage from '../../assets/img/background.jpg';
 const BackgroundImage = createGlobalStyle`
@@ -28,10 +28,9 @@ const BackgroundImage = createGlobalStyle`
   }
 `;
 
-
 const Bond: React.FC = () => {
-  const { path } = useRouteMatch();
-  const { account } = useWallet();
+  const {path} = useRouteMatch();
+  const {account} = useWallet();
   const bombFinance = useBombFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
@@ -56,7 +55,7 @@ const Bond: React.FC = () => {
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
       const tx = await bombFinance.redeemBonds(amount);
-      addTransaction(tx, { summary: `Redeem ${amount} BBOND` });
+      addTransaction(tx, {summary: `Redeem ${amount} BBOND`});
     },
     [bombFinance, addTransaction],
   );

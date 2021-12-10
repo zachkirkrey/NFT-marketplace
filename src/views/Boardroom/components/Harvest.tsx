@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import styled from 'styled-components';
 
-import { Box, Button, Card, CardContent, Typography } from '@material-ui/core';
+import {Box, Button, Card, CardContent, Typography} from '@material-ui/core';
 
 import TokenSymbol from '../../../components/TokenSymbol';
 import Label from '../../../components/Label';
@@ -13,11 +13,11 @@ import ProgressCountdown from './ProgressCountdown';
 import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
 import useEarningsOnBoardroom from '../../../hooks/useEarningsOnBoardroom';
 import useBombStats from '../../../hooks/useBombStats';
-import { getDisplayBalance } from '../../../utils/formatBalance';
+import {getDisplayBalance} from '../../../utils/formatBalance';
 
 const Harvest: React.FC = () => {
   const bombStats = useBombStats();
-  const { onReward } = useHarvestFromBoardroom();
+  const {onReward} = useHarvestFromBoardroom();
   const earnings = useEarningsOnBoardroom();
   const canClaimReward = useClaimRewardCheck();
 
@@ -28,7 +28,7 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const { from, to } = useClaimRewardTimerBoardroom();
+  const {from, to} = useClaimRewardTimerBoardroom();
 
   return (
     <Box>
@@ -40,13 +40,13 @@ const Harvest: React.FC = () => {
                 <TokenSymbol symbol="BOMB" />
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
-              <Label text={`≈ $${earnedInDollars}`} variant="yellow"  />
+              <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
               <Label text="BOMB Earned" variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
                 onClick={onReward}
-                className={earnings.eq(0) || !canClaimReward ? "shinyButtonDisabled":"shinyButton"}
+                className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
                 disabled={earnings.eq(0) || !canClaimReward}
               >
                 Claim Reward
@@ -55,13 +55,13 @@ const Harvest: React.FC = () => {
           </StyledCardContentInner>
         </CardContent>
       </Card>
-      <Box mt={2} style={{ color: '#FFF' }}>
+      <Box mt={2} style={{color: '#FFF'}}>
         {canClaimReward ? (
           ''
         ) : (
           <Card>
             <CardContent>
-              <Typography style={{ textAlign: 'center' }}>Claim possible in</Typography>
+              <Typography style={{textAlign: 'center'}}>Claim possible in</Typography>
               <ProgressCountdown hideBar={true} base={from} deadline={to} description="Claim available in" />
             </CardContent>
           </Card>

@@ -13,7 +13,7 @@ import bshareFtmLpLogo from '../../assets/img/bshare-bnb-LP.png';
 import bnbLogo from '../../assets/img/bnb.png';
 import btcLogo from '../../assets/img/BCTB-icon.png';
 
-const logosBySymbol: { [title: string]: string } = {
+const logosBySymbol: {[title: string]: string} = {
   //Real tokens
   //=====================
   BOMB: bombLogo,
@@ -43,7 +43,7 @@ type LogoProps = {
   size?: number;
 };
 
-const TokenSymbol: React.FC<LogoProps> = ({ symbol, size = 64 }) => {
+const TokenSymbol: React.FC<LogoProps> = ({symbol, size = 64}) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }

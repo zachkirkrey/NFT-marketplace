@@ -1,8 +1,8 @@
-import { ChainId } from '@pancakeswap/sdk';
-import { Configuration } from './bomb-finance/config';
-import { BankInfo } from './bomb-finance';
+import {ChainId} from '@pancakeswap/sdk';
+import {Configuration} from './bomb-finance/config';
+import {BankInfo} from './bomb-finance';
 
-const configurations: { [env: string]: Configuration } = {
+const configurations: {[env: string]: Configuration} = {
   // development: {
   //   chainId: 97,
   //   networkName: 'BSC Testnet',
@@ -84,7 +84,7 @@ const configurations: { [env: string]: Configuration } = {
   },
 };
 
-export const bankDefinitions: { [contractName: string]: BankInfo } = {
+export const bankDefinitions: {[contractName: string]: BankInfo} = {
   /*
   Explanation:
   name: description of the card

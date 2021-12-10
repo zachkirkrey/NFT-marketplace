@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
-import { BigNumber } from 'ethers';
+import {useCallback, useEffect, useState} from 'react';
+import {BigNumber} from 'ethers';
 import useBombFinance from './useBombFinance';
-import { ContractName } from '../bomb-finance';
+import {ContractName} from '../bomb-finance';
 import config from '../config';
 
 const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Number) => {

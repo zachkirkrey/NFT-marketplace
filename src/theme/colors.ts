@@ -41,7 +41,6 @@ export const teal = {
   200: '#64ffda',
 };
 
-
 export const newNavy = {
-  200: '171923'
+  200: '171923',
 };
