@@ -26,22 +26,17 @@ import useTotalStakedOnBoardroom from '../../hooks/useTotalStakedOnBoardroom';
 import useClaimRewardCheck from '../../hooks/boardroom/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/boardroom/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
-import BoardroomImage from '../../assets/img/boardroom.png';
 import { createGlobalStyle } from 'styled-components';
 
-// const BackgroundImage = createGlobalStyle`
-//   body, html {
-//     background: url(${BoardroomImage}) no-repeat !important;
-//     background-size: cover !important;
-//   }
-// `;
-
+import HomeImage from '../../assets/img/background.jpg';
 const BackgroundImage = createGlobalStyle`
   body {
-    background-color: grey;
+    background: url(${HomeImage}) repeat !important;
     background-size: cover !important;
+    background-color: #171923;
   }
 `;
+
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -78,8 +73,8 @@ const Boardroom = () => {
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
-                  <CardContent>
-                    <Typography style={{ textAlign: 'center' }}>Next Epoch</Typography>
+                  <CardContent style={{ textAlign: 'center' }}>
+                    <Typography style={{textTransform: "uppercase", color: "#f9d749"}}>Next Epoch</Typography>
                     <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
                   </CardContent>
                 </Card>
@@ -87,7 +82,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>Current Epoch</Typography>
+                    <Typography style={{textTransform: "uppercase", color: "#f9d749"}}>Current Epoch</Typography>
                     <Typography>{Number(currentEpoch)}</Typography>
                   </CardContent>
                 </Card>
@@ -95,7 +90,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>
+                    <Typography style={{textTransform: "uppercase", color: "#f9d749"}}>
                       BOMB PEG <small>(TWAP)</small>
                     </Typography>
                     <Typography>{scalingFactor} BTC</Typography>
@@ -108,7 +103,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>APR</Typography>
+                    <Typography style={{textTransform: "uppercase", color: "#f9d749"}}>APR</Typography>
                     <Typography>{boardroomAPR.toFixed(2)}%</Typography>
                   </CardContent>
                 </Card>
@@ -116,18 +111,15 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography>BSHARES Staked</Typography>
+                    <Typography style={{textTransform: "uppercase", color: "#f9d749"}}>BSHARES Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>
               </Grid>
             </Grid>
 
-            <Grid container justify="center">
+            {/* <Grid container justify="center">
               <Box mt={3} style={{ width: '600px' }}>
-                {/* <Alert variant="filled" severity="info">
-                  Boardroom will resume printing BOMB once the price of BOMB is above its peg of 1.01.
-                </Alert> */}
                 <Alert variant="filled" severity="warning">
                   <b> Boardroom smart contract has been updated! </b><br />
                   If you have BSHARE in the previous Boardroom, visit here to retrieve it:<br />
@@ -135,7 +127,7 @@ const Boardroom = () => {
                 </Alert>
 
               </Box>
-            </Grid>
+            </Grid> */}
 
             <Box mt={4}>
               <StyledBoardroom>
@@ -187,10 +179,9 @@ const Boardroom = () => {
               <Button
                 disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
                 onClick={onRedeem}
-                color="primary"
-                variant="contained"
+                className={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward) ? "shinyButtonDisabledSecondary": "shinyButtonSecondary"}
               >
-                Claim and Withdraw
+                Claim &amp; Withdraw
               </Button>
             </Grid>
           </Box>

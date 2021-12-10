@@ -23,18 +23,14 @@ const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
     setWalletProviderOpen(false);
   };
 
-  const buttonText = text ? text : 'Unlock';
+  const buttonText = text ? text : 'Connect Wallet';
 
   return (
     <div>
       {!account ? (
-        <Button onClick={handleWalletProviderOpen} color="primary" variant="contained">
-          {buttonText}
-        </Button>
+        <Button onClick={handleWalletProviderOpen} className="shinyButtonSecondary" >{buttonText}</Button>
       ) : (
-        <Button variant="contained" onClick={onPresentAccountModal}>
-          My Wallet
-        </Button>
+        <Button onClick={onPresentAccountModal} className="shinyButtonSecondary" >My Wallet</Button>
       )}
 
       <WalletProviderModal open={isWalletProviderOpen} handleClose={handleWalletProviderClose} />

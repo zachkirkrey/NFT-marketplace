@@ -19,12 +19,12 @@ body {
   height: 100%;
 }
 
-.makeStyles-paper-11,
-.makeStyles-paper-11 h2,
-.MuiTypography-body1,
-.MuiPaper-root,
-.MuiPaper-root h2 {
-  color: #000 !important;
+/* .makeStyles-paper-11, */
+/* .makeStyles-paper-11 h2, */
+/* .MuiTypography-body1,
+.MuiPaper-root, */
+h2 {
+  color: #f9d749 !important;
 }
 
 body {
@@ -46,10 +46,8 @@ h4,
 h5,
 h6 {
   font-family: 'Rubik', cursive !important;
-}
-
-footer .a:hover {
-  fill: '#DA4567';
+  text-transform: uppercase;
+  color: #f9d749;
 }
 
 .MuiToolbar-regular {
@@ -68,7 +66,7 @@ code {
 }
 
 .wallet-button {
-  color: #5f6025 !important;
+  color: white;
   font-family: 'Rubik', sans-serif !important;
   font-size: 1.2rem !important;
   text-align: left !important;
@@ -76,6 +74,91 @@ code {
   text-transform: none !important;
 }
 .wallet-button:hover {
-  background-color: black !important;
-  color: #ff6c17 !important;
+  color: #f9d749 !important;
+}
+
+.navLink {
+  color: white !important;
+}
+
+.navLink:hover {
+  color: #f9d749 !important;
+}
+
+.shinyButton {
+  margin-top: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+
+  border-radius: 15px;
+  font-size: 1rem !important; 
+  padding-left: 5px; 
+  color: #f9d749 !important;
+  box-shadow: 0px 0px 5px 0px rgba(251,221,76,1);
+}
+
+.shinyButtonDisabled {
+  border-radius: 15px;
+
+  color: grey !important;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+
+.shinyButton:hover {
+  background-color: #f9d749 !important;
+  color: #171923 !important;
+}
+
+.shinyButtonSecondary {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  
+  border-radius: 15px;
+  font-size: 1rem !important; 
+  padding-left: 5px; 
+  background-color: #f9d749 !important;
+  color: #171923 !important;
+  /* box-shadow: 0px 0px 5px 0px rgba(251,221,76,1); */
+}
+
+.shinyButtonDisabledSecondary {
+  border-radius: 15px;
+
+  color: grey !important;
+  box-shadow: 0px 0px 5px 0px grey;
+}
+
+.shinyButtonSecondary:hover {
+  background-color: #f9d749 !important;
+  color: #171923 !important;
+  box-shadow: 0px 0px 5px 0px rgba(251,221,76,1);
+
+}
+
+.navTokenPrice {
+  padding-top: 5px;
+  padding-right: 15px; 
+  color: #fff;
+}
+
+.navTokenIcon {
+  height: 30px !important;
+  width: 30px !important;
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  overflow: hidden;
+}
+
+.bomb {
+  background-image: url("/bomb1.png");
+}
+
+.bshare {
+  background-image: url("/bomb2.png");
+}
+
+.btc {
+  background-image: url("/bomb3.png");
 }

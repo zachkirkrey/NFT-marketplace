@@ -1,7 +1,7 @@
-import { black, purple, teal, grey, red, white, yellow } from './colors';
+import { black, purple, teal, grey, red, white, yellow, newNavy } from './colors';
 
 const theme = {
-  borderRadius: 12,
+  borderRadius: 13,
   color: {
     black,
     grey,
@@ -15,6 +15,7 @@ const theme = {
     },
     white,
     teal,
+    newNavy,
   },
   siteWidth: 1200,
   spacing: {

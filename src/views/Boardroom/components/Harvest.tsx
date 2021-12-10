@@ -40,14 +40,13 @@ const Harvest: React.FC = () => {
                 <TokenSymbol symbol="BOMB" />
               </CardIcon>
               <Value value={getDisplayBalance(earnings)} />
-              <Label text={`≈ $${earnedInDollars}`} />
-              <Label text="BOMB Earned" />
+              <Label text={`≈ $${earnedInDollars}`} variant="yellow"  />
+              <Label text="BOMB Earned" variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
               <Button
                 onClick={onReward}
-                color="primary"
-                variant="contained"
+                className={earnings.eq(0) || !canClaimReward ? "shinyButtonDisabled":"shinyButton"}
                 disabled={earnings.eq(0) || !canClaimReward}
               >
                 Claim Reward

@@ -27,7 +27,7 @@ const StyledPanel = styled.div<NoticeProps>`
     color === 'grey' ? theme.color.grey[900] : color === 'yellow' ? '#c6840077' : '#689f3877'};
   color: ${({ color, theme }) =>
     color === 'grey' ? theme.color.grey[400] : color === 'yellow' ? '#ffd54f' : '#8bc34a'};
-  border-radius: 4px;
+  border-radius: 15px;
 `;
 
 const StyledText = styled.span``;

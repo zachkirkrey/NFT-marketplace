@@ -1,16 +1,17 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import bombLogo from '../../assets/img/bomb-256.png';
-import tShareLogo from '../../assets/img/bshare-256.png';
-import bombLogoPNG from '../../assets/img/bomb-512.png';
-import tShareLogoPNG from '../../assets/img/bshare-512.png';
-import tBondLogo from '../../assets/img/bbond-256.png';
+import bombLogo from '../../assets/img/bomb.png';
+import tShareLogo from '../../assets/img/bshares.png';
+import bombLogoPNG from '../../assets/img/bomb.png';
+import tShareLogoPNG from '../../assets/img/bshares.png';
+import tBondLogo from '../../assets/img/bbond.png';
 
-import bombFtmLpLogo from '../../assets/img/bomb-btc-lp-512.png';
-import bshareFtmLpLogo from '../../assets/img/bshare-bnb-lp-512.png';
+import bombFtmLpLogo from '../../assets/img/bomb-bitcoin-LP.png';
+import bshareFtmLpLogo from '../../assets/img/bshare-bnb-LP.png';
 
 import bnbLogo from '../../assets/img/bnb.png';
+import btcLogo from '../../assets/img/BCTB-icon.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -26,9 +27,9 @@ const logosBySymbol: { [title: string]: string } = {
   ZOO: bnbLogo,
   CAKE: bnbLogo,
   SUSD: bnbLogo,
-  SBTC: bnbLogo,
-  BTCB: bnbLogo,
-  BTC: bnbLogo,
+  SBTC: btcLogo,
+  BTCB: btcLogo,
+  BTC: btcLogo,
   SVL: bnbLogo,
   'BOMB-BNB-LP': bombFtmLpLogo,
   'BOMB-BTCB-LP': bombFtmLpLogo,

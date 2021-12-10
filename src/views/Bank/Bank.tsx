@@ -94,8 +94,8 @@ const Bank: React.FC = () => {
           {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
           <Spacer size="lg" />
           <div>
-            <Button onClick={onRedeem} color="primary" variant="contained">
-              Claim & Withdraw
+            <Button onClick={onRedeem} className="shinyButtonSecondary">
+              Claim &amp; Withdraw
             </Button>
           </div>
           <Spacer size="lg" />

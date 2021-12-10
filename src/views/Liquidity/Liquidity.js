@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import Page from '../../components/Page';
 import { createGlobalStyle } from 'styled-components';
-import HomeImage from '../../assets/img/home.png';
+import HomeImage from '../../assets/img/background.jpg';
 import useLpStats from '../../hooks/useLpStats';
 import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
 import useBombStats from '../../hooks/useBombStats';
@@ -19,6 +19,7 @@ const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) no-repeat !important;
     background-size: cover !important;
+    background-color: #171923;
   }
 `;
 function isNumeric(n) {

@@ -1,6 +1,6 @@
 {
   "name": "bomb-frontend",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repository": "https://github.com/bombmoney/bomb-frontend.git",
   "private": false,
   "author": "Aaron <aaron@1coin.io>",
@@ -15,8 +15,6 @@
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@pancakeswap/sdk": "^2.4.0",
     "@reduxjs/toolkit": "^1.4.0",
-    "@spiritswap/sdk": "https://github.com/Layer3Org/spiritswap-sdk",
-    "@spookyswap/sdk": "https://github.com/SpookySwap/spookyswap-sdk",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -45,12 +43,12 @@
     "redux-localstorage-simple": "^2.3.1",
     "styled-components": "^5.1.1",
     "typescript": "^3.9.7",
-    "use-wallet": "OGBoogieTomb/use-wallet",
+    "use-wallet": "^0.13.1",
     "web3": "^1.2.11"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= GENERATE_SOURCEMAP=false react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

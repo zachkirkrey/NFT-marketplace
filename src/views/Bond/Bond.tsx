@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import Page from '../../components/Page';
-import BondImage from '../../assets/img/pit.png';
 import { createGlobalStyle } from 'styled-components';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
@@ -19,21 +18,16 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
-import { BigNumber } from 'ethers';
 
-// const BackgroundImage = createGlobalStyle`
-//   body {
-//     background: url(${BondImage}) no-repeat !important;
-//     background-size: cover !important;
-//   }
-// `;
-
+import HomeImage from '../../assets/img/background.jpg';
 const BackgroundImage = createGlobalStyle`
   body {
-    background-color: grey;
+    background: url(${HomeImage}) repeat !important;
     background-size: cover !important;
+    background-color: #171923;
   }
 `;
+
 
 const Bond: React.FC = () => {
   const { path } = useRouteMatch();
@@ -76,7 +70,7 @@ const Bond: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="Buy & Redeem Bonds" subtitle="Earn premiums upon redemption" />
+              <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
             <StyledBond>
               <StyledCardWrapper>

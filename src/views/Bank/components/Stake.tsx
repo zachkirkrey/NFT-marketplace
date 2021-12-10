@@ -111,8 +111,9 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
                   approveStatus === ApprovalState.UNKNOWN
                 }
                 onClick={approve}
-                color="primary"
-                variant="contained"
+                className={ bank.closedForStaking ||
+                  approveStatus === ApprovalState.PENDING ||
+                  approveStatus === ApprovalState.UNKNOWN ? "shinyButtonDisabled": "shinyButton"}
                 style={{ marginTop: '20px' }}
               >
                 {`Approve ${bank.depositTokenName}`}

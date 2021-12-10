@@ -76,7 +76,7 @@ const StyledTitleArea = styled.div`
 `;
 
 const StyledModalTitle = styled.div`
-  //color: ${(props) => props.theme.color.grey[300]};
+  //color: ${(props) => props.theme.color.grey[100]};
   flex: 1;
   font-size: 18px;
   font-weight: 700;
