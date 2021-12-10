@@ -82,7 +82,7 @@ const Providers: React.FC = ({ children }) => {
     <TP1 theme={theme}>
       <TP theme={newTheme}>
         <UseWalletProvider
-          chainId={config.chainId}
+          
           connectors={{
             walletconnect: { rpcUrl: config.defaultProvider },
             walletlink: {

@@ -8,6 +8,7 @@ import Modal, { ModalProps } from '../Modal';
 import ModalTitle from '../ModalTitle';
 import useBombFinance from '../../hooks/useBombFinance';
 import TokenSymbol from '../TokenSymbol';
+import { useMediaQuery } from '@material-ui/core';
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const bombFinance = useBombFinance();
@@ -20,13 +21,15 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   const bbondBalance = useTokenBalance(bombFinance.BBOND);
   const displayBbondBalance = useMemo(() => getDisplayBalance(bbondBalance), [bbondBalance]);
+  
+  const matches = useMediaQuery('(min-width:900px)');
 
   return (
     <Modal>
-      <ModalTitle text="My Wallet" />
+      <ModalTitle text="My Wallet"  />
 
-      <Balances>
-        <StyledBalanceWrapper>
+      <Balances style={{display: "flex", flexDirection: (matches ? "row": "column")}}>
+        <StyledBalanceWrapper style={{paddingBottom: "15px"}}>
           <TokenSymbol symbol="BOMB" />
           <StyledBalance>
             <StyledValue>{displayBombBalance}</StyledValue>
@@ -34,7 +37,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           </StyledBalance>
         </StyledBalanceWrapper>
 
-        <StyledBalanceWrapper>
+        <StyledBalanceWrapper style={{paddingBottom: "15px"}}>
           <TokenSymbol symbol="BSHARE" />
           <StyledBalance>
             <StyledValue>{displayBshareBalance}</StyledValue>
@@ -42,7 +45,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           </StyledBalance>
         </StyledBalanceWrapper>
 
-        <StyledBalanceWrapper>
+        <StyledBalanceWrapper style={{paddingBottom: "15px"}}>
           <TokenSymbol symbol="BBOND" />
           <StyledBalance>
             <StyledValue>{displayBbondBalance}</StyledValue>

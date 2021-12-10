@@ -48,14 +48,14 @@ const WalletProviderModal = ({ open, handleClose }) => {
             title="Metamask"
           />
           <WalletCard
-            icon={<img src={walletConnectLogo} alt="Wallet Connect logo" style={{ height: 24 }} />}
+            icon={<img src={walletConnectLogo} alt="Wallet Connect logo" style={{ height: 24, color: "white" }} />}
             onConnect={() => {
               connect('walletconnect');
             }}
             title="WalletConnect"
           />
           <WalletCard
-            icon={<img src={coingBaseLogo} alt="Coinbase wallet logo" style={{ height: 32 }} />}
+            icon={<img src={coingBaseLogo} alt="Coinbase wallet logo" style={{ height: 32, color: "white" }} />}
             onConnect={() => {
               connect('walletlink');
             }}

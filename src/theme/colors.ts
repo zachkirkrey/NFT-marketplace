@@ -40,3 +40,8 @@ export const bg = '#000000';
 export const teal = {
   200: '#64ffda',
 };
+
+
+export const newNavy = {
+  200: '171923'
+};

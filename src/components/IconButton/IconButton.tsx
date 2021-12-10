@@ -26,13 +26,16 @@ interface StyledButtonProps {
     -12px -12px 24px ${props => props.theme.color.grey[800]}aa;
  */
 
+// background-color: ${(props) => (!props.disabled ? '#571eb1' : props.theme.color.grey[900])};
+// color: ${(props) => (!props.disabled ? props.theme.color.primary.main : props.theme.color.grey[500])};
+
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  // background-color: ${(props) => props.theme.color.grey[!props.disabled ? 700 : 900]};
-  background-color: ${(props) => (!props.disabled ? '#571eb1' : props.theme.color.grey[900])};
-  border: 0;
+  border: 2px solid;
   border-radius: 28px;
-  color: ${(props) => (!props.disabled ? props.theme.color.primary.main : props.theme.color.grey[500])};
+  background-color: #171923;
+  box-shadow: ${(props) => ("0px 0px 5px 0px " + !props.disabled ? "rgba(251,221,76,1)" : "grey" + ";")};
+  color: ${(props) => (!props.disabled ? "#f9d749" : "grey")};
   cursor: pointer;
   display: flex;
   font-weight: 700;
@@ -45,9 +48,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   pointer-events: ${(props) => (!props.disabled ? undefined : 'none')};
   text-transform: uppercase;
   width: 56px;
+
   &:hover {
-    // background-color: ${(props) => props.theme.color.grey[800]};
-    background-color: #2c2560;
+    background-color: #f9d749;
+    color: #171923;
   }
 `;
 

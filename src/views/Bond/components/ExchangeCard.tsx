@@ -71,7 +71,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
               <StyledCardIcon>
                 <TokenSymbol symbol={fromToken.symbol} size={54} />
               </StyledCardIcon>
-              <Label text={fromTokenName} variant="normal" />
+              <Label text={fromTokenName} variant="yellow" />
             </StyledToken>
             <StyledExchangeArrow>
               <FontAwesomeIcon icon={faArrowRight} />
@@ -80,22 +80,21 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
               <StyledCardIcon>
                 <TokenSymbol symbol={toToken.symbol} size={54} />
               </StyledCardIcon>
-              <Label text={toTokenName} variant="normal" />
+              <Label text={toTokenName} variant="yellow" />
             </StyledToken>
           </StyledExchanger>
           <StyledDesc>{priceDesc}</StyledDesc>
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED && !disabled ? (
               <Button
-                color="primary"
-                variant="contained"
+              className="shinyButton"
                 disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
                 onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
               >
                 {`Approve ${fromTokenName}`}
               </Button>
             ) : (
-              <Button color="primary" variant="contained" onClick={onPresent} disabled={disabled}>
+              <Button className={disabled ? "shinyButtonDisabled" : "shinyButton"} onClick={onPresent} disabled={disabled}>
                 {disabledDescription || action}
               </Button>
             )}
@@ -113,6 +112,7 @@ const StyledCardTitle = styled.div`
   font-weight: 700;
   height: 64px;
   justify-content: center;
+  color: #f9d749;
   margin-top: ${(props) => -props.theme.spacing[3]}px;
 `;
 

@@ -18,7 +18,7 @@ const FarmCard = ({ bank }) => {
                 height: '48px',
                 width: '48px',
                 borderRadius: '40px',
-                backgroundColor: 'white',
+                backgroundColor: '#363746',
                 alignItems: 'center',
                 display: 'flex',
                 justifyContent: 'center',
@@ -36,7 +36,7 @@ const FarmCard = ({ bank }) => {
           </Box>
         </CardContent>
         <CardActions style={{ justifyContent: 'flex-end' }}>
-          <Button color="primary" size="small" variant="contained" component={Link} to={`/farm/${bank.contract}`}>
+          <Button className="shinyButtonSecondary" component={Link} to={`/farm/${bank.contract}`}>
             View
           </Button>
         </CardActions>

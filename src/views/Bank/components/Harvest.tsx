@@ -16,7 +16,7 @@ import { getDisplayBalance } from '../../../utils/formatBalance';
 import TokenSymbol from '../../../components/TokenSymbol';
 import { Bank } from '../../../bomb-finance';
 import useBombStats from '../../../hooks/useBombStats';
-import useShareStats from '../../../hooks/usetShareStats';
+import useShareStats from '../../../hooks/usebShareStats';
 
 interface HarvestProps {
   bank: Bank;
@@ -48,7 +48,7 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
             <Label text={`${tokenName} Earned`} />
           </StyledCardHeader>
           <StyledCardActions>
-            <Button onClick={onReward} disabled={earnings.eq(0)} color="primary" variant="contained">
+            <Button onClick={onReward} disabled={earnings.eq(0)} className={earnings.eq(0) ? "shinyButtonDisabled" : "shinyButton"}>
               Claim
             </Button>
           </StyledCardActions>

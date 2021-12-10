@@ -84,15 +84,14 @@ const Stake: React.FC = () => {
                 <TokenSymbol symbol="BSHARE" />
               </CardIcon>
               <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={`≈ $${tokenPriceInDollars}`} />
-              <Label text={'BSHARE Staked'} />
+              <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow"/>
+              <Label text={'BSHARE Staked'} variant="yellow"/>
             </StyledCardHeader>
             <StyledCardActions>
               {approveStatus !== ApprovalState.APPROVED ? (
                 <Button
                   disabled={approveStatus !== ApprovalState.NOT_APPROVED}
-                  variant="contained"
-                  color="primary"
+                  className={approveStatus !== ApprovalState.NOT_APPROVED ? "shinyButton": "shinyButtonDisabled"}
                   style={{ marginTop: '20px' }}
                   onClick={approve}
                 >
@@ -101,11 +100,11 @@ const Stake: React.FC = () => {
               ) : (
                 <>
                   <IconButton disabled={!canWithdrawFromBoardroom} onClick={onPresentWithdraw}>
-                    <RemoveIcon />
+                    <RemoveIcon color={!canWithdrawFromBoardroom ? "" : "yellow"}/>
                   </IconButton>
                   <StyledActionSpacer />
                   <IconButton onClick={onPresentDeposit}>
-                    <AddIcon />
+                    <AddIcon color={!canWithdrawFromBoardroom ? "" : "yellow"}/>
                   </IconButton>
                 </>
               )}

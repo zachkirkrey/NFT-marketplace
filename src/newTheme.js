@@ -5,11 +5,13 @@ const newTheme = createMuiTheme({
   palette: {
     type: 'light',
     text: {
-      primary: '#FFF',
+      primary: '#dddfee',
+      secondary: 'white',
+      yellow: '#f9d749'
     },
     background: {
       default: '#121212',
-      paper: 'rgba(255, 255, 255, 0.9)',
+      paper: '#171923',
     },
     primary: {
       light: '#ffe066',

@@ -15,17 +15,12 @@ import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
 
-// const BackgroundImage = createGlobalStyle`
-//   body {
-//     background: url(${FarmImage}) no-repeat !important;
-//     background-size: cover !important;
-//   }
-// `;
-
+import HomeImage from '../../assets/img/background.jpg';
 const BackgroundImage = createGlobalStyle`
   body {
-    background-color: grey;
+    background: url(${HomeImage}) repeat !important;
     background-size: cover !important;
+    background-color: #171923;
   }
 `;
 
@@ -41,22 +36,22 @@ const Farm = () => {
           <BackgroundImage />
           {!!account ? (
             <Container maxWidth="lg">
-              <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
+              {/* <Typography color="textYellow" align="center" variant="h3" gutterBottom>
                 Farm
-              </Typography>
+              </Typography> */}
 
               <Box mt={5}>
                 <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom>
+                  <Typography color="textYellow" align="center" variant="h4" gutterBottom>
                     Earn BSHARE by staking PancakeSwap LP
                   </Typography>
-                  <Alert variant="filled" severity="info">
+                  {/* <Alert variant="filled" severity="info">
                     <h4>
                       Farms started November 25th 2021 and will continue running for 1 full year.</h4>
 
 
 
-                  </Alert>
+                  </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 2)
@@ -75,7 +70,7 @@ const Farm = () => {
                   <Alert variant="filled" severity="warning">
                     Please remove funds from all farms which are not active.
                   </Alert>
-                  <Grid container spacing={3} style={{ marginTop: '20px' }}>
+                  <Grid container spacing={3} style={{ marginTop: '20px', display: "flex", alignItems: "center" }}>
                     {activeBanks
                       .filter((bank) => bank.sectionInUI === 1)
                       .map((bank) => (
