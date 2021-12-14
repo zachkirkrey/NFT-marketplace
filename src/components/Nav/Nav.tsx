@@ -149,6 +149,9 @@ const Nav = () => {
               <a href="https://docs.bomb.money" className={'navLink ' + classes.link} rel="noopener" target="_blank">
                 Docs
               </a>
+                <a href="https://bomb.farm" className={'navLink ' + classes.link} rel="noopener" target="_blank">
+                AutoVaults
+              </a>
             </Box>
 
             <Box
@@ -223,6 +226,9 @@ const Nav = () => {
                 {/* <ListItemLink primary="Regulations" to="/regulations" /> */}
                 <ListItem button component="a" href="https://docs.bomb.money">
                   <ListItemText>Docs</ListItemText>
+                  </ListItem>
+                   <ListItem button component="a" href="https://bomb.farm">
+                  <ListItemText>AutoVaults</ListItemText>
                 </ListItem>
               </List>
             </Drawer>
