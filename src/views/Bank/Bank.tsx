@@ -37,6 +37,15 @@ const Bank: React.FC = () => {
   const {account} = useWallet();
   const {onRedeem} = useRedeem(bank);
   const statsOnPool = useStatsForPool(bank);
+
+  let vaultUrl: string;
+  if (bank.depositTokenName.includes('BOMB')) {
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
+  } else {
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-wbnb';
+
+  }
+
   return account && bank ? (
     <>
       <PageHeader
@@ -44,6 +53,17 @@ const Bank: React.FC = () => {
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
+         <Box mt={5}>
+                <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
+
+        <Alert variant="filled" severity="info">
+            <h3>Our autocompounding vaults are live!</h3><br />
+            We support zapping tokens, and auto-compound every 2 hours!<br />
+            Check it out here: <a href={vaultUrl}>{vaultUrl}</a>
+
+
+        </Alert></Grid>
+        </Box>
       <Box>
         <Grid container justify="center" spacing={3} style={{marginBottom: '50px'}}>
           <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
@@ -72,15 +92,7 @@ const Bank: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-      {/* <Box mt={5}>
-                <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
-
-        <Alert variant="filled" severity="warning">
-            Our reward farms have transitioned to PancakeSwap LPs from ApeSwap.<br /> ApeSwap LP based farms no longer have rewards.
-
-
-        </Alert></Grid>
-        </Box> */}
+   
       <Box mt={5}>
         <StyledBank>
           <StyledCardsWrapper>
@@ -116,12 +128,16 @@ const LPTokenHelpText: React.FC<{bank: BankEntity}> = ({bank}) => {
 
   let pairName: string;
   let uniswapUrl: string;
+  let vaultUrl: string;
   if (bank.depositTokenName.includes('BOMB')) {
     pairName = 'BOMB-BTCB pair';
     uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
   } else {
     pairName = 'BSHARE-BNB pair';
     uniswapUrl = 'https://pancakeswap.finance/add/BNB/' + bshareAddr;
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-bnb';
+
   }
   return (
     <Card>

@@ -102,6 +102,7 @@ export class BombFinance {
     const bombRewardPoolSupply2 = await this.BOMB.balanceOf(BombRewardPool.address);
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
     const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
+    const priceInBNBstring = priceInBNB.toString();
     const priceInBTC = await this.getTokenPriceFromPancakeswapBTC(this.BOMB);
     const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
@@ -193,8 +194,8 @@ export class BombFinance {
     const bombStat = await this.getBombStat();
     const bondBombRatioBN = await Treasury.getBondPremiumRate();
     const modifier = bondBombRatioBN / 1e18 > 1 ? bondBombRatioBN / 1e18 : 1;
-    const bondPriceInBNB = (Number(bombStat.tokenInFtm) * modifier).toFixed(2);
-    const priceOfBBondInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(2);
+    const bondPriceInBNB = (Number(bombStat.tokenInFtm) * modifier).toFixed(4);
+    const priceOfBBondInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(4);
     const supply = await this.BBOND.displayedTotalSupply();
     return {
       tokenInFtm: bondPriceInBNB,
