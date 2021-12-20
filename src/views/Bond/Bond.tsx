@@ -18,8 +18,10 @@ import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import {getDisplayBalance} from '../../utils/formatBalance';
 import {BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN} from '../../bomb-finance/constants';
+import { Alert } from '@material-ui/lab';
 
 import HomeImage from '../../assets/img/background.jpg';
+import { Grid , Box } from '@material-ui/core';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -71,6 +73,18 @@ const Bond: React.FC = () => {
             <Route exact path={path}>
               <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
+             <Box mt={5}>
+                <Grid item xs={12} sm={12} justify="center" style={{ margin: '18px', display: 'flex' }}>
+                <Alert variant="filled" severity="error">
+                    <b>
+                      Claiming below 1.1 peg will not receive a redemption bonus, claim wisely!</b>
+
+
+
+              </Alert>
+            
+              </Grid>
+              </Box>
             <StyledBond>
               <StyledCardWrapper>
                 <ExchangeCard
