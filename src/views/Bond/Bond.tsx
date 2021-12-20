@@ -63,6 +63,7 @@ const Bond: React.FC = () => {
   );
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
+  const isBondPayingPremium = useMemo(() => Number(bondStat?.tokenInFtm) >= 1.1, [bondStat]);
 
   return (
     <Switch>
@@ -73,18 +74,20 @@ const Bond: React.FC = () => {
             <Route exact path={path}>
               <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
-             <Box mt={5}>
+            {isBondPayingPremium == false ? (
+
+
+                 <Box mt={5}>
                 <Grid item xs={12} sm={12} justify="center" style={{ margin: '18px', display: 'flex' }}>
                 <Alert variant="filled" severity="error">
                     <b>
                       Claiming below 1.1 peg will not receive a redemption bonus, claim wisely!</b>
-
-
-
               </Alert>
             
               </Grid>
               </Box>
+            ) : <></>}
+          
             <StyledBond>
               <StyledCardWrapper>
                 <ExchangeCard
