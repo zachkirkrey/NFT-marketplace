@@ -193,7 +193,7 @@ export class BombFinance {
     const {Treasury} = this.contracts;
     const bombStat = await this.getBombStat();
     const bondBombRatioBN = await Treasury.getBondPremiumRate();
-    const modifier = bondBombRatioBN / 1e18 > 1 ? bondBombRatioBN / 1e18 : 1;
+    const modifier = bondBombRatioBN / 1e14 > 1 ? bondBombRatioBN / 1e14 : 1;
     const bondPriceInBNB = (Number(bombStat.tokenInFtm) * modifier).toFixed(4);
     const priceOfBBondInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(4);
     const supply = await this.BBOND.displayedTotalSupply();
