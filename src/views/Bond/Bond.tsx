@@ -17,7 +17,7 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import {getDisplayBalance} from '../../utils/formatBalance';
-import {BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN} from '../../bomb-finance/constants';
+import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN, DECIMALS_18 } from '../../bomb-finance/constants';
 import { Alert } from '@material-ui/lab';
 
 import HomeImage from '../../assets/img/background.jpg';
@@ -42,7 +42,7 @@ const Bond: React.FC = () => {
   const bondsPurchasable = useBondsPurchasable();
 
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
-  // const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice).toFixed(4) : null), [cashPrice]);
+  const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
@@ -64,6 +64,7 @@ const Bond: React.FC = () => {
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
   const isBondPayingPremium = useMemo(() => Number(bondStat?.tokenInFtm) >= 1.1, [bondStat]);
+  const bondScale = (Number(cashPrice) / 100000000000000).toFixed(4); 
 
   return (
     <Switch>
@@ -109,7 +110,9 @@ const Bond: React.FC = () => {
                 <ExchangeStat
                   tokenName="10,000 BOMB"
                   description="Last-Hour TWAP Price"
-                  price={Number(bombStat?.tokenInFtm).toFixed(4) || '-'}
+                  //price={Number(bombStat?.tokenInFtm).toFixed(4) || '-'}
+                 price={bondScale || '-'}
+
                 />
                 <Spacer size="md" />
                 <ExchangeStat
