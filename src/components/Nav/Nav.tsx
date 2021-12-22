@@ -193,9 +193,10 @@ const Nav = () => {
             />
             <AccountButton text="Connect" />
             <Drawer
-              className={classes.drawer}
-              onEscapeKeyDown={handleDrawerClose}
-              onBackdropClick={handleDrawerClose}
+                className={classes.drawer}
+                onClose={handleDrawerClose}
+              // onEscapeKeyDown={handleDrawerClose}
+              // onBackdropClick={handleDrawerClose}
               variant="temporary"
               anchor="left"
               open={open}

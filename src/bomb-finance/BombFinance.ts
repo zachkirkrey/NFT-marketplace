@@ -336,9 +336,9 @@ export class BombFinance {
     }
     const rewardPerSecond = await poolContract.tSharePerSecond();
     if (depositTokenName.startsWith('BOMB')) {
-      return rewardPerSecond.mul(35500).div(59500);
+      return rewardPerSecond.mul(44625).div(59500);
     } else {
-      return rewardPerSecond.mul(24000).div(59500);
+      return rewardPerSecond.mul(14875).div(59500);
     }
   }
 
@@ -401,9 +401,10 @@ export class BombFinance {
    * Redeem bonds for cash.
    * @param amount amount of bonds to redeem.
    */
-  async redeemBonds(amount: string): Promise<TransactionResponse> {
+  async redeemBonds(amount: string | number): Promise<TransactionResponse> {
     const {Treasury} = this.contracts;
     const priceForBomb = await Treasury.getBombPrice();
+
     return await Treasury.redeemBonds(decimalToBalance(amount), priceForBomb);
   }
 

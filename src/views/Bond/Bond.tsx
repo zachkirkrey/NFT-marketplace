@@ -42,7 +42,7 @@ const Bond: React.FC = () => {
   const bondsPurchasable = useBondsPurchasable();
 
   const bondBalance = useTokenBalance(bombFinance?.BBOND);
-  const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice) : null), [cashPrice]);
+  //const scalingFactor = useMemo(() => (cashPrice ? Number(cashPrice) : null), [cashPrice]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
@@ -78,7 +78,7 @@ const Bond: React.FC = () => {
             {isBondPayingPremium == false ? (
 
 
-                 <Box mt={5}>
+              <Box mt={5}>
                 <Grid item xs={12} sm={12} justify="center" style={{ margin: '18px', display: 'flex' }}>
                 <Alert variant="filled" severity="error">
                     <b>
