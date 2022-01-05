@@ -23,7 +23,7 @@ import { Alert } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
 import useBombFinance from '../../hooks/useBombFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
-
+import { Helmet } from 'react-helmet'
 import BombImage from '../../assets/img/bomb.png';
 
 import HomeImage from '../../assets/img/background.jpg';
@@ -34,6 +34,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
+const TITLE = 'bomb.money | BTC pegged algocoin'
 
 // const BackgroundImage = createGlobalStyle`
 //   body {
@@ -140,6 +141,9 @@ const Home = () => {
 
   return (
     <Page>
+      <Helmet>
+        <title>{TITLE}</title>
+      </Helmet>
       <BackgroundImage />
       <Grid container spacing={3}>
         {/* Logo */}
@@ -149,7 +153,7 @@ const Home = () => {
           sm={4}
           style={{ display: 'flex', justifyContent: 'center', verticalAlign: 'middle', overflow: 'hidden' }}
         >
-          <img src={BombImage} style={{ maxHeight: '240px' }} />
+          <img src={BombImage} alt='Bomb.money' style={{ maxHeight: '240px' }} />
         </Grid>
         {/* Explanation text */}
         <Grid item xs={12} sm={8}>
@@ -186,7 +190,7 @@ const Home = () => {
 
             <Alert variant="filled" severity="info">
               <strong>Please Note:</strong> We were not impacted by any of the recent exploits. &nbsp;
-              <a href="https://medium.com/@bombbshare/dec-18-quick-update-regarding-grim-exploit-4f1a0c989fba" target="_blank">
+              <a rel="noopener noreferrer" href="https://medium.com/@bombbshare/dec-18-quick-update-regarding-grim-exploit-4f1a0c989fba" target="_blank">
                 Read more here.
               </a>
 

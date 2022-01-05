@@ -101,10 +101,10 @@ export class BombFinance {
     const bombRewardPoolSupply = await this.BOMB.balanceOf(BombGenesisRewardPool.address);
     const bombRewardPoolSupply2 = await this.BOMB.balanceOf(BombRewardPool.address);
     const bombCirculatingSupply = supply.sub(bombRewardPoolSupply).sub(bombRewardPoolSupply2);
-    const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
-    const priceInBNBstring = priceInBNB.toString();
+    //  const priceInBNB = await this.getTokenPriceFromPancakeswap(this.BOMB);
+    //const priceInBNBstring = priceInBNB.toString();
     const priceInBTC = await this.getTokenPriceFromPancakeswapBTC(this.BOMB);
-    const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
+    // const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneBTC = await this.getBTCBPriceFromPancakeswap();
     const priceInDollars = await this.getTokenPriceFromPancakeswapBOMBUSD();
     const priceOfBombInDollars = ((Number(priceInBTC) * Number(priceOfOneBTC)) / 10000).toFixed(2);
@@ -573,9 +573,9 @@ export class BombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     //const { chainId } = this.config;
-    const {BTCB, WBNB} = this.config.externalTokens;
+    // const {WBNB} = this.config.externalTokens;
 
-    const wbnb = new Token(56, WBNB[0], WBNB[1]);
+    // const wbnb = new Token(56, WBNB[0], WBNB[1]);
     const btcb = new Token(56, this.BTC.address, this.BTC.decimal, 'BTCB', 'BTCB');
     const token = new Token(56, tokenContract.address, tokenContract.decimal, tokenContract.symbol);
     try {
@@ -594,9 +594,9 @@ export class BombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
     //const { chainId } = this.config;
-    const {BOMB, WBNB} = this.config.externalTokens;
+    //const {WBNB} = this.config.externalTokens;
 
-    const wbnb = new Token(56, WBNB[0], WBNB[1]);
+    //  const wbnb = new Token(56, WBNB[0], WBNB[1]);
     const btcb = new Token(56, this.BTC.address, this.BTC.decimal, 'BTCB', 'BTCB');
     const token = new Token(56, this.BOMB.address, this.BOMB.decimal, this.BOMB.symbol);
     try {
@@ -909,11 +909,11 @@ export class BombFinance {
     const {_reserve0, _reserve1} = await this.BOMBBTCB_LP.getReserves();
     let quote;
     if (tokenName === 'BOMB') {
-      quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
-    } else {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);
+    } else {
+      quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
     }
-    return (quote / 1e14).toString();
+    return (quote / 1e18).toString();
   }
 
   /**

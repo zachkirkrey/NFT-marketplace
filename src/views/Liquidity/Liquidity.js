@@ -1,19 +1,20 @@
-import React, {useMemo, useState} from 'react';
+import React, { useMemo, useState } from 'react';
 import Page from '../../components/Page';
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import HomeImage from '../../assets/img/background.jpg';
 import useLpStats from '../../hooks/useLpStats';
-import {Box, Button, Grid, Paper, Typography} from '@material-ui/core';
+import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
 import useBombStats from '../../hooks/useBombStats';
 import TokenInput from '../../components/TokenInput';
 import useBombFinance from '../../hooks/useBombFinance';
-import {useWallet} from 'use-wallet';
+import { useWallet } from 'use-wallet';
 import useTokenBalance from '../../hooks/useTokenBalance';
-import {getDisplayBalance} from '../../utils/formatBalance';
+import { getDisplayBalance } from '../../utils/formatBalance';
 import useApproveTaxOffice from '../../hooks/useApproveTaxOffice';
-import {ApprovalState} from '../../hooks/useApprove';
+import { ApprovalState } from '../../hooks/useApprove';
 import useProvideBombFtmLP from '../../hooks/useProvideBombFtmLP';
-import {Alert} from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
+import { Helmet } from 'react-helmet';
 
 const BackgroundImage = createGlobalStyle`
   body {
@@ -25,12 +26,13 @@ const BackgroundImage = createGlobalStyle`
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
+const TITLE = 'bomb.money |'
 
 const ProvideLiquidity = () => {
   const [bombAmount, setBombAmount] = useState(0);
   const [ftmAmount, setFtmAmount] = useState(0);
   const [lpTokensAmount, setLpTokensAmount] = useState(0);
-  const {balance} = useWallet();
+  const { balance } = useWallet();
   const bombStats = useBombStats();
   const bombFinance = useBombFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
@@ -38,7 +40,7 @@ const ProvideLiquidity = () => {
   const btcBalance = useTokenBalance(bombFinance.BTC);
 
   const ftmBalance = (btcBalance / 1e18).toFixed(4);
-  const {onProvideBombFtmLP} = useProvideBombFtmLP();
+  const { onProvideBombFtmLP } = useProvideBombFtmLP();
   const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
@@ -81,15 +83,19 @@ const ProvideLiquidity = () => {
     setLpTokensAmount(ftmBalance / bombLPStats.ftmAmount);
   };
   return (
+
     <Page>
+      <Helmet>
+        <title>{TITLE}</title>
+      </Helmet>
       <BackgroundImage />
       <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
         Provide Liquidity
       </Typography>
 
       <Grid container justify="center">
-        <Box style={{width: '600px'}}>
-          <Alert variant="filled" severity="warning" style={{marginBottom: '10px'}}>
+        <Box style={{ width: '600px' }}>
+          <Alert variant="filled" severity="warning" style={{ marginBottom: '10px' }}>
             <b>
               This and{' '}
               <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">
@@ -101,7 +107,7 @@ const ProvideLiquidity = () => {
           <Grid item xs={12} sm={12}>
             <Paper>
               <Box mt={4}>
-                <Grid item xs={12} sm={12} style={{borderRadius: 15}}>
+                <Grid item xs={12} sm={12} style={{ borderRadius: 15 }}>
                   <Box p={4}>
                     <Grid container>
                       <Grid item xs={12}>
@@ -127,13 +133,13 @@ const ProvideLiquidity = () => {
                         <p>1 BNB = {ftmPriceInBOMB} BOMB</p>
                         <p>LP tokens ≈ {lpTokensAmount.toFixed(2)}</p>
                       </Grid>
-                      <Grid xs={12} justifyContent="center" style={{textAlign: 'center'}}>
+                      <Grid xs={12} justifyContent="center" style={{ textAlign: 'center' }}>
                         {approveTaxOfficeStatus === ApprovalState.APPROVED ? (
                           <Button
                             variant="contained"
                             onClick={() => onProvideBombFtmLP(ftmAmount.toString(), bombAmount.toString())}
                             color="primary"
-                            style={{margin: '0 10px', color: '#fff'}}
+                            style={{ margin: '0 10px', color: '#fff' }}
                           >
                             Supply
                           </Button>
@@ -142,7 +148,7 @@ const ProvideLiquidity = () => {
                             variant="contained"
                             onClick={() => approveTaxOffice()}
                             color="secondary"
-                            style={{margin: '0 10px'}}
+                            style={{ margin: '0 10px' }}
                           >
                             Approve
                           </Button>

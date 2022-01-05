@@ -104,7 +104,7 @@ const Sbs: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="BBond -> BShare Swap" subtitle="Swap BBond to BShare" />
+              <PageHeader icon={'💣'} title="BBond -> BShare Swap" subtitle="Swap BBond to BShare" />
             </Route>
             <Box mt={5}>
               <Grid container justify="center" spacing={6}>

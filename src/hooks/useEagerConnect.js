@@ -1,10 +1,10 @@
-import {useEffect} from 'react';
+import { useEffect } from 'react';
 // import { connectorLocalStorageKey, ConnectorNames } from '@pancakeswap/uikit'
-import {useWallet} from 'use-wallet';
+import { useWallet } from 'use-wallet';
 
 const useEagerConnect = () => {
   // const { login } = useAuth()
-  const {account, connect, connector} = useWallet();
+  const { account, connect, connector } = useWallet();
 
   if (account && window.localStorage.getItem('connectorId') === '') {
     window.localStorage.setItem('connectorId', connector);

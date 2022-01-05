@@ -9,7 +9,7 @@ import ExchangeCard from './components/ExchangeCard';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import useBondStats from '../../hooks/useBondStats';
-import useBombStats from '../../hooks/useBombStats';
+//import useBombStats from '../../hooks/useBombStats';
 import useBombFinance from '../../hooks/useBombFinance';
 import useCashPriceInLastTWAP from '../../hooks/useCashPriceInLastTWAP';
 import {useTransactionAdder} from '../../state/transactions/hooks';
@@ -17,11 +17,14 @@ import ExchangeStat from './components/ExchangeStat';
 import useTokenBalance from '../../hooks/useTokenBalance';
 import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import {getDisplayBalance} from '../../utils/formatBalance';
-import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN, DECIMALS_18 } from '../../bomb-finance/constants';
+import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
 import { Alert } from '@material-ui/lab';
 
+
 import HomeImage from '../../assets/img/background.jpg';
-import { Grid , Box } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
+
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -29,6 +32,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
+const TITLE = 'bomb.money | Bonds'
 
 const Bond: React.FC = () => {
   const {path} = useRouteMatch();
@@ -36,7 +40,7 @@ const Bond: React.FC = () => {
   const bombFinance = useBombFinance();
   const addTransaction = useTransactionAdder();
   const bondStat = useBondStats();
-  const bombStat = useBombStats();
+  //const bombStat = useBombStats();
   const cashPrice = useCashPriceInLastTWAP();
 
   const bondsPurchasable = useBondsPurchasable();
@@ -64,18 +68,22 @@ const Bond: React.FC = () => {
   const isBondRedeemable = useMemo(() => cashPrice.gt(BOND_REDEEM_PRICE_BN), [cashPrice]);
   const isBondPurchasable = useMemo(() => Number(bondStat?.tokenInFtm) < 1.01, [bondStat]);
   const isBondPayingPremium = useMemo(() => Number(bondStat?.tokenInFtm) >= 1.1, [bondStat]);
+// console.log("bondstat", Number(bondStat?.tokenInFtm))
   const bondScale = (Number(cashPrice) / 100000000000000).toFixed(4); 
 
   return (
     <Switch>
       <Page>
         <BackgroundImage />
+              <Helmet>
+        <title>{TITLE}</title>
+      </Helmet>
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader icon={'🏦'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
+              <PageHeader icon={'💣'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
             </Route>
-            {isBondPayingPremium == false ? (
+            {isBondPayingPremium === false ? (
 
 
               <Box mt={5}>

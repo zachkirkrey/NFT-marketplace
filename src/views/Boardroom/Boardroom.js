@@ -1,22 +1,22 @@
-import React, {useMemo} from 'react';
-import {useWallet} from 'use-wallet';
+import React, { useMemo } from 'react';
+import { useWallet } from 'use-wallet';
 import moment from 'moment';
 import styled from 'styled-components';
 import Spacer from '../../components/Spacer';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-import {Box, Card, CardContent, Button, Typography, Grid} from '@material-ui/core';
+import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
 
-import {Alert} from '@material-ui/lab';
+//import { Alert } from '@material-ui/lab';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 
 import useRedeemOnBoardroom from '../../hooks/useRedeemOnBoardroom';
 import useStakedBalanceOnBoardroom from '../../hooks/useStakedBalanceOnBoardroom';
-import {getDisplayBalance} from '../../utils/formatBalance';
+import { getDisplayBalance } from '../../utils/formatBalance';
 import useCurrentEpoch from '../../hooks/useCurrentEpoch';
 import useFetchBoardroomAPR from '../../hooks/useFetchBoardroomAPR';
 
@@ -26,7 +26,8 @@ import useTotalStakedOnBoardroom from '../../hooks/useTotalStakedOnBoardroom';
 import useClaimRewardCheck from '../../hooks/boardroom/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/boardroom/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
+import { Helmet } from 'react-helmet'
 
 import HomeImage from '../../assets/img/background.jpg';
 const BackgroundImage = createGlobalStyle`
@@ -36,6 +37,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
+const TITLE = 'bomb.money | Boardroom'
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -48,8 +50,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Boardroom = () => {
   const classes = useStyles();
-  const {account} = useWallet();
-  const {onRedeem} = useRedeemOnBoardroom();
+  const { account } = useWallet();
+  const { onRedeem } = useRedeemOnBoardroom();
   const stakedBalance = useStakedBalanceOnBoardroom();
   const currentEpoch = useCurrentEpoch();
   const cashStat = useCashPriceInEstimatedTWAP();
@@ -58,11 +60,14 @@ const Boardroom = () => {
   const canClaimReward = useClaimRewardCheck();
   const canWithdraw = useWithdrawCheck();
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
-  const {to} = useTreasuryAllocationTimes();
+  const { to } = useTreasuryAllocationTimes();
 
   return (
     <Page>
       <BackgroundImage />
+      <Helmet>
+        <title>{TITLE}</title>
+      </Helmet>
       {!!account ? (
         <>
           <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
@@ -72,8 +77,8 @@ const Boardroom = () => {
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
-                  <CardContent style={{textAlign: 'center'}}>
-                    <Typography style={{textTransform: 'uppercase', color: '#f9d749'}}>Next Epoch</Typography>
+                  <CardContent style={{ textAlign: 'center' }}>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Next Epoch</Typography>
                     <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
                   </CardContent>
                 </Card>
@@ -81,7 +86,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{textTransform: 'uppercase', color: '#f9d749'}}>Current Epoch</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Current Epoch</Typography>
                     <Typography>{Number(currentEpoch)}</Typography>
                   </CardContent>
                 </Card>
@@ -89,7 +94,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{textTransform: 'uppercase', color: '#f9d749'}}>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>
                       BOMB PEG <small>(TWAP)</small>
                     </Typography>
                     <Typography>{scalingFactor} BTC</Typography>
@@ -102,7 +107,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{textTransform: 'uppercase', color: '#f9d749'}}>APR</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>APR</Typography>
                     <Typography>{boardroomAPR.toFixed(2)}%</Typography>
                   </CardContent>
                 </Card>
@@ -110,7 +115,7 @@ const Boardroom = () => {
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{textTransform: 'uppercase', color: '#f9d749'}}>BSHARES Staked</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BSHARES Staked</Typography>
                     <Typography>{getDisplayBalance(totalStaked)}</Typography>
                   </CardContent>
                 </Card>

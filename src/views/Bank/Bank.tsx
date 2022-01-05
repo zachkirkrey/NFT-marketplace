@@ -49,7 +49,7 @@ const Bank: React.FC = () => {
   return account && bank ? (
     <>
       <PageHeader
-        icon="🏦"
+        icon="💣"
         subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
         title={bank?.name}
       />
@@ -128,15 +128,15 @@ const LPTokenHelpText: React.FC<{bank: BankEntity}> = ({bank}) => {
 
   let pairName: string;
   let uniswapUrl: string;
-  let vaultUrl: string;
+ // let vaultUrl: string;
   if (bank.depositTokenName.includes('BOMB')) {
     pairName = 'BOMB-BTCB pair';
     uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
-    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
+ //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
   } else {
     pairName = 'BSHARE-BNB pair';
     uniswapUrl = 'https://pancakeswap.finance/add/BNB/' + bshareAddr;
-    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-bnb';
+ //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-bnb';
 
   }
   return (

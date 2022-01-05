@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect} from 'react';
+import React, {useMemo} from 'react';
 import clsx from 'clsx';
 import {Link} from 'react-router-dom';
 import {
@@ -28,7 +28,7 @@ import AccountButton from './AccountButton';
 
 import bombLogo from '../../assets/img/bomb-logo.png';
 import {roundAndFormatNumber} from '../../0x';
-import TokenSymbol from '../TokenSymbol';
+//import TokenSymbol from '../TokenSymbol';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -92,7 +92,7 @@ const Nav = () => {
   const btcStats = useBtcStats();
   const shareStats = useShareStats();
 
-  const [connected, setConnected] = React.useState(false);
+ // const [connected, setConnected] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,14 +102,14 @@ const Nav = () => {
     setOpen(false);
   };
 
-  const btcPriceInDollars = useMemo(() => (bombStats ? Number(btcStats).toFixed(2) : null), [bombStats]);
+  const btcPriceInDollars = useMemo(() => (btcStats ? Number(btcStats).toFixed(2) : null), [btcStats]);
   const bombPriceInDollars = useMemo(
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
   );
   const sharePriceInDollars = useMemo(
-    () => (bombStats ? Number(shareStats.priceInDollars).toFixed(2) : null),
-    [bombStats],
+    () => (shareStats ? Number(shareStats.priceInDollars).toFixed(2) : null),
+    [shareStats],
   );
 
   return (
@@ -146,10 +146,10 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-              <a href="https://docs.bomb.money" className={'navLink ' + classes.link} rel="noopener" target="_blank">
+              <a href="https://docs.bomb.money" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
                 Docs
               </a>
-                <a href="https://bomb.farm" className={'navLink ' + classes.link} rel="noopener" target="_blank">
+                <a href="https://bomb.farm" className={'navLink ' + classes.link} rel="noopener noreferrer" target="_blank">
                 AutoVaults
               </a>
             </Box>
