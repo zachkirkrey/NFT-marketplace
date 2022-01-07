@@ -28,7 +28,7 @@ const configurations: {[env: string]: Configuration} = {
     chainId: 56,
     networkName: 'BSC Mainnet',
     ftmscanUrl: 'https://bscscan.com',
-    defaultProvider: 'https://bsc1.bomb.money/',
+    defaultProvider: 'https://bsc-dataseed.binance.org/',
     deployments: require('./bomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       WBNB: ['0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18],
@@ -57,7 +57,7 @@ const configurations: {[env: string]: Configuration} = {
     chainId: 56,
     networkName: 'BSC Mainnet',
     ftmscanUrl: 'https://bscscan.com',
-    defaultProvider: 'https://bsc1.bomb.money/',
+    defaultProvider: 'https://bsc-dataseed.binance.org/',
     deployments: require('./bomb-finance/deployments/deployments.mainnet.json'),
     externalTokens: {
       WBNB: ['0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c', 18],
