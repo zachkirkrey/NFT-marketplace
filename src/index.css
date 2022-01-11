@@ -126,7 +126,8 @@ code {
   align-items: center;
 }
 
-.davatar {
+.account > img,
+.account > div {
   margin-right: 8px;
 }
 
