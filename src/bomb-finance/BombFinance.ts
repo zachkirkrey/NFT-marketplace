@@ -336,9 +336,9 @@ export class BombFinance {
     }
     const rewardPerSecond = await poolContract.tSharePerSecond();
     if (depositTokenName.startsWith('BOMB')) {
-      return rewardPerSecond.mul(41650).div(59500);
+      return rewardPerSecond.mul(44625).div(59500);
     } else {
-      return rewardPerSecond.mul(17850).div(59500);
+      return rewardPerSecond.mul(14875).div(59500);
     }
   }
 
