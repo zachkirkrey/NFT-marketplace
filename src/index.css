@@ -34,9 +34,8 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
-  background-position: center center !important;
-  background-attachment: fixed !important;
-  background-size: cover !important;
+  background: linear-gradient(90deg, #071421 0%, #002148 50%, #071421 100%) !important;
+  line-height: 1.5;
 }
 
 h1,
