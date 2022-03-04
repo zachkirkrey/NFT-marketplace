@@ -1,6 +1,6 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   AppBar,
   Box,
@@ -8,11 +8,10 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  useMediaQuery,
   List,
   ListItem,
   ListItemText,
-  Divider,
+  useMediaQuery,
 } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
@@ -21,13 +20,11 @@ import useBtcStats from '../../hooks/useBtcStats';
 import useShareStats from '../../hooks/usebShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 
 import bombLogo from '../../assets/img/bomb-logo.png';
-import {roundAndFormatNumber} from '../../0x';
+import { roundAndFormatNumber } from '../../0x';
 //import TokenSymbol from '../TokenSymbol';
 
 const useStyles = makeStyles((theme) => ({
@@ -39,54 +36,73 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    color: '#f9d749',
-    'background-color': '#171923',
+    // color: '#f9d749',
+    'background-color': '#0d2048',
     // borderBottom: `1px solid ${theme.palette.divider}`,
-    padding: '10px',
+    // padding: '10px',
     marginBottom: '3rem',
   },
   drawer: {
-    width: 240,
-    flexShrink: 0,
+    // width: 240,
+    // flexShrink: 0,
   },
   drawerPaper: {
     width: 240,
+    height: 'auto',
+    top: 65,
+    bottom: 0,
+    backgroundColor: '#001226',
+    padding: theme.spacing(2),
+
+    [theme.breakpoints.up('sm')]: {
+      width: 300,
+    },
   },
   hide: {
-    display: 'none',
+    // display: 'none',
   },
   toolbar: {
-    flexWrap: 'wrap',
+    height: 65,
+    // flexWrap: 'wrap',
   },
   toolbarTitle: {
-    fontFamily: 'Rubik',
-    fontSize: '0px',
-    flexGrow: 1,
+    // fontFamily: 'Rubik',
+    // fontSize: '0px',
+    // flexGrow: 1,
   },
   link: {
-    textTransform: 'uppercase',
-    color: '#f9d749',
-    fontSize: '18px',
-    marginTop: '15px',
-    margin: theme.spacing(10, 1, 1, 2),
-    textDecoration: 'none',
-    '&:hover': {
-      textDecoration: 'none',
-    },
+    // padding: 16px 12px!important
+    // padding: theme.spacing(4, 3),
+    padding: '16px 12px !important',
+    // textTransform: 'uppercase',
+    // color: '#f9d749',
+    // fontSize: '18px',
+    // marginTop: '15px',
+    // margin: theme.spacing(10, 1, 1, 2),
+    // textDecoration: 'none',
+    // '&:hover': {
+    //   textDecoration: 'none',
+    // },
   },
   brandLink: {
-    textDecoration: 'none',
-    color: '#f9d749',
-    '&:hover': {
-      textDecoration: 'none',
-    },
+    // textDecoration: 'none',
+    // color: '#f9d749',
+    // '&:hover': {
+    //   textDecoration: 'none',
+    // },
+  },
+
+  logo: {
+    height: 40,
+    marginTop: -10,
+    marginRight: 10,
   },
 }));
 
 const Nav = () => {
-  const matches = useMediaQuery('(min-width:900px)');
+  const matches = false;
+  const displayRatesInAppbar = useMediaQuery('(min-width: 768px)');
   const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const bombStats = useBombStats();
   const btcStats = useBtcStats();
@@ -117,13 +133,13 @@ const Nav = () => {
       <Toolbar className={classes.toolbar}>
         {matches ? (
           <>
-            <Typography variant="h6" color="inherit" noWrap style={{flexGrow: '0'}} className={classes.toolbarTitle}>
+            <Typography variant="h6" color="inherit" noWrap style={{ flexGrow: '0' }} className={classes.toolbarTitle}>
               {/* <a className={ classes.brandLink } href="/">Bomb Money</a> */}
               <Link to="/" color="inherit" className={classes.brandLink}>
                 <img alt="bomb.money" src={bombLogo} height="60px" />
               </Link>
             </Typography>
-            <Box style={{paddingLeft: '15px', fontSize: '1rem', flexGrow: '1'}}>
+            <Box style={{ paddingLeft: '15px', fontSize: '1rem', flexGrow: '1' }}>
               <Link to="/" className={'navLink ' + classes.link}>
                 Home
               </Link>
@@ -140,11 +156,6 @@ const Nav = () => {
                 Bond
               </Link>
 
-
-              
- 
-              
-
               {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
               </Link>
@@ -154,24 +165,24 @@ const Nav = () => {
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
               </Link> */}
-                      <a
+              <a
                 href="https://bombbtc.com"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
-              //  target="_blank"
+                //  target="_blank"
               >
                 BTC Staking
               </a>
-    
+
               <a
                 href="https://bomb.farm"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
-              //  target="_blank"
+                //  target="_blank"
               >
                 Vaults
               </a>
-                          <a
+              <a
                 href="https://shop.bomb.money"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
@@ -179,7 +190,7 @@ const Nav = () => {
               >
                 Merch
               </a>
-                               <a
+              <a
                 href="https://vote.bomb.money"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
@@ -187,7 +198,7 @@ const Nav = () => {
               >
                 Vote
               </a>
-                        <a
+              <a
                 href="https://docs.bomb.money"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
@@ -228,13 +239,20 @@ const Nav = () => {
             >
               <MenuIcon />
             </IconButton>
-
-            <img
-              alt="bomb.money"
-              src={bombLogo}
-              style={{height: '40px', marginTop: '-10px', marginLeft: '10px', marginRight: '15px'}}
-            />
-            <AccountButton text="Connect" />
+            <img alt="bomb.money" src={bombLogo} className={classes.logo} />
+            <Box display="flex" alignItems="center" ml="auto">
+              {displayRatesInAppbar ? (
+                <Box display="flex" alignItems="center">
+                  <div className="navTokenIcon bomb"></div>{' '}
+                  <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+                  <div className="navTokenIcon bshare"></div>{' '}
+                  <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
+                  <div className="navTokenIcon btc"></div>{' '}
+                  <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+                </Box>
+              ) : null}
+              <AccountButton text="Connect" />
+            </Box>
             <Drawer
               className={classes.drawer}
               onClose={handleDrawerClose}
@@ -247,43 +265,36 @@ const Nav = () => {
                 paper: classes.drawerPaper,
               }}
             >
-              <div>
-                <IconButton onClick={handleDrawerClose}>
-                  {theme.direction === 'rtl' ? (
-                    <ChevronRightIcon htmlColor="white" />
-                  ) : (
-                    <ChevronLeftIcon htmlColor="white" />
-                  )}
-                </IconButton>
-              </div>
-              <Divider />
               <List>
-                <ListItem>
-                  <AccountButton text="Connect" />
-                </ListItem>
+                {!displayRatesInAppbar ? (
+                  <>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <div className="navTokenIcon bomb"></div>{' '}
+                      <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+                    </Box>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <div className="navTokenIcon bshare"></div>{' '}
+                      <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
+                    </Box>
+                    <Box display="flex" alignItems="center" mb={2}>
+                      <div className="navTokenIcon btc"></div>{' '}
+                      <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+                    </Box>
+                  </>
+                ) : null}
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farm" />
-                <ListItemLink primary="xBOMB" to="/xbomb" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
+                <ListItemLink primary="xBOMB" to="/xbomb" />
                 <ListItemLink primary="Bond" to="/bond" />
+                <ListItemLink primary="BTC Staking" href="https://bombbtc.com" />
+                <ListItemLink primary="Vaults" href="https://bomb.farm" />
                 {/* <ListItemLink primary="SBS" to="/sbs" /> */}
                 {/* <ListItemLink primary="Liquidity" to="/liquidity" /> */}
                 {/* <ListItemLink primary="Regulations" to="/regulations" /> */}
-                <ListItem button component="a" href="https://docs.bomb.money">
-                  <ListItemText>Documentation</ListItemText>
-                </ListItem>
-                <ListItem button component="a" href="https://bomb.farm">
-                  <ListItemText>Vaults</ListItemText>
-                  </ListItem>
-                  <ListItem button component="a" href="https://shop.bomb.money">
-                  <ListItemText>Merch</ListItemText>
-                  </ListItem>
-                     <ListItem button component="a" href="https://vote.bomb.money">
-                  <ListItemText>Vote</ListItemText>
-                  </ListItem>
-                <ListItem button component="a" href="https://bombbtc.com">
-                  <ListItemText>BTC Staking</ListItemText>
-                </ListItem>
+                <ListItemLink primary="Merch" href="https://shop.bomb.money" />
+                <ListItemLink primary="Vote" href="https://vote.bomb.money" />
+                <ListItemLink primary="Docs" href="https://docs.bomb.money" />
               </List>
             </Drawer>
           </>
