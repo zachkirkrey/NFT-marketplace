@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-import { Box, Button, Card, CardContent } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Paper } from '@material-ui/core';
 
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
@@ -13,7 +13,7 @@ import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 //import useXbombBalance from '../../../hooks/useXbombBalance';
 import useBombStats from '../../../hooks/useBombStats';
-import useApprove, {ApprovalState} from '../../../hooks/useApprove';
+import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import MetamaskFox from '../../../assets/img/metamask-fox.svg';
@@ -34,8 +34,6 @@ const Stake: React.FC = () => {
 
   const [approveStatus, approve] = useApprove(bombFinance.BOMB, bombFinance.contracts.xBOMB.address);
 
-
-
   const tokenBalance = useTokenBalance(bombFinance.BOMB);
   //const stakedBalance = useStakedBomb();
   const stakedBalance = useTokenBalance(bombFinance.XBOMB);
@@ -51,14 +49,11 @@ const Stake: React.FC = () => {
 
   const stakedTokenPriceInDollars = Number(bombPriceInDollars) * xbombRate;
 
-  const tokenPriceInDollars = useMemo(
-    () => {
-      return stakedTokenPriceInDollars
-        ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
-        : null;
-    },
-    [stakedTokenPriceInDollars, stakedBalance],
-  );
+  const tokenPriceInDollars = useMemo(() => {
+    return stakedTokenPriceInDollars
+      ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
+      : null;
+  }, [stakedTokenPriceInDollars, stakedBalance]);
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
   const { onStake } = useStakeToBomb();
@@ -87,101 +82,53 @@ const Stake: React.FC = () => {
   );
 
   return (
-    <Box>
-      <Card>
-        <CardContent>
-          <StyledCardContentInner>
-            <StyledCardHeader>
-              <CardIcon>
-                <TokenSymbol symbol="XBOMB" />
-              </CardIcon>
-
-              <Button
-                className={'shinyButton'}
-                onClick={() => {
-                  bombFinance.watchAssetInMetamask('XBOMB');
-                }}
-                style={{
-                  position: 'static',
-                  top: '10px',
-                  right: '10px',
-                  border: '1px grey solid',
-                  paddingBottom: '5px',
-                  marginBottom: '20px',
-                }}
-              >
-                {' '}
-                <b>+</b>&nbsp;&nbsp;
-                <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
-              </Button>
-              <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={'xBOMB Balance'} variant="yellow" />
-              <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} BOMB / $${tokenPriceInDollars}`} variant="yellow" />
-            </StyledCardHeader>
-            <StyledCardActions>
-              {approveStatus !== ApprovalState.APPROVED ? (
-                <Button
-                  disabled={approveStatus !== ApprovalState.NOT_APPROVED}
-                  className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
-                  style={{ marginTop: '20px' }}
-                  onClick={approve}
-                >
-                  Approve BOMB
-                </Button>
-              ) : (
-                <>
-                  <IconButton onClick={onPresentWithdraw}>
-                    <RemoveIcon color={'yellow'} />
-                  </IconButton>
-                  <StyledActionSpacer />
-                  <IconButton onClick={onPresentDeposit}>
-                    <AddIcon color={'yellow'} />
-                  </IconButton>
-                </>
-              )}
-            </StyledCardActions>
-          </StyledCardContentInner>
-        </CardContent>
-      </Card>
-      {/* <Box mt={2} style={{color: '#FFF'}}>
-        {canWithdrawFromBoardroom ? (
-          ''
+    <Paper style={{ position: 'relative' }}>
+      <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
+        <TokenSymbol symbol="XBOMB" />
+        <Button
+          className={'shinyButton'}
+          onClick={() => {
+            bombFinance.watchAssetInMetamask('XBOMB');
+          }}
+          style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
+        >
+          {' '}
+          <b>+</b>&nbsp;&nbsp;
+          <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
+        </Button>
+        <Box mt={3} mb={1}>
+          <Value value={getDisplayBalance(stakedBalance)} />
+        </Box>
+        <Box mb={5} textAlign="center">
+          <Label text={'xBOMB Balance'} variant="yellow" />
+          <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} BOMB / $${tokenPriceInDollars}`} variant="yellow" />
+        </Box>
+        {approveStatus !== ApprovalState.APPROVED ? (
+          <Button
+            disabled={approveStatus !== ApprovalState.NOT_APPROVED}
+            className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
+            onClick={approve}
+          >
+            Approve BOMB
+          </Button>
         ) : (
-          <Card>
-            <CardContent>
-              <Typography style={{textAlign: 'center'}}>Withdraw possible in</Typography>
-              <ProgressCountdown hideBar={true} base={from} deadline={to} description="Withdraw available in" />
-            </CardContent>
-          </Card>
+          <>
+            <IconButton onClick={onPresentWithdraw}>
+              <RemoveIcon color={'yellow'} />
+            </IconButton>
+            <StyledActionSpacer />
+            <IconButton onClick={onPresentDeposit}>
+              <AddIcon color={'yellow'} />
+            </IconButton>
+          </>
         )}
-      </Box> */}
-    </Box>
+      </Box>
+    </Paper>
   );
 };
-
-const StyledCardHeader = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-const StyledCardActions = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 28px;
-  width: 100%;
-`;
 
 const StyledActionSpacer = styled.div`
   height: ${(props) => props.theme.spacing[4]}px;
   width: ${(props) => props.theme.spacing[4]}px;
 `;
-
-const StyledCardContentInner = styled.div`
-  align-items: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 export default Stake;
