@@ -1,5 +1,15 @@
+import { Paper, withStyles } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
+import { bgGradient } from '../../theme/colors';
+
+const HighlightedPaper = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+    backgroundColor: '#0d3b81',
+    boxShadow: 'inset 0 -4px 0 #274d87',
+  },
+}))(Paper);
 
 interface PageHeaderProps {
   icon: React.ReactNode;
@@ -7,42 +17,29 @@ interface PageHeaderProps {
   title?: string;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({icon, subtitle, title}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
   return (
-    <StyledPageHeader>
+    <HighlightedPaper>
       {/* <StyledIcon>{icon}</StyledIcon> */}
       <StyledTitle>{title}</StyledTitle>
       <StyledSubtitle>{subtitle}</StyledSubtitle>
-    </StyledPageHeader>
+    </HighlightedPaper>
   );
 };
 
-const StyledPageHeader = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: ${(props) => props.theme.spacing[6]}px;
-  padding-top: ${(props) => props.theme.spacing[6]}px;
-  max-width: 512px;
-  width: 100%;
-  margin: 0 auto;
-`;
-
 const StyledTitle = styled.h1`
+  margin-bottom: 16px;
   color: '#f9d749';
   font-size: 36px;
   font-weight: 700;
-  margin: 0;
-  padding: 0;
 `;
 
 const StyledSubtitle = styled.h3`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #fff;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
   padding: 0;
-  text-align: center;
 `;
 
 export default PageHeader;

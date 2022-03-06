@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Button, Card} from '@material-ui/core';
+import { Box, Button, Card } from '@material-ui/core';
 
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
@@ -9,13 +9,13 @@ import CardContent from '../../../components/CardContent';
 import useBombFinance from '../../../hooks/useBombFinance';
 import Label from '../../../components/Label';
 import TokenSymbol from '../../../components/TokenSymbol';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import useModal from '../../../hooks/useModal';
 import ExchangeModal from './ExchangeModal';
 import ERC20 from '../../../bomb-finance/ERC20';
 import useTokenBalance from '../../../hooks/useTokenBalance';
-import useApprove, {ApprovalState} from '../../../hooks/useApprove';
+import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useCatchError from '../../../hooks/useCatchError';
 
 interface ExchangeCardProps {
@@ -43,7 +43,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
 }) => {
   const catchError = useCatchError();
   const {
-    contracts: {Treasury},
+    contracts: { Treasury },
   } = useBombFinance();
   const [approveStatus, approve] = useApprove(fromToken, Treasury.address);
 
@@ -68,18 +68,18 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
           <StyledCardTitle>{`${action} ${toTokenName}`}</StyledCardTitle>
           <StyledExchanger>
             <StyledToken>
-              <StyledCardIcon>
+              <Box display="flex" mb={1}>
                 <TokenSymbol symbol={fromToken.symbol} size={54} />
-              </StyledCardIcon>
+              </Box>
               <Label text={fromTokenName} variant="yellow" />
             </StyledToken>
             <StyledExchangeArrow>
               <FontAwesomeIcon icon={faArrowRight} />
             </StyledExchangeArrow>
             <StyledToken>
-              <StyledCardIcon>
+              <Box display="flex" mb={1}>
                 <TokenSymbol symbol={toToken.symbol} size={54} />
-              </StyledCardIcon>
+              </Box>
               <Label text={toTokenName} variant="yellow" />
             </StyledToken>
           </StyledExchanger>
@@ -87,6 +87,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
           <StyledCardActions>
             {approveStatus !== ApprovalState.APPROVED && !disabled ? (
               <Button
+                fullWidth
                 className="shinyButton"
                 disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
                 onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
@@ -95,6 +96,7 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
               </Button>
             ) : (
               <Button
+                fullWidth
                 className={disabled ? 'shinyButtonDisabled' : 'shinyButton'}
                 onClick={onPresent}
                 disabled={disabled}
@@ -120,21 +122,10 @@ const StyledCardTitle = styled.div`
   margin-top: ${(props) => -props.theme.spacing[3]}px;
 `;
 
-const StyledCardIcon = styled.div`
-  background-color: ${(props) => props.theme.color.grey[900]};
-  width: 72px;
-  height: 72px;
-  border-radius: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: ${(props) => props.theme.spacing[2]}px;
-`;
-
 const StyledExchanger = styled.div`
   align-items: center;
   display: flex;
-  margin-bottom: ${(props) => props.theme.spacing[5]}px;
+  margin-bottom: ${(props) => props.theme.spacing[3]}px;
 `;
 
 const StyledExchangeArrow = styled.div`
@@ -154,7 +145,7 @@ const StyledToken = styled.div`
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[3]}px;
+  margin-top: ${(props) => props.theme.spacing[7]}px;
   width: 100%;
 `;
 

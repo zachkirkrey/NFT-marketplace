@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Card} from '@material-ui/core';
+import { Card } from '@material-ui/core';
 
 interface ExchangeStatProps {
   tokenName: string;
@@ -9,7 +9,7 @@ interface ExchangeStatProps {
   price: string;
 }
 
-const ExchangeStat: React.FC<ExchangeStatProps> = ({tokenName, description, price}) => {
+const ExchangeStat: React.FC<ExchangeStatProps> = ({ tokenName, description, price }) => {
   return (
     <Card>
       <StyledCardContentInner>
@@ -24,6 +24,7 @@ const StyledCardTitle = styled.div`
   font-size: 20px;
   font-weight: 700;
   margin-bottom: ${(props) => props.theme.spacing[2]}px;
+  color: #f9d749;
 `;
 
 const StyledDesc = styled.span`
@@ -32,12 +33,11 @@ const StyledDesc = styled.span`
 `;
 
 const StyledCardContentInner = styled.div`
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: ${(props) => props.theme.spacing[2]}px;
+  padding: ${(props) => props.theme.spacing[4]}px ${(props) => props.theme.spacing[2]}px;
 `;
 
 export default ExchangeStat;
