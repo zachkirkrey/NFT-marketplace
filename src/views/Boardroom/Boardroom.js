@@ -2,14 +2,11 @@ import React, { useMemo } from 'react';
 import { useWallet } from 'use-wallet';
 import moment from 'moment';
 import styled from 'styled-components';
-import Spacer from '../../components/Spacer';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { Box, Card, CardContent, Button, Typography, Grid } from '@material-ui/core';
-
-//import { Alert } from '@material-ui/lab';
+import { Box, Typography, Grid, Paper } from '@material-ui/core';
 
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
@@ -26,18 +23,10 @@ import useTotalStakedOnBoardroom from '../../hooks/useTotalStakedOnBoardroom';
 import useClaimRewardCheck from '../../hooks/boardroom/useClaimRewardCheck';
 import useWithdrawCheck from '../../hooks/boardroom/useWithdrawCheck';
 import ProgressCountdown from './components/ProgressCountdown';
-import { createGlobalStyle } from 'styled-components';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
+import { withStyles } from '@material-ui/styles';
 
-import HomeImage from '../../assets/img/background.jpg';
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) repeat !important;
-    background-size: cover !important;
-    background-color: #171923;
-  }
-`;
-const TITLE = 'bomb.money | Boardroom'
+const TITLE = 'bomb.money | Boardroom';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -46,7 +35,56 @@ const useStyles = makeStyles((theme) => ({
       height: '90px',
     },
   },
+  paperSeparator: {
+    height: 1,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    marginLeft: -theme.spacing(3),
+    marginRight: -theme.spacing(3),
+    backgroundColor: 'hsla(0, 0%, 100%, .1)',
+  },
+  HighlightedTextSmall: {
+    fontSize: '0.5em',
+  },
 }));
+
+const BorderedPaper = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+    backgroundColor: 'transparent',
+    border: '1px solid hsla(0, 0%, 100%, .1)',
+  },
+}))(Paper);
+
+const CurrentEpochPaper = withStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(3),
+    paddingLeft: 0,
+    borderColor: theme.palette.text.yellow,
+  },
+}))(BorderedPaper);
+
+const CurrentEpoch = withStyles((theme) => ({
+  root: {
+    marginRight: theme.spacing(2),
+    padding: theme.spacing(2),
+    background: '#f9d749',
+    color: theme.palette.primary.contrastText,
+    fontWeight: 700,
+    textAlign: 'center',
+    borderTopRightRadius: theme.shape.borderRadius,
+    borderBottomRightRadius: theme.shape.borderRadius,
+  },
+}))(Typography);
+
+const HighlightedText = withStyles((theme) => ({
+  root: {
+    fontWeight: 700,
+    color: theme.palette.text.yellow,
+  },
+}))(Typography);
 
 const Boardroom = () => {
   const classes = useStyles();
@@ -64,169 +102,161 @@ const Boardroom = () => {
 
   return (
     <Page>
-      <BackgroundImage />
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
       {!!account ? (
-        <>
-          <Typography color="textPrimary" align="center" variant="h3" gutterBottom>
-            Boardroom
-          </Typography>
-          <Box mt={5}>
-            <Grid container justify="center" spacing={3}>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent style={{ textAlign: 'center' }}>
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Next Epoch</Typography>
-                    <ProgressCountdown base={moment().toDate()} hideBar={true} deadline={to} description="Next Epoch" />
-                  </CardContent>
-                </Card>
+        <Grid container spacing={3}>
+          <Grid item xs={12} lg={3}>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <CurrentEpochPaper>
+                  <CurrentEpoch>
+                    <div>Epoch</div>
+                    <div>{Number(currentEpoch)}</div>
+                  </CurrentEpoch>
+                  <div>
+                    <Typography style={{ textTransform: 'uppercase' }}>Next Epoch</Typography>
+                    <ProgressCountdown
+                      base={moment().toDate()}
+                      hideBar={true}
+                      deadline={to}
+                      description="Next Epoch"
+                      customRenderText={(text) => <HighlightedText variant="h5">{text}</HighlightedText>}
+                    />
+                  </div>
+                </CurrentEpochPaper>
               </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>Current Epoch</Typography>
-                    <Typography>{Number(currentEpoch)}</Typography>
-                  </CardContent>
-                </Card>
+              <Grid item xs={12}>
+                <BorderedPaper>
+                  <Grid container spacing={1}>
+                    <Grid item xs={6}>
+                      <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                        Expansion rate
+                      </Typography>
+                      <HighlightedText variant="h5">--%</HighlightedText>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                        APR
+                      </Typography>
+                      <HighlightedText variant="h5">{boardroomAPR.toFixed(2)}%</HighlightedText>
+                    </Grid>
+                  </Grid>
+                </BorderedPaper>
               </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>
+              <Grid item xs={12}>
+                <BorderedPaper>
+                  <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                    TVL in Boardroom
+                  </Typography>
+                  <HighlightedText variant="h5">--</HighlightedText>
+                  <div className={classes.paperSeparator} />
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Box display="flex" justifyContent="space-between">
+                        <Typography variant="body2">BSHARES Staked</Typography>
+                        <HighlightedText variant="body2">{getDisplayBalance(totalStaked)}</HighlightedText>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Box display="flex" justifyContent="space-between">
+                        <div>
+                          <Typography variant="body2">
+                            BOMB PEG <small>(TWAP)</small>
+                          </Typography>
+                          <Typography variant="body2">per 10,000 BOMB</Typography>
+                        </div>
+                        <HighlightedText variant="body2">{scalingFactor} BTC</HighlightedText>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                  {/* 
+                    <Box mb={2}>
+                      <Typography style={{ textTransform: 'uppercase' }}>BSHARES Staked</Typography>
+                      <HighlightedText variant="h5">{getDisplayBalance(totalStaked)}</HighlightedText>
+                    </Box>
+                    <Typography style={{ textTransform: 'uppercase' }}>
                       BOMB PEG <small>(TWAP)</small>
                     </Typography>
-                    <Typography>{scalingFactor} BTC</Typography>
-                    <Typography>
-                      <small>per 10,000 BOMB</small>
-                    </Typography>
-                  </CardContent>
-                </Card>
+                    <HighlightedText variant="h5">
+                      {scalingFactor} BTC <small className={classes.HighlightedTextSmall}>per 10,000 BOMB</small>
+                    </HighlightedText> */}
+                </BorderedPaper>
               </Grid>
-              <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>APR</Typography>
-                    <Typography>{boardroomAPR.toFixed(2)}%</Typography>
-                  </CardContent>
-                </Card>
+              <Grid item xs={12}>
+                <BorderedPaper>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <Box display="flex" justifyContent="space-between">
+                        <Typography variant="body2">Stake fee</Typography>
+                        <HighlightedText variant="body2">2%</HighlightedText>
+                      </Box>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Box display="flex" justifyContent="space-between">
+                        <Typography variant="body2">Unstake fee</Typography>
+                        <HighlightedText variant="body2">0%</HighlightedText>
+                      </Box>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      <Box display="flex" justifyContent="space-between">
+                        <Typography variant="body2">Next expansion amount</Typography>
+                        <HighlightedText variant="body2" align="right">
+                          276,141 BOMB
+                        </HighlightedText>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </BorderedPaper>
               </Grid>
-              <Grid item xs={12} md={2} lg={2}>
-                <Card className={classes.gridItem}>
-                  <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BSHARES Staked</Typography>
-                    <Typography>{getDisplayBalance(totalStaked)}</Typography>
-                  </CardContent>
-                </Card>
+            </Grid>
+          </Grid>
+
+          <Grid item lg={9}>
+            <Grid container spacing={3} alignItems="stretch">
+              <Grid item xs={6}>
+                <Harvest />
+              </Grid>
+              <Grid item xs={6}>
+                <Stake />
+              </Grid>
+              <Grid item lg={6} style={{ display: 'flex' }}>
+                <BorderedPaper>
+                  <HighlightedText variant="body2" paragraph>
+                    Stake &amp; Unstake
+                  </HighlightedText>
+                  <Typography variant="body2" paragraph>
+                    There is a 2% tax fee per stake. The unstake fee is 0% during expansion, and 2% on contraction
+                    period. These fees will be used to buyback DARK.
+                  </Typography>
+                  <Typography variant="body2">
+                    Upon stake, the fund will be locked for 6 epochs. Any time the user claims rewards or stakes more
+                    funds or unstakes fully/partially, both lock and reward counter will be reset.
+                  </Typography>
+                </BorderedPaper>
+              </Grid>
+              <Grid item lg={6} style={{ display: 'flex' }}>
+                <BorderedPaper>
+                  <HighlightedText variant="body2" paragraph>
+                    Claim DARK reward
+                  </HighlightedText>
+                  <Typography variant="body2">
+                    Rewards can be claimed after 3 epochs after deposit. Each time rewards claimed, both locked and
+                    reward counter will be reset.
+                  </Typography>
+                </BorderedPaper>
               </Grid>
             </Grid>
-
-            {/* <Grid container justify="center">
-              <Box mt={3} style={{ width: '600px' }}>
-                <Alert variant="filled" severity="warning">
-                  <b> Boardroom smart contract has been updated! </b><br />
-                  If you have BSHARE in the previous Boardroom, visit here to retrieve it:<br />
-                  <a href="https://61aadb35c5a5c50007c2a61b--bomb-money.netlify.app/boardroom">https://61aadb35c5a5c50007c2a61b--bomb-money.netlify.app/boardroom</a><br /><br />
-                </Alert>
-
-              </Box>
-            </Grid> */}
-
-            <Box mt={4}>
-              <StyledBoardroom>
-                <StyledCardsWrapper>
-                  <StyledCardWrapper>
-                    <Harvest />
-                  </StyledCardWrapper>
-                  <Spacer />
-                  <StyledCardWrapper>
-                    <Stake />
-                  </StyledCardWrapper>
-                </StyledCardsWrapper>
-              </StyledBoardroom>
-            </Box>
-
-            {/* <Grid container justify="center" spacing={3}>
-            <Grid item xs={4}>
-              <Card>
-                <CardContent align="center">
-                  <Typography>Rewards</Typography>
-
-                </CardContent>
-                <CardActions style={{justifyContent: 'center'}}>
-                  <Button color="primary" variant="outlined">Claim Reward</Button>
-                </CardActions>
-                <CardContent align="center">
-                  <Typography>Claim Countdown</Typography>
-                  <Typography>00:00:00</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
-              <Card>
-                <CardContent align="center">
-                  <Typography>Stakings</Typography>
-                  <Typography>{getDisplayBalance(stakedBalance)}</Typography>
-                </CardContent>
-                <CardActions style={{justifyContent: 'center'}}>
-                  <Button>+</Button>
-                  <Button>-</Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          </Grid> */}
-          </Box>
-
-          <Box mt={5}>
-            <Grid container justify="center" spacing={3} mt={10}>
-              <Button
-                disabled={stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)}
-                onClick={onRedeem}
-                className={
-                  stakedBalance.eq(0) || (!canWithdraw && !canClaimReward)
-                    ? 'shinyButtonDisabledSecondary'
-                    : 'shinyButtonSecondary'
-                }
-              >
-                Claim &amp; Withdraw
-              </Button>
-            </Grid>
-          </Box>
-        </>
+          </Grid>
+        </Grid>
       ) : (
         <UnlockWallet />
       )}
     </Page>
   );
 };
-
-const StyledBoardroom = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const StyledCardsWrapper = styled.div`
-  display: flex;
-  width: 600px;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
-
-const StyledCardWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
 
 export default Boardroom;

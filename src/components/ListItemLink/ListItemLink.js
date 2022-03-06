@@ -33,8 +33,6 @@ const ListItemLink = ({ primary, to = undefined, href = undefined }) => {
     strict: false,
   });
 
-  console.log('to location.pathname isActive', to, location.pathname, isActive);
-
   const CustomLink = React.useMemo(() => {
     return React.forwardRef((linkProps, ref) => <Link ref={ref} to={to} {...linkProps} />);
   }, [to]);

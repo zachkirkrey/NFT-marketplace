@@ -1,18 +1,7 @@
 import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import {
-  AppBar,
-  Box,
-  Drawer,
-  IconButton,
-  Toolbar,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  useMediaQuery,
-} from '@material-ui/core';
+import { AppBar, Box, Drawer, IconButton, Toolbar, Typography, List, useMediaQuery } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
 import useBombStats from '../../hooks/useBombStats';

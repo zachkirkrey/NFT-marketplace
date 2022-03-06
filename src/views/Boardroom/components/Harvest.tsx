@@ -1,7 +1,7 @@
-import React, {useMemo} from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
-import {Box, Button, Card, CardContent, Typography} from '@material-ui/core';
+import { Box, Button, Card, CardContent, makeStyles, Paper, Typography, withStyles } from '@material-ui/core';
 
 import TokenSymbol from '../../../components/TokenSymbol';
 import Label from '../../../components/Label';
@@ -13,11 +13,44 @@ import ProgressCountdown from './ProgressCountdown';
 import useHarvestFromBoardroom from '../../../hooks/useHarvestFromBoardroom';
 import useEarningsOnBoardroom from '../../../hooks/useEarningsOnBoardroom';
 import useBombStats from '../../../hooks/useBombStats';
-import {getDisplayBalance} from '../../../utils/formatBalance';
+import { getDisplayBalance } from '../../../utils/formatBalance';
+
+const useClasses = makeStyles({
+  badge: {
+    borderTop: `86px solid rgb(255, 214, 0)`,
+    borderRight: `86px solid transparent`,
+    position: 'absolute',
+    top: 0,
+    width: 0,
+    height: 0,
+    fontWeight: 'bold',
+    fontSize: '14px',
+    lineHeight: '21px',
+    color: 'rgb(0, 0, 0)',
+  },
+});
+
+const RelativePaper = withStyles({
+  root: {
+    position: 'relative',
+    overflow: 'hidden',
+  },
+})(Paper);
+
+const BadgeText = withStyles({
+  root: {
+    fontWeight: 700,
+    left: 4,
+    transform: 'rotate(-45deg)',
+    position: 'absolute',
+    top: -66,
+  },
+})(Typography);
 
 const Harvest: React.FC = () => {
+  const classes = useClasses();
   const bombStats = useBombStats();
-  const {onReward} = useHarvestFromBoardroom();
+  const { onReward } = useHarvestFromBoardroom();
   const earnings = useEarningsOnBoardroom();
   const canClaimReward = useClaimRewardCheck();
 
@@ -28,67 +61,41 @@ const Harvest: React.FC = () => {
 
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
 
-  const {from, to} = useClaimRewardTimerBoardroom();
+  const { from, to } = useClaimRewardTimerBoardroom();
 
   return (
-    <Box>
-      <Card>
-        <CardContent>
-          <StyledCardContentInner>
-            <StyledCardHeader>
-              <CardIcon>
-                <TokenSymbol symbol="BOMB" />
-              </CardIcon>
-              <Value value={getDisplayBalance(earnings)} />
-              <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
-              <Label text="BOMB Earned" variant="yellow" />
-            </StyledCardHeader>
-            <StyledCardActions>
-              <Button
-                onClick={onReward}
-                className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
-                disabled={earnings.eq(0) || !canClaimReward}
-              >
-                Claim Reward
-              </Button>
-            </StyledCardActions>
-          </StyledCardContentInner>
-        </CardContent>
-      </Card>
-      <Box mt={2} style={{color: '#FFF'}}>
-        {canClaimReward ? (
-          ''
-        ) : (
-          <Card>
-            <CardContent>
-              <Typography style={{textAlign: 'center'}}>Claim possible in</Typography>
+    <RelativePaper>
+      <div className={classes.badge}>
+        <BadgeText variant="body2">Reward</BadgeText>
+      </div>
+      <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
+        <TokenSymbol symbol="BOMB" />
+        <Box mt={3} mb={1}>
+          <Value value={getDisplayBalance(earnings)} />
+        </Box>
+        <Box mb={5} textAlign="center">
+          <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
+          <Label text="BOMB Earned" variant="yellow" />
+        </Box>
+        <Button
+          fullWidth
+          onClick={onReward}
+          className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
+          disabled={earnings.eq(0) || !canClaimReward}
+        >
+          Claim Reward
+        </Button>
+        {canClaimReward ? null : (
+          <Box mt={2} style={{ color: '#FFF' }}>
+            <>
+              <Typography style={{ textAlign: 'center' }}>Claim possible in</Typography>
               <ProgressCountdown hideBar={true} base={from} deadline={to} description="Claim available in" />
-            </CardContent>
-          </Card>
+            </>
+          </Box>
         )}
       </Box>
-    </Box>
+    </RelativePaper>
   );
 };
-
-const StyledCardHeader = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-const StyledCardActions = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[6]}px;
-  width: 100%;
-`;
-
-const StyledCardContentInner = styled.div`
-  align-items: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-`;
 
 export default Harvest;

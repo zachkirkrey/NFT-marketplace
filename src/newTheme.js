@@ -35,6 +35,13 @@ const newTheme = createTheme({
     color: '#2c2560',
     fontFamily: ['"Rubik"', 'sans-serif'].join(','),
   },
+  container: {
+    root: {
+      '(min-width: 1280px)': {
+        maxWidth: 1368,
+      },
+    },
+  },
 });
 
 export default newTheme;
