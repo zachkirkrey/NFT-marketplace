@@ -68,7 +68,7 @@ const Bond: React.FC = () => {
             <Route exact path={path}>
               <Grid container justifyContent="center">
                 <Grid item lg={10}>
-                  <PageHeader icon={'💣'} title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
+                  <PageHeader title="Buy &amp; Redeem Bonds" subtitle="Earn premiums upon redemption" />
                 </Grid>
               </Grid>
             </Route>

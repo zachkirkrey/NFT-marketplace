@@ -11,13 +11,12 @@ const HighlightedPaper = withStyles((theme) => ({
 }))(Paper);
 
 interface PageHeaderProps {
-  icon: React.ReactNode;
   subtitle?: string;
   title?: string;
   rightNode?: React.ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, rightNode }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ subtitle, title, rightNode }) => {
   return (
     <HighlightedPaper>
       <Grid container spacing={3} alignItems="center" justifyContent="space-between">
@@ -42,7 +41,7 @@ const StyledSubtitle = styled.h3`
   color: #fff;
   font-size: 18px;
   font-weight: 400;
-  margin: 16px 0 0;
+  margin: 0;
   padding: 0;
 `;
 

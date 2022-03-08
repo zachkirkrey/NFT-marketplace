@@ -49,11 +49,14 @@ const Bank: React.FC = () => {
 
   return account && bank ? (
     <>
-      <PageHeader
-        icon="💣"
-        //     subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
-        title={bank?.name}
-      />
+      <Grid container justifyContent="center">
+        <Grid item lg={10}>
+          <PageHeader
+            title={bank?.name}
+            subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
+          />
+        </Grid>
+      </Grid>
       <Box mt={5}>
         <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
           <Alert variant="filled" severity="info">
@@ -157,7 +160,7 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
 const BankNotFound = () => {
   return (
     <Center>
-      <PageHeader icon="🏚" title="Not Found" subtitle="You've hit a bank just robbed by unicorns." />
+      <PageHeader title="Not Found" subtitle="You've hit a bank just robbed by unicorns." />
     </Center>
   );
 };

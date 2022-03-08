@@ -69,7 +69,6 @@ const Staking = () => {
             <Grid container justifyContent="center">
               <Grid item xs={12} lg={10}>
                 <PageHeader
-                  icon={'💣'}
                   title="BOMB Staking for xBOMB"
                   rightNode={
                     <HighlightedBorderedPaper elevation={0}>
