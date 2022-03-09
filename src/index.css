@@ -49,6 +49,10 @@ h6 {
   color: #f9d749;
 }
 
+.MuiAlert-root a {
+  color: inherit;
+}
+
 .MuiToolbar-regular {
   color: #e0e3bd;
 }

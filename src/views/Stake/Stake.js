@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { useWallet } from 'use-wallet';
 import Stake from './components/Stake';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { Box, Typography, Grid, withStyles, Paper } from '@material-ui/core';
 import { roundAndFormatNumber } from '../../0x';

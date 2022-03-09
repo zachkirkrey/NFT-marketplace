@@ -42,6 +42,11 @@ const newTheme = createTheme({
       },
     },
   },
+  alert: {
+    a: {
+      color: 'inherit',
+    },
+  },
 });
 
 export default newTheme;

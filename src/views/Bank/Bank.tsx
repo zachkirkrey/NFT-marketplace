@@ -3,9 +3,8 @@ import styled from 'styled-components';
 
 import { useParams } from 'react-router-dom';
 import { useWallet } from 'use-wallet';
-import { makeStyles } from '@material-ui/core/styles';
 
-import { Box, Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
+import { Box, Button, Typography, Grid, withStyles, Paper } from '@material-ui/core';
 
 import PageHeader from '../../components/PageHeader';
 import Spacer from '../../components/Spacer';
@@ -19,18 +18,23 @@ import { Bank as BankEntity } from '../../bomb-finance';
 import useBombFinance from '../../hooks/useBombFinance';
 import { Alert } from '@material-ui/lab';
 
-const useStyles = makeStyles((theme) => ({
-  gridItem: {
-    height: '100%',
-    [theme.breakpoints.up('md')]: {
-      height: '90px',
-    },
+const BorderedPaper = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+    backgroundColor: 'transparent',
+    border: '1px solid hsla(0, 0%, 100%, .1)',
   },
-}));
+}))(Paper);
+
+const HighlightedText = withStyles((theme) => ({
+  root: {
+    fontWeight: 700,
+    color: '#f9d749',
+  },
+}))(Typography);
 
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
-  const classes = useStyles();
   const { bankId } = useParams();
   const bank = useBank(bankId);
 
@@ -49,73 +53,85 @@ const Bank: React.FC = () => {
 
   return account && bank ? (
     <>
-      <Grid container justifyContent="center">
-        <Grid item lg={10}>
-          <PageHeader
-            title={bank?.name}
-            subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
-          />
+      <Box mb={4}>
+        <Grid container justifyContent="center">
+          <Grid item lg={10}>
+            <PageHeader
+              title={bank?.name}
+              subtitle={`Deposit ${bank?.depositTokenName} and earn ${bank?.earnTokenName}`}
+            />
+          </Grid>
+        </Grid>
+      </Box>
+      <Box display="flex" mb={3} justifyContent="center">
+        <Alert variant="filled" severity="info">
+          <h3>Our autocompounding vaults are live!</h3>
+          We support zapping tokens, and auto-compound every 2 hours!
+          <br />
+          Check it out here: <a href={vaultUrl}>{vaultUrl}</a>
+        </Alert>
+      </Box>
+      <Grid container spacing={3}>
+        <Grid item xs={12} lg={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={12}>
+              <BorderedPaper>
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                      APR
+                    </Typography>
+                    <HighlightedText variant="h5">
+                      {bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%
+                    </HighlightedText>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                      Daily APR
+                    </Typography>
+                    <HighlightedText variant="h5">
+                      {bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%
+                    </HighlightedText>
+                  </Grid>
+                </Grid>
+              </BorderedPaper>
+            </Grid>
+
+            <Grid item xs={12} md={6} lg={12}>
+              <BorderedPaper>
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Typography style={{ textTransform: 'uppercase' }} variant="body2">
+                      TVL
+                    </Typography>
+                    <HighlightedText variant="h5">${statsOnPool?.TVL}</HighlightedText>
+                  </Grid>
+                </Grid>
+              </BorderedPaper>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} lg={9}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Harvest bank={bank} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <Stake bank={bank} />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
-      <Box mt={5}>
-        <Grid container justify="center" spacing={3} style={{ marginBottom: '30px' }}>
-          <Alert variant="filled" severity="info">
-            <h3>Our autocompounding vaults are live!</h3>
-            <br />
-            We support zapping tokens, and auto-compound every 2 hours!
-            <br />
-            Check it out here: <a href={vaultUrl}>{vaultUrl}</a>
-          </Alert>
-        </Grid>
-      </Box>
-      <Box>
-        <Grid container justify="center" spacing={3} style={{ marginBottom: '50px' }}>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>APR</Typography>
-                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>Daily APR</Typography>
-                <Typography>{bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
-            <Card className={classes.gridItem}>
-              <CardContent style={{ textAlign: 'center' }}>
-                <Typography>TVL</Typography>
-                <Typography>${statsOnPool?.TVL}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Box mt={5}>
-        <StyledBank>
-          <StyledCardsWrapper>
-            <StyledCardWrapper>
-              <Harvest bank={bank} />
-            </StyledCardWrapper>
-            <Spacer />
-            <StyledCardWrapper>{<Stake bank={bank} />}</StyledCardWrapper>
-          </StyledCardsWrapper>
-          <Spacer size="lg" />
-          {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
-          <Spacer size="lg" />
-          <div>
-            <Button onClick={onRedeem} className="shinyButtonSecondary">
-              Claim &amp; Withdraw
-            </Button>
-          </div>
-          <Spacer size="lg" />
-        </StyledBank>
+      <Box display="flex" flexDirection="column" alignItems="center">
+        <Spacer size="lg" />
+        {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
+        <Spacer size="lg" />
+        <div>
+          <Button onClick={onRedeem} className="shinyButtonSecondary">
+            Claim &amp; Withdraw
+          </Button>
+        </div>
+        <Spacer size="lg" />
       </Box>
     </>
   ) : !bank ? (
@@ -147,22 +163,18 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
     //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-bnb';
   }
   return (
-    <Card>
-      <CardContent>
+    <Paper>
+      <Box p={2}>
         <StyledLink href={uniswapUrl} target="_blank">
           {`Provide liquidity for ${pairName} now on PancakeSwap`}
         </StyledLink>
-      </CardContent>
-    </Card>
+      </Box>
+    </Paper>
   );
 };
 
 const BankNotFound = () => {
-  return (
-    <Center>
-      <PageHeader title="Not Found" subtitle="You've hit a bank just robbed by unicorns." />
-    </Center>
-  );
+  return <PageHeader title="Not Found" subtitle="You've hit a bank just robbed by unicorns." />;
 };
 
 const StyledBank = styled.div`
@@ -197,13 +209,6 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
-`;
-
-const Center = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
 `;
 
 export default Bank;
