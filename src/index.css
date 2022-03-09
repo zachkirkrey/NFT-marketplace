@@ -15,8 +15,8 @@ h4 {
 
 html,
 body {
-  overflow-y: auto;
-  height: 100%;
+  /* overflow-y: auto;
+  height: 100%; */
 }
 
 /* .makeStyles-paper-11, */
@@ -28,12 +28,13 @@ h2 {
 }
 
 body {
-  position: absolute;
+  /* position: absolute;
   content: '';
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
+  width: 100%; */
+  /* min-height: 100vh; */
   background: linear-gradient(90deg, #071421 0%, #002148 50%, #071421 100%) !important;
   line-height: 1.5;
 }

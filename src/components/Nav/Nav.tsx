@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Box, Drawer, IconButton, Toolbar, Typography, List, useMediaQuery } from '@material-ui/core';
+import { AppBar, Box, Drawer, IconButton, Toolbar, List, useMediaQuery } from '@material-ui/core';
 
 import ListItemLink from '../ListItemLink';
 import useBombStats from '../../hooks/useBombStats';
@@ -23,8 +23,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    backgroundColor: '#0d2048',
+    backgroundColor: 'transparent',
     marginBottom: '3rem',
+    transition: 'background-color linear .1s',
+  },
+  appBarBackground: {
+    backgroundColor: '#0d2048',
   },
   drawerPaper: {
     width: 240,
@@ -65,6 +69,24 @@ const Nav = () => {
   const btcStats = useBtcStats();
   const shareStats = useShareStats();
 
+  const [navBackgroundTransparent, setNavBackgroundTransparent] = useState(true);
+
+  const handleScroll = () => {
+    if (window.scrollY > 65) {
+      setNavBackgroundTransparent(false);
+    } else {
+      setNavBackgroundTransparent(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('scroll', handleScroll);
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -84,7 +106,11 @@ const Nav = () => {
   );
 
   return (
-    <AppBar position="sticky" elevation={0} className={classes.appBar}>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      className={`${classes.appBar} ${!navBackgroundTransparent ? classes.appBarBackground : ''}`}
+    >
       <Toolbar className={classes.toolbar}>
         {displayNavWithoutDrawer ? (
           <>
