@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { AppBar, Box, Drawer, IconButton, Toolbar, Typography, List, useMediaQuery } from '@material-ui/core';
 
@@ -9,12 +8,11 @@ import useBtcStats from '../../hooks/useBtcStats';
 import useShareStats from '../../hooks/usebShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 
 import bombLogo from '../../assets/img/bomb-logo.png';
 import { roundAndFormatNumber } from '../../0x';
-//import TokenSymbol from '../TokenSymbol';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -25,15 +23,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
-    // color: '#f9d749',
-    'background-color': '#0d2048',
-    // borderBottom: `1px solid ${theme.palette.divider}`,
-    // padding: '10px',
+    backgroundColor: '#0d2048',
     marginBottom: '3rem',
-  },
-  drawer: {
-    // width: 240,
-    // flexShrink: 0,
   },
   drawerPaper: {
     width: 240,
@@ -47,40 +38,17 @@ const useStyles = makeStyles((theme) => ({
       width: 300,
     },
   },
-  hide: {
-    // display: 'none',
-  },
   toolbar: {
     height: 65,
-    // flexWrap: 'wrap',
-  },
-  toolbarTitle: {
-    // fontFamily: 'Rubik',
-    // fontSize: '0px',
-    // flexGrow: 1,
   },
   link: {
-    // padding: 16px 12px!important
-    // padding: theme.spacing(4, 3),
-    padding: '16px 12px !important',
-    // textTransform: 'uppercase',
-    // color: '#f9d749',
-    // fontSize: '18px',
-    // marginTop: '15px',
-    // margin: theme.spacing(10, 1, 1, 2),
-    // textDecoration: 'none',
-    // '&:hover': {
-    //   textDecoration: 'none',
-    // },
+    [theme.breakpoints.up('lg')]: {
+      padding: '0 8px',
+      textTransform: 'uppercase',
+      textDecoration: 'none',
+      fontSize: '15px',
+    },
   },
-  brandLink: {
-    // textDecoration: 'none',
-    // color: '#f9d749',
-    // '&:hover': {
-    //   textDecoration: 'none',
-    // },
-  },
-
   logo: {
     height: 40,
     marginTop: -10,
@@ -89,15 +57,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Nav = () => {
-  const matches = false;
+  const displayNavWithoutDrawer = useMediaQuery('(min-width: 1440px)');
   const displayRatesInAppbar = useMediaQuery('(min-width: 768px)');
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const bombStats = useBombStats();
   const btcStats = useBtcStats();
   const shareStats = useShareStats();
-
-  // const [connected, setConnected] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -120,14 +86,11 @@ const Nav = () => {
   return (
     <AppBar position="sticky" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        {matches ? (
+        {displayNavWithoutDrawer ? (
           <>
-            <Typography variant="h6" color="inherit" noWrap style={{ flexGrow: '0' }} className={classes.toolbarTitle}>
-              {/* <a className={ classes.brandLink } href="/">Bomb Money</a> */}
-              <Link to="/" color="inherit" className={classes.brandLink}>
-                <img alt="bomb.money" src={bombLogo} height="60px" />
-              </Link>
-            </Typography>
+            <Link to="/" style={{ display: 'flex', color: 'inherit', marginTop: '-8px' }}>
+              <img alt="bomb.money" src={bombLogo} height="46px" />
+            </Link>
             <Box style={{ paddingLeft: '15px', fontSize: '1rem', flexGrow: '1' }}>
               <Link to="/" className={'navLink ' + classes.link}>
                 Home
@@ -219,16 +182,12 @@ const Nav = () => {
           </>
         ) : (
           <>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={clsx(open && classes.hide)}
-            >
+            <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start">
               <MenuIcon />
             </IconButton>
-            <img alt="bomb.money" src={bombLogo} className={classes.logo} />
+            <Link to="/" style={{ display: 'flex' }}>
+              <img alt="bomb.money" src={bombLogo} className={classes.logo} />
+            </Link>
             <Box display="flex" alignItems="center" ml="auto">
               {displayRatesInAppbar ? (
                 <Box display="flex" alignItems="center">
@@ -243,7 +202,6 @@ const Nav = () => {
               <AccountButton text="Connect" />
             </Box>
             <Drawer
-              className={classes.drawer}
               onClose={handleDrawerClose}
               // onEscapeKeyDown={handleDrawerClose}
               // onBackdropClick={handleDrawerClose}
