@@ -15,10 +15,10 @@ import useTotalValueLocked from '../../hooks/useTotalValueLocked';
 import { Bomb as bombTesting } from '../../bomb-finance/deployments/deployments.testing.json';
 import { Bomb as bombProd } from '../../bomb-finance/deployments/deployments.mainnet.json';
 import { roundAndFormatNumber } from '../../0x';
-import MetamaskFox from '../../assets/img/metamask-fox.svg';
 import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
 import { Alert } from '@material-ui/lab';
+import tenWhiteImg from '../../assets/img/10-white.svg';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useBombFinance from '../../hooks/useBombFinance';
@@ -26,7 +26,6 @@ import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 import { Helmet } from 'react-helmet';
 import BombImage from '../../assets/img/bomb.png';
 
-import HomeImage from '../../assets/img/background.jpg';
 import { withStyles } from '@material-ui/styles';
 import { bgGradient, bgGradientHighlighted } from '../../theme/colors';
 import { TokenCard } from './TokenCard';
@@ -57,6 +56,28 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 352,
     },
   },
+  tvlBgAdornment: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    width: 80,
+    height: 80,
+    backgroundImage: `url(${tenWhiteImg})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    opacity: 0.15,
+  },
+  tvlBgAdornment2: {
+    position: 'absolute',
+    top: 6,
+    right: 10,
+    width: 32,
+    height: 32,
+    backgroundImage: `url(${tenWhiteImg})`,
+    backgroundSize: 'contain',
+    backgroundRepeat: 'no-repeat',
+    opacity: 0.15,
+  },
 }));
 
 const HighlightedPaper = withStyles({
@@ -75,7 +96,9 @@ const JumbotronPaper = withStyles({
 
 const TotalValueLockedPaper = withStyles((theme) => ({
   root: {
+    position: 'relative',
     background: bgGradientHighlighted,
+
     [theme.breakpoints.up('md')]: {
       marginTop: -48,
     },
@@ -220,6 +243,8 @@ const Home = () => {
                   </p>
                 </Box>
                 <TotalValueLockedPaper>
+                  <div className={classes.tvlBgAdornment} />
+                  <div className={classes.tvlBgAdornment2} />
                   <Box p={3} textAlign="center">
                     <h2>Total Value Locked</h2>
                     <CountUp style={{ fontSize: '36px' }} end={TVL} separator="," prefix="$" />
