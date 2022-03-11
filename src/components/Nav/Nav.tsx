@@ -195,6 +195,7 @@ const Nav = () => {
                 paddingRight: '15px',
                 height: '30px',
                 display: 'flex',
+                alignItems: 'center',
               }}
             >
               <div className="navTokenIcon bomb"></div>{' '}
