@@ -30,6 +30,7 @@ import { withStyles } from '@material-ui/styles';
 import { bgGradient, bgGradientHighlighted } from '../../theme/colors';
 import { TokenCard } from './TokenCard';
 import { TokenSwapCard } from './TokenSwapCard';
+import { PromotedTokenCard } from './PromotedTokenCard';
 
 const TITLE = 'bomb.money | BTC pegged algocoin';
 
@@ -104,6 +105,16 @@ const TotalValueLockedPaper = withStyles((theme) => ({
     },
   },
 }))(Paper);
+
+const PromotedTokensGridItem = withStyles((theme) => ({
+  root: {
+    [theme.breakpoints.up('md')]: {
+      '&:not(:last-child)': {
+        borderRight: `1px solid rgba(255, 255, 255, 0.1)`,
+      },
+    },
+  },
+}))(Grid);
 
 const Home = () => {
   const classes = useStyles();
@@ -289,6 +300,19 @@ const Home = () => {
           </Card>
         </Grid>
 
+        <Grid item xs={12}>
+          <Paper style={{ overflow: 'hidden' }}>
+            <Grid container>
+              <PromotedTokensGridItem item xs={12} md={6}>
+                <PromotedTokenCard type="treasure" />
+              </PromotedTokensGridItem>
+              <PromotedTokensGridItem item xs={12} md={6}>
+                <PromotedTokenCard type="invested" />
+              </PromotedTokensGridItem>
+            </Grid>
+          </Paper>
+        </Grid>
+
         {/* BOMB */}
         <Grid item xs={12} md={4}>
           <TokenCard
@@ -297,7 +321,7 @@ const Home = () => {
             tokenName="BOMB"
             topSubtext="10,000 BOMB (1.0 Peg) ="
             mainText={`${bombPriceInBNB ? bombPriceInBNB : '-.----'} BTC`}
-            bottomSubtext={`${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / BOMB`}
+            bottomSubtext={`$${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / BOMB`}
             marketCap={`$${roundAndFormatNumber(bombCirculatingSupply * bombPriceInDollars, 2)}$`}
             circulatingSupply={roundAndFormatNumber(bombCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bombTotalSupply, 2)}
@@ -312,7 +336,7 @@ const Home = () => {
             tokenName="BSHARE"
             topSubtext="Current Price"
             mainText={`${bSharePriceInBNB ? bSharePriceInBNB : '-.----'} BNB`}
-            bottomSubtext={`${bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / BSHARE`}
+            bottomSubtext={`$${bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / BSHARE`}
             marketCap={`$${roundAndFormatNumber((bShareCirculatingSupply * bSharePriceInDollars).toFixed(2), 2)}`}
             circulatingSupply={roundAndFormatNumber(bShareCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bShareTotalSupply, 2)}
