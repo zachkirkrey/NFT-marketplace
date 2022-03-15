@@ -79,6 +79,15 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     opacity: 0.15,
   },
+  tombforkTokenPrice: {
+    color: theme.palette.text.yellow,
+  },
+  governanceTokenPrice: {
+    color: '#119aff',
+  },
+  '10bondTokenPrice': {
+    color: '#fa8f18',
+  },
 }));
 
 const HighlightedPaper = withStyles({
@@ -327,6 +336,7 @@ const Home = () => {
             marketCap={`$${roundAndFormatNumber(bombCirculatingSupply * bombPriceInDollars, 2)}$`}
             circulatingSupply={roundAndFormatNumber(bombCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bombTotalSupply, 2)}
+            price={<span className={classes.tombforkTokenPrice}>0.1 USDT</span>}
           />
         </Grid>
 
@@ -342,6 +352,7 @@ const Home = () => {
             marketCap={`$${roundAndFormatNumber((bShareCirculatingSupply * bSharePriceInDollars).toFixed(2), 2)}`}
             circulatingSupply={roundAndFormatNumber(bShareCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bShareTotalSupply, 2)}
+            price={<span className={classes.governanceTokenPrice}>10000 USDT</span>}
           />
         </Grid>
 
@@ -358,6 +369,7 @@ const Home = () => {
             marketCap={`$${roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}`}
             circulatingSupply={roundAndFormatNumber(tBondCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(tBondTotalSupply, 2)}
+            price={<span className={classes['10bondTokenPrice']}>-- USDT</span>}
           />
         </Grid>
 

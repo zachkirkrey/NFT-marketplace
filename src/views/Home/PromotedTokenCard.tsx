@@ -58,7 +58,7 @@ type PromotedTokenCardProps = {
 
 const labelMap = {
   treasure: 'Invested',
-  invested: 'DarkDAO',
+  invested: 'Treasure',
 };
 
 const classesMap = {

@@ -17,6 +17,7 @@ type TokenCardProps = {
   marketCap: string;
   circulatingSupply: string;
   totalSupply: string;
+  price: string | React.ReactNode;
 };
 
 const useClasses = makeStyles({
@@ -101,6 +102,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
   marketCap,
   circulatingSupply,
   totalSupply,
+  price,
 }) => {
   const classes = useClasses();
 
@@ -137,6 +139,14 @@ export const TokenCard: React.FC<TokenCardProps> = ({
       <Box p={2}>
         <Box mb={3}>
           <CurrentPricePaper elevation={0}>
+            <Box py={1} px={2} textAlign="left">
+              Price: <b>{price}</b>
+            </Box>
+          </CurrentPricePaper>
+        </Box>
+
+        <Box mb={3}>
+          {/* <CurrentPricePaper elevation={0}>
             <Box px={2} py={3}>
               {topSubtext}
               <Box>
@@ -146,7 +156,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
                 <span style={{ fontSize: '16px', alignContent: 'flex-start' }}>{bottomSubtext}</span>
               </Box>
             </Box>
-          </CurrentPricePaper>
+          </CurrentPricePaper> */}
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={12}>
