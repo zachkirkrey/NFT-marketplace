@@ -93,7 +93,6 @@ const useStyles = makeStyles((theme) => ({
 const HighlightedPaper = withStyles({
   root: {
     background: '#043378',
-    overflow: 'hidden',
   },
 })(Paper);
 
@@ -312,7 +311,7 @@ const Home = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <HighlightedPaper>
+          <HighlightedPaper style={{ overflow: 'hidden' }}>
             <Grid container>
               <PromotedTokensGridItem item xs={12} md={6}>
                 <PromotedTokenCard type="treasure" />
