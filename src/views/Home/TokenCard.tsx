@@ -57,11 +57,12 @@ const useClasses = makeStyles({
   },
 });
 
-const StyledCard = withStyles({
+const StyledPaper = withStyles({
   root: {
     textAlign: 'center',
+    backgroundColor: '#043378',
   },
-})(Card);
+})(Paper);
 
 const CurrentPricePaper = withStyles({
   root: {
@@ -104,7 +105,7 @@ export const TokenCard: React.FC<TokenCardProps> = ({
   const classes = useClasses();
 
   return (
-    <StyledCard style={{ position: 'relative' }}>
+    <StyledPaper style={{ position: 'relative' }}>
       <Header display="flex" alignItems="center" p={[2, 3]}>
         <Box display="flex" mr={2}>
           <TokenSymbol symbol={tokenSymbol} size={48} />
@@ -168,6 +169,6 @@ export const TokenCard: React.FC<TokenCardProps> = ({
           </Grid>
         </Grid>
       </Box>
-    </StyledCard>
+    </StyledPaper>
   );
 };

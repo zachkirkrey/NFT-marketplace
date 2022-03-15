@@ -83,12 +83,14 @@ const useStyles = makeStyles((theme) => ({
 
 const HighlightedPaper = withStyles({
   root: {
-    background: bgGradient,
+    background: '#043378',
+    overflow: 'hidden',
   },
 })(Paper);
 
 const JumbotronPaper = withStyles({
   root: {
+    background: bgGradient,
     position: 'relative',
     marginTop: 82,
     boxShadow: 'rgb(72 108 182 / 20%) 0px -10px 0px inset',
@@ -301,7 +303,7 @@ const Home = () => {
         </Grid>
 
         <Grid item xs={12}>
-          <Paper style={{ overflow: 'hidden' }}>
+          <HighlightedPaper>
             <Grid container>
               <PromotedTokensGridItem item xs={12} md={6}>
                 <PromotedTokenCard type="treasure" />
@@ -310,7 +312,7 @@ const Home = () => {
                 <PromotedTokenCard type="invested" />
               </PromotedTokensGridItem>
             </Grid>
-          </Paper>
+          </HighlightedPaper>
         </Grid>
 
         {/* BOMB */}
