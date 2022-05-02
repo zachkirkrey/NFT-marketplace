@@ -4,7 +4,7 @@ import {ChainId} from '@pancakeswap/sdk';
 export type Configuration = {
   chainId: ChainId;
   networkName: string;
-  ftmscanUrl: string;
+  cronoscanUrl: string;
   defaultProvider: string;
   deployments: Deployments;
   externalTokens: {[contractName: string]: [string, number]};
@@ -31,6 +31,6 @@ export const defaultEthereumConfig = {
   autoGasMultiplier: 1.5,
   defaultConfirmations: 3,
   defaultGas: '6000000',
-  defaultGasPrice: '7000000000000',
+  defaultGasPrice: '60000000000',
   ethereumNodeTimeout: 10000,
 };

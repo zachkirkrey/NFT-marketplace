@@ -16,6 +16,8 @@ const Banks: React.FC = ({children}) => {
       if (bankInfo.finished) {
         if (!bombFinance.isUnlocked) continue;
 
+        console.log("bombFinance ", bombFinance)
+
         // only show pools staked by user
         const balance = await bombFinance.stakedBalanceOnBank(
           bankInfo.contract,
@@ -30,7 +32,7 @@ const Banks: React.FC = ({children}) => {
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
         depositToken: bombFinance.externalTokens[bankInfo.depositTokenName],
-        earnToken: bankInfo.earnTokenName === 'BOMB' ? bombFinance.BOMB : bombFinance.BSHARE,
+        earnToken: bankInfo.earnTokenName === '_10MB' ? bombFinance._10MB : bombFinance._10SHARE,
       });
     }
     banks.sort((a, b) => (a.sort > b.sort ? 1 : -1));

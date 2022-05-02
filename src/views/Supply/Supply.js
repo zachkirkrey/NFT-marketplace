@@ -8,10 +8,10 @@ import { Alert } from '@material-ui/lab';
 import Spacer from '../../components/Spacer';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-// import bombFinance, { BOMB, BTCB } from '../../bomb-finance';
+// import bombFinance, { _10MB, USDT } from '../../bomb-finance';
 // import useXbombBalance from '../../hooks/useXbombBalance';
 // import useXbombAPR from '../../hooks/useXbombAPR';
-import useSuppliedBtcbBalance from '../../hooks/useTotalSuppliedBtcbBalance';
+import useSuppliedUSDTBalance from '../../hooks/useTotalSuppliedUSDTBalance';
 import useSuppliedBombBalance from '../../hooks/useTotalSuppliedBombBalance';
 
 import { createGlobalStyle } from 'styled-components';
@@ -19,7 +19,7 @@ import { Helmet } from 'react-helmet'
 import SupplyBomb from './components/SupplyBomb';
 
 import HomeImage from '../../assets/img/background.jpg';
-import SupplyBtcb from './components/SupplyBtcb';
+import SupplyUSDT from './components/SupplyUSDT';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -43,7 +43,7 @@ const Supply = () => {
   const { account } = useWallet();
   // const { onRedeem } = useRedeemOnBoardroom();
   const stakedBombBalance = Number(useSuppliedBombBalance() / 1000000000000000000).toFixed(2);
-  const stakedBtcbBalance = Number(useSuppliedBtcbBalance() / 1000000000000000000).toFixed(5);
+  const stakedUSDTBalance = Number(useSuppliedUSDTBalance() / 1000000000000000000).toFixed(5);
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance / 1000000000000000000).toFixed(4);
   // const xbombAPR = useXbombAPR();
@@ -96,16 +96,16 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BTCB AVAILABLE</Typography>
-                    <Typography>{Number(stakedBtcbBalance)} BTCB</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>USDT AVAILABLE</Typography>
+                    <Typography>{Number(stakedUSDTBalance)} USDT</Typography>
                   </CardContent>
                 </Card>
               </Grid>
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BOMB AVAILABLE</Typography>
-                    <Typography>{Number(stakedBombBalance)} BOMB</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>_10MB AVAILABLE</Typography>
+                    <Typography>{Number(stakedBombBalance)} _10MB</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -113,11 +113,11 @@ const Supply = () => {
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
                     <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>
-                      BOMB PEG <small>(TWAP)</small>
+                      _10MB PEG <small>(TWAP)</small>
                     </Typography>
-                    <Typography> BTC</Typography>
+                    <Typography> USDT</Typography>
                     <Typography>
-                      <small>per 10,000 BOMB</small>
+                      <small>per 10 _10MB</small>
                     </Typography>
                   </CardContent>
                 </Card>
@@ -141,7 +141,7 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BOMB Staked</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>_10MB Staked</Typography>
                     <Typography>{roundAndFormatNumber(bombTotalStaked)}</Typography>
                   </CardContent>
                 </Card>
@@ -149,7 +149,7 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>BOMB Staked USD</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>_10MB Staked USD</Typography>
                     <Typography>${roundAndFormatNumber(xbombTVL, 2)}</Typography>
                   </CardContent>
                 </Card>
@@ -166,7 +166,7 @@ const Supply = () => {
                   {/* <Spacer /> */}
                   <StyledCardWrapper>
 
-                    <SupplyBtcb />
+                    <SupplyUSDT />
                   </StyledCardWrapper>
                   <Spacer />
                   <StyledCardWrapper>
@@ -187,11 +187,11 @@ const Supply = () => {
                     {/* <Box>
                       <Card>
                         <CardContent>
-                          <h2>About xBOMB & Rewards</h2>
-                          <p><strong>We are currently depositing 10,000 BOMB per week into the staking pool until our BTC Single Staking service is launched.</strong></p>
-                          <p>xBOMB will be the governance token required to cast votes on protocol decisions.</p>
-                          <p>20% of all BOMB minted will be deposited into the xBOMB smart contract, increasing the amount of BOMB that can be redeemed for each xBOMB. Rewards will be deposited at random times to prevent abuse.</p>
-                          <p>Functionality will be developed around xBOMB including using it as collateral to borrow other assets.</p>
+                          <h2>About x_10MB & Rewards</h2>
+                          <p><strong>We are currently depositing 10 _10MB per week into the staking pool until our USDT Single Staking service is launched.</strong></p>
+                          <p>x_10MB will be the governance token required to cast votes on protocol decisions.</p>
+                          <p>20% of all _10MB minted will be deposited into the x_10MB smart contract, increasing the amount of _10MB that can be redeemed for each x_10MB. Rewards will be deposited at random times to prevent abuse.</p>
+                          <p>Functionality will be developed around x_10MB including using it as collateral to borrow other assets.</p>
                           <p>Reward structure subject to change based on community voting.</p>
                         </CardContent>
                       </Card>

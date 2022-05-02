@@ -1,48 +1,48 @@
+import { Grid, Paper, withStyles } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 
+const HighlightedPaper = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(3),
+    backgroundColor: '#0d3b81',
+    boxShadow: 'inset 0 -4px 0 #274d87',
+  },
+}))(Paper);
+
 interface PageHeaderProps {
-  icon: React.ReactNode;
   subtitle?: string;
   title?: string;
+  rightNode?: React.ReactNode;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({icon, subtitle, title}) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ subtitle, title, rightNode }) => {
   return (
-    <StyledPageHeader>
-      {/* <StyledIcon>{icon}</StyledIcon> */}
-      <StyledTitle>{title}</StyledTitle>
-      <StyledSubtitle>{subtitle}</StyledSubtitle>
-    </StyledPageHeader>
+    <HighlightedPaper>
+      <Grid container spacing={3} alignItems="center" justifyContent="space-between">
+        <Grid item>
+          <StyledTitle>{title}</StyledTitle>
+          {subtitle ? <StyledSubtitle>{subtitle}</StyledSubtitle> : null}
+        </Grid>
+        <Grid item>{rightNode}</Grid>
+      </Grid>
+    </HighlightedPaper>
   );
 };
 
-const StyledPageHeader = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: ${(props) => props.theme.spacing[6]}px;
-  padding-top: ${(props) => props.theme.spacing[6]}px;
-  max-width: 512px;
-  width: 100%;
-  margin: 0 auto;
-`;
-
 const StyledTitle = styled.h1`
+  margin: 0;
   color: '#f9d749';
   font-size: 36px;
   font-weight: 700;
-  margin: 0;
-  padding: 0;
 `;
 
 const StyledSubtitle = styled.h3`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #fff;
   font-size: 18px;
   font-weight: 400;
   margin: 0;
   padding: 0;
-  text-align: center;
 `;
 
 export default PageHeader;

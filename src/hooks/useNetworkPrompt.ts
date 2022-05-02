@@ -19,12 +19,12 @@ const usePromptNetwork = () => {
           chainId: `0x${config.chainId.toString(16)}`,
           chainName: config.networkName,
           nativeCurrency: {
-            name: 'BNB',
-            symbol: 'BNB',
+            name: 'CRO',
+            symbol: 'CRO',
             decimals: 18,
           },
           rpcUrls: [config.defaultProvider],
-          blockExplorerUrls: [config.ftmscanUrl],
+          blockExplorerUrls: [config.cronoscanUrl],
         },
       ],
     });

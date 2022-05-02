@@ -13,16 +13,16 @@ import {useMediaQuery} from '@material-ui/core';
 const AccountModal: React.FC<ModalProps> = ({onDismiss}) => {
   const bombFinance = useBombFinance();
 
-  const bombBalance = useTokenBalance(bombFinance.BOMB);
+  const bombBalance = useTokenBalance(bombFinance._10MB);
   const displayBombBalance = useMemo(() => getDisplayBalance(bombBalance, 18, 2), [bombBalance]);
 
-  const bshareBalance = useTokenBalance(bombFinance.BSHARE);
+  const bshareBalance = useTokenBalance(bombFinance._10SHARE);
   const displayBshareBalance = useMemo(() => getDisplayBalance(bshareBalance, 18, 2), [bshareBalance]);
 
-  const bbondBalance = useTokenBalance(bombFinance.BBOND);
-  const displayBbondBalance = useMemo(() => getDisplayBalance(bbondBalance, 18, 2), [bbondBalance]);
+  const _10BONDBalance = useTokenBalance(bombFinance._10BOND);
+  const display_10BONDBalance = useMemo(() => getDisplayBalance(_10BONDBalance, 18, 2), [_10BONDBalance]);
 
-    const xbombBalance = useTokenBalance(bombFinance.XBOMB);
+    const xbombBalance = useTokenBalance(bombFinance.X_10MB);
   const displayXbombBalance = useMemo(() => getDisplayBalance(xbombBalance, 18, 2), [xbombBalance]);
 
   const matches = useMediaQuery('(min-width:900px)');
@@ -33,32 +33,32 @@ const AccountModal: React.FC<ModalProps> = ({onDismiss}) => {
 
       <Balances style={{display: 'flex', flexDirection: matches ? 'row' : 'column'}}>
         <StyledBalanceWrapper style={{paddingBottom: '15px'}}>
-          <TokenSymbol symbol="BOMB" />
+          <TokenSymbol symbol="_10MB" />
           <StyledBalance>
             <StyledValue>{displayBombBalance}</StyledValue>
-            <Label text="BOMB Available" />
+            <Label text="_10MB Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
 
         <StyledBalanceWrapper style={{paddingBottom: '15px'}}>
-          <TokenSymbol symbol="BSHARE" />
+          <TokenSymbol symbol="_10SHARE" />
           <StyledBalance>
             <StyledValue>{displayBshareBalance}</StyledValue>
-            <Label text="BSHARE Available" />
+            <Label text="_10SHARE Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
         <StyledBalanceWrapper style={{paddingBottom: '15px'}}>
-          <TokenSymbol symbol="XBOMB" />
+          <TokenSymbol symbol="X_10MB" />
           <StyledBalance>
             <StyledValue>{displayXbombBalance}</StyledValue>
-            <Label text="XBOMB Available" />
+            <Label text="X_10MB Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
         <StyledBalanceWrapper style={{paddingBottom: '15px'}}>
-          <TokenSymbol symbol="BBOND" />
+          <TokenSymbol symbol="_10BOND" />
           <StyledBalance>
-            <StyledValue>{displayBbondBalance}</StyledValue>
-            <Label text="BBOND Available" />
+            <StyledValue>{display_10BONDBalance}</StyledValue>
+            <Label text="_10BOND Available" />
           </StyledBalance>
         </StyledBalanceWrapper>
       </Balances>

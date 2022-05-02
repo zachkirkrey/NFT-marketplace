@@ -30,22 +30,22 @@ const TITLE = 'bomb.money |'
 
 const ProvideLiquidity = () => {
   const [bombAmount, setBombAmount] = useState(0);
-  const [ftmAmount, setFtmAmount] = useState(0);
+  const [croAmount, setFtmAmount] = useState(0);
   const [lpTokensAmount, setLpTokensAmount] = useState(0);
   const { balance } = useWallet();
   const bombStats = useBombStats();
   const bombFinance = useBombFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
-  const bombBalance = useTokenBalance(bombFinance.BOMB);
-  const btcBalance = useTokenBalance(bombFinance.BTC);
+  const bombBalance = useTokenBalance(bombFinance._10MB);
+  const USDTalance = useTokenBalance(bombFinance.USDT);
 
-  const ftmBalance = (btcBalance / 1e18).toFixed(4);
+  const croBalance = (USDTalance / 1e18).toFixed(4);
   const { onProvideBombFtmLP } = useProvideBombFtmLP();
-  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
+  const bombFtmLpStats = useLpStats('_10MB-USDT-LP');
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
-  const bombPriceInBNB = useMemo(() => (bombStats ? Number(bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);
-  const ftmPriceInBOMB = useMemo(() => (bombStats ? Number(1 / bombStats.tokenInFtm).toFixed(2) : null), [bombStats]);
+  const bombPriceInCRO = useMemo(() => (bombStats ? Number(bombStats.tokenInUSDT).toFixed(2) : null), [bombStats]);
+  const croPriceIn_10MB = useMemo(() => (bombStats ? Number(1 / bombStats.tokenInUSDT).toFixed(2) : null), [bombStats]);
   // const classes = useStyles();
 
   const handleBombChange = async (e) => {
@@ -54,9 +54,9 @@ const ProvideLiquidity = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setBombAmount(e.currentTarget.value);
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'BOMB');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, '_10MB');
     setFtmAmount(quoteFromSpooky);
-    setLpTokensAmount(quoteFromSpooky / bombLPStats.ftmAmount);
+    setLpTokensAmount(quoteFromSpooky / bombLPStats.croAmount);
   };
 
   const handleFtmChange = async (e) => {
@@ -65,22 +65,22 @@ const ProvideLiquidity = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setFtmAmount(e.currentTarget.value);
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'BTCB');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'USDT');
     setBombAmount(quoteFromSpooky);
 
     setLpTokensAmount(quoteFromSpooky / bombLPStats.tokenAmount);
   };
   const handleBombSelectMax = async () => {
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(getDisplayBalance(bombBalance), 'BOMB');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(getDisplayBalance(bombBalance), '_10MB');
     setBombAmount(getDisplayBalance(bombBalance));
     setFtmAmount(quoteFromSpooky);
-    setLpTokensAmount(quoteFromSpooky / bombLPStats.ftmAmount);
+    setLpTokensAmount(quoteFromSpooky / bombLPStats.croAmount);
   };
   const handleFtmSelectMax = async () => {
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(ftmBalance, 'BNB');
-    setFtmAmount(ftmBalance);
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(croBalance, 'CRO');
+    setFtmAmount(croBalance);
     setBombAmount(quoteFromSpooky);
-    setLpTokensAmount(ftmBalance / bombLPStats.ftmAmount);
+    setLpTokensAmount(croBalance / bombLPStats.croAmount);
   };
   return (
 
@@ -99,9 +99,9 @@ const ProvideLiquidity = () => {
             <b>
               This and{' '}
               <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">
-                Pancakeswap
+                USDT
               </a>{' '}
-              are the only ways to provide Liquidity on BOMB-BTCB pair without paying tax.
+              are the only ways to provide Liquidity on _10MB-USDT pair without paying tax.
             </b>
           </Alert>
           <Grid item xs={12} sm={12}>
@@ -116,28 +116,28 @@ const ProvideLiquidity = () => {
                           onChange={handleBombChange}
                           value={bombAmount}
                           max={getDisplayBalance(bombBalance)}
-                          symbol={'BOMB'}
+                          symbol={'_10MB'}
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
                         <TokenInput
                           onSelectMax={handleFtmSelectMax}
                           onChange={handleFtmChange}
-                          value={ftmAmount}
-                          max={ftmBalance}
-                          symbol={'BTCB'}
+                          value={croAmount}
+                          max={croBalance}
+                          symbol={'USDT'}
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
-                        <p>1 BOMB = {bombPriceInBNB} BNB</p>
-                        <p>1 BNB = {ftmPriceInBOMB} BOMB</p>
+                        <p>1 _10MB = {bombPriceInCRO} CRO</p>
+                        <p>1 CRO = {croPriceIn_10MB} _10MB</p>
                         <p>LP tokens ≈ {lpTokensAmount.toFixed(2)}</p>
                       </Grid>
                       <Grid xs={12} justifyContent="center" style={{ textAlign: 'center' }}>
                         {approveTaxOfficeStatus === ApprovalState.APPROVED ? (
                           <Button
                             variant="contained"
-                            onClick={() => onProvideBombFtmLP(ftmAmount.toString(), bombAmount.toString())}
+                            onClick={() => onProvideBombFtmLP(croAmount.toString(), bombAmount.toString())}
                             color="primary"
                             style={{ margin: '0 10px', color: '#fff' }}
                           >

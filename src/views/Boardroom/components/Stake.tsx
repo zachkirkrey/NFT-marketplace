@@ -1,23 +1,18 @@
-import React, {useMemo} from 'react';
-import styled from 'styled-components';
+import React, { useMemo } from 'react';
 
-import {Box, Button, Card, CardContent, Typography} from '@material-ui/core';
+import { Box, Button, Card, CardContent, makeStyles, Paper, Typography, withStyles } from '@material-ui/core';
 
-// import Button from '../../../components/Button';
-// import Card from '../../../components/Card';
-// import CardContent from '../../../components/CardContent';
-import CardIcon from '../../../components/CardIcon';
-import {AddIcon, RemoveIcon} from '../../../components/icons';
+import { AddIcon, RemoveIcon } from '../../../components/icons';
 import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 
-import useApprove, {ApprovalState} from '../../../hooks/useApprove';
+import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useWithdrawCheck from '../../../hooks/boardroom/useWithdrawCheck';
 
-import {getDisplayBalance} from '../../../utils/formatBalance';
+import { getDisplayBalance } from '../../../utils/formatBalance';
 
 import DepositModal from './DepositModal';
 import WithdrawModal from './WithdrawModal';
@@ -30,15 +25,48 @@ import TokenSymbol from '../../../components/TokenSymbol';
 import useStakeToBoardroom from '../../../hooks/useStakeToBoardroom';
 import useWithdrawFromBoardroom from '../../../hooks/useWithdrawFromBoardroom';
 
+const useClasses = makeStyles({
+  badge: {
+    borderTop: `86px solid rgb(17, 154, 250)`,
+    borderRight: `86px solid transparent`,
+    position: 'absolute',
+    top: 0,
+    width: 0,
+    height: 0,
+    fontWeight: 'bold',
+    fontSize: '14px',
+    lineHeight: '21px',
+    color: 'rgb(0, 0, 0)',
+  },
+});
+
+const RelativePaper = withStyles({
+  root: {
+    position: 'relative',
+    overflow: 'hidden',
+  },
+})(Paper);
+
+const BadgeText = withStyles({
+  root: {
+    fontWeight: 700,
+    left: 10,
+    transform: 'rotate(-45deg)',
+    position: 'absolute',
+    top: -66,
+  },
+})(Typography);
+
 const Stake: React.FC = () => {
+  const classes = useClasses();
   const bombFinance = useBombFinance();
-  const [approveStatus, approve] = useApprove(bombFinance.BSHARE, bombFinance.contracts.Boardroom.address);
+  const [approveStatus, approve] = useApprove(bombFinance._10SHARE, bombFinance.contracts.Boardroom.address);
 
-  const tokenBalance = useTokenBalance(bombFinance.BSHARE);
+  const tokenBalance = useTokenBalance(bombFinance._10SHARE);
   const stakedBalance = useStakedBalanceOnBoardroom();
-  const {from, to} = useUnstakeTimerBoardroom();
+  const { from, to } = useUnstakeTimerBoardroom();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('BSHARE', bombFinance.BSHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('_10SHARE', bombFinance._10SHARE);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
@@ -46,10 +74,9 @@ const Stake: React.FC = () => {
         : null,
     [stakedTokenPriceInDollars, stakedBalance],
   );
-  // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const {onStake} = useStakeToBoardroom();
-  const {onWithdraw} = useWithdrawFromBoardroom();
+  const { onStake } = useStakeToBoardroom();
+  const { onWithdraw } = useWithdrawFromBoardroom();
   const canWithdrawFromBoardroom = useWithdrawCheck();
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
@@ -59,7 +86,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'BShare'}
+      tokenName={'_10HSHARE'}
     />,
   );
 
@@ -70,87 +97,56 @@ const Stake: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'BShare'}
+      tokenName={'_10HSHARE'}
     />,
   );
 
   return (
-    <Box>
-      <Card>
-        <CardContent>
-          <StyledCardContentInner>
-            <StyledCardHeader>
-              <CardIcon>
-                <TokenSymbol symbol="BSHARE" />
-              </CardIcon>
-              <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
-              <Label text={'BSHARE Staked'} variant="yellow" />
-            </StyledCardHeader>
-            <StyledCardActions>
-              {approveStatus !== ApprovalState.APPROVED ? (
-                <Button
-                  disabled={approveStatus !== ApprovalState.NOT_APPROVED}
-                  className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
-                  style={{marginTop: '20px'}}
-                  onClick={approve}
-                >
-                  Approve BSHARE
-                </Button>
-              ) : (
-                <>
-                  <IconButton disabled={!canWithdrawFromBoardroom} onClick={onPresentWithdraw}>
-                    <RemoveIcon color={!canWithdrawFromBoardroom ? '' : 'yellow'} />
-                  </IconButton>
-                  <StyledActionSpacer />
-                  <IconButton onClick={onPresentDeposit}>
-                    <AddIcon color={!canWithdrawFromBoardroom ? '' : 'yellow'} />
-                  </IconButton>
-                </>
-              )}
-            </StyledCardActions>
-          </StyledCardContentInner>
-        </CardContent>
-      </Card>
-      <Box mt={2} style={{color: '#FFF'}}>
-        {canWithdrawFromBoardroom ? (
-          ''
+    <RelativePaper>
+      <div className={classes.badge}>
+        <BadgeText variant="body2">Stake</BadgeText>
+      </div>
+      <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
+        <TokenSymbol symbol="_10SHARE" />
+        <Box mt={3} mb={1}>
+          <Value value={getDisplayBalance(stakedBalance)} />
+        </Box>
+        <Box mb={5} textAlign="center">
+          <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
+          <Label text={'_10SHARE Staked'} variant="yellow" />
+        </Box>
+        {approveStatus !== ApprovalState.APPROVED ? (
+          <Button
+            fullWidth
+            disabled={approveStatus !== ApprovalState.NOT_APPROVED}
+            className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
+            onClick={approve}
+          >
+            Approve _10SHARE
+          </Button>
         ) : (
-          <Card>
-            <CardContent>
-              <Typography style={{textAlign: 'center'}}>Withdraw possible in</Typography>
-              <ProgressCountdown hideBar={true} base={from} deadline={to} description="Withdraw available in" />
-            </CardContent>
-          </Card>
+          <>
+            <IconButton disabled={!canWithdrawFromBoardroom} onClick={onPresentWithdraw}>
+              <RemoveIcon color={!canWithdrawFromBoardroom ? '' : 'yellow'} />
+            </IconButton>
+            <IconButton onClick={onPresentDeposit}>
+              <AddIcon color={!canWithdrawFromBoardroom ? '' : 'yellow'} />
+            </IconButton>
+          </>
+        )}
+        {canWithdrawFromBoardroom ? null : (
+          <Box mt={2} style={{ color: '#FFF' }}>
+            <Card>
+              <CardContent>
+                <Typography style={{ textAlign: 'center' }}>Withdraw possible in</Typography>
+                <ProgressCountdown hideBar={true} base={from} deadline={to} description="Withdraw available in" />
+              </CardContent>
+            </Card>
+          </Box>
         )}
       </Box>
-    </Box>
+    </RelativePaper>
   );
 };
-
-const StyledCardHeader = styled.div`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-`;
-const StyledCardActions = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 28px;
-  width: 100%;
-`;
-
-const StyledActionSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
-`;
-
-const StyledCardContentInner = styled.div`
-  align-items: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-between;
-`;
 
 export default Stake;

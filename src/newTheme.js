@@ -11,7 +11,7 @@ const newTheme = createTheme({
     },
     background: {
       default: '#121212',
-      paper: '#171923',
+      paper: '#0d2a56',
     },
     primary: {
       light: '#ffe066',
@@ -34,6 +34,18 @@ const newTheme = createTheme({
   typography: {
     color: '#2c2560',
     fontFamily: ['"Rubik"', 'sans-serif'].join(','),
+  },
+  container: {
+    root: {
+      '(min-width: 1280px)': {
+        maxWidth: 1368,
+      },
+    },
+  },
+  alert: {
+    a: {
+      color: 'inherit',
+    },
   },
 });
 

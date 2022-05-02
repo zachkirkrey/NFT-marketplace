@@ -9,11 +9,11 @@ const useProvideBombFtmLP = () => {
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleProvideBombFtmLP = useCallback(
-    (ftmAmount: string, bombAmount: string) => {
+    (croAmount: string, bombAmount: string) => {
       const bombAmountBn = parseUnits(bombAmount);
       handleTransactionReceipt(
-        bombFinance.provideBombFtmLP(ftmAmount, bombAmountBn),
-        `Provide BOMB-BTCB LP ${bombAmount} ${ftmAmount} using ${TAX_OFFICE_ADDR}`,
+        bombFinance.provideBombFtmLP(croAmount, bombAmountBn),
+        `Provide _10MB-USDT LP ${bombAmount} ${croAmount} using ${TAX_OFFICE_ADDR}`,
       );
     },
     [bombFinance, handleTransactionReceipt],

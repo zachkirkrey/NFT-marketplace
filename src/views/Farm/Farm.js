@@ -10,55 +10,40 @@ import { Alert } from '@material-ui/lab';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
 import FarmCard from './FarmCard';
-//import FarmImage from '../../assets/img/farm.png';
-import { createGlobalStyle } from 'styled-components';
 
 import useBanks from '../../hooks/useBanks';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 
-import HomeImage from '../../assets/img/background.jpg';
-const BackgroundImage = createGlobalStyle`
-  body {
-    background: url(${HomeImage}) repeat !important;
-    background-size: cover !important;
-    background-color: #171923;
-  }
-`;
+import PageHeader from '../../components/PageHeader';
 
-const TITLE = 'bomb.money | Farms'
-
+const TITLE = 'bomb.money | Farms';
 
 const Farm = () => {
   const [banks] = useBanks();
   const { path } = useRouteMatch();
   const { account } = useWallet();
   const activeBanks = banks.filter((bank) => !bank.finished);
+
   return (
     <Switch>
       <Page>
-
         <Route exact path={path}>
-          <BackgroundImage />
           <Helmet>
             <title>{TITLE}</title>
           </Helmet>
           {!!account ? (
             <Container maxWidth="lg">
-              {/* <Typography color="textYellow" align="center" variant="h3" gutterBottom>
-                Farm
-              </Typography> */}
+              <Grid container justifyContent="center">
+                <Grid item lg={10}>
+                  <PageHeader title="Farm" subtitle="Earn _10SHARE by staking USDT LP" />
+                </Grid>
+              </Grid>
 
               <Box mt={5}>
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 2).length === 0}>
-                  <Typography color="textYellow" align="center" variant="h4" gutterBottom>
-                    Earn BSHARE by staking PancakeSwap LP
-                  </Typography>
+                <div hidden={!activeBanks.some((bank) => bank.sectionInUI === 2)}>
                   {/* <Alert variant="filled" severity="info">
                     <h4>
                       Farms started November 25th 2021 and will continue running for 1 full year.</h4>
-
-
-
                   </Alert> */}
                   <Grid container spacing={3} style={{ marginTop: '20px' }}>
                     {activeBanks
@@ -71,8 +56,14 @@ const Farm = () => {
                   </Grid>
                 </div>
 
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 1).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                <div hidden={!activeBanks.some((bank) => bank.sectionInUI === 1)}>
+                  <Typography
+                    color="textPrimary"
+                    variant="h5"
+                    component="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
                     Inactive ApeSwap Farms
                   </Typography>
                   <Alert variant="filled" severity="warning">
@@ -89,8 +80,14 @@ const Farm = () => {
                   </Grid>
                 </div>
 
-                <div hidden={activeBanks.filter((bank) => bank.sectionInUI === 0).length === 0}>
-                  <Typography color="textPrimary" variant="h4" gutterBottom style={{ marginTop: '20px' }}>
+                <div hidden={!activeBanks.some((bank) => bank.sectionInUI === 0)}>
+                  <Typography
+                    color="textPrimary"
+                    variant="h5"
+                    component="h4"
+                    gutterBottom
+                    style={{ marginTop: '20px' }}
+                  >
                     Genesis Pools
                   </Typography>
                   <Alert variant="filled" severity="warning">
@@ -101,7 +98,7 @@ const Farm = () => {
                       .filter((bank) => bank.sectionInUI === 0)
                       .map((bank) => (
                         <React.Fragment key={bank.name}>
-                          <FarmCard bank={bank} />
+                          <FarmCard bank={bank} key={bank.name} />
                         </React.Fragment>
                       ))}
                   </Grid>
@@ -112,8 +109,7 @@ const Farm = () => {
             <UnlockWallet />
           )}
         </Route>
-        <Route path={`${path}/:bankId`}>
-          <BackgroundImage />
+        <Route path={`${path}/:bankId/:poolId`}>
           <Bank />
         </Route>
       </Page>

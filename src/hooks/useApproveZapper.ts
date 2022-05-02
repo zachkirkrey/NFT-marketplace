@@ -3,7 +3,7 @@ import {useCallback, useMemo} from 'react';
 import {useHasPendingApproval, useTransactionAdder} from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
 import ERC20 from '../bomb-finance/ERC20';
-import {BNB_TICKER, BOMB_TICKER, BSHARE_TICKER, BTC_TICKER, ZAPPER_ROUTER_ADDR} from '../utils/constants';
+import {CRO_TICKER, _10MB_TICKER, _10SHARE_TICKER, USDT_TICKER, ZAPPER_ROUTER_ADDR} from '../utils/constants';
 import useBombFinance from './useBombFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
@@ -20,17 +20,17 @@ export enum ApprovalState {
 function useApproveZapper(zappingToken: string): [ApprovalState, () => Promise<void>] {
   const bombFinance = useBombFinance();
   let token: ERC20;
-  if (zappingToken === BNB_TICKER) token = bombFinance.BNB;
-  else if (zappingToken === BOMB_TICKER) token = bombFinance.BOMB;
-  else if (zappingToken === BSHARE_TICKER) token = bombFinance.BSHARE;
-  else if (zappingToken === BTC_TICKER) token = bombFinance.externalTokens[BTC_TICKER];
+  if (zappingToken === CRO_TICKER) token = bombFinance.CRO;
+  else if (zappingToken === _10MB_TICKER) token = bombFinance._10MB;
+  else if (zappingToken === _10SHARE_TICKER) token = bombFinance._10SHARE;
+  else if (zappingToken === USDT_TICKER) token = bombFinance.externalTokens[USDT_TICKER];
   const pendingApproval = useHasPendingApproval(token.address, ZAPPER_ROUTER_ADDR);
   const currentAllowance = useAllowance(token, ZAPPER_ROUTER_ADDR, pendingApproval);
 
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    if (token === bombFinance.BNB) return ApprovalState.APPROVED;
+    if (token === bombFinance.CRO) return ApprovalState.APPROVED;
     if (!currentAllowance) return ApprovalState.UNKNOWN;
 
     // amountToApprove will be defined if currentAllowance is

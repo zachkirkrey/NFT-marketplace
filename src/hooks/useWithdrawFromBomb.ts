@@ -8,7 +8,7 @@ const useWithdrawFromBomb = () => {
 
   const handleWithdraw = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(bombFinance.withdrawFromBomb(amount), `Redeem ${amount} BOMB from xBOMB Staking`);
+      handleTransactionReceipt(bombFinance.withdrawFromBomb(amount), `Redeem ${amount} _10MB from x_10MB Staking`);
     },
     [bombFinance, handleTransactionReceipt],
   );

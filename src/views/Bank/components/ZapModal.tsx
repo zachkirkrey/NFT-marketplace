@@ -15,7 +15,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance';
 import useBombFinance from '../../../hooks/useBombFinance';
 import {useWallet} from 'use-wallet';
 import useApproveZapper, {ApprovalState} from '../../../hooks/useApproveZapper';
-import {BOMB_TICKER, BSHARE_TICKER, BNB_TICKER, BTC_TICKER} from '../../../utils/constants';
+import {_10MB_TICKER, _10SHARE_TICKER, CRO_TICKER, USDT_TICKER} from '../../../utils/constants';
 import {Alert} from '@material-ui/lab';
 
 interface ZapProps extends ModalProps {
@@ -27,20 +27,21 @@ interface ZapProps extends ModalProps {
 const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', decimals = 18}) => {
   const bombFinance = useBombFinance();
   const {balance} = useWallet();
-  const ftmBalance = (Number(balance) / 1e18).toFixed(4).toString();
-  const bombBalance = useTokenBalance(bombFinance.BOMB);
-  const bshareBalance = useTokenBalance(bombFinance.BSHARE);
-  const btcBalance = useTokenBalance(bombFinance.BTC);
+  const croBalance = (Number(balance) / 1e18).toFixed(4).toString();
+  const bombBalance = useTokenBalance(bombFinance._10MB);
+  const bshareBalance = useTokenBalance(bombFinance._10SHARE);
+  const USDTalance = useTokenBalance(bombFinance.USDT);
   const [val, setVal] = useState('');
-  const [zappingToken, setZappingToken] = useState(BNB_TICKER);
-  const [zappingTokenBalance, setZappingTokenBalance] = useState(ftmBalance);
-  const [estimate, setEstimate] = useState({token0: '0', token1: '0'}); // token0 will always be BNB in this case
+  const [zappingToken, setZappingToken] = useState(CRO_TICKER);
+  const [zappingTokenBalance, setZappingTokenBalance] = useState(croBalance);
+  const [estimate, setEstimate] = useState({token0: '0', token1: '0'}); // token0 will always be CRO in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
-  const bombFtmLpStats = useLpStats('BOMB-BTCB-LP');
-  const tShareFtmLpStats = useLpStats('BSHARE-BNB-LP');
+  /*
+  const bombFtmLpStats = useLpStats('_10MB-USDT-LP');
+  const tShareFtmLpStats = useLpStats('_10SHARE-CRO-LP');
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
-  const ftmAmountPerLP = tokenName.startsWith(BOMB_TICKER) ? bombLPStats?.ftmAmount : bshareLPStats?.ftmAmount;
+  const croAmountPerLP = tokenName.startsWith(_10MB_TICKER) ? bombLPStats?.croAmount : bshareLPStats?.croAmount;*/
   /**
    * Checks if a value is a valid number or not
    * @param n is the value to be evaluated for a number
@@ -52,15 +53,15 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
   const handleChangeAsset = (event: any) => {
     const value = event.target.value;
     setZappingToken(value);
-    setZappingTokenBalance(ftmBalance);
-    if (event.target.value === BSHARE_TICKER) {
+    setZappingTokenBalance(croBalance);
+    if (event.target.value === _10SHARE_TICKER) {
       setZappingTokenBalance(getDisplayBalance(bshareBalance, decimals));
     }
-    if (event.target.value === BOMB_TICKER) {
+    if (event.target.value === _10MB_TICKER) {
       setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
     }
-    if (event.target.value === BTC_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(btcBalance, decimals));
+    if (event.target.value === USDT_TICKER) {
+      setZappingTokenBalance(getDisplayBalance(USDTalance, decimals));
     }
   };
 
@@ -90,11 +91,11 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
         Select asset to zap with
       </InputLabel>
       <Select onChange={handleChangeAsset} style={{color: '#2c2560'}} labelId="label" id="select" value={zappingToken}>
-        <StyledMenuItem value={BNB_TICKER}>BNB</StyledMenuItem>
-        <StyledMenuItem value={BSHARE_TICKER}>BSHARE</StyledMenuItem>
-        {/* <StyledMenuItem value={BTC_TICKER}>BTC</StyledMenuItem> */}
+        <StyledMenuItem value={CRO_TICKER}>CRO</StyledMenuItem>
+        <StyledMenuItem value={_10SHARE_TICKER}>_10SHARE</StyledMenuItem>
+        {/* <StyledMenuItem value={USDT_TICKER}>USDT</StyledMenuItem> */}
         {/* Bomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
-        {/* <StyledMenuItem value={BOMB_TICKER}>BOMB</StyledMenuItem> */}
+        {/* <StyledMenuItem value={_10MB_TICKER}>_10MB</StyledMenuItem> */}
       </Select>
       <TokenInput
         onSelectMax={handleSelectMax}
@@ -106,12 +107,12 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
       <Label text="Zap Estimations" />
       <StyledDescriptionText>
         {' '}
-        {tokenName}: {Number(estimate.token0) / Number(ftmAmountPerLP)}
+        {tokenName}: {Number(estimate.token0) / Number(/*croAmountPerLP*/ 1)}
       </StyledDescriptionText>
       <StyledDescriptionText>
         {' '}
-        ({Number(estimate.token0)} {tokenName.startsWith(BSHARE_TICKER) ? BSHARE_TICKER : BNB_TICKER} /{' '}
-        {Number(estimate.token1)} {tokenName.startsWith(BSHARE_TICKER) ? BNB_TICKER : BSHARE_TICKER}){' '}
+        ({Number(estimate.token0)} {tokenName.startsWith(_10SHARE_TICKER) ? _10SHARE_TICKER : CRO_TICKER} /{' '}
+        {Number(estimate.token1)} {tokenName.startsWith(_10SHARE_TICKER) ? CRO_TICKER : _10SHARE_TICKER}){' '}
       </StyledDescriptionText>
       <ModalActions>
         <Button

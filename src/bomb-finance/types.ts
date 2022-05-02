@@ -27,7 +27,7 @@ export type PoolStats = {
 };
 
 export type TokenStat = {
-  tokenInFtm: string;
+  tokenInUSDT: string;
   priceInDollars: string;
   totalSupply: string;
   circulatingSupply: string;
@@ -35,7 +35,7 @@ export type TokenStat = {
 
 export type LPStat = {
   tokenAmount: string;
-  ftmAmount: string;
+  croAmount: string;
   priceOfOne: string;
   totalLiquidity: string;
   totalSupply: string;
@@ -57,7 +57,7 @@ export type AllocationTime = {
 
 export type BShareSwapperStat = {
   bshareBalance: string;
-  bbondBalance: string;
+  _10BONDBalance: string;
   // bombPrice: string;
   // bsharePrice: string;
   rateBSharePerBomb: string;

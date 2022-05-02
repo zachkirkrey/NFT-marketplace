@@ -44,3 +44,6 @@ export const teal = {
 export const newNavy = {
   200: '171923',
 };
+
+export const bgGradient = `linear-gradient(98.45deg, rgb(0, 76, 165) 1.89%, rgb(7, 30, 84) 99.09%)`;
+export const bgGradientHighlighted = `linear-gradient(98.45deg,#119afa 1.89%,#36d846 99.09%)`;

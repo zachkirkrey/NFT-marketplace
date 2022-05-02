@@ -1,10 +1,10 @@
-export const BOMB_TICKER = 'BOMB';
-export const BSHARE_TICKER = 'BSHARE';
-export const BBOND_TICKER = 'BBOND';
-export const BNB_TICKER = 'BNB';
-export const WBNB_TICKER = 'WBNB';
-export const BTC_TICKER = 'BTCB';
+export const _10MB_TICKER = '_10MB';
+export const _10SHARE_TICKER = '_10SHARE';
+export const _10BOND_TICKER = '_10BOND';
+export const CRO_TICKER = 'CRO';
+export const WCRO_TICKER = 'WCRO';
+export const USDT_TICKER = 'USDT';
 
-export const SPOOKY_ROUTER_ADDR = '0x10ED43C718714eb63d5aA57B78B54704E256024E';
+export const SPOOKY_ROUTER_ADDR = '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506';
 export const ZAPPER_ROUTER_ADDR = '0xA0C5F779e52A8D9a81aF17Dd910577946B6810F6';
-export const TAX_OFFICE_ADDR = '0x2A637BEE0D76136d8ee44B96cf0A5f9198657AaF';
+export const TAX_OFFICE_ADDR = '0x0B36Ef2cb78859C20c8C1380CeAdB75043aA92b3';
