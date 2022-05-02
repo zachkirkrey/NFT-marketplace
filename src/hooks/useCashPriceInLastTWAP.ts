@@ -8,11 +8,11 @@ const useCashPriceInLastTWAP = () => {
   const bombFinance = useBombFinance();
 
   const fetchCashPrice = useCallback(async () => {
-    setPrice(await bombFinance.getBombPriceInLastTWAP());
+    setPrice(await bombFinance.get10MBPriceInLastTWAP());
   }, [bombFinance]);
 
   useEffect(() => {
-    fetchCashPrice().catch((err) => console.error(`Failed to fetch BOMB price: ${err.stack}`));
+    fetchCashPrice().catch((err) => console.error(`Failed to fetch _10MB price: ${err.stack}`));
     const refreshInterval = setInterval(fetchCashPrice, config.refreshInterval);
     return () => clearInterval(refreshInterval);
   }, [setPrice, bombFinance, fetchCashPrice]);

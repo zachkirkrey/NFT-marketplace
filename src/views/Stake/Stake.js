@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet';
 
 import PageHeader from '../../components/PageHeader';
 
-const TITLE = 'bomb.money | xBOMB - BOMB Staking';
+const TITLE = 'bomb.money | x_10MB - _10MB Staking';
 
 const BorderedPaper = withStyles((theme) => ({
   root: {
@@ -68,14 +68,14 @@ const Staking = () => {
             <Grid container justifyContent="center">
               <Grid item xs={12} lg={10}>
                 <PageHeader
-                  title="BOMB Staking for xBOMB"
+                  title="_10MB Staking for x_10MB"
                   rightNode={
                     <HighlightedBorderedPaper elevation={0}>
                       <Typography align="center" style={{ textTransform: 'uppercase' }}>
                         Current rate
                       </Typography>
                       <HighlightedText align="center" style={{ textTransform: 'uppercase' }}>
-                        1 xBOMB = {Number(xbombRate)} BOMB
+                        1 x_10MB = {Number(xbombRate)} _10MB
                       </HighlightedText>
                     </HighlightedBorderedPaper>
                   }
@@ -87,11 +87,11 @@ const Staking = () => {
             <Alert variant="filled" severity="info" maxWidth={600}>
               <b> Most rewards are generated from boardroom printing! Rewards come from:</b>
               <br />
-              - 80% of autocompounder fees are used to buy BOMB on the open market
+              - 80% of autocompounder fees are used to buy _10MB on the open market
               <br />
-              - 20% of all BOMB minted - from protocol allocation, does not impact BSHARE boardroom printing.
+              - 20% of all _10MB minted - from protocol allocation, does not impact _10SHARE boardroom printing.
               <br />
-              If TWAP of BOMB peg is not over 1.01, yield will be reduced.
+              If TWAP of _10MB peg is not over 1.01, yield will be reduced.
               <br />
               APR is based on performance since launch on January 24th, 2022.
             </Alert>
@@ -146,18 +146,18 @@ const Staking = () => {
                 <Grid item xs={12} lg={6}>
                   <BorderedPaper>
                     <HighlightedText variant="body2" paragraph>
-                      About xBOMB &amp; Rewards
+                      About x_10MB &amp; Rewards
                     </HighlightedText>
                     <Typography variant="body2" paragraph>
-                      xBOMB will be the governance token required to cast votes on protocol decisions.
+                      x_10MB will be the governance token required to cast votes on protocol decisions.
                     </Typography>
                     <Typography variant="body2" paragraph>
-                      20% of all BOMB minted will be deposited into the xBOMB smart contract, increasing the amount of
-                      BOMB that can be redeemed for each xBOMB. Rewards will be deposited at random times to prevent
+                      20% of all _10MB minted will be deposited into the x_10MB smart contract, increasing the amount of
+                      _10MB that can be redeemed for each x_10MB. Rewards will be deposited at random times to prevent
                       abuse.
                     </Typography>
                     <Typography variant="body2" paragraph>
-                      Functionality will be developed around xBOMB including using it as collateral to borrow other
+                      Functionality will be developed around x_10MB including using it as collateral to borrow other
                       assets.
                     </Typography>
                     <Typography variant="body2">

@@ -42,7 +42,7 @@ const ListItemLink = ({ primary, to = undefined, href = undefined }) => {
       <StyledListItemText primary={primary} />
     </StyledListItem>
   ) : (
-    <StyledListItem button component="a" href="https://bombbtc.com">
+    <StyledListItem button component="a" href="https://bombUSDT.com">
       <StyledListItemText primary={primary} />
     </StyledListItem>
   );

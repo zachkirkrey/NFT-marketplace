@@ -11,6 +11,8 @@ const useEarnings = (poolName: ContractName, earnTokenName: String, poolId: Numb
 
   const fetchBalance = useCallback(async () => {
     const balance = await bombFinance.earnedFromBank(poolName, earnTokenName, poolId, bombFinance.myAccount);
+
+    console.log("earned balance ", balance.toString())
     setBalance(balance);
   }, [poolName, earnTokenName, poolId, bombFinance]);
 

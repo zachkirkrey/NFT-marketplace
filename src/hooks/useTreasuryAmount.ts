@@ -9,7 +9,7 @@ const useTreasuryAmount = () => {
   useEffect(() => {
     if (bombFinance) {
       const {Treasury} = bombFinance.contracts;
-      bombFinance.BOMB.balanceOf(Treasury.address).then(setAmount);
+      bombFinance._10MB.balanceOf(Treasury.address).then(setAmount);
     }
   }, [bombFinance]);
   return amount;

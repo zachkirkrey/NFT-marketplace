@@ -35,7 +35,7 @@ const Farm = () => {
             <Container maxWidth="lg">
               <Grid container justifyContent="center">
                 <Grid item lg={10}>
-                  <PageHeader title="Farm" subtitle="Earn BSHARE by staking PancakeSwap LP" />
+                  <PageHeader title="Farm" subtitle="Earn _10SHARE by staking USDT LP" />
                 </Grid>
               </Grid>
 
@@ -109,7 +109,7 @@ const Farm = () => {
             <UnlockWallet />
           )}
         </Route>
-        <Route path={`${path}/:bankId`}>
+        <Route path={`${path}/:bankId/:poolId`}>
           <Bank />
         </Route>
       </Page>

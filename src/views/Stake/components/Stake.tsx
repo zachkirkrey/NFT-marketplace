@@ -32,11 +32,11 @@ const Stake: React.FC = () => {
   const bombFinance = useBombFinance();
   const bombStats = useBombStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance.BOMB, bombFinance.contracts.xBOMB.address);
+  const [approveStatus, approve] = useApprove(bombFinance._10MB, bombFinance.contracts.x_10MB.address);
 
-  const tokenBalance = useTokenBalance(bombFinance.BOMB);
+  const tokenBalance = useTokenBalance(bombFinance._10MB);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.XBOMB);
+  const stakedBalance = useTokenBalance(bombFinance.X_10MB);
 
   const xbombBalance = useXbombBalance();
   const xbombRate = Number(xbombBalance) / 1000000000000000000;
@@ -66,7 +66,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'BOMB'}
+      tokenName={'_10MB'}
     />,
   );
 
@@ -77,18 +77,18 @@ const Stake: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'xBOMB'}
+      tokenName={'x_10MB'}
     />,
   );
 
   return (
     <Paper style={{ position: 'relative' }}>
       <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
-        <TokenSymbol symbol="XBOMB" />
+        <TokenSymbol symbol="X_10MB" />
         <Button
           className={'shinyButton'}
           onClick={() => {
-            bombFinance.watchAssetInMetamask('XBOMB');
+            bombFinance.watchAssetInMetamask('X_10MB');
           }}
           style={{ position: 'absolute', top: '10px', right: '10px', border: '1px grey solid' }}
         >
@@ -100,8 +100,8 @@ const Stake: React.FC = () => {
           <Value value={getDisplayBalance(stakedBalance)} />
         </Box>
         <Box mb={5} textAlign="center">
-          <Label text={'xBOMB Balance'} variant="yellow" />
-          <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} BOMB / $${tokenPriceInDollars}`} variant="yellow" />
+          <Label text={'x_10MB Balance'} variant="yellow" />
+          <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} _10MB / $${tokenPriceInDollars}`} variant="yellow" />
         </Box>
         {approveStatus !== ApprovalState.APPROVED ? (
           <Button
@@ -109,7 +109,7 @@ const Stake: React.FC = () => {
             className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
             onClick={approve}
           >
-            Approve BOMB
+            Approve _10MB
           </Button>
         ) : (
           <>

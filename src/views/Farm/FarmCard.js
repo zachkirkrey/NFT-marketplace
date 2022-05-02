@@ -24,7 +24,7 @@ const FarmCard = ({ bank }) => {
             </Grid>
           </Grid>
           <Box display="flex" justifyContent="flex-end">
-            <Button className="shinyButtonSecondary" component={Link} to={`/farm/${bank.contract}`}>
+            <Button className="shinyButtonSecondary" component={Link} to={`/farm/${bank.contract}/${bank.poolId}`}>
               View
             </Button>
           </Box>

@@ -69,13 +69,13 @@ const Harvest: React.FC = () => {
         <BadgeText variant="body2">Reward</BadgeText>
       </div>
       <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
-        <TokenSymbol symbol="BOMB" />
+        <TokenSymbol symbol="_10MB" />
         <Box mt={3} mb={1}>
           <Value value={getDisplayBalance(earnings)} />
         </Box>
         <Box mb={5} textAlign="center">
           <Label text={`≈ $${earnedInDollars}`} variant="yellow" />
-          <Label text="BOMB Earned" variant="yellow" />
+          <Label text="_10MB Earned" variant="yellow" />
         </Box>
         <Button
           fullWidth

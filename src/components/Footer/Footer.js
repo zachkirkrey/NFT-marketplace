@@ -77,42 +77,8 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container className={classes.links} justifyContent="flex-end" spacing={10}>
           <Grid item>
-            <FooterLinksHeader>Defi</FooterLinksHeader>
             <a href="/" className={classes.link}>
-              DarkEarn
-            </a>
-            <a href="/" className={classes.link}>
-              DarkVerse
-            </a>
-            <a href="/" className={classes.link}>
-              DarkFolio
-            </a>
-            <a href="/" className={classes.link}>
-              DarkDollar
-            </a>
-            <a href="/" className={classes.link}>
-              DarkSwap
-            </a>
-            <a href="/" className={classes.link}>
-              DarkAuto
-            </a>
-          </Grid>
-          <Grid item>
-            <FooterLinksHeader>Games</FooterLinksHeader>
-            <a href="/" className={classes.link}>
-              DarkRoll
-            </a>
-            <a href="/" className={classes.link}>
-              DarkSport
-            </a>
-            <a href="/" className={classes.link}>
-              DarkPortal
-            </a>
-            <a href="/" className={classes.link}>
-              Dark Hunters
-            </a>
-            <a href="/" className={classes.link}>
-              Dark Master
+              Github
             </a>
           </Grid>
         </Grid>
@@ -123,7 +89,7 @@ const Footer = () => {
             <Typography variant="body2" color="textPrimary" align="left">
               {'Copyright © '}
               <Link color="inherit" href="/">
-                Bomb Money
+                10MB Money
               </Link>{' '}
               {new Date().getFullYear()}
             </Typography>

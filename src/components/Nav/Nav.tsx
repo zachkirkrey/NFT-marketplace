@@ -4,7 +4,7 @@ import { AppBar, Box, Drawer, IconButton, Toolbar, List, useMediaQuery } from '@
 
 import ListItemLink from '../ListItemLink';
 import useBombStats from '../../hooks/useBombStats';
-import useBtcStats from '../../hooks/useBtcStats';
+import useUSDTStats from '../../hooks/useUSDTStats';
 import useShareStats from '../../hooks/usebShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
@@ -66,7 +66,7 @@ const Nav = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const bombStats = useBombStats();
-  const btcStats = useBtcStats();
+  const USDTStats = useUSDTStats();
   const shareStats = useShareStats();
 
   const [navBackgroundTransparent, setNavBackgroundTransparent] = useState(true);
@@ -95,7 +95,7 @@ const Nav = () => {
     setOpen(false);
   };
 
-  const btcPriceInDollars = useMemo(() => (btcStats ? Number(btcStats).toFixed(2) : null), [btcStats]);
+  const USDTPriceInDollars = useMemo(() => (USDTStats ? Number(USDTStats).toFixed(2) : null), [USDTStats]);
   const bombPriceInDollars = useMemo(
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
@@ -127,13 +127,15 @@ const Nav = () => {
               <Link to="/boardroom" className={'navLink ' + classes.link}>
                 Boardroom
               </Link>
-              <Link to="/xbomb" className={'navLink ' + classes.link}>
-                xBOMB
-              </Link>
+              {/*<Link to="/xbomb" className={'navLink ' + classes.link}>
+                x_10MB
+              </Link>*/}
               <Link to="/bond" className={'navLink ' + classes.link}>
                 Bond
               </Link>
-
+              <Link to="/mint" className={'navLink ' + classes.link}>
+                Mint
+              </Link>
               {/* <Link color="textPrimary" to="/sbs" className={classes.link}>
                 SBS
               </Link>
@@ -142,14 +144,14 @@ const Nav = () => {
               </Link>
               <Link color="textPrimary" to="/regulations" className={classes.link}>
                 Regulations
-              </Link> */}
+              </Link> 
               <a
-                href="https://bombbtc.com"
+                href="https://bombUSDT.com"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
                 //  target="_blank"
               >
-                BTC Staking
+                USDT Staking
               </a>
 
               <a
@@ -175,7 +177,7 @@ const Nav = () => {
                 target="_blank"
               >
                 Vote
-              </a>
+              </a>*/}
               <a
                 href="https://docs.bomb.money"
                 className={'navLink ' + classes.link}
@@ -202,8 +204,8 @@ const Nav = () => {
               <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
               <div className="navTokenIcon bshare"></div>{' '}
               <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
-              <div className="navTokenIcon btc"></div>{' '}
-              <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+              <div className="navTokenIcon USDT"></div>{' '}
+              <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -222,8 +224,8 @@ const Nav = () => {
                   <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
                   <div className="navTokenIcon bshare"></div>{' '}
                   <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
-                  <div className="navTokenIcon btc"></div>{' '}
-                  <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+                  <div className="navTokenIcon USDT"></div>{' '}
+                  <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
                 </Box>
               ) : null}
               <AccountButton text="Connect" />
@@ -251,24 +253,25 @@ const Nav = () => {
                       <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
                     </Box>
                     <Box display="flex" alignItems="center" mb={2}>
-                      <div className="navTokenIcon btc"></div>{' '}
-                      <div className="navTokenPrice">${roundAndFormatNumber(Number(btcPriceInDollars), 2)}</div>
+                      <div className="navTokenIcon USDT"></div>{' '}
+                      <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
                     </Box>
                   </>
                 ) : null}
                 <ListItemLink primary="Home" to="/" />
                 <ListItemLink primary="Farm" to="/farm" />
                 <ListItemLink primary="Boardroom" to="/boardroom" />
-                <ListItemLink primary="xBOMB" to="/xbomb" />
+                {/*<ListItemLink primary="x_10MB" to="/xbomb" />*/}
                 <ListItemLink primary="Bond" to="/bond" />
-                <ListItemLink primary="BTC Staking" href="https://bombbtc.com" />
-                <ListItemLink primary="Vaults" href="https://bomb.farm" />
+                <ListItemLink primary="Mint" to="/mint" />
+                {/*<ListItemLink primary="USDT Staking" href="https://bombUSDT.com" />*/}
+                {/*<ListItemLink primary="Vaults" href="https://bomb.farm" />*/}
                 {/* <ListItemLink primary="SBS" to="/sbs" /> */}
                 {/* <ListItemLink primary="Liquidity" to="/liquidity" /> */}
                 {/* <ListItemLink primary="Regulations" to="/regulations" /> */}
-                <ListItemLink primary="Merch" href="https://shop.bomb.money" />
-                <ListItemLink primary="Vote" href="https://vote.bomb.money" />
-                <ListItemLink primary="Docs" href="https://docs.bomb.money" />
+                {/*<ListItemLink primary="Merch" href="https://shop.bomb.money" />*/}
+                {/*<ListItemLink primary="Vote" href="https://vote.bomb.money" />*/}
+                {/*<ListItemLink primary="Docs" href="https://docs.bomb.money" />*/}
               </List>
             </Drawer>
           </>

@@ -8,7 +8,7 @@ const useSupplyToBomb = () => {
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(bombFinance.supplyToBomb(amount), `Supply  ${amount} BOMB`);
+      handleTransactionReceipt(bombFinance.supplyToBomb(amount), `Supply  ${amount} _10MB`);
     },
     [bombFinance, handleTransactionReceipt],
   );

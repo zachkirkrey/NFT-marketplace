@@ -3,7 +3,7 @@ import useBombFinance from './useBombFinance';
 //import {TokenStat} from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
-const useBtcStats = () => {
+const useUSDTStats = () => {
   const [stat, setStat] = useState<Number>();
   const {slowRefresh} = useRefresh();
   const bombFinance = useBombFinance();
@@ -11,7 +11,8 @@ const useBtcStats = () => {
   useEffect(() => {
     async function fetchSharePrice() {
       try {
-        setStat(await bombFinance.getBTCPriceUSD());
+        let usdtPrice: any = await bombFinance.getUSDTPriceUSD()
+        setStat(usdtPrice);
       } catch (err) {
         console.error(err);
       }
@@ -22,4 +23,4 @@ const useBtcStats = () => {
   return stat;
 };
 
-export default useBtcStats;
+export default useUSDTStats;

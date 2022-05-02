@@ -32,12 +32,12 @@ const SupplyBomb: React.FC = () => {
   const bombFinance = useBombFinance();
   const bombStats = useBombStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance.BOMB, bombFinance.contracts.BombRouter.address);
-  const [approveStatusW, approveW] = useApprove(bombFinance.BBOMBBOMB, bombFinance.contracts.BombRouter.address);
+  const [approveStatus, approve] = useApprove(bombFinance._10MB, bombFinance.contracts.BombRouter.address);
+  const [approveStatusW, approveW] = useApprove(bombFinance.B_10MB_10MB, bombFinance.contracts.BombRouter.address);
 
-  const tokenBalance = useTokenBalance(bombFinance.BOMB);
+  const tokenBalance = useTokenBalance(bombFinance._10MB);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.BBOMB_BOMB);
+  const stakedBalance = useTokenBalance(bombFinance.B_10MB__10MB);
 
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance) / 1000000000000000000;
@@ -70,7 +70,7 @@ const SupplyBomb: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'BOMB'}
+      tokenName={'_10MB'}
     />,
   );
 
@@ -81,7 +81,7 @@ const SupplyBomb: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'BOMB'}
+      tokenName={'_10MB'}
     />,
   );
 
@@ -92,16 +92,16 @@ const SupplyBomb: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <Typography variant='h5' component='h2'>
-                Supply BOMB
+                Supply _10MB
               </Typography>
               <CardIcon>
-                <TokenSymbol symbol="BOMB" />
+                <TokenSymbol symbol="_10MB" />
               </CardIcon>
 
               <Button
                 className={'shinyButton'}
                 onClick={() => {
-                  bombFinance.watchAssetInMetamask('BOMB');
+                  bombFinance.watchAssetInMetamask('_10MB');
                 }}
                 style={{
                   position: 'static',
@@ -117,7 +117,7 @@ const SupplyBomb: React.FC = () => {
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
               <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={'bBOMB (BOMB)'} variant="yellow" />
+              <Label text={'b_10MB (_10MB)'} variant="yellow" />
               <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
@@ -128,7 +128,7 @@ const SupplyBomb: React.FC = () => {
                   style={{ marginTop: '20px' }}
                   onClick={approve}
                 >
-                  Approve BOMB
+                  Approve _10MB
                 </Button>
               ) : (
                   <>

@@ -35,17 +35,20 @@ const HighlightedText = withStyles((theme) => ({
 
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
-  const { bankId } = useParams();
-  const bank = useBank(bankId);
+  const { bankId, poolId } = useParams();
+  console.log("poolId ", poolId)
+  const bank = useBank(bankId, poolId);
+
+  console.log("bank ", bank)
 
   const { account } = useWallet();
   const { onRedeem } = useRedeem(bank);
   const statsOnPool = useStatsForPool(bank);
 
   let vaultUrl: string;
-  if (bank.depositTokenName.includes('BOMB-BTCB')) {
-    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
-  } else if (bank.depositTokenName.includes('BOMB-BSHARE')) {
+  if (bank.depositTokenName.includes('_10MB-USDT')) {
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
+  } else if (bank.depositTokenName.includes('_10MB-_10SHARE')) {
     vaultUrl = 'https://www.bomb.farm/#/bsc/';
   } else {
     vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-wbnb';
@@ -143,24 +146,24 @@ const Bank: React.FC = () => {
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const bombFinance = useBombFinance();
-  const bombAddr = bombFinance.BOMB.address;
-  const bshareAddr = bombFinance.BSHARE.address;
+  const bombAddr = bombFinance._10MB.address;
+  const bshareAddr = bombFinance._10SHARE.address;
 
   let pairName: string;
   let uniswapUrl: string;
   // let vaultUrl: string;
-  if (bank.depositTokenName.includes('BOMB-BTCB')) {
-    pairName = 'BOMB-BTCB pair';
+  if (bank.depositTokenName.includes('_10MB-USDT')) {
+    pairName = '_10MB-USDT pair';
     uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
-  } else if (bank.depositTokenName.includes('BOMB-BSHARE')) {
-    pairName = 'BOMB-BSHARE pair';
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
+  } else if (bank.depositTokenName.includes('_10MB-_10SHARE')) {
+    pairName = '_10MB-_10SHARE pair';
     uniswapUrl = 'https://pancakeswap.finance/add/' + bombAddr + '/' + bshareAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-btcb';
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
   } else {
-    pairName = 'BSHARE-BNB pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/BNB/' + bshareAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-bnb';
+    pairName = '_10SHARE-CRO pair';
+    uniswapUrl = 'https://pancakeswap.finance/add/CRO/' + bshareAddr;
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-_10SHARE-CRO';
   }
   return (
     <Paper>

@@ -12,7 +12,7 @@ import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 //import useXbombBalance from '../../../hooks/useXbombBalance';
-import useBtcStats from '../../../hooks/useBtcStats';
+import useUSDTStats from '../../../hooks/useUSDTStats';
 import useApprove, {ApprovalState} from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
@@ -24,32 +24,32 @@ import WithdrawModal from './WithdrawModal';
 import useBombFinance from '../../../hooks/useBombFinance';
 //import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';   //May not be needed anymore.
 import TokenSymbol from '../../../components/TokenSymbol';
-import useSupplyToBtcb from '../../../hooks/useSupplyToBtcb';
-import useRedeemFromBtcb from '../../../hooks/useRedeemFromBtcb';
+import useSupplyToUSDT from '../../../hooks/useSupplyToUSDT';
+import useRedeemFromMMF from '../../../hooks/useRedeemFromUSDT';
 
 
 
-const SupplyBtcb: React.FC = () => {
+const SupplyUSDT: React.FC = () => {
   const bombFinance = useBombFinance();
-  const btcStats = useBtcStats();
+  const USDTStats = useUSDTStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance.BTC, bombFinance.contracts.BombRouter.address);
-  const [approveStatusW, approveW] = useApprove(bombFinance.BBOMBBTCB, bombFinance.contracts.BombRouter.address);
+  const [approveStatus, approve] = useApprove(bombFinance.USDT, bombFinance.contracts.BombRouter.address);
+  const [approveStatusW, approveW] = useApprove(bombFinance.B_10MBUSDT, bombFinance.contracts.BombRouter.address);
 
-  const tokenBalance = useTokenBalance(bombFinance.BTC);
+  const tokenBalance = useTokenBalance(bombFinance.USDT);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.BBOMB_BTCB);
+  const stakedBalance = useTokenBalance(bombFinance.B_10MB_USDT);
 
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance) / 1000000000000000000;
   // const xbombToBombEquivalent = Number(getDisplayBalance(stakedBalance)) * xbombRate;
 
-  const btcPriceInDollars = useMemo(
-    () => (btcStats ? Number(btcStats).toFixed(2) : null),
-    [btcStats],
+  const USDTPriceInDollars = useMemo(
+    () => (USDTStats ? Number(USDTStats).toFixed(2) : null),
+    [USDTStats],
   );
 
-  const stakedTokenPriceInDollars = Number(btcPriceInDollars);
+  const stakedTokenPriceInDollars = Number(USDTPriceInDollars);
 
   const tokenPriceInDollars = useMemo(
     () => {
@@ -61,8 +61,8 @@ const SupplyBtcb: React.FC = () => {
   );
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useSupplyToBtcb();
-  const { onWithdraw } = useRedeemFromBtcb();
+  const { onStake } = useSupplyToUSDT();
+  const { onWithdraw } = useRedeemFromMMF();
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
@@ -71,7 +71,7 @@ const SupplyBtcb: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'BTCB'}
+      tokenName={'USDT'}
     />,
   );
 
@@ -82,7 +82,7 @@ const SupplyBtcb: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'BTCB'}
+      tokenName={'USDT'}
     />,
   );
 
@@ -93,16 +93,16 @@ const SupplyBtcb: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
                  <Typography variant="h5" component="h2">
-              Supply BTCB
+              Supply USDT
             </Typography>
               <CardIcon>
-                <TokenSymbol symbol="BTCB" />
+                <TokenSymbol symbol="USDT" />
               </CardIcon>
 
               <Button
                 className={'shinyButton'}
                 onClick={() => {
-                  bombFinance.watchAssetInMetamask('BTCB');
+                  bombFinance.watchAssetInMetamask('USDT');
                 }}
                 style={{
                   position: 'static',
@@ -118,7 +118,7 @@ const SupplyBtcb: React.FC = () => {
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
               <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={'bBOMB (BTCB)'} variant="yellow" />
+              <Label text={'b_10MB (USDT)'} variant="yellow" />
               <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
@@ -129,7 +129,7 @@ const SupplyBtcb: React.FC = () => {
                   style={{ marginTop: '20px' }}
                   onClick={approve}
                 >
-                  Approve BTCB
+                  Approve USDT
                 </Button>
               ) : (
                   <>
@@ -198,4 +198,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `;
 
-export default SupplyBtcb;
+export default SupplyUSDT;

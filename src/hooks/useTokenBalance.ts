@@ -10,6 +10,7 @@ const useTokenBalance = (token: ERC20) => {
   const isUnlocked = bombFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
+    console.log("token ", token.symbol)
     setBalance(await token.balanceOf(bombFinance.myAccount));
   }, [token, bombFinance.myAccount]);
 

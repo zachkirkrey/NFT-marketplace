@@ -3,14 +3,14 @@ import { BigNumber } from 'ethers';
 import useBombFinance from './useBombFinance';
 import useRefresh from './useRefresh';
 
-const useSuppliedBtcbBalance = () => {
+const useSuppliedUSDTBalance = () => {
   const { slowRefresh } = useRefresh();
   const [balance, setBalance] = useState(BigNumber.from(0));
   const bombFinance = useBombFinance();
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBalance(await bombFinance.getTotalSuppliedBtcb());
+        setBalance(await bombFinance.getTotalSuppliedUSDT());
       } catch (e) {
         console.error(e);
       }
@@ -20,4 +20,4 @@ const useSuppliedBtcbBalance = () => {
   return balance;
 };
 
-export default useSuppliedBtcbBalance;
+export default useSuppliedUSDTBalance;

@@ -22,13 +22,16 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   const bombStats = useBombStats();
   const tShareStats = useShareStats();
 
-  const tokenName = bank.earnTokenName === 'BSHARE' ? 'BSHARE' : 'BOMB';
-  const tokenStats = bank.earnTokenName === 'BSHARE' ? tShareStats : bombStats;
-  const tokenPriceInDollars = useMemo(
-    () => (tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null),
-    [tokenStats],
-  );
+  console.log("bombStats ", bombStats)
+  console.log("tShareStats ", tShareStats)
+
+  const tokenName = bank.earnTokenName === '_10SHARE' ? '_10SHARE' : '_10MB';
+  const tokenStats = bank.earnTokenName === '_10SHARE' ? tShareStats : bombStats;
+  const tokenPriceInDollars = tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null
+  console.log("tokenPriceInDollars ", tokenPriceInDollars)
+  console.log("earnings ", earnings.toString())
   const earnedInDollars = (Number(tokenPriceInDollars) * Number(getDisplayBalance(earnings))).toFixed(2);
+  console.log("earnedInDollars ", earnedInDollars)
   return (
     <Paper>
       <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
