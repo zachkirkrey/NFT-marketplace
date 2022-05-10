@@ -21,7 +21,7 @@ import useBondsPurchasable from '../../hooks/useBondsPurchasable';
 import { getDisplayBalance } from '../../utils/formatBalance';
 import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../bomb-finance/constants';
 import { Alert } from '@material-ui/lab';
-
+import MintRedeem from './components/MintRedeem';
 
 import { Box, Grid, Button, Card } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
@@ -52,14 +52,14 @@ const Mint: React.FC = () => {
       const tx = await Pool.mint(usdtInput, _10SHAREInput, '0');
       addTransaction(tx, { summary: `Mint 10MB` });
     },
-    [bombFinance, addTransaction, usdtInput, _10SHAREInput],
+    [usdtInput, Pool, _10SHAREInput, addTransaction],
   );
   const handleRedeem10MB = useCallback(
     async () => {
       const tx = await Pool.redeem(_10MBInput, '0', '0');
       addTransaction(tx, { summary: `Redeem 10MB` });
     },
-    [bombFinance, addTransaction, _10MBInput],
+    [Pool, _10MBInput, addTransaction],
   );
 
   const handleCollectRedeem10MB = useCallback(
@@ -67,7 +67,7 @@ const Mint: React.FC = () => {
       const tx = await Pool.collectRedemption();
       addTransaction(tx, { summary: `Redeem 10MB` });
     },
-    [bombFinance, addTransaction, _10MBInput],
+    [Pool, addTransaction],
   );
 
   const isBondRedeemable = cashPrice.gt(BOND_REDEEM_PRICE_BN);
@@ -152,160 +152,7 @@ const Mint: React.FC = () => {
           <title>{TITLE}</title>
         </Helmet>
         {!!account ? (
-          <>
-            <Route exact path={path}>
-              <Grid container justifyContent="center">
-                <Grid item lg={10}>
-                  <PageHeader title="Mint &amp; Redeem 10MB" subtitle="Earn premiums upon redemption" />
-                </Grid>
-              </Grid>
-            </Route>
-
-            <StyledBond>
-              <StyledCardWrapper>
-                
-              {approveUSDTForMintStatus !== ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={approveUSDTForMintStatus === ApprovalState.PENDING || approveUSDTForMintStatus === ApprovalState.UNKNOWN}
-                onClick={() => catchError(approveUSDTForMint(), `Unable to approve USDT`)}
-              >
-                {`Approve USDT`}
-              </Button>
-            ) : (
-              <>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={true}
-                onClick={() => {}}
-              >
-              {(usdtInput.toNumber() / 1000000).toFixed(4)}
-              </Button>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={onUSDTPresent}
-              >
-                {`Enter USDT amount`}
-              </Button></>
-            )}
-              {approveShareForMintStatus !== ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={approveShareForMintStatus === ApprovalState.PENDING || approveShareForMintStatus === ApprovalState.UNKNOWN}
-                onClick={() => catchError(approveShareForMint(), `Unable to approve 10SHARE`)}
-              >
-                {`Approve 10SHARE`}
-              </Button>
-            ) : (
-              <>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={true}
-                onClick={() => {}}
-              >
-              {(_10SHAREInput.div(BigNumber.from(10).pow(9)).toNumber() / 1000000000).toFixed(4)}
-              </Button>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={on10SHAREPresent}
-              >
-                {`Enter 10SHARE amount`}
-              </Button></>
-            )}
-              {approveUSDTForMintStatus === ApprovalState.APPROVED && approveShareForMintStatus === ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={() => catchError(handleMint10MB(), `Unable to mint 10MB`)}
-              >
-                {`Mint 10MB`}
-              </Button>
-            ) : (
-              null
-            )}
-              </StyledCardWrapper>
-              <StyledStatsWrapper>
-                <ExchangeStat
-                  tokenName="10 _10MB"
-                  description="Last-Hour TWAP Price"
-                  //price={Number(bombStat?.tokenInUSDT).toFixed(4) || '-'}
-                  price={bondScale || '-'}
-                />
-                <Spacer size="md" />
-                <ExchangeStat
-                  tokenName="10 _10BOND"
-                  description="Current Price: (_10MB)^2"
-                  price={(Number(bondStat?.tokenInUSDT) * 10).toFixed(2) || '-'}
-                />
-              </StyledStatsWrapper>
-              <StyledCardWrapper>
-              {approve10MBForRedeemStatus !== ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={approve10MBForRedeemStatus === ApprovalState.PENDING || approve10MBForRedeemStatus === ApprovalState.UNKNOWN}
-                onClick={() => catchError(approve10MBForRedeem(), `Unable to approve 10SHARE`)}
-              >
-                {`Approve 10MB`}
-              </Button>
-            ) : (
-
-
-              <>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={true}
-                onClick={() => {}}
-              >
-                {(_10MBInput.div(BigNumber.from(10).pow(9)).toNumber() / 1000000000).toFixed(4)}
-              </Button>
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={on10MBPresent}
-              >
-                {`Enter 10MB amount`}
-              </Button></>
-            )}
-
-              {approve10MBForRedeemStatus === ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={() => catchError(handleRedeem10MB(), `Unable to redeem`)}
-              >
-                {`Redeem 10MB`}
-              </Button>
-            ) : (
-              null
-            )}
-              {approve10MBForRedeemStatus === ApprovalState.APPROVED ? (
-              <Button
-                fullWidth
-                className="shinyButton"
-                disabled={false}
-                onClick={() => catchError(handleCollectRedeem10MB(), `Unable to collect`)}
-              >
-                {`Collect Redeem Payout`}
-              </Button>
-            ) : (
-              null
-            )}
-              </StyledCardWrapper>
-            </StyledBond>
-          </>
+          <MintRedeem />
         ) : (
           <UnlockWallet />
         )}
@@ -314,34 +161,5 @@ const Mint: React.FC = () => {
   );
 };
 
-const StyledBond = styled.div`
-  display: flex;
-  @media (max-width: 768px) {
-    width: 100%;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-`;
-
-const StyledCardWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  @media (max-width: 768px) {
-    width: 80%;
-  }
-`;
-
-const StyledStatsWrapper = styled.div`
-  display: flex;
-  flex: 0.8;
-  margin: 0 20px;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    width: 80%;
-    margin: 16px 0;
-  }
-`;
 
 export default Mint;
