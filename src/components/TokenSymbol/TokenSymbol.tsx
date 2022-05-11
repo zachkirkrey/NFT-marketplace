@@ -1,13 +1,13 @@
 import React from 'react';
 
 //Graveyard ecosystem logos
-import bombLogo from '../../assets/img/bomb.png';
-import tShareLogo from '../../assets/img/bshares.png';
-import bombLogoPNG from '../../assets/img/bomb.png';
+import bombLogo from '../../assets/img/10mb_bomb_2.png';
+import tShareLogo from '../../assets/img/10mb_share.png';
+import bombLogoPNG from '../../assets/img/10mb_bomb_2.png';
 import xbombLogo from '../../assets/img/xbomb.png';
 
-import tShareLogoPNG from '../../assets/img/bshares.png';
-import tBondLogo from '../../assets/img/bbond.png';
+import tShareLogoPNG from '../../assets/img/10mb_share.png';
+import tBondLogo from '../../assets/img/10mb_bond.png';
 
 import bombFtmLpLogo from '../../assets/img/bomb-bitcoin-LP.png';
 import bshareFtmLpLogo from '../../assets/img/bshare-bnb-LP.png';
