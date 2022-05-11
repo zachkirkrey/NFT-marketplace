@@ -1,5 +1,5 @@
-import React, {createContext, useEffect, useState} from 'react';
-import {useWallet} from 'use-wallet';
+import React, { createContext, useEffect, useState } from 'react';
+import { useWallet } from 'use-wallet';
 import BombFinance from '../../bomb-finance';
 import config from '../../config';
 
@@ -7,10 +7,10 @@ export interface BombFinanceContext {
   bombFinance?: BombFinance;
 }
 
-export const Context = createContext<BombFinanceContext>({bombFinance: null});
+export const Context = createContext<BombFinanceContext>({ bombFinance: null });
 
-export const BombFinanceProvider: React.FC = ({children}) => {
-  const {ethereum, account} = useWallet();
+export const BombFinanceProvider: React.FC = ({ children }) => {
+  const { ethereum, account } = useWallet();
   const [bombFinance, setBombFinance] = useState<BombFinance>();
 
   useEffect(() => {
@@ -26,5 +26,5 @@ export const BombFinanceProvider: React.FC = ({children}) => {
     }
   }, [account, ethereum, bombFinance]);
 
-  return <Context.Provider value={{bombFinance}}>{children}</Context.Provider>;
+  return <Context.Provider value={{ bombFinance }}>{children}</Context.Provider>;
 };

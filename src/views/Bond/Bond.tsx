@@ -54,15 +54,14 @@ const Bond: React.FC = () => {
   );
   const isBondRedeemable = cashPrice.gt(BOND_REDEEM_PRICE_BN);
 
-  console.log("bondStat ", bondStat)
+  console.log('bondStat ', bondStat);
 
   const isBondPurchasable = Number(bondStat?.tokenInUSDT) < 1.01;
   const isBondPayingPremium = Number(bondStat?.tokenInUSDT) >= 1.01;
-  const bondScale = (Number(cashPrice) / 100000 ).toFixed(2);
+  const bondScale = (Number(cashPrice) / 100000).toFixed(2);
 
-
-  console.log("bondStat ", bondStat)
-  console.log("isBondRedeemable ", isBondRedeemable)
+  console.log('bondStat ', bondStat);
+  console.log('isBondRedeemable ', isBondRedeemable);
 
   return (
     <Switch>

@@ -1,9 +1,9 @@
-import {BigNumber, ethers} from 'ethers';
-import {useCallback, useMemo} from 'react';
-import {useHasPendingApproval, useTransactionAdder} from '../state/transactions/hooks';
+import { BigNumber, ethers } from 'ethers';
+import { useCallback, useMemo } from 'react';
+import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks';
 import useAllowance from './useAllowance';
 import ERC20 from '../bomb-finance/ERC20';
-import {CRO_TICKER, _10MB_TICKER, _10SHARE_TICKER, USDT_TICKER, ZAPPER_ROUTER_ADDR} from '../utils/constants';
+import { CRO_TICKER, _10MB_TICKER, _10SHARE_TICKER, USDT_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
 import useBombFinance from './useBombFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;

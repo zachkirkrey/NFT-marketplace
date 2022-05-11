@@ -1,6 +1,6 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
-import {Bank} from '../bomb-finance';
+import { Bank } from '../bomb-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
 const useZap = (bank: Bank) => {
@@ -16,7 +16,7 @@ const useZap = (bank: Bank) => {
     },
     [bank, bombFinance, handleTransactionReceipt],
   );
-  return {onZap: handleZap};
+  return { onZap: handleZap };
 };
 
 export default useZap;

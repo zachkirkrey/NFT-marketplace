@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Button} from '@material-ui/core';
-import Input, {InputProps} from '../Input';
+import { Button } from '@material-ui/core';
+import Input, { InputProps } from '../Input';
 
 interface TokenInputProps extends InputProps {
   label: string;
   onSelectMax?: () => void;
 }
 
-const PercentInput: React.FC<TokenInputProps> = ({label, onChange, onSelectMax, value}) => {
+const PercentInput: React.FC<TokenInputProps> = ({ label, onChange, onSelectMax, value }) => {
   return (
     <StyledTokenInput>
       <StyledMaxText>{label}</StyledMaxText>

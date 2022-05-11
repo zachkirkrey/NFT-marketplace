@@ -1,1 +1,1 @@
-export {default} from './MigrationDisclaimerModal';
+export { default } from './MigrationDisclaimerModal';

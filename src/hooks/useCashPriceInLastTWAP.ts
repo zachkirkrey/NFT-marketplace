@@ -1,7 +1,7 @@
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useBombFinance from './useBombFinance';
 import config from '../config';
-import {BigNumber} from 'ethers';
+import { BigNumber } from 'ethers';
 
 const useCashPriceInLastTWAP = () => {
   const [price, setPrice] = useState<BigNumber>(BigNumber.from(0));

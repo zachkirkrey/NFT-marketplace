@@ -1,11 +1,11 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import Button from '../../../components/Button';
-import Modal, {ModalProps} from '../../../components/Modal';
+import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
 import ModalTitle from '../../../components/ModalTitle';
 import TokenInput from '../../../components/TokenInput';
-import {getFullDisplayBalance} from '../../../utils/formatBalance';
-import {BigNumber} from 'ethers';
+import { getFullDisplayBalance } from '../../../utils/formatBalance';
+import { BigNumber } from 'ethers';
 import Label from '../../../components/Label';
 
 interface ExchangeModalProps extends ModalProps {
@@ -26,7 +26,7 @@ const ExchangeModal: React.FC<ExchangeModalProps> = ({
   onDismiss,
   action,
   tokenName,
-  decimals = 18
+  decimals = 18,
 }) => {
   const [val, setVal] = useState('');
   const fullBalance = useMemo(() => getFullDisplayBalance(max, decimals), [max]);

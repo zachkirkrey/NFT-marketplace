@@ -26,7 +26,7 @@ const BackgroundImage = createGlobalStyle`
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
-const TITLE = 'bomb.money |'
+const TITLE = 'bomb.money |';
 
 const ProvideLiquidity = () => {
   const [bombAmount, setBombAmount] = useState(0);
@@ -83,7 +83,6 @@ const ProvideLiquidity = () => {
     setLpTokensAmount(croBalance / bombLPStats.croAmount);
   };
   return (
-
     <Page>
       <Helmet>
         <title>{TITLE}</title>

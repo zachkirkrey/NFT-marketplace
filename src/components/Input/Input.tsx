@@ -9,7 +9,7 @@ export interface InputProps {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({endAdornment, onChange, placeholder, startAdornment, value}) => {
+const Input: React.FC<InputProps> = ({ endAdornment, onChange, placeholder, startAdornment, value }) => {
   return (
     <StyledInputWrapper>
       {!!startAdornment && startAdornment}

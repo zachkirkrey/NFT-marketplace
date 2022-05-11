@@ -66,8 +66,8 @@ export class BombFinance {
     this._10BOND = new ERC20(deployments._10BOND.address, provider, '_10BOND');
     this.CRO = this.externalTokens['WCRO'];
     this.USDT = this.externalTokens['USDT'];
-    this.Pool = new Contract(deployments["Pool"].address, deployments["Pool"].abi, provider);
-    this.Pool = this.Pool.connect(this.signer)
+    this.Pool = new Contract(deployments['Pool'].address, deployments['Pool'].abi, provider);
+    this.Pool = this.Pool.connect(this.signer);
     //this.X_10MB = new ERC20(deployments.x_10MB.address, provider, 'X_10MB');
     // this.B_10MB__10MB = new ERC20(deployments._10MBBorrowable.address, provider, 'b_10MB');
     // this.B_10MB_USDT = new ERC20(deployments.USDTBorrowable.address, provider, 'b_10MB');
@@ -136,9 +136,9 @@ export class BombFinance {
     const price10MBInCRO = await this.getTokenPriceFromMMFInCRO(this._10MB);
     // const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneFtmInDollars = await this.getWCROPriceFromMMF();
-    console.log("price10MBInCRO ", price10MBInCRO)
-    console.log("priceOfOneFtmInDollars ", priceOfOneFtmInDollars)
-    const priceOf10MBInDollars = ((Number(price10MBInCRO) * Number(priceOfOneFtmInDollars))).toFixed(2);
+    console.log('price10MBInCRO ', price10MBInCRO);
+    console.log('priceOfOneFtmInDollars ', priceOfOneFtmInDollars);
+    const priceOf10MBInDollars = (Number(price10MBInCRO) * Number(priceOfOneFtmInDollars)).toFixed(2);
     //console.log('priceOfBombInDollars', priceOfBombInDollars);
 
     return {
@@ -226,7 +226,7 @@ export class BombFinance {
   async getBondStat(): Promise<TokenStat> {
     const { Treasury } = this.contracts;
     const bombStat = await this.getBombStat();
-    console.log("bombStat 1", bombStat)
+    console.log('bombStat 1', bombStat);
     const bondBombRatioBN = await Treasury.getBondPremiumRate();
     const modifier = bondBombRatioBN / 1e13 > 1 ? bondBombRatioBN / 1e13 : 1;
     const priceOf_10BONDInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(4);
@@ -252,11 +252,11 @@ export class BombFinance {
     const supply = await this._10SHARE.totalSupply();
 
     const priceInCRO = await this.getTokenPriceFromMMFInCRO(this._10SHARE);
-    console.log("_10SHARE priceInCRO ", priceInCRO)
+    console.log('_10SHARE priceInCRO ', priceInCRO);
     const _10MBMasterchefSupply = await this._10SHARE.balanceOf(_10MBMasterChef.address);
     const tShareCirculatingSupply = supply.sub(_10MBMasterchefSupply);
     const priceOfOneCRO = await this.getWCROPriceFromMMF();
-    console.log("_10SHARE priceOfOneCRO ", priceOfOneCRO)
+    console.log('_10SHARE priceOfOneCRO ', priceOfOneCRO);
     const priceOfSharesInDollars = (Number(priceInCRO) * Number(priceOfOneCRO)).toFixed(2);
 
     return {
@@ -390,12 +390,11 @@ export class BombFinance {
     depositTokenName: string,
   ) {
     if (earnTokenName === '_10MB') {
-        return await poolContract._10MBPerSecond();
+      return await poolContract._10MBPerSecond();
     } else if (earnTokenName === '_10SHARE') {
       return await poolContract._10SHAREPerSecond();
     }
   }
-
 
   /**
    * Method to calculate the tokenPrice of the deposited asset in a pool/bank
@@ -408,8 +407,8 @@ export class BombFinance {
   async getDepositTokenPriceInDollars(tokenName: string, token: ERC20) {
     let tokenPrice;
     const priceOfOneFtmInDollars = await this.getWCROPriceFromMMF();
-    console.log("getDepositTokenPriceInDollars 1 ", tokenName)
-    console.log("getDepositTokenPriceInDollars 2 ", token.address)
+    console.log('getDepositTokenPriceInDollars 1 ', tokenName);
+    console.log('getDepositTokenPriceInDollars 2 ', token.address);
     if (tokenName === 'WCRO') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
@@ -485,10 +484,12 @@ export class BombFinance {
     const _10MBPrice = (await this.getBombStat()).priceInDollars;
 
     const boardroomtShareBalanceOf = await this._10SHARE.balanceOf(this.currentBoardroom().address);
-    const bombStakeBalanceOf = '0'//await this._10MB.balanceOf(this.X_10MB.address);
+    const bombStakeBalanceOf = '0'; //await this._10MB.balanceOf(this.X_10MB.address);
 
-    const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
-    const bombTVL = Number(getDisplayBalance(BigNumber.from(bombStakeBalanceOf), this._10MB.decimal)) * Number(_10MBPrice);
+    const boardroomTVL =
+      Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
+    const bombTVL =
+      Number(getDisplayBalance(BigNumber.from(bombStakeBalanceOf), this._10MB.decimal)) * Number(_10MBPrice);
 
     return totalValue + boardroomTVL + bombTVL;
   }
@@ -519,7 +520,7 @@ export class BombFinance {
     const tokenSupply = getFullDisplayBalance(await token.balanceOf(lpToken.address), token.decimal);
     const priceOfOneFtmInDollars = await this.getWCROPriceFromMMF();
     const tokenPriceCro = await this.getTokenPriceFromMMFInCRO(token);
-    const tokenPriceDollarNumber = (Number(tokenPriceCro) * Number(priceOfOneFtmInDollars))
+    const tokenPriceDollarNumber = Number(tokenPriceCro) * Number(priceOfOneFtmInDollars);
     const tokenInLP = Number(tokenSupply) / Number(totalSupply);
     const tokenPrice = (Number(tokenPriceDollarNumber) * tokenInLP * 2) //We multiply by 2 since half the price of the lp token is the price of each piece of the pair. So twice gives the total
       .toString();
@@ -583,7 +584,7 @@ export class BombFinance {
    */
   async harvest(poolName: ContractName, poolId: Number): Promise<TransactionResponse> {
     const pool = this.contracts[poolName];
-    console.log("pool ", pool)
+    console.log('pool ', pool);
     //By passing 0 as the amount, we are asking the contract to only redeem the reward and not the currently staked token
     return await pool.withdraw(poolId, 0);
   }
@@ -612,46 +613,31 @@ export class BombFinance {
     return this.boardroomVersionOfUser !== 'latest';
   }
 
-
   async getTokenPriceFromMMFInCRO(tokenContract: ERC20): Promise<string> {
     const { WCRO, USDT } = this.config.externalTokens;
 
-    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4'
+    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4';
 
-    const mmfFactory = new ethers.Contract(
-      mmfFactoryAddress,
-      UniswapV2Factory,
-      this.provider
-    );
+    const mmfFactory = new ethers.Contract(mmfFactoryAddress, UniswapV2Factory, this.provider);
 
-    const lpAddress = await mmfFactory.getPair(WCRO[0], tokenContract.address)
-  
-    console.log("tokenContract.address ", tokenContract.address)
-    console.log("WCRO[0] ", WCRO[0])
-    console.log("lpAddress ", lpAddress)
+    const lpAddress = await mmfFactory.getPair(WCRO[0], tokenContract.address);
 
-    const pairContract = new ethers.Contract(
-      lpAddress,
-      LpReserveContract,
-      this.provider
-    );
-  
+    console.log('tokenContract.address ', tokenContract.address);
+    console.log('WCRO[0] ', WCRO[0]);
+    console.log('lpAddress ', lpAddress);
+
+    const pairContract = new ethers.Contract(lpAddress, LpReserveContract, this.provider);
+
     const reserves = await pairContract.getReserves();
     let marketPrice = 0;
-    let marketPriceBN = BigNumber.from(0)
+    let marketPriceBN = BigNumber.from(0);
 
     const token0 = await pairContract.token0();
-  
+
     if (token0 == tokenContract.address) {
-      marketPriceBN =
-        BigNumber.from(reserves[1])
-          .mul(BigNumber.from(10).pow(9))
-          .div(reserves[0]).div('1000000')
+      marketPriceBN = BigNumber.from(reserves[1]).mul(BigNumber.from(10).pow(9)).div(reserves[0]).div('1000000');
     } else {
-      marketPriceBN =
-        BigNumber.from(reserves[0])
-          .mul(BigNumber.from(10).pow(9))
-          .div(reserves[1]).div('1000000')
+      marketPriceBN = BigNumber.from(reserves[0]).mul(BigNumber.from(10).pow(9)).div(reserves[1]).div('1000000');
     }
 
     if (tokenContract.address.toLocaleLowerCase() == USDT[0].toLocaleLowerCase()) {
@@ -660,9 +646,9 @@ export class BombFinance {
       marketPrice = marketPriceBN.toNumber() / 1000;
     }
 
-    console.log("marketPrice ", marketPrice)
+    console.log('marketPrice ', marketPrice);
 
-    return marketPrice+'';
+    return marketPrice + '';
   }
 
   async getTokenPriceFromMMFInUSD(tokenContract: ERC20): Promise<string> {
@@ -671,49 +657,33 @@ export class BombFinance {
 
     const { USDT } = this.config.externalTokens;
 
-    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4'
+    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4';
 
-    const mmfFactory = new ethers.Contract(
-      mmfFactoryAddress,
-      UniswapV2Factory,
-      this.provider
-    );
+    const mmfFactory = new ethers.Contract(mmfFactoryAddress, UniswapV2Factory, this.provider);
 
-    const lpAddress = mmfFactory.getPair(tokenContract.address, USDT[0])
+    const lpAddress = mmfFactory.getPair(tokenContract.address, USDT[0]);
 
-    const pairContract = new ethers.Contract(
-      lpAddress,
-      LpReserveContract,
-      this.provider
-    );
-  
+    const pairContract = new ethers.Contract(lpAddress, LpReserveContract, this.provider);
+
     const reserves = await pairContract.getReserves();
     let marketPrice = 0;
-  
+
     const token0 = await pairContract.token0();
-  
+
     if (token0 == tokenContract.address) {
-      marketPrice =
-        BigNumber.from(reserves[1])
-          .mul(BigNumber.from(10).pow(9))
-          .div(reserves[0])
-          .toNumber() / 1000000000;
+      marketPrice = BigNumber.from(reserves[1]).mul(BigNumber.from(10).pow(9)).div(reserves[0]).toNumber() / 1000000000;
     } else {
-      marketPrice =
-        BigNumber.from(reserves[0])
-          .mul(BigNumber.from(10).pow(9))
-          .div(reserves[1])
-          .toNumber() / 1000000000;
+      marketPrice = BigNumber.from(reserves[0]).mul(BigNumber.from(10).pow(9)).div(reserves[1]).toNumber() / 1000000000;
     }
 
-    return marketPrice+'';
+    return marketPrice + '';
   }
 
   async getTokenPriceFromMMF10MBUSD(): Promise<string> {
     const ready = await this.provider.ready;
     if (!ready) return;
 
-    return this.getTokenPriceFromMMFInUSD(this._10MB)
+    return this.getTokenPriceFromMMFInUSD(this._10MB);
   }
 
   // async getTokenPriceFromSpiritswap(tokenContract: ERC20): Promise<string> {
@@ -800,31 +770,32 @@ export class BombFinance {
 
   async getBoardroomAPR() {
     const Boardroom = this.currentBoardroom();
-    console.log("getBoardroomAPR 1 ", Boardroom)
+    console.log('getBoardroomAPR 1 ', Boardroom);
     let latestSnapshotIndex;
     try {
       latestSnapshotIndex = await Boardroom.latestSnapshotIndex();
-    } catch(err) {
-      latestSnapshotIndex = BigNumber.from(0)
+    } catch (err) {
+      latestSnapshotIndex = BigNumber.from(0);
     }
-    console.log("getBoardroomAPR 2 ", Boardroom)
+    console.log('getBoardroomAPR 2 ', Boardroom);
     const lastHistory = await Boardroom.boardHistory(latestSnapshotIndex);
-    console.log("getBoardroomAPR 3")
+    console.log('getBoardroomAPR 3');
     const lastRewardsReceived = lastHistory[1];
-    console.log("getBoardroomAPR 4")
+    console.log('getBoardroomAPR 4');
     const _10SHAREPrice = (await this.getShareStat()).priceInDollars;
-    console.log("getBoardroomAPR 5")
+    console.log('getBoardroomAPR 5');
     const _10MBPrice = (await this.getBombStat()).priceInDollars;
-    console.log("getBoardroomAPR 6")
+    console.log('getBoardroomAPR 6');
     const epochRewardsPerShare = lastRewardsReceived / 1e18;
 
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(_10MBPrice) * 4;
-    console.log("getBoardroomAPR 7")
+    console.log('getBoardroomAPR 7');
     const boardroomtShareBalanceOf = await this._10SHARE.balanceOf(Boardroom.address);
-    console.log("getBoardroomAPR 8")
-    const boardroomTVL = Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
-    console.log("getBoardroomAPR 9")
+    console.log('getBoardroomAPR 8');
+    const boardroomTVL =
+      Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
+    console.log('getBoardroomAPR 9');
     const realAPR = ((amountOfRewardsPerDay * 100) / boardroomTVL) * 365;
     return realAPR;
   }
@@ -861,12 +832,12 @@ export class BombFinance {
    * @returns true if user can withdraw reward, false if they can't
    */
   async canUserUnstakeFromBoardroom(): Promise<boolean> {
-    console.log("canUserUnstakeFromBoardroom 1")
+    console.log('canUserUnstakeFromBoardroom 1');
     const Boardroom = this.currentBoardroom();
-    console.log("Boardroom ", Boardroom)
-    console.log("this.myAccount ", this.myAccount)
+    console.log('Boardroom ', Boardroom);
+    console.log('this.myAccount ', this.myAccount);
     const canWithdraw = await Boardroom.canWithdraw(this.myAccount);
-    console.log("canUserUnstakeFromBoardroom 2")
+    console.log('canUserUnstakeFromBoardroom 2');
     const stakedAmount = await this.getStakedSharesOnBoardroom();
     const notStaked = Number(getDisplayBalance(stakedAmount, this._10SHARE.decimal)) === 0;
     const result = notStaked ? true : canWithdraw;
@@ -985,7 +956,7 @@ export class BombFinance {
 
   async getEarningsOnBoardroom(): Promise<BigNumber> {
     const Boardroom = this.currentBoardroom();
-    console.log("getEarningsOnBoardroom ", Boardroom)
+    console.log('getEarningsOnBoardroom ', Boardroom);
     return await Boardroom.earned(this.myAccount);
   }
 
@@ -1023,18 +994,18 @@ export class BombFinance {
    */
   async getUserClaimRewardTime(): Promise<AllocationTime> {
     const { Boardroom, Treasury } = this.contracts;
-    console.log("getUserClaimRewardTime 1")
+    console.log('getUserClaimRewardTime 1');
     const nextEpochTimestamp = await Boardroom.nextEpochPoint(); //in unix timestamp
-    console.log("getUserClaimRewardTime 2")
+    console.log('getUserClaimRewardTime 2');
     const currentEpoch = await Boardroom.epoch();
-    console.log("getUserClaimRewardTime 3")
+    console.log('getUserClaimRewardTime 3');
     const mason = await Boardroom.directors(this.myAccount);
-    console.log("getUserClaimRewardTime 4")
+    console.log('getUserClaimRewardTime 4');
     const startTimeEpoch = mason.epochTimerStart;
-    console.log("getUserClaimRewardTime 5")
+    console.log('getUserClaimRewardTime 5');
     const period = await Treasury.PERIOD();
     const periodInHours = period / 60 / 60; // 6 hours, period is displayed in seconds which is 21600
-    console.log("getUserClaimRewardTime 6")
+    console.log('getUserClaimRewardTime 6');
     const rewardLockupEpochs = await Boardroom.rewardLockupEpochs();
     const targetEpochForClaimUnlock = Number(startTimeEpoch) + Number(rewardLockupEpochs);
 

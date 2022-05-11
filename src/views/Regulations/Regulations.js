@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import {withStyles, makeStyles} from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-import {Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@material-ui/core';
+import { Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 
 import Page from '../../components/Page';
 import RegulationsImage from '../../assets/img/regulations_bg.png';
-import {createGlobalStyle} from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import useBombFinance from '../../hooks/useBombFinance';
 
 const BackgroundImage = createGlobalStyle`
@@ -50,7 +50,7 @@ const Regulations = () => {
   const [rows, setRows] = useState(null);
   function createData(epoch, dao, dev, boardroom, bondsBought, bondsRedeemed) {
     var sum = (Number(dao) + Number(dev) + Number(boardroom)).toFixed(2);
-    return {epoch, dao, dev, boardroom, sum, bondsBought, bondsRedeemed};
+    return { epoch, dao, dev, boardroom, sum, bondsBought, bondsRedeemed };
   }
   useEffect(() => {
     if (bombFinance) {
@@ -96,10 +96,10 @@ const Regulations = () => {
           <TableBody>
             {rows?.map((row, index) => (
               <StyledTableRow
-                style={index % 2 ? {background: 'rgba(255,255,255,0.9)'} : {background: 'rgba(255,255,255,0.8)'}}
+                style={index % 2 ? { background: 'rgba(255,255,255,0.9)' } : { background: 'rgba(255,255,255,0.8)' }}
                 key={row.epoch}
               >
-                <StyledTableCell style={{color: '#2c2560'}} align="center" component="th" scope="row">
+                <StyledTableCell style={{ color: '#2c2560' }} align="center" component="th" scope="row">
                   {row.epoch}
                 </StyledTableCell>
                 <StyledTableCell align="center">{row.boardroom}</StyledTableCell>

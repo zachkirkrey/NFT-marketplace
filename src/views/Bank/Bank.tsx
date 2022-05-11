@@ -36,10 +36,10 @@ const HighlightedText = withStyles((theme) => ({
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
   const { bankId, poolId } = useParams();
-  console.log("poolId ", poolId)
+  console.log('poolId ', poolId);
   const bank = useBank(bankId, poolId);
 
-  console.log("bank ", bank)
+  console.log('bank ', bank);
 
   const { account } = useWallet();
   const { onRedeem } = useRedeem(bank);

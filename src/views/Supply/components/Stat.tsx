@@ -8,7 +8,7 @@ interface StatProps {
   description: string;
 }
 
-const Stat: React.FC<StatProps> = ({icon, title, description}) => {
+const Stat: React.FC<StatProps> = ({ icon, title, description }) => {
   return (
     <Card>
       <StyledCardContentInner>

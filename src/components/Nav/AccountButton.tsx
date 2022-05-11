@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Button} from '@material-ui/core';
-import {useWallet} from 'use-wallet';
+import React, { useState } from 'react';
+import { Button } from '@material-ui/core';
+import { useWallet } from 'use-wallet';
 import useModal from '../../hooks/useModal';
 import WalletProviderModal from '../WalletProviderModal';
 import AccountModal from './AccountModal';
-import {useENS} from '../../hooks/useENS';
+import { useENS } from '../../hooks/useENS';
 import Davatar from '@davatar/react';
 
 function shorten(str: string) {
@@ -16,10 +16,10 @@ interface AccountButtonProps {
   text?: string;
 }
 
-const AccountButton: React.FC<AccountButtonProps> = ({text}) => {
-  const {account} = useWallet();
+const AccountButton: React.FC<AccountButtonProps> = ({ text }) => {
+  const { account } = useWallet();
   const [onPresentAccountModal] = useModal(<AccountModal />);
-  const {ensName} = useENS(account);
+  const { ensName } = useENS(account);
 
   const [isWalletProviderOpen, setWalletProviderOpen] = useState(false);
 

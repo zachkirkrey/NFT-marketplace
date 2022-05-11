@@ -1,21 +1,21 @@
 import { Configuration } from './bomb-finance/config';
 import { BankInfo } from './bomb-finance';
 
-import _10BOND from "../src/bomb-finance/deployments/_10BOND.json";
-import _10MB from "../src/bomb-finance/deployments/_10MB.json";
-import _10MBTaxOracle from "../src/bomb-finance/deployments/_10MBTaxOracle.json";
+import _10BOND from '../src/bomb-finance/deployments/_10BOND.json';
+import _10MB from '../src/bomb-finance/deployments/_10MB.json';
+import _10MBTaxOracle from '../src/bomb-finance/deployments/_10MBTaxOracle.json';
 
-import _10SHARE from "../src/bomb-finance/deployments/_10SHARE.json";
-import Boardroom from "../src/bomb-finance/deployments/Boardroom.json";
+import _10SHARE from '../src/bomb-finance/deployments/_10SHARE.json';
+import Boardroom from '../src/bomb-finance/deployments/Boardroom.json';
 
-import Oracle from "../src/bomb-finance/deployments/Oracle.json";
-import TaxOffice from "../src/bomb-finance/deployments/TaxOffice.json";
+import Oracle from '../src/bomb-finance/deployments/Oracle.json';
+import TaxOffice from '../src/bomb-finance/deployments/TaxOffice.json';
 
-import Treasury from "../src/bomb-finance/deployments/Treasury.json";
+import Treasury from '../src/bomb-finance/deployments/Treasury.json';
 
-import _10MBMasterchef from "../src/bomb-finance/deployments/_10MBMasterchef.json"
+import _10MBMasterchef from '../src/bomb-finance/deployments/_10MBMasterchef.json';
 
-import Pool from "../src/bomb-finance/deployments/Pool.json"
+import Pool from '../src/bomb-finance/deployments/Pool.json';
 
 const contractsArray = [
   [_10BOND, '0xd812803de72C6a5993606F962D0144B7FB25A1aE'],
@@ -27,21 +27,20 @@ const contractsArray = [
   [TaxOffice, '0xA9179fEf1f74605e83FD9317a1B4aF154FDD0896'],
   [Treasury, '0x81AB6D37F2A332064A9146Dde676ECBF6f904B24'],
   [_10MBMasterchef, '0x72f80bF818359c1215561Ee92fFd5EE003424924'],
-  [Pool, '0x25A7958c976bD5e73788c82CEd3F9Bc28a175072']
-]
+  [Pool, '0x25A7958c976bD5e73788c82CEd3F9Bc28a175072'],
+];
 
-interface DeploymentMapType  {
+interface DeploymentMapType {
   [contractName: string]: {
     address: string;
     abi: any[];
   };
-};
-let deploymentsRaw: DeploymentMapType = {}
+}
+let deploymentsRaw: DeploymentMapType = {};
 
 for (const contract of contractsArray) {
-  deploymentsRaw[(contract[0] as any).contractName ] = {"abi": (contract[0] as any).abi, "address": contract[1] as string}
+  deploymentsRaw[(contract[0] as any).contractName] = { abi: (contract[0] as any).abi, address: contract[1] as string };
 }
-
 
 const configurations: { [env: string]: Configuration } = {
   /*
@@ -74,8 +73,8 @@ const configurations: { [env: string]: Configuration } = {
       USDT: ['0x5C623485a00934e46698B81520f8bA2b8f8B3339', 6],
       WCRO: ['0x594EBf69f8d731aEBf9b2C8892DC11B888131046', 18],
       WSMINO: ['0xc9332BC1f891BC17e633Df670Ac1B1d40Cd68e88', 18],
-      '_10MB': [deploymentsRaw['_10MB'].address, 18],
-      '_10SHARE': [deploymentsRaw['_10SHARE'].address, 18],
+      _10MB: [deploymentsRaw['_10MB'].address, 18],
+      _10SHARE: [deploymentsRaw['_10SHARE'].address, 18],
       '_10MB-USDT-LP': ['0x9dD5f66dCfB94A9f8A7e4FfEFBB282f39b6087fF', 18],
       '_10MB-CRO-LP': ['0x53288433D2b3017Df6612075ee7C43bB73C02D74', 18],
       'USDT-CRO-LP': ['0x9c58645396F353D9f4862aa63dEE4ab0Ed32dAC9', 18],
@@ -90,7 +89,7 @@ const configurations: { [env: string]: Configuration } = {
     networkName: 'Polygon Mainnet',
     cronoscanUrl: 'https://polygonscan.com',
     defaultProvider: 'https://polygon-rpc.com/',
-//    defaultProvider: 'http://127.0.0.1:8545/',
+    //    defaultProvider: 'http://127.0.0.1:8545/',
     deployments: deploymentsRaw,
     baseLaunchDate: new Date('2022-04-09 1:00:00Z'),
     bondLaunchesAt: new Date('2022-04-09 1:00:00Z'),
@@ -101,8 +100,8 @@ const configurations: { [env: string]: Configuration } = {
       USDT: ['0x5C623485a00934e46698B81520f8bA2b8f8B3339', 6],
       WCRO: ['0x594EBf69f8d731aEBf9b2C8892DC11B888131046', 18],
       WSMINO: ['0xc9332BC1f891BC17e633Df670Ac1B1d40Cd68e88', 18],
-      '_10MB': [deploymentsRaw['_10MB'].address, 18],
-      '_10SHARE': [deploymentsRaw['_10SHARE'].address, 18],
+      _10MB: [deploymentsRaw['_10MB'].address, 18],
+      _10SHARE: [deploymentsRaw['_10SHARE'].address, 18],
       '_10MB-USDT-LP': ['0x9dD5f66dCfB94A9f8A7e4FfEFBB282f39b6087fF', 18],
       '_10MB-CRO-LP': ['0x53288433D2b3017Df6612075ee7C43bB73C02D74', 18],
       'USDT-CRO-LP': ['0x9c58645396F353D9f4862aa63dEE4ab0Ed32dAC9', 18],

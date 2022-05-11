@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import useBombFinance from './useBombFinance';
-import {LPStat} from '../bomb-finance/types';
+import { LPStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
 const useLpStats = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
-  const {slowRefresh} = useRefresh();
+  const { slowRefresh } = useRefresh();
   const bombFinance = useBombFinance();
 
   useEffect(() => {

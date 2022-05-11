@@ -1,22 +1,22 @@
-import React, {useState, useMemo} from 'react';
+import React, { useState, useMemo } from 'react';
 
-import {Button, Select, MenuItem, InputLabel, withStyles} from '@material-ui/core';
+import { Button, Select, MenuItem, InputLabel, withStyles } from '@material-ui/core';
 // import Button from '../../../components/Button'
-import Modal, {ModalProps} from '../../../components/Modal';
+import Modal, { ModalProps } from '../../../components/Modal';
 import ModalActions from '../../../components/ModalActions';
 import ModalTitle from '../../../components/ModalTitle';
 import TokenInput from '../../../components/TokenInput';
 import styled from 'styled-components';
 
-import {getDisplayBalance} from '../../../utils/formatBalance';
+import { getDisplayBalance } from '../../../utils/formatBalance';
 import Label from '../../../components/Label';
 import useLpStats from '../../../hooks/useLpStats';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import useBombFinance from '../../../hooks/useBombFinance';
-import {useWallet} from 'use-wallet';
-import useApproveZapper, {ApprovalState} from '../../../hooks/useApproveZapper';
-import {_10MB_TICKER, _10SHARE_TICKER, CRO_TICKER, USDT_TICKER} from '../../../utils/constants';
-import {Alert} from '@material-ui/lab';
+import { useWallet } from 'use-wallet';
+import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
+import { _10MB_TICKER, _10SHARE_TICKER, CRO_TICKER, USDT_TICKER } from '../../../utils/constants';
+import { Alert } from '@material-ui/lab';
 
 interface ZapProps extends ModalProps {
   onConfirm: (zapAsset: string, lpName: string, amount: string) => void;
@@ -24,9 +24,9 @@ interface ZapProps extends ModalProps {
   decimals?: number;
 }
 
-const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', decimals = 18}) => {
+const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', decimals = 18 }) => {
   const bombFinance = useBombFinance();
-  const {balance} = useWallet();
+  const { balance } = useWallet();
   const croBalance = (Number(balance) / 1e18).toFixed(4).toString();
   const bombBalance = useTokenBalance(bombFinance._10MB);
   const bshareBalance = useTokenBalance(bombFinance._10SHARE);
@@ -34,7 +34,7 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(CRO_TICKER);
   const [zappingTokenBalance, setZappingTokenBalance] = useState(croBalance);
-  const [estimate, setEstimate] = useState({token0: '0', token1: '0'}); // token0 will always be CRO in this case
+  const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be CRO in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
   /*
   const bombFtmLpStats = useLpStats('_10MB-USDT-LP');
@@ -68,18 +68,18 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
   const handleChange = async (e: any) => {
     if (e.currentTarget.value === '' || e.currentTarget.value === 0) {
       setVal(e.currentTarget.value);
-      setEstimate({token0: '0', token1: '0'});
+      setEstimate({ token0: '0', token1: '0' });
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setVal(e.currentTarget.value);
     const estimateZap = await bombFinance.estimateZapIn(zappingToken, tokenName, String(e.currentTarget.value));
-    setEstimate({token0: estimateZap[0].toString(), token1: estimateZap[1].toString()});
+    setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
   const handleSelectMax = async () => {
     setVal(zappingTokenBalance);
     const estimateZap = await bombFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
-    setEstimate({token0: estimateZap[0].toString(), token1: estimateZap[1].toString()});
+    setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
   };
 
   return (
@@ -87,10 +87,16 @@ const ZapModal: React.FC<ZapProps> = ({onConfirm, onDismiss, tokenName = '', dec
       <ModalTitle text={`Zap in ${tokenName}`} />
 
       <StyledActionSpacer />
-      <InputLabel style={{color: '#2c2560'}} id="label">
+      <InputLabel style={{ color: '#2c2560' }} id="label">
         Select asset to zap with
       </InputLabel>
-      <Select onChange={handleChangeAsset} style={{color: '#2c2560'}} labelId="label" id="select" value={zappingToken}>
+      <Select
+        onChange={handleChangeAsset}
+        style={{ color: '#2c2560' }}
+        labelId="label"
+        id="select"
+        value={zappingToken}
+      >
         <StyledMenuItem value={CRO_TICKER}>CRO</StyledMenuItem>
         <StyledMenuItem value={_10SHARE_TICKER}>_10SHARE</StyledMenuItem>
         {/* <StyledMenuItem value={USDT_TICKER}>USDT</StyledMenuItem> */}

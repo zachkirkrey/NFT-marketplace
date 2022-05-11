@@ -1,8 +1,8 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
-import {Bank} from '../bomb-finance';
+import { Bank } from '../bomb-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
-import {parseUnits} from 'ethers/lib/utils';
+import { parseUnits } from 'ethers/lib/utils';
 
 const useStake = (bank: Bank) => {
   const bombFinance = useBombFinance();
@@ -18,7 +18,7 @@ const useStake = (bank: Bank) => {
     },
     [bank, bombFinance, handleTransactionReceipt],
   );
-  return {onStake: handleStake};
+  return { onStake: handleStake };
 };
 
 export default useStake;

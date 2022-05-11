@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react';
-import {BigNumber} from 'ethers';
+import { useEffect, useState } from 'react';
+import { BigNumber } from 'ethers';
 //import ERC20 from '../bomb-finance/ERC20';
 import useBombFinance from './useBombFinance';
 //import config from '../config';

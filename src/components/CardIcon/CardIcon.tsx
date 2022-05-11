@@ -5,7 +5,7 @@ interface CardIconProps {
   children?: React.ReactNode;
 }
 
-const CardIcon: React.FC<CardIconProps> = ({children}) => <StyledCardIcon>{children}</StyledCardIcon>;
+const CardIcon: React.FC<CardIconProps> = ({ children }) => <StyledCardIcon>{children}</StyledCardIcon>;
 
 const StyledCardIcon = styled.div`
   background-color: #363746;

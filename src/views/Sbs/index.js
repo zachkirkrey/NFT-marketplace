@@ -1,1 +1,1 @@
-export {default} from './Sbs';
+export { default } from './Sbs';

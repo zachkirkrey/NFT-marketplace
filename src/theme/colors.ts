@@ -44,7 +44,7 @@ export const mint = {
   bg: '#061628',
   divBg: '#071F3D',
   divBgDark: '#06101A',
-}
+};
 
 export const bg = '#000000';
 

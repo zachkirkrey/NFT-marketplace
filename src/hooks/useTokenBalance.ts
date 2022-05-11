@@ -1,5 +1,5 @@
-import {useCallback, useEffect, useState} from 'react';
-import {BigNumber} from 'ethers';
+import { useCallback, useEffect, useState } from 'react';
+import { BigNumber } from 'ethers';
 import ERC20 from '../bomb-finance/ERC20';
 import useBombFinance from './useBombFinance';
 import config from '../config';
@@ -10,7 +10,7 @@ const useTokenBalance = (token: ERC20) => {
   const isUnlocked = bombFinance?.isUnlocked;
 
   const fetchBalance = useCallback(async () => {
-    console.log("token ", token.symbol)
+    console.log('token ', token.symbol);
     setBalance(await token.balanceOf(bombFinance.myAccount));
   }, [token, bombFinance.myAccount]);
 

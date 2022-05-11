@@ -1,8 +1,8 @@
-import {BigNumber, Contract} from 'ethers';
-import {Signer} from '@ethersproject/abstract-signer';
-import {Provider} from '@ethersproject/abstract-provider';
-import {TransactionResponse} from '@ethersproject/providers';
-import {formatUnits} from 'ethers/lib/utils';
+import { BigNumber, Contract } from 'ethers';
+import { Signer } from '@ethersproject/abstract-signer';
+import { Provider } from '@ethersproject/abstract-provider';
+import { TransactionResponse } from '@ethersproject/providers';
+import { formatUnits } from 'ethers/lib/utils';
 
 class ERC20 {
   private contract: Contract;
@@ -66,7 +66,7 @@ export default ERC20;
 const ABI = [
   {
     inputs: [
-      {internalType: 'string', name: 'name', type: 'string'},
+      { internalType: 'string', name: 'name', type: 'string' },
       {
         internalType: 'string',
         name: 'symbol',

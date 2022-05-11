@@ -50,14 +50,11 @@ const SupplyBomb: React.FC = () => {
 
   const stakedTokenPriceInDollars = Number(bombPriceInDollars);
 
-  const tokenPriceInDollars = useMemo(
-    () => {
-      return stakedTokenPriceInDollars
-        ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
-        : null;
-    },
-    [stakedTokenPriceInDollars, stakedBalance],
-  );
+  const tokenPriceInDollars = useMemo(() => {
+    return stakedTokenPriceInDollars
+      ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
+      : null;
+  }, [stakedTokenPriceInDollars, stakedBalance]);
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
   const { onStake } = useSupplyToBomb();
@@ -91,7 +88,7 @@ const SupplyBomb: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
-              <Typography variant='h5' component='h2'>
+              <Typography variant="h5" component="h2">
                 Supply _10MB
               </Typography>
               <CardIcon>
@@ -131,20 +128,15 @@ const SupplyBomb: React.FC = () => {
                   Approve _10MB
                 </Button>
               ) : (
-                  <>
-                    {approveStatusW !== ApprovalState.APPROVED ? (
-            
-                      <IconButton onClick={approveW}>
-                        A
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={onPresentWithdraw}>
-                        <RemoveIcon color={'yellow'} />
-                      </IconButton>
-                        
-                          
-                            )}
-                          
+                <>
+                  {approveStatusW !== ApprovalState.APPROVED ? (
+                    <IconButton onClick={approveW}>A</IconButton>
+                  ) : (
+                    <IconButton onClick={onPresentWithdraw}>
+                      <RemoveIcon color={'yellow'} />
+                    </IconButton>
+                  )}
+
                   <StyledActionSpacer />
                   <IconButton onClick={onPresentDeposit}>
                     <AddIcon color={'yellow'} />

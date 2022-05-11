@@ -176,7 +176,10 @@ const Home = () => {
     () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
     [tBondStats],
   );
-  const tBondPriceInCRO = useMemo(() => (tBondStats ? (Number(tBondStats.tokenInUSDT) * 10).toFixed(4) : null), [tBondStats]);
+  const tBondPriceInCRO = useMemo(
+    () => (tBondStats ? (Number(tBondStats.tokenInUSDT) * 10).toFixed(4) : null),
+    [tBondStats],
+  );
   const tBondCirculatingSupply = useMemo(
     () => (tBondStats ? String(tBondStats.circulatingSupply) : null),
     [tBondStats],
@@ -361,7 +364,7 @@ const Home = () => {
             tokenSymbol="_10BOND"
             tokenName="_10BOND"
             topSubtext="10 _10BOND"
-            mainText={tBondPriceInCRO ? tBondPriceInCRO + " USDT" : '-.----'}
+            mainText={tBondPriceInCRO ? tBondPriceInCRO + ' USDT' : '-.----'}
             USDT
             bottomSubtext={`$${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} / _10BOND`}
             marketCap={`$${roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}`}

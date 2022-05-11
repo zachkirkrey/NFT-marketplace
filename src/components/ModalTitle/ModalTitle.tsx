@@ -5,7 +5,7 @@ interface ModalTitleProps {
   text?: string;
 }
 
-const ModalTitle: React.FC<ModalTitleProps> = ({text}) => <StyledModalTitle>{text}</StyledModalTitle>;
+const ModalTitle: React.FC<ModalTitleProps> = ({ text }) => <StyledModalTitle>{text}</StyledModalTitle>;
 
 const StyledModalTitle = styled.div`
   align-items: center;
