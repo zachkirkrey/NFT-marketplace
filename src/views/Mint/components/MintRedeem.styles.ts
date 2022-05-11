@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    width: 710px;
-    height: 580px;
+    width: min(95%, 710px);
+    min-height: 580px;
     display: flex;
     flex-direction: column;
     margin-inline: auto;
@@ -77,11 +77,12 @@ export const Wrapper = styled.div`
             & > div{
                 flex: 1;
                 & > :first-child{
+                    font-size: 0.7rem;
                     font-weight: 700;
                     color: ${({theme}) => theme.color.mint.yellow};
                 }
                 & > :last-child{
-                    font-size: 0.8rem;
+                    font-size: 0.5rem;
                     font-weight: 400;
                     color: ${({theme}) => theme.color.white};
                 }
@@ -138,29 +139,85 @@ export const Wrapper = styled.div`
     & p{
         margin: 0
     }
+    @media (min-width: 650px) {
+    & .content{
+        & .info{
+            & > div{
+            & > :first-child{
+                font-size: 1rem;
+            }
+            & > :last-child{
+                font-size: 0.8rem;
+            }
+        }  
+    }
+    }
+    }
+    @media (min-width: 1600px) {
+        width: 900px;
+        min-height: 700px;
+    }
 `;
 
-export const PriceWrapper = styled.div<{color: string, border: string, bg: string}>`
+export const PriceWrapper = styled.div<{color: string, border: string}>`
     flex: 1;
     height: 70px;
     border-radius:23px;
     border: 1px solid ${({theme,border}) => theme.color.mint[border]};;
-    background-color: ${({theme,bg}) => theme.color.mint[bg]};
+    background-color: ${({theme}) => theme.color.mint.divBgDark};
     padding-top: 8px;
     & > p {
         color: ${({theme}) => theme.color.white};
-        padding-left: 20px;
     }
     & > :first-child{
+        padding-left: 10px;
         font-size: 0.8rem;
         font-weight: 400;
     }
     & > :last-child{
+        margin-left: 10px;
         font-size: 2.2rem;
         font-weight: 800;
         color: ${({theme,color}) => theme.color.mint[color]};
+        background-color: transparent;
+        border: none;
     }
     & .loadingColor{
-        color: ${({theme,color}) => theme.color.mint.gray};
+        color: ${({theme}) => theme.color.mint.gray};
+    }
+    @media (min-width: 600px) {
+        & > :first-child{
+            padding-left: 20px;
+        }
+        & > :last-child{
+            margin-left: 20px;
+        }
+    }
+`;
+
+export const InputWrapper = styled.div`
+    flex: 1;
+    height: 70px;
+    border-radius:23px;
+    border: 1px solid ${({theme}) => theme.color.mint.redeem};;
+    background-color: ${({theme}) => theme.color.mint.divBg};
+    padding-top: 8px;
+    & > :first-child{
+        color: ${({theme}) => theme.color.white};
+        padding-left: 20px;
+        font-size: 0.8rem;
+        font-weight: 400;
+    }
+    & > :last-child{
+        width: 70%;
+        margin-left: 20px;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: ${({theme}) => theme.color.white};
+        background-color: transparent;
+        border: none;
+    }
+    & .loadingColor{
+        color: ${({theme}) => theme.color.mint.gray};
     }
 `;

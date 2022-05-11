@@ -1,5 +1,5 @@
-import React,{useState,useEffect} from 'react'
-import {Wrapper,PriceWrapper} from './MintRedeem.styles';
+import React,{useState} from 'react'
+import {Wrapper, PriceWrapper, InputWrapper} from './MintRedeem.styles';
 import triangle from '../../../assets/img/triangle.svg';
 
 
@@ -7,98 +7,108 @@ type MorR = 'mint' | 'redeem';
 
 export default function MintRedeem() {
   const [mintOrRedeem, setMintOrRedeem] = useState<MorR>('mint');
-  const [loading, setLoading] = useState<boolean>(true);
+  const [redeem, setRedeem] = useState('');
+  const [mintUsdt, setMintUsdt] = useState('')
+  const [mintShare, setMintShare] = useState('')
 
-  useEffect(() => {
-    setTimeout(()=> setLoading(false),2000);
-  }, [])
-  
 
   return (
-     <Wrapper>
-              <div className='stateButtons'>
-                <button onClick={()=> setMintOrRedeem('mint')} className={mintOrRedeem === 'mint'? 'select': null}>MINT</button>
-                <button onClick={()=> setMintOrRedeem('redeem')} className={mintOrRedeem === 'redeem'? 'select': null}>REDEEM</button>
+      <Wrapper>
+        <div className='stateButtons'>
+          <button onClick={()=> setMintOrRedeem('mint')} className={mintOrRedeem === 'mint'? 'select': null}>MINT</button>
+          <button onClick={()=> setMintOrRedeem('redeem')} className={mintOrRedeem === 'redeem'? 'select': null}>REDEEM</button>
+        </div>
+        <div className='content'>
+        {mintOrRedeem === 'mint'? (
+          <>
+            <div className='prices'>
+              <Input type="USDT" inputState={mintUsdt} setInputState={setMintUsdt} />
+              <span>+</span>
+              <Input type="10SHARE" inputState={mintShare} setInputState={setMintShare} />
+            </div>
+            <div className='triangleContainer'>
+              <img src={triangle} alt="triangle icon" />
+              <img src={triangle} alt="triangle icon" />
+            </div>
+            <div className='mintTo'>
+              <PriceContent value={Number((Number(mintUsdt)*0.77).toFixed(2))+Number((Number(mintShare)*0.77).toFixed(2))} type="10MB" border="divBgDark" color="blue"    />
+            </div>
+          </>
+        ): (
+          <>
+            <Input type="10MB" inputState={redeem} setInputState={setRedeem} />
+            <div className='triangleContainer'>
+              <img src={triangle} alt="triangle icon" />
+              <img src={triangle} alt="triangle icon" />
+            </div>
+            <div className='redeemTo'>
+              <PriceContent value={+((Number(redeem)*0.77).toFixed(2))} type="USDT" border="divBgDark" color="blue"  />
+              <span>+</span>
+              <PriceContent value={+((Number(redeem)*0.77).toFixed(2))} type="10SHARE" border="divBgDark" color="blue"  />
+            </div>
+            <div className='amountCollect'>
+              <p>Amount to collect</p>
+              <div>
+                <PriceContent value={+((Number(redeem)*0.77).toFixed(2))} type="USDT" border="yellow" color="white"   />
+                <span>+</span>
+                <PriceContent value={+((Number(redeem)*0.77).toFixed(2))} type="10SHARE" border="yellow" color="white"  />
               </div>
-              <div className='content'>
-              {mintOrRedeem === 'mint'? (
-                <>
-                  <div className='prices'>
-                    <PriceContent value={27.72} type="USDT" border="redeem" bg="divBg" color="white" loading={loading} />
-                    <span>+</span>
-                    <PriceContent value={27.72} type="10SHARE" border="redeem" bg="divBg" color="white" loading={loading}/>
-                  </div>
-                  <div className='triangleContainer'>
-                    <img src={triangle} alt="triangle icon" />
-                    <img src={triangle} alt="triangle icon" />
-                  </div>
-                  <div className='mintTo'>
-                    <PriceContent value={36.01} type="10MB" border="divBgDark" bg="divBgDark" color="blue" loading={loading} />
-                  </div>
-                </>
-              ): (
-                <>
-                  <PriceContent value={36.01} type="10MB" border="redeem" bg="divBg" color="white" loading={loading}/>
-                  <div className='triangleContainer'>
-                    <img src={triangle} alt="triangle icon" />
-                    <img src={triangle} alt="triangle icon" />
-                  </div>
-                  <div className='redeemTo'>
-                    <PriceContent value={27.72} type="USDT" border="divBgDark" bg="divBgDark" color="blue" loading={loading}/>
-                    <span>+</span>
-                    <PriceContent value={27.72} type="10SHARE" border="divBgDark" bg="divBgDark" color="blue" loading={loading} />
-                  </div>
-                  <div className='amountCollect'>
-                    <p>Amount to collect</p>
-                    <div>
-                      <PriceContent value={27.72} type="USDT" border="yellow" bg="divBgDark" color="white" loading={loading} />
-                      <span>+</span>
-                      <PriceContent value={27.72} type="10SHARE" border="yellow" bg="divBgDark" color="white" loading={loading} />
-                    </div>
-                  </div>
-                </>
-              )}
-              <div className='info'>
-                <div>
-                  <p>10_10MB = 0.77 USDT</p>
-                  <p>Last-Hour TWAP Price</p>
-                </div>
-                <div>
-                  <p>10_10BOND = 0.77 USDT</p>
-                  <p>Current Price: (_10MB)*2</p>
-                </div>
-              </div>
-              </div>
+            </div>
+          </>
+        )}
+        <div className='info'>
+          <div>
+            <p>10_10MB = 0.77 USDT</p>
+            <p>Last-Hour TWAP Price</p>
+          </div>
+          <div>
+            <p>10_10BOND = 0.77 USDT</p>
+            <p>Current Price: (_10MB)*2</p>
+          </div>
+        </div>
+        </div>
 
-              {mintOrRedeem === 'mint'? (
-                <div className='mintButton'>
-                  <button className={loading? 'loadingBg': null}>MINT</button>
-                </div>
-              ): (
-                <div className='redeemButtons'>
-                  <button>REDEEM</button>
-                  <button className={loading? 'loadingBg': null}>COLLECT</button>
-                </div>
-              )}
-            </Wrapper>
+        {mintOrRedeem === 'mint'? (
+          <div className='mintButton'>
+            <button className={mintUsdt || mintShare? null: 'loadingBg'}>MINT</button>
+          </div>
+        ): (
+          <div className='redeemButtons'>
+            <button>REDEEM</button>
+            <button className={redeem? null:'loadingBg'}>COLLECT</button>
+          </div>
+        )}
+      </Wrapper>
   )
 }
 
-interface priceProps{
-  bg: string;
-  border: string;
-  color: string;
-  value: number;
+interface InputProps{
   type: string;
-  loading: boolean;
+  inputState: string;
+  setInputState: React.Dispatch<React.SetStateAction<string>>
 }
 
-
-function PriceContent({ bg,border,color,value,type, loading}: priceProps) {
+function Input({inputState, setInputState, type}: InputProps){
   return (
-      <PriceWrapper bg={bg} border={border} color={color} >
+    <InputWrapper>
        <p>{type}</p>
-       <p className={loading? 'loadingColor': null}>{loading? '0.0': value}</p>
+       <input type="text" onChange={(e) => setInputState(e.target.value)} className={inputState? null: 'loadingColor'} placeholder="0.0" />
+    </InputWrapper>
+  )
+}
+
+interface PriceProps{
+  border: string;
+  color: string;
+  type: string;
+  value: number;
+}
+
+function PriceContent({ border,color,value,type}: PriceProps) {
+  return (
+      <PriceWrapper border={border} color={color} >
+       <p>{type}</p>
+       <p className={value > 0 ? null: 'loadingColor'}>{value > 0 ? value:'0.0'}</p>
       </PriceWrapper>
   )
 }
