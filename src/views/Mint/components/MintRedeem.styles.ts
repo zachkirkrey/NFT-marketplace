@@ -105,6 +105,7 @@ export const Wrapper = styled.div`
       font-size: 1.3rem;
       font-weight: 800;
       box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
+      border: none;
       border-radius: 23px;
     }
     & .loadingBg {
@@ -137,7 +138,8 @@ export const Wrapper = styled.div`
   }
   & p,
   button,
-  span {
+  span ,
+  input{
     font-family: 'Montserrat';
   }
   & p {
