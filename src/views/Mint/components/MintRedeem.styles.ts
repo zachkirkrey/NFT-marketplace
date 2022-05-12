@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   width: min(95%, 710px);
-  min-height: 580px;
   display: flex;
   flex-direction: column;
   margin-inline: auto;
@@ -43,7 +42,6 @@ export const Wrapper = styled.div`
         font-size: 3rem;
       }
     }
-
     & .triangleContainer {
       width: 55%;
       margin: 11px auto 17px;
@@ -53,7 +51,6 @@ export const Wrapper = styled.div`
     & .mintTo {
       margin-bottom: 15px;
     }
-
     & .amountCollect {
       padding: 9px 0 15px;
       & > p {
@@ -71,7 +68,6 @@ export const Wrapper = styled.div`
       color: ${({ theme }) => theme.color.mint.yellow};
       font-size: 3rem;
     }
-
     & .info {
       display: flex;
       margin: 0 20px;
@@ -93,9 +89,8 @@ export const Wrapper = styled.div`
       }
     }
   }
-
   & .mintButton {
-    margin: 0 20px 30px;
+    margin: 30px 20px;
     & button {
       width: 100%;
       height: 45px;
@@ -175,7 +170,6 @@ export const Wrapper = styled.div`
   }
   @media (min-width: 1600px) {
     width: 900px;
-    min-height: 700px;
   }
 `;
 
