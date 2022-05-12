@@ -89,7 +89,7 @@ export default function MintRedeem() {
 
       {mintOrRedeem === 'mint' ? (
         <div className="mintButton">
-          <Button disabled={mintUsdt === '' || mintShare === '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
+          <Button disabled={mintUsdt === '' && mintShare === '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
         </div>
       ) : (
         <div className="redeemButtons">
@@ -118,6 +118,7 @@ function Input({ inputState, setInputState, type }: InputProps) {
         onChange={(e) => setInputState(e.target.value)}
         className={inputState ? null : 'loadingColor'}
         placeholder="0.0"
+        value={inputState}
       />
     </InputWrapper>
   );

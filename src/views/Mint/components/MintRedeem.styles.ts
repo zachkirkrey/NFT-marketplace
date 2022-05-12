@@ -112,6 +112,8 @@ export const Wrapper = styled.div`
     }
     & button:hover{
       box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
+    }
+    & button:hover span{
       color: ${({ theme }) => theme.color.black};
     }
   }
@@ -133,12 +135,18 @@ export const Wrapper = styled.div`
       color: ${({ theme }) => theme.color.white};
       margin-bottom: 10px;
     }
+     & > :first-child:hover span{
+      color: ${({ theme }) => theme.color.white};
+    }
     & .loadingBg {
       background-color: ${({ theme }) => theme.color.mint.gray};
       color: ${({ theme }) => theme.color.black};
     }
     & button:hover{
       box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
+      color: ${({ theme }) => theme.color.black};
+    }
+    & button:hover span{
       color: ${({ theme }) => theme.color.black};
     }
   }
