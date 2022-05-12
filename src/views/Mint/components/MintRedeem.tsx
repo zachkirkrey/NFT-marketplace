@@ -89,7 +89,7 @@ export default function MintRedeem() {
 
       {mintOrRedeem === 'mint' ? (
         <div className="mintButton">
-          <Button disabled={mintUsdt === '' || mintShare !== '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
+          <Button disabled={mintUsdt === '' || mintShare === '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
         </div>
       ) : (
         <div className="redeemButtons">
