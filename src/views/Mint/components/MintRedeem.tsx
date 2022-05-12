@@ -118,6 +118,11 @@ function Input({ inputState, setInputState, type }: InputProps) {
         onChange={(e) => setInputState(e.target.value)}
         className={inputState ? null : 'loadingColor'}
         placeholder="0.0"
+        onKeyPress={(event) => {
+        if (!/[0-9]/.test(event.key)) {
+          event.preventDefault();
+        }
+      }}
         value={inputState}
       />
     </InputWrapper>

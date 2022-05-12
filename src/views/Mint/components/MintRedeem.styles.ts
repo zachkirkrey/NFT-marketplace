@@ -98,7 +98,7 @@ export const Wrapper = styled.div`
     margin: 0 20px 30px;
     & button {
       width: 100%;
-      height: 40px;
+      height: 45px;
       background-color: ${({ theme }) => theme.color.mint.yellow};
       color: ${({ theme }) => theme.color.black};
       cursor: pointer;
@@ -121,7 +121,7 @@ export const Wrapper = styled.div`
     margin: 30px 20px;
     & button {
       width: 100%;
-      height: 40px;
+      height: 45px;
       background-color: ${({ theme }) => theme.color.mint.yellow};
       color: ${({ theme }) => theme.color.black};
       cursor: pointer;
