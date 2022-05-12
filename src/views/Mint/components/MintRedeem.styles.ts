@@ -104,12 +104,15 @@ export const Wrapper = styled.div`
       cursor: pointer;
       font-size: 1.3rem;
       font-weight: 800;
-      box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
       border: none;
       border-radius: 23px;
     }
     & .loadingBg {
       background-color: ${({ theme }) => theme.color.mint.gray};
+    }
+    & button:hover{
+      box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
+      color: ${({ theme }) => theme.color.black};
     }
   }
   & .redeemButtons {
@@ -125,14 +128,17 @@ export const Wrapper = styled.div`
       border: none;
       border-radius: 23px;
     }
-    & :first-child {
-      box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
+    & > :first-child {
       background-color: ${({ theme }) => theme.color.mint.redeem};
       color: ${({ theme }) => theme.color.white};
       margin-bottom: 10px;
     }
     & .loadingBg {
       background-color: ${({ theme }) => theme.color.mint.gray};
+      color: ${({ theme }) => theme.color.black};
+    }
+    & button:hover{
+      box-shadow: -4px -4px 15px rgba(255, 255, 255, 0.36), 4px 4px 15px #000000;
       color: ${({ theme }) => theme.color.black};
     }
   }

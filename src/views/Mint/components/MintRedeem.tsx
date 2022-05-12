@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Wrapper, PriceWrapper, InputWrapper } from './MintRedeem.styles';
 import triangle from '../../../assets/img/triangle.svg';
+import { Button} from '@material-ui/core';
+
 
 type MorR = 'mint' | 'redeem';
 
@@ -34,7 +36,7 @@ export default function MintRedeem() {
             </div>
             <div className="mintTo">
               <PriceContent
-                value={Number((Number(mintUsdt) * 0.77).toFixed(2)) + Number((Number(mintShare) * 0.77).toFixed(2))}
+                value={Number((Number(+mintUsdt * 0.77) + Number(+mintShare * 0.77)).toFixed(2))}
                 type="10MB"
                 border="divBgDark"
                 color="blue"
@@ -87,12 +89,14 @@ export default function MintRedeem() {
 
       {mintOrRedeem === 'mint' ? (
         <div className="mintButton">
-          <button className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</button>
+          <Button disabled={mintUsdt === '' || mintShare !== '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
         </div>
       ) : (
         <div className="redeemButtons">
-          <button className={redeem ? null : 'loadingBg'}>REDEEM</button>
-          <button className={redeem ? null : 'loadingBg'}>COLLECT</button>
+          <Button disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>
+            REDEEM
+          </Button>
+          <Button disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>COLLECT</Button>
         </div>
       )}
     </Wrapper>
