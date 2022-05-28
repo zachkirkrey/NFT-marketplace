@@ -176,9 +176,14 @@ export class BombFinance {
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
     const USDTAmountBN = await this.USDT.balanceOf(lpToken.address);
-    const USDTAmount = getDisplayBalance(USDTAmountBN, 18);
+
+    console.log("name ", name)
+    console.log("USDTAmountBN ", USDTAmountBN.toString())
+    const USDTAmount = getDisplayBalance(USDTAmountBN, 6);
+    console.log("USDTAmount ", USDTAmount.toString())
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
     const croAmountInOneLP = Number(USDTAmount) / Number(lpTokenSupply);
+    console.log("croAmountInOneLP ", croAmountInOneLP.toString())
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
 
     const lpTokenPriceFixed = Number(lpTokenPrice).toFixed(2).toString();
@@ -187,7 +192,7 @@ export class BombFinance {
 
     return {
       tokenAmount: tokenAmountInOneLP.toFixed(2).toString(),
-      croAmount: croAmountInOneLP.toFixed(5).toString(),
+      croAmount: croAmountInOneLP.toFixed(7).toString(),
       priceOfOne: lpTokenPriceFixed,
       totalLiquidity: liquidity,
       totalSupply: Number(lpTokenSupply).toFixed(2).toString(),
@@ -553,7 +558,7 @@ export class BombFinance {
   async getTokenPriceFromMMFInCRO(tokenContract: ERC20): Promise<string> {
     const { WCRO, USDT } = this.config.externalTokens;
 
-    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4';
+    const mmfFactoryAddress = '0xd590cC180601AEcD6eeADD9B7f2B7611519544f4';
 
     const mmfFactory = new ethers.Contract(mmfFactoryAddress, UniswapV2Factory, this.provider);
 
@@ -594,7 +599,7 @@ export class BombFinance {
 
     const { USDT } = this.config.externalTokens;
 
-    const mmfFactoryAddress = '0xc35DADB65012eC5796536bD9864eD8773aBc74C4';
+    const mmfFactoryAddress = '0xd590cC180601AEcD6eeADD9B7f2B7611519544f4'
 
     const mmfFactory = new ethers.Contract(mmfFactoryAddress, UniswapV2Factory, this.provider);
 

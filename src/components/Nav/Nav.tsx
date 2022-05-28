@@ -11,7 +11,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 import AccountButton from './AccountButton';
 
-import bombLogo from '../../assets/img/bomb-logo.png';
+//import bombLogo from '../../assets/img/bomb-logo.png';
+import bombLogo from '../../assets/img/10mb-logo.png';
 import { roundAndFormatNumber } from '../../0x';
 
 const useStyles = makeStyles((theme) => ({

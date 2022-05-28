@@ -23,7 +23,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import useBombFinance from '../../hooks/useBombFinance';
 import { ReactComponent as IconTelegram } from '../../assets/img/telegram.svg';
 import { Helmet } from 'react-helmet';
-import BombImage from '../../assets/img/bomb.png';
+import BombImage from '../../assets/img/10mb_bomb_2.png';
 
 import { withStyles } from '@material-ui/styles';
 import { bgGradient, bgGradientHighlighted } from '../../theme/colors';
