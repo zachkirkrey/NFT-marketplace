@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ModalActions: React.FC = ({children}) => {
+const ModalActions: React.FC = ({ children }) => {
   const l = React.Children.toArray(children).length;
   return (
     <StyledModalActions>

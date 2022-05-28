@@ -1,8 +1,8 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
-import {Bank} from '../bomb-finance';
+import { Bank } from '../bomb-finance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
-import {parseUnits} from 'ethers/lib/utils';
+import { parseUnits } from 'ethers/lib/utils';
 
 const useWithdraw = (bank: Bank) => {
   const bombFinance = useBombFinance();
@@ -18,7 +18,7 @@ const useWithdraw = (bank: Bank) => {
     },
     [bank, bombFinance, handleTransactionReceipt],
   );
-  return {onWithdraw: handleWithdraw};
+  return { onWithdraw: handleWithdraw };
 };
 
 export default useWithdraw;

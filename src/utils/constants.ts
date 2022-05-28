@@ -1,6 +1,6 @@
-export const _10MB_TICKER = '_10MB';
-export const _10SHARE_TICKER = '_10SHARE';
-export const _10BOND_TICKER = '_10BOND';
+export const _10MB_TICKER = '10MB';
+export const _10SHARE_TICKER = '10SHARE';
+export const _10BOND_TICKER = '10BOND';
 export const CRO_TICKER = 'CRO';
 export const WCRO_TICKER = 'WCRO';
 export const USDT_TICKER = 'USDT';

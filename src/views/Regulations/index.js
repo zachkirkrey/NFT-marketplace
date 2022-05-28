@@ -1,1 +1,1 @@
-export {default} from './Regulations';
+export { default } from './Regulations';

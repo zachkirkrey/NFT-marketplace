@@ -60,13 +60,13 @@ const BadgeText = withStyles({
 const Stake: React.FC = () => {
   const classes = useClasses();
   const bombFinance = useBombFinance();
-  const [approveStatus, approve] = useApprove(bombFinance._10SHARE, bombFinance.contracts.Boardroom.address);
+  const [approveStatus, approve] = useApprove(bombFinance["10SHARE"], bombFinance.contracts.Boardroom.address);
 
-  const tokenBalance = useTokenBalance(bombFinance._10SHARE);
+  const tokenBalance = useTokenBalance(bombFinance["10SHARE"]);
   const stakedBalance = useStakedBalanceOnBoardroom();
   const { from, to } = useUnstakeTimerBoardroom();
 
-  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('_10SHARE', bombFinance._10SHARE);
+  const stakedTokenPriceInDollars = useStakedTokenPriceInDollars('10SHARE', bombFinance["10SHARE"]);
   const tokenPriceInDollars = useMemo(
     () =>
       stakedTokenPriceInDollars
@@ -86,7 +86,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'_10HSHARE'}
+      tokenName={'10HSHARE'}
     />,
   );
 
@@ -97,7 +97,7 @@ const Stake: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'_10HSHARE'}
+      tokenName={'10HSHARE'}
     />,
   );
 
@@ -107,13 +107,13 @@ const Stake: React.FC = () => {
         <BadgeText variant="body2">Stake</BadgeText>
       </div>
       <Box display="flex" flexDirection="column" alignItems="center" px={3} py={6}>
-        <TokenSymbol symbol="_10SHARE" />
+        <TokenSymbol symbol="10SHARE" />
         <Box mt={3} mb={1}>
           <Value value={getDisplayBalance(stakedBalance)} />
         </Box>
         <Box mb={5} textAlign="center">
           <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
-          <Label text={'_10SHARE Staked'} variant="yellow" />
+          <Label text={'10SHARE Staked'} variant="yellow" />
         </Box>
         {approveStatus !== ApprovalState.APPROVED ? (
           <Button
@@ -122,7 +122,7 @@ const Stake: React.FC = () => {
             className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
             onClick={approve}
           >
-            Approve _10SHARE
+            Approve 10SHARE
           </Button>
         ) : (
           <>

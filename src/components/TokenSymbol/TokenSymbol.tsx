@@ -15,15 +15,15 @@ import bshareFtmLpLogo from '../../assets/img/bshare-bnb-LP.png';
 import bnbLogo from '../../assets/img/bnb.png';
 import USDTLogo from '../../assets/img/BCTB-icon.png';
 
-const logosBySymbol: {[title: string]: string} = {
+const logosBySymbol: { [title: string]: string } = {
   //Real tokens
   //=====================
-  _10MB: bombLogo,
-  _10MBPNG: bombLogoPNG,
-  _10SHAREPNG: tShareLogoPNG,
+  "10MB": bombLogo,
+  "10MBPNG": bombLogoPNG,
+  "10SHAREPNG": tShareLogoPNG,
   X_10MB: xbombLogo,
-  _10SHARE: tShareLogo,
-  _10BOND: tBondLogo,
+  "10SHARE": tShareLogo,
+  "10BOND": tBondLogo,
   WCRO: bnbLogo,
   BOO: bnbLogo,
   SHIBA: bnbLogo,
@@ -35,14 +35,14 @@ const logosBySymbol: {[title: string]: string} = {
   WSMINO: USDTLogo,
   MMF: USDTLogo,
   SVL: bnbLogo,
-  '_10MB-CRO-LP': bombFtmLpLogo,
-  '_10MB-USDT-LP': bombFtmLpLogo,
-  '_10SHARE-_10MB-LP': bombFtmLpLogo,
-  '_10MB-_10SHARE-LP': bombFtmLpLogo,
-  '_10SHARE-USDT-LP': bombFtmLpLogo,
-  '_10SHARE-CRO-LP': bshareFtmLpLogo,
-  '_10SHARE-CRO-APELP': bshareFtmLpLogo,
-  '_10MB-USDT-APELP': bombFtmLpLogo,
+  '10MB-CRO-LP': bombFtmLpLogo,
+  '10MB-USDT-LP': bombFtmLpLogo,
+  '10SHARE-_10MB-LP': bombFtmLpLogo,
+  '10MB-10SHARE-LP': bombFtmLpLogo,
+  '10SHARE-USDT-LP': bombFtmLpLogo,
+  '10SHARE-CRO-LP': bshareFtmLpLogo,
+  '10SHARE-CRO-APELP': bshareFtmLpLogo,
+  '10MB-USDT-APELP': bombFtmLpLogo,
 };
 
 type LogoProps = {
@@ -50,7 +50,7 @@ type LogoProps = {
   size?: number;
 };
 
-const TokenSymbol: React.FC<LogoProps> = ({symbol, size = 64}) => {
+const TokenSymbol: React.FC<LogoProps> = ({ symbol, size = 64 }) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }

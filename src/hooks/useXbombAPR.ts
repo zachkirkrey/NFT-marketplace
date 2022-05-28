@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import useBombFinance from './useBombFinance';
-import {PoolStats} from '../bomb-finance/types';
+import { PoolStats } from '../bomb-finance/types';
 
 import useRefresh from './useRefresh';
 
 const useXbombAPR = () => {
-  const {slowRefresh} = useRefresh();
+  const { slowRefresh } = useRefresh();
   const [bombAPR, setBombAPR] = useState<PoolStats>();
 
   const bombFinance = useBombFinance();

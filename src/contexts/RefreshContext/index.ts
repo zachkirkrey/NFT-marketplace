@@ -1,1 +1,1 @@
-export {RefreshContext, RefreshContextProvider} from './RefreshContextProvider';
+export { RefreshContext, RefreshContextProvider } from './RefreshContextProvider';

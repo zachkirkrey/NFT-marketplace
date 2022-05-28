@@ -1,4 +1,4 @@
-import {createAction} from '@reduxjs/toolkit';
+import { createAction } from '@reduxjs/toolkit';
 
 export type PopupContent = {
   txn?: {
@@ -12,7 +12,7 @@ export type PopupContent = {
   };
 };
 
-export const updateBlockNumber = createAction<{chainId: number; blockNumber: number}>('app/updateBlockNumber');
+export const updateBlockNumber = createAction<{ chainId: number; blockNumber: number }>('app/updateBlockNumber');
 
 export const toggleWalletModal = createAction<void>('app/toggleWalletModal');
 
@@ -24,4 +24,4 @@ export const addPopup = createAction<{
   content: PopupContent;
 }>('app/addPopup');
 
-export const removePopup = createAction<{key: string}>('app/removePopup');
+export const removePopup = createAction<{ key: string }>('app/removePopup');

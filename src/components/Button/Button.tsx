@@ -1,7 +1,7 @@
-import React, {useContext, useMemo} from 'react';
-import styled, {ThemeContext} from 'styled-components';
+import React, { useContext, useMemo } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -14,8 +14,8 @@ interface ButtonProps {
   variant?: 'default' | 'secondary' | 'tertiary';
 }
 
-const Button: React.FC<ButtonProps> = ({children, disabled, href, onClick, size, text, to, variant}) => {
-  const {color, spacing} = useContext(ThemeContext);
+const Button: React.FC<ButtonProps> = ({ children, disabled, href, onClick, size, text, to, variant }) => {
+  const { color, spacing } = useContext(ThemeContext);
 
   let buttonColor: string;
   switch (variant) {

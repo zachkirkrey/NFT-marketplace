@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import styled, {ThemeContext} from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
-import {CircularProgressbar, buildStyles} from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 interface DialProps {
   children?: React.ReactNode;
@@ -10,8 +10,8 @@ interface DialProps {
   value: number;
 }
 
-const Dial: React.FC<DialProps> = ({children, disabled, size = 256, value}) => {
-  const {color} = useContext(ThemeContext);
+const Dial: React.FC<DialProps> = ({ children, disabled, size = 256, value }) => {
+  const { color } = useContext(ThemeContext);
 
   return (
     <StyledDial size={size}>

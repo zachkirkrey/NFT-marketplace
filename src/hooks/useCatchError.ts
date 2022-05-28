@@ -1,5 +1,5 @@
-import {useCallback} from 'react';
-import {useAddPopup} from '../state/application/hooks';
+import { useCallback } from 'react';
+import { useAddPopup } from '../state/application/hooks';
 
 const DEFAULT_ERROR_MSG = 'Unexpected error is occurred.';
 
@@ -14,7 +14,7 @@ function useCatchError(): (promise: Promise<any>, message?: string) => void {
           return;
         }
         console.error(`Uncaught exception: ${err.stack}`);
-        addPopup({error: {message, stack: err.stack}});
+        addPopup({ error: { message, stack: err.stack } });
       });
     },
     [addPopup],

@@ -1,7 +1,7 @@
-import React, {useCallback} from 'react';
+import React, { useCallback } from 'react';
 
 import Button from '../Button';
-import Modal, {ModalProps} from '..//Modal';
+import Modal, { ModalProps } from '..//Modal';
 import ModalActions from '..//ModalActions';
 import ModalTitle from '..//ModalTitle';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ interface MigrationDisclaimerModalProps extends ModalProps {
   onDismiss: () => void;
 }
 
-const MigrationDisclaimerModal: React.FC<MigrationDisclaimerModalProps> = ({onConfirm, onDismiss}) => {
+const MigrationDisclaimerModal: React.FC<MigrationDisclaimerModalProps> = ({ onConfirm, onDismiss }) => {
   const handleConfirm = useCallback(() => {
     onConfirm();
     // onDismiss();

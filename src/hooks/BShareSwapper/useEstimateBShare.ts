@@ -1,12 +1,12 @@
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useBombFinance from '../useBombFinance';
-import {useWallet} from 'use-wallet';
-import {BigNumber} from 'ethers';
-import {parseUnits} from 'ethers/lib/utils';
+import { useWallet } from 'use-wallet';
+import { BigNumber } from 'ethers';
+import { parseUnits } from 'ethers/lib/utils';
 
 const useEstimateBShare = (_10BONDAmount: string) => {
   const [estimateAmount, setEstimateAmount] = useState<string>('');
-  const {account} = useWallet();
+  const { account } = useWallet();
   const bombFinance = useBombFinance();
 
   const estimateAmountOfBShare = useCallback(async () => {

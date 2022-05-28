@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import {AlertCircle, CheckCircle} from 'react-feather';
-import styled, {ThemeContext} from 'styled-components';
-import {useWallet} from 'use-wallet';
+import React, { useContext } from 'react';
+import { AlertCircle, CheckCircle } from 'react-feather';
+import styled, { ThemeContext } from 'styled-components';
+import { useWallet } from 'use-wallet';
 import config from '../../config';
 
 const RowNoFlex = styled.div`
@@ -17,12 +17,12 @@ export default function TransactionPopup({
   success?: boolean;
   summary?: string;
 }) {
-  const {chainId} = useWallet();
+  const { chainId } = useWallet();
   const theme = useContext(ThemeContext);
 
   return (
     <RowNoFlex>
-      <div style={{paddingRight: 16}}>
+      <div style={{ paddingRight: 16 }}>
         {success ? <CheckCircle color={theme.color.teal[200]} size={24} /> : <AlertCircle color="#FF6871" size={24} />}
       </div>
       <div>

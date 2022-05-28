@@ -155,7 +155,7 @@ const Boardroom = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Box display="flex" justifyContent="space-between">
-                        <Typography variant="body2">_10SHARES Staked</Typography>
+                        <Typography variant="body2">10SHARES Staked</Typography>
                         <HighlightedText variant="body2">{getDisplayBalance(totalStaked)}</HighlightedText>
                       </Box>
                     </Grid>
@@ -163,9 +163,9 @@ const Boardroom = () => {
                       <Box display="flex" justifyContent="space-between">
                         <div>
                           <Typography variant="body2">
-                            _10MB PEG <small>(TWAP)</small>
+                            10MB PEG <small>(TWAP)</small>
                           </Typography>
-                          <Typography variant="body2">per 10 _10MB</Typography>
+                          <Typography variant="body2">per 10 10MB</Typography>
                         </div>
                         <HighlightedText variant="body2">{scalingFactor} USDT</HighlightedText>
                       </Box>
@@ -173,14 +173,14 @@ const Boardroom = () => {
                   </Grid>
                   {/* 
                     <Box mb={2}>
-                      <Typography style={{ textTransform: 'uppercase' }}>_10SHARES Staked</Typography>
+                      <Typography style={{ textTransform: 'uppercase' }}>10SHARES Staked</Typography>
                       <HighlightedText variant="h5">{getDisplayBalance(totalStaked)}</HighlightedText>
                     </Box>
                     <Typography style={{ textTransform: 'uppercase' }}>
-                      _10MB PEG <small>(TWAP)</small>
+                      10MB PEG <small>(TWAP)</small>
                     </Typography>
                     <HighlightedText variant="h5">
-                      {scalingFactor} USDT <small className={classes.HighlightedTextSmall}>per 10 _10MB</small>
+                      {scalingFactor} USDT <small className={classes.HighlightedTextSmall}>per 10 10MB</small>
                     </HighlightedText> */}
                 </BorderedPaper>
               </Grid>
@@ -205,7 +205,7 @@ const Boardroom = () => {
                       <Box display="flex" justifyContent="space-between">
                         <Typography variant="body2">Next expansion amount</Typography>
                         <HighlightedText variant="body2" align="right">
-                          276,141 _10MB
+                          276,141 10MB
                         </HighlightedText>
                       </Box>
                     </Grid>
@@ -230,7 +230,7 @@ const Boardroom = () => {
                   </HighlightedText>
                   <Typography variant="body2" paragraph>
                     There is a 2% tax fee per stake. The unstake fee is 0% during expansion, and 2% on contraction
-                    period. These fees will be used to buyback _10MB.
+                    period. These fees will be used to buyback 10MB.
                   </Typography>
                   <Typography variant="body2">
                     Upon stake, the fund will be locked for 6 epochs. Any time the user claims rewards or stakes more
@@ -241,7 +241,7 @@ const Boardroom = () => {
               <Grid item lg={6} style={{ display: 'flex' }}>
                 <BorderedPaper>
                   <HighlightedText variant="body2" paragraph>
-                    Claim _10MB reward
+                    Claim 10MB reward
                   </HighlightedText>
                   <Typography variant="body2">
                     Rewards can be claimed after 3 epochs after deposit. Each time rewards claimed, both locked and

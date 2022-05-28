@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 
+import { BigNumber } from 'ethers';
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
 // import CardContent from '../../../components/CardContent';
@@ -32,12 +33,11 @@ const SupplyBomb: React.FC = () => {
   const bombFinance = useBombFinance();
   const bombStats = useBombStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance._10MB, bombFinance.contracts.BombRouter.address);
-  const [approveStatusW, approveW] = useApprove(bombFinance.B_10MB_10MB, bombFinance.contracts.BombRouter.address);
+  const [approveStatus, approve] = useApprove(bombFinance["10MB"], bombFinance.contracts.BombRouter.address);
 
-  const tokenBalance = useTokenBalance(bombFinance._10MB);
+  const tokenBalance = useTokenBalance(bombFinance["10MB"]);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.B_10MB__10MB);
+  const stakedBalance = BigNumber.from(0)//useTokenBalance(bombFinance.B_10MB__10MB);
 
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance) / 1000000000000000000;
@@ -50,14 +50,11 @@ const SupplyBomb: React.FC = () => {
 
   const stakedTokenPriceInDollars = Number(bombPriceInDollars);
 
-  const tokenPriceInDollars = useMemo(
-    () => {
-      return stakedTokenPriceInDollars
-        ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
-        : null;
-    },
-    [stakedTokenPriceInDollars, stakedBalance],
-  );
+  const tokenPriceInDollars = useMemo(() => {
+    return stakedTokenPriceInDollars
+      ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
+      : null;
+  }, [stakedTokenPriceInDollars, stakedBalance]);
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
   const { onStake } = useSupplyToBomb();
@@ -70,7 +67,7 @@ const SupplyBomb: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'_10MB'}
+      tokenName={'10MB'}
     />,
   );
 
@@ -81,7 +78,7 @@ const SupplyBomb: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'_10MB'}
+      tokenName={'10MB'}
     />,
   );
 
@@ -91,17 +88,17 @@ const SupplyBomb: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
-              <Typography variant='h5' component='h2'>
-                Supply _10MB
+              <Typography variant="h5" component="h2">
+                Supply 10MB
               </Typography>
               <CardIcon>
-                <TokenSymbol symbol="_10MB" />
+                <TokenSymbol symbol="10MB" />
               </CardIcon>
 
               <Button
                 className={'shinyButton'}
                 onClick={() => {
-                  bombFinance.watchAssetInMetamask('_10MB');
+                  bombFinance.watchAssetInMetamask('10MB');
                 }}
                 style={{
                   position: 'static',
@@ -117,7 +114,7 @@ const SupplyBomb: React.FC = () => {
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
               <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={'b_10MB (_10MB)'} variant="yellow" />
+              <Label text={'b_10MB (10MB)'} variant="yellow" />
               <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
@@ -128,23 +125,11 @@ const SupplyBomb: React.FC = () => {
                   style={{ marginTop: '20px' }}
                   onClick={approve}
                 >
-                  Approve _10MB
+                  Approve 10MB
                 </Button>
               ) : (
-                  <>
-                    {approveStatusW !== ApprovalState.APPROVED ? (
-            
-                      <IconButton onClick={approveW}>
-                        A
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={onPresentWithdraw}>
-                        <RemoveIcon color={'yellow'} />
-                      </IconButton>
-                        
-                          
-                            )}
-                          
+                <>
+
                   <StyledActionSpacer />
                   <IconButton onClick={onPresentDeposit}>
                     <AddIcon color={'yellow'} />

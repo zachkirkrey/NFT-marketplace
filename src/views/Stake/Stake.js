@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet';
 
 import PageHeader from '../../components/PageHeader';
 
-const TITLE = 'bomb.money | x_10MB - _10MB Staking';
+const TITLE = 'bomb.money | x_10MB - 10MB Staking';
 
 const BorderedPaper = withStyles((theme) => ({
   root: {
@@ -75,7 +75,7 @@ const Staking = () => {
                         Current rate
                       </Typography>
                       <HighlightedText align="center" style={{ textTransform: 'uppercase' }}>
-                        1 x_10MB = {Number(xbombRate)} _10MB
+                        1 x_10MB = {Number(xbombRate)} 10MB
                       </HighlightedText>
                     </HighlightedBorderedPaper>
                   }
@@ -87,11 +87,11 @@ const Staking = () => {
             <Alert variant="filled" severity="info" maxWidth={600}>
               <b> Most rewards are generated from boardroom printing! Rewards come from:</b>
               <br />
-              - 80% of autocompounder fees are used to buy _10MB on the open market
+              - 80% of autocompounder fees are used to buy 10MB on the open market
               <br />
-              - 20% of all _10MB minted - from protocol allocation, does not impact _10SHARE boardroom printing.
+              - 20% of all 10MB minted - from protocol allocation, does not impact 10SHARE boardroom printing.
               <br />
-              If TWAP of _10MB peg is not over 1.01, yield will be reduced.
+              If TWAP of 10MB peg is not over 1.01, yield will be reduced.
               <br />
               APR is based on performance since launch on January 24th, 2022.
             </Alert>
@@ -152,8 +152,8 @@ const Staking = () => {
                       x_10MB will be the governance token required to cast votes on protocol decisions.
                     </Typography>
                     <Typography variant="body2" paragraph>
-                      20% of all _10MB minted will be deposited into the x_10MB smart contract, increasing the amount of
-                      _10MB that can be redeemed for each x_10MB. Rewards will be deposited at random times to prevent
+                      20% of all 10MB minted will be deposited into the x_10MB smart contract, increasing the amount of
+                      _0MB that can be redeemed for each x_10MB. Rewards will be deposited at random times to prevent
                       abuse.
                     </Typography>
                     <Typography variant="body2" paragraph>

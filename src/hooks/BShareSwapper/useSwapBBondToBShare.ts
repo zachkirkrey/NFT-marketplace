@@ -1,8 +1,8 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from '../useBombFinance';
 import useHandleTransactionReceipt from '../useHandleTransactionReceipt';
 // import { BigNumber } from "ethers";
-import {parseUnits} from 'ethers/lib/utils';
+import { parseUnits } from 'ethers/lib/utils';
 
 const useSwapBBondToBShare = () => {
   const bombFinance = useBombFinance();
@@ -11,11 +11,14 @@ const useSwapBBondToBShare = () => {
   const handleSwapBShare = useCallback(
     (_10BONDAmount: string) => {
       const _10BONDAmountBn = parseUnits(_10BONDAmount, 18);
-      handleTransactionReceipt(bombFinance.swap_10BONDToBShare(_10BONDAmountBn), `Swap ${_10BONDAmount} _10BOND to _10HSHARE`);
+      handleTransactionReceipt(
+        bombFinance.swap_10BONDToBShare(_10BONDAmountBn),
+        `Swap ${_10BONDAmount} 10BOND to 10HSHARE`,
+      );
     },
     [bombFinance, handleTransactionReceipt],
   );
-  return {onSwapBShare: handleSwapBShare};
+  return { onSwapBShare: handleSwapBShare };
 };
 
 export default useSwapBBondToBShare;

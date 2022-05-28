@@ -15,7 +15,7 @@ import useSuppliedUSDTBalance from '../../hooks/useTotalSuppliedUSDTBalance';
 import useSuppliedBombBalance from '../../hooks/useTotalSuppliedBombBalance';
 
 import { createGlobalStyle } from 'styled-components';
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet';
 import SupplyBomb from './components/SupplyBomb';
 
 import HomeImage from '../../assets/img/background.jpg';
@@ -27,7 +27,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
-const TITLE = 'bomb.money | Supply Assets'
+const TITLE = 'bomb.money | Supply Assets';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -49,9 +49,6 @@ const Supply = () => {
   // const xbombAPR = useXbombAPR();
 
   //const xbombTVL = xbombAPR.TVL;
-
-
-
 
   // const stakedTotalBombBalance = useSuppliedTotalBombBalance();
   // console.log("stakedTotalBombBalance", Number(stakedTotalBombBalance / 1000000000000000000).toFixed(2));
@@ -82,17 +79,12 @@ const Supply = () => {
                 <p>
                   <b>Test our single asset staking features while we finish building our new web UI!</b>
                 </p>
-
               </Alert>
-
             </Box>
           </Grid>
 
-
-
           <Box mt={5}>
             <Grid container justify="center" spacing={3}>
-
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
@@ -104,8 +96,8 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>_10MB AVAILABLE</Typography>
-                    <Typography>{Number(stakedBombBalance)} _10MB</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>10MB AVAILABLE</Typography>
+                    <Typography>{Number(stakedBombBalance)} 10MB</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -156,7 +148,6 @@ const Supply = () => {
               </Grid> */}
             </Grid>
 
-
             <Box mt={4}>
               <StyledBoardroom>
                 <StyledCardsWrapper>
@@ -165,12 +156,10 @@ const Supply = () => {
                   </StyledCardWrapper> */}
                   {/* <Spacer /> */}
                   <StyledCardWrapper>
-
                     <SupplyUSDT />
                   </StyledCardWrapper>
                   <Spacer />
                   <StyledCardWrapper>
-
                     <SupplyBomb />
                   </StyledCardWrapper>
                 </StyledCardsWrapper>
@@ -251,7 +240,7 @@ const Supply = () => {
         <UnlockWallet />
       )}
     </Page>
-  )
+  );
 };
 
 const StyledBoardroom = styled.div`

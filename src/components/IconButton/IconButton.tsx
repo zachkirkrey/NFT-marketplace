@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface IconButtonProps {
   children?: React.ReactNode;
@@ -10,7 +10,7 @@ interface IconButtonProps {
   to?: string;
 }
 
-const IconButton: React.FC<IconButtonProps> = ({children, disabled, onClick, to}) => {
+const IconButton: React.FC<IconButtonProps> = ({ children, disabled, onClick, to }) => {
   return (
     <StyledButton disabled={disabled} onClick={onClick}>
       {!!to ? <StyledLink to={to}>{children}</StyledLink> : children}
@@ -34,7 +34,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   border: 2px solid;
   border-radius: 28px;
   background-color: #171923;
-  box-shadow: ${(props) => ('0px 0px 5px 0px ' + !props.disabled ? 'rgba(251,221,76,1)' : 'grey' )};
+  box-shadow: ${(props) => ('0px 0px 5px 0px ' + !props.disabled ? 'rgba(251,221,76,1)' : 'grey')};
   color: ${(props) => (!props.disabled ? '#f9d749' : 'grey')};
   cursor: pointer;
   display: flex;
