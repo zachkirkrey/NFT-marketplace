@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import {Button} from '@material-ui/core';
-import Input, {InputProps} from '../Input';
+import { Button } from '@material-ui/core';
+import Input, { InputProps } from '../Input';
 
 interface TokenInputProps extends InputProps {
   max: number | string;
@@ -10,7 +10,7 @@ interface TokenInputProps extends InputProps {
   onSelectMax?: () => void;
 }
 
-const TokenInput: React.FC<TokenInputProps> = ({max, symbol, onChange, onSelectMax, value}) => {
+const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelectMax, value }) => {
   return (
     <StyledTokenInput>
       <StyledMaxText>

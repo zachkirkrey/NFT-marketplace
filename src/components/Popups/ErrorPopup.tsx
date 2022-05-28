@@ -1,19 +1,19 @@
-import React, {useCallback} from 'react';
-import {AlertCircle} from 'react-feather';
+import React, { useCallback } from 'react';
+import { AlertCircle } from 'react-feather';
 import styled from 'styled-components';
 
 const RowNoFlex = styled.div`
   flex-wrap: nowrap;
 `;
 
-export default function ErrorPopup({message, stack}: {message: string; stack: string}) {
+export default function ErrorPopup({ message, stack }: { message: string; stack: string }) {
   const copyErrorDetails = useCallback(async () => {
     await navigator.clipboard.writeText(`${message}\n${stack}`);
   }, [message, stack]);
 
   return (
     <RowNoFlex>
-      <div style={{paddingRight: 16}}>
+      <div style={{ paddingRight: 16 }}>
         <AlertCircle color="#FF6871" size={24} />
       </div>
       <div>

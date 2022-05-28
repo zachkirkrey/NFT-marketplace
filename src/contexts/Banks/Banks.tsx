@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Context from './context';
 import useBombFinance from '../../hooks/useBombFinance';
-import {Bank} from '../../bomb-finance';
-import config, {bankDefinitions} from '../../config';
+import { Bank } from '../../bomb-finance';
+import config, { bankDefinitions } from '../../config';
 
-const Banks: React.FC = ({children}) => {
+const Banks: React.FC = ({ children }) => {
   const [banks, setBanks] = useState<Bank[]>([]);
   const bombFinance = useBombFinance();
   const isUnlocked = bombFinance?.isUnlocked;
@@ -16,7 +16,7 @@ const Banks: React.FC = ({children}) => {
       if (bankInfo.finished) {
         if (!bombFinance.isUnlocked) continue;
 
-        console.log("bombFinance ", bombFinance)
+        console.log('bombFinance ', bombFinance);
 
         // only show pools staked by user
         const balance = await bombFinance.stakedBalanceOnBank(
@@ -32,7 +32,7 @@ const Banks: React.FC = ({children}) => {
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
         depositToken: bombFinance.externalTokens[bankInfo.depositTokenName],
-        earnToken: bankInfo.earnTokenName === '_10MB' ? bombFinance._10MB : bombFinance._10SHARE,
+        earnToken: bankInfo.earnTokenName === '10MB' ? bombFinance["10MB"] : bombFinance["10SHARE"],
       });
     }
     banks.sort((a, b) => (a.sort > b.sort ? 1 : -1));
@@ -45,7 +45,7 @@ const Banks: React.FC = ({children}) => {
     }
   }, [isUnlocked, bombFinance, fetchPools]);
 
-  return <Context.Provider value={{banks}}>{children}</Context.Provider>;
+  return <Context.Provider value={{ banks }}>{children}</Context.Provider>;
 };
 
 export default Banks;

@@ -1,6 +1,6 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import useBombFinance from '../useBombFinance';
-import {AllocationTime} from '../../bomb-finance/types';
+import { AllocationTime } from '../../bomb-finance/types';
 
 const useClaimRewardTimerBoardroom = () => {
   const [time, setTime] = useState<AllocationTime>({

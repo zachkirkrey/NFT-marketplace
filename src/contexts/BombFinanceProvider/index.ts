@@ -1,1 +1,1 @@
-export {BombFinanceProvider as default, Context} from './BombFinanceProvider';
+export { BombFinanceProvider as default, Context } from './BombFinanceProvider';

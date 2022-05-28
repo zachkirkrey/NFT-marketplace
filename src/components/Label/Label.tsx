@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import styled, {ThemeContext} from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 
 interface LabelProps {
   text?: string;
@@ -7,8 +7,8 @@ interface LabelProps {
   color?: string;
 }
 
-const Label: React.FC<LabelProps> = ({text, variant = 'secondary', color: customColor}) => {
-  const {color} = useContext(ThemeContext);
+const Label: React.FC<LabelProps> = ({ text, variant = 'secondary', color: customColor }) => {
+  const { color } = useContext(ThemeContext);
 
   let labelColor: string;
   if (customColor) {

@@ -6,7 +6,7 @@ interface ValueProps {
   value: string;
 }
 
-const Value: React.FC<ValueProps> = ({value}) => {
+const Value: React.FC<ValueProps> = ({ value }) => {
   return <StyledValue>{value}</StyledValue>;
 };
 

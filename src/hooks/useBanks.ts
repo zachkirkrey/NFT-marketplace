@@ -1,8 +1,8 @@
-import {useContext} from 'react';
-import {Context as BanksContext} from '../contexts/Banks';
+import { useContext } from 'react';
+import { Context as BanksContext } from '../contexts/Banks';
 
 const useBanks = () => {
-  const {banks} = useContext(BanksContext);
+  const { banks } = useContext(BanksContext);
   return [banks];
 };
 

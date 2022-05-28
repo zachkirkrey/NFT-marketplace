@@ -128,8 +128,8 @@ const PromotedTokensGridItem = withStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStatsUSDT('_10MB-USDT-LP');
-  const bShareFtmLpStats = useLpStats('_10SHARE-CRO-LP');
+  const bombFtmLpStats = useLpStatsUSDT('10MB-USDT-LP');
+  const bShareFtmLpStats = useLpStats('10SHARE-CRO-LP');
   const bombStats = useBombStats();
   const bShareStats = usebShareStats();
   const tBondStats = useBondStats();
@@ -176,15 +176,18 @@ const Home = () => {
     () => (tBondStats ? Number(tBondStats.priceInDollars).toFixed(2) : null),
     [tBondStats],
   );
-  const tBondPriceInCRO = useMemo(() => (tBondStats ? (Number(tBondStats.tokenInUSDT) * 10).toFixed(4) : null), [tBondStats]);
+  const tBondPriceInCRO = useMemo(
+    () => (tBondStats ? (Number(tBondStats.tokenInUSDT) * 10).toFixed(4) : null),
+    [tBondStats],
+  );
   const tBondCirculatingSupply = useMemo(
     () => (tBondStats ? String(tBondStats.circulatingSupply) : null),
     [tBondStats],
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: '_10MB-USDT-LP' });
-  const bshareLpZap = useZap({ depositTokenName: '_10SHARE-CRO-LP' });
+  const bombLpZap = useZap({ depositTokenName: '10MB-USDT-LP' });
+  const bshareLpZap = useZap({ depositTokenName: '10SHARE-CRO-LP' });
 
   const [onPresentBombZap, onDissmissBombZap] = useModal(
     <ZapModal
@@ -194,7 +197,7 @@ const Home = () => {
         bombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBombZap();
       }}
-      tokenName={'_10MB-USDT-LP'}
+      tokenName={'10MB-USDT-LP'}
     />,
   );
 
@@ -206,7 +209,7 @@ const Home = () => {
         bshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBshareZap();
       }}
-      tokenName={'_10SHARE-CRO-LP'}
+      tokenName={'10SHARE-CRO-LP'}
     />,
   );
 
@@ -216,8 +219,8 @@ const Home = () => {
         <title>{TITLE}</title>
       </Helmet>
       {/* <BackgroundImage /> */}
-      <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">_10MBUSDT.COM</Button>}>
-        _10MB USDT MAINNET STAKING!{' '}
+      <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">10MBUSDT.COM</Button>}>
+        10MB USDT MAINNET STAKING!{' '}
         <a href="https://bombUSDT.com" style={{ color: 'inherit' }}>
           Stake Bitcoin from USDT Mainnet!
         </a>
@@ -226,8 +229,8 @@ const Home = () => {
       <Grid container spacing={3}>
         {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
-            <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">_10MBUSDT.COM</Button>}>
-              _10MB USDT MAINNET STAKING! Stake Bitcoin from USDT Mainnet!
+            <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">10MBUSDT.COM</Button>}>
+              10MB USDT MAINNET STAKING! Stake Bitcoin from USDT Mainnet!
             </Alert>
           </Grid>
         </Grid> */}
@@ -241,12 +244,12 @@ const Home = () => {
                 <Box flex={1} mr={3}>
                   <h2>Welcome to Bomb</h2>
                   <p>
-                    _10MB is an algocoin which is designed to follow the price of USDT. Enjoy high yields normally only
+                    10MB is an algocoin which is designed to follow the price of USDT. Enjoy high yields normally only
                     found on high risk assets, but with exposure to USDT instead!
                   </p>
                   <p>
-                    <strong>_10MB is pegged via algorithm to a 10:1 ratio to USDT. $10 USDT = 100 _10MB PEG</strong>
-                    {/* Stake your _10MB-USDT LP in the Farm to earn _10SHARE rewards. Then stake your earned _10SHARE in the
+                    <strong>10MB is pegged via algorithm to a 10:1 ratio to USDT. $10 USDT = 100 10MB PEG</strong>
+                    {/* Stake your _10MB-USDT LP in the Farm to earn 10SHARE rewards. Then stake your earned 10SHARE in the
                 Boardroom to earn more _10MB! */}
                   </p>
                   <p>
@@ -284,10 +287,10 @@ const Home = () => {
                 Autovaults
               </Button>
               <Button href={buyBombAddress} style={{ margin: '5px' }} className={'shinyButton ' + classes.button}>
-                Buy _10MB
+                Buy 10MB
               </Button>
               <Button href={buyBShareAddress} className={'shinyButton ' + classes.button} style={{ margin: '5px' }}>
-                Buy _10SHARE
+                Buy 10SHARE
               </Button>
               <Button
                 target="_blank"
@@ -295,7 +298,7 @@ const Home = () => {
                 className="shinyButton"
                 style={{ margin: '5px' }}
               >
-                _10MB Chart
+                10MB Chart
               </Button>
               <Button
                 target="_blank"
@@ -303,7 +306,7 @@ const Home = () => {
                 className="shinyButton"
                 style={{ margin: '5px' }}
               >
-                _10SHARE Chart
+                10SHARE Chart
               </Button>
             </CardContent>
           </Card>
@@ -325,12 +328,12 @@ const Home = () => {
         {/* _10MB */}
         <Grid item xs={12} md={4}>
           <TokenCard
-            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('_10MB')}
-            tokenSymbol="_10MB"
-            tokenName="_10MB"
-            topSubtext="10 _10MB (1.0 Peg) ="
+            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('10MB')}
+            tokenSymbol="10MB"
+            tokenName="10MB"
+            topSubtext="10 10MB (1.0 Peg) ="
             mainText={`${bombPriceInUSDT ? (bombPriceInUSDT * 10).toFixed(2) : '-.----'} USDT`}
-            bottomSubtext={`$${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / _10MB`}
+            bottomSubtext={`$${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / 10MB`}
             marketCap={`$${roundAndFormatNumber(bombCirculatingSupply * bombPriceInDollars, 2)}$`}
             circulatingSupply={roundAndFormatNumber(bombCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bombTotalSupply, 2)}
@@ -341,12 +344,12 @@ const Home = () => {
         {/* _10SHARE */}
         <Grid item xs={12} md={4}>
           <TokenCard
-            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('_10SHARE')}
-            tokenSymbol="_10SHARE"
-            tokenName="_10SHARE"
+            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('10SHARE')}
+            tokenSymbol="10SHARE"
+            tokenName="10SHARE"
             topSubtext="Current Price"
             mainText={`${bSharePriceInUSDT ? Number(bSharePriceInUSDT).toFixed(2) : '-.----'} USDT`}
-            bottomSubtext={`$${bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / _10SHARE`}
+            bottomSubtext={`$${bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / 10SHARE`}
             marketCap={`$${roundAndFormatNumber((bShareCirculatingSupply * bSharePriceInDollars).toFixed(2), 2)}`}
             circulatingSupply={roundAndFormatNumber(bShareCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(bShareTotalSupply, 2)}
@@ -357,13 +360,13 @@ const Home = () => {
         {/* _10BOND */}
         <Grid item xs={12} md={4}>
           <TokenCard
-            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('_10BOND')}
-            tokenSymbol="_10BOND"
-            tokenName="_10BOND"
-            topSubtext="10 _10BOND"
-            mainText={tBondPriceInCRO ? tBondPriceInCRO + " USDT" : '-.----'}
+            onMetamaskFoxIconClick={() => bombFinance.watchAssetInMetamask('10BOND')}
+            tokenSymbol="10BOND"
+            tokenName="10BOND"
+            topSubtext="10 10BOND"
+            mainText={tBondPriceInCRO ? tBondPriceInCRO + ' USDT' : '-.----'}
             USDT
-            bottomSubtext={`$${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} / _10BOND`}
+            bottomSubtext={`$${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} / 10BOND`}
             marketCap={`$${roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}`}
             circulatingSupply={roundAndFormatNumber(tBondCirculatingSupply, 2)}
             totalSupply={roundAndFormatNumber(tBondTotalSupply, 2)}
@@ -373,12 +376,12 @@ const Home = () => {
 
         <Grid item xs={12} md={6}>
           <TokenSwapCard
-            title="_10MB-USDT LP"
+            title="10MB-USDT LP"
             // title="_10MB-USDT USDT LP"
-            tokenSymbol="_10MB-USDT-LP"
+            tokenSymbol="10MB-USDT-LP"
             onZapInClick={onPresentBombZap}
             zapInDisabled
-            swapPrice={`${bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} _10MB / 
+            swapPrice={`${bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} 10MB / 
             ${bombLPStats?.croAmount ? bombLPStats?.croAmount : '-.--'} USDT`}
             price={`$${bombLPStats?.priceOfOne ? bombLPStats.priceOfOne : '-.--'}`}
             liquidity={`$${bombLPStats?.totalLiquidity ? roundAndFormatNumber(bombLPStats.totalLiquidity, 2) : '-.--'}`}
@@ -387,11 +390,11 @@ const Home = () => {
         </Grid>
         <Grid item xs={12} md={6}>
           <TokenSwapCard
-            title="_10SHARE-CRO LP"
+            title="10SHARE-CRO LP"
             // title="_10SHARE-CRO USDT LP"
-            tokenSymbol="_10SHARE-CRO-LP"
+            tokenSymbol="10SHARE-CRO-LP"
             onZapInClick={onPresentBombZap}
-            swapPrice={`${bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} _10SHARE /
+            swapPrice={`${bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} 10SHARE /
             ${bshareLPStats?.croAmount ? bshareLPStats?.croAmount : '-.--'} CRO`}
             price={`$${bshareLPStats?.priceOfOne ? bshareLPStats.priceOfOne : '-.--'}`}
             liquidity={`$${
@@ -403,7 +406,7 @@ const Home = () => {
             <CardContent align="center">
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="_10SHARE-CRO-LP" />
+                  <TokenSymbol symbol="10SHARE-CRO-LP" />
                 </CardIcon>
               </Box>
               <h2>_10SHARE-CRO USDT LP</h2>

@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
@@ -7,10 +7,10 @@ const useHarvestFromBoardroom = () => {
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
   const handleReward = useCallback(() => {
-    handleTransactionReceipt(bombFinance.harvestCashFromBoardroom(), 'Claim _10MB from Boardroom');
+    handleTransactionReceipt(bombFinance.harvestCashFromBoardroom(), 'Claim 10MB from Boardroom');
   }, [bombFinance, handleTransactionReceipt]);
 
-  return {onReward: handleReward};
+  return { onReward: handleReward };
 };
 
 export default useHarvestFromBoardroom;

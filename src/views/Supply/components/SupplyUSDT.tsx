@@ -13,7 +13,7 @@ import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 //import useXbombBalance from '../../../hooks/useXbombBalance';
 import useUSDTStats from '../../../hooks/useUSDTStats';
-import useApprove, {ApprovalState} from '../../../hooks/useApprove';
+import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
 import MetamaskFox from '../../../assets/img/metamask-fox.svg';
@@ -26,8 +26,6 @@ import useBombFinance from '../../../hooks/useBombFinance';
 import TokenSymbol from '../../../components/TokenSymbol';
 import useSupplyToUSDT from '../../../hooks/useSupplyToUSDT';
 import useRedeemFromMMF from '../../../hooks/useRedeemFromUSDT';
-
-
 
 const SupplyUSDT: React.FC = () => {
   const bombFinance = useBombFinance();
@@ -44,21 +42,15 @@ const SupplyUSDT: React.FC = () => {
   // const xbombRate = Number(xbombBalance) / 1000000000000000000;
   // const xbombToBombEquivalent = Number(getDisplayBalance(stakedBalance)) * xbombRate;
 
-  const USDTPriceInDollars = useMemo(
-    () => (USDTStats ? Number(USDTStats).toFixed(2) : null),
-    [USDTStats],
-  );
+  const USDTPriceInDollars = useMemo(() => (USDTStats ? Number(USDTStats).toFixed(2) : null), [USDTStats]);
 
   const stakedTokenPriceInDollars = Number(USDTPriceInDollars);
 
-  const tokenPriceInDollars = useMemo(
-    () => {
-      return stakedTokenPriceInDollars
-        ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
-        : null;
-    },
-    [stakedTokenPriceInDollars, stakedBalance],
-  );
+  const tokenPriceInDollars = useMemo(() => {
+    return stakedTokenPriceInDollars
+      ? (Number(stakedTokenPriceInDollars) * Number(getDisplayBalance(stakedBalance))).toFixed(2).toString()
+      : null;
+  }, [stakedTokenPriceInDollars, stakedBalance]);
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
   const { onStake } = useSupplyToUSDT();
@@ -92,9 +84,9 @@ const SupplyUSDT: React.FC = () => {
         <CardContent>
           <StyledCardContentInner>
             <StyledCardHeader>
-                 <Typography variant="h5" component="h2">
-              Supply USDT
-            </Typography>
+              <Typography variant="h5" component="h2">
+                Supply USDT
+              </Typography>
               <CardIcon>
                 <TokenSymbol symbol="USDT" />
               </CardIcon>
@@ -132,21 +124,15 @@ const SupplyUSDT: React.FC = () => {
                   Approve USDT
                 </Button>
               ) : (
-                  <>
-                    {approveStatusW !== ApprovalState.APPROVED ? (
-            
-                      <IconButton onClick={approveW}>
-                        A
-                      </IconButton>
-                    ) : (
-                      <IconButton onClick={onPresentWithdraw}>
-                        <RemoveIcon color={'yellow'} />
-                      </IconButton>
-                        
-                          
-                            )}
-                          
-                           
+                <>
+                  {approveStatusW !== ApprovalState.APPROVED ? (
+                    <IconButton onClick={approveW}>A</IconButton>
+                  ) : (
+                    <IconButton onClick={onPresentWithdraw}>
+                      <RemoveIcon color={'yellow'} />
+                    </IconButton>
+                  )}
+
                   <StyledActionSpacer />
                   <IconButton onClick={onPresentDeposit}>
                     <AddIcon color={'yellow'} />

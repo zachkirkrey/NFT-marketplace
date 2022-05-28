@@ -1,8 +1,8 @@
-import { AbiCoder } from "ethers/lib/utils";
+import { AbiCoder } from 'ethers/lib/utils';
 
 export type Deployments = {
-    [contractName: string]: {
-      address: string;
-      abi: any[];
-    };
+  [contractName: string]: {
+    address: string;
+    abi: any[];
   };
+};

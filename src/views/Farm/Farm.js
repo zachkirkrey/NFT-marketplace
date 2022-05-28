@@ -35,7 +35,7 @@ const Farm = () => {
             <Container maxWidth="lg">
               <Grid container justifyContent="center">
                 <Grid item lg={10}>
-                  <PageHeader title="Farm" subtitle="Earn _10SHARE by staking USDT LP" />
+                  <PageHeader title="Farm" subtitle="Earn 10MB or 10SHARE by staking USDT LP" />
                 </Grid>
               </Grid>
 

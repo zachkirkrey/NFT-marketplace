@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
@@ -8,11 +8,11 @@ const useStakeToBomb = () => {
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(bombFinance.stakeToBomb(amount), `Stake ${amount} _10MB for x_10MB`);
+      handleTransactionReceipt(bombFinance.stakeToBomb(amount), `Stake ${amount} 10MB for X10MB`);
     },
     [bombFinance, handleTransactionReceipt],
   );
-  return {onStake: handleStake};
+  return { onStake: handleStake };
 };
 
 export default useStakeToBomb;

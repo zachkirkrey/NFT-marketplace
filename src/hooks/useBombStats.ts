@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import useBombFinance from './useBombFinance';
-import {TokenStat} from '../bomb-finance/types';
+import { TokenStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
 const useBombStats = () => {
   const [stat, setStat] = useState<TokenStat>();
-  const {fastRefresh} = useRefresh();
+  const { fastRefresh } = useRefresh();
   const bombFinance = useBombFinance();
 
   useEffect(() => {

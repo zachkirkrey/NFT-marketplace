@@ -1,8 +1,8 @@
-import {useCallback, useEffect, useState} from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import {BigNumber} from 'ethers';
+import { BigNumber } from 'ethers';
 import useBombFinance from './useBombFinance';
-import {ContractName} from '../bomb-finance';
+import { ContractName } from '../bomb-finance';
 import config from '../config';
 
 const useStakedBalance = (poolName: ContractName, poolId: Number) => {

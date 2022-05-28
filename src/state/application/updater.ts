@@ -1,13 +1,13 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
-import {useWallet} from 'use-wallet';
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useWallet } from 'use-wallet';
 import useDebounce from '../../hooks/useDebounce';
 import useIsWindowVisible from '../../hooks/useIsWindowVisible';
-import {updateBlockNumber} from './actions';
-import {getDefaultProvider} from '../../utils/provider';
+import { updateBlockNumber } from './actions';
+import { getDefaultProvider } from '../../utils/provider';
 
 export default function Updater(): null {
-  const {ethereum, chainId} = useWallet();
+  const { ethereum, chainId } = useWallet();
 
   const dispatch = useDispatch();
 
@@ -25,8 +25,8 @@ export default function Updater(): null {
     (blockNumber: number) => {
       setState((state) => {
         if (chainId === state.chainId) {
-          if (typeof state.blockNumber !== 'number') return {chainId, blockNumber};
-          return {chainId, blockNumber: Math.max(blockNumber, state.blockNumber)};
+          if (typeof state.blockNumber !== 'number') return { chainId, blockNumber };
+          return { chainId, blockNumber: Math.max(blockNumber, state.blockNumber) };
         }
         return state;
       });
@@ -38,7 +38,7 @@ export default function Updater(): null {
   // @ts-ignore
   useEffect(() => {
     if (!ethereum || !chainId || !windowVisible) return undefined;
-    setState({chainId, blockNumber: null});
+    setState({ chainId, blockNumber: null });
 
     const provider = getDefaultProvider();
     provider

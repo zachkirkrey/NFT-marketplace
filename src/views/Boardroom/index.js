@@ -1,1 +1,1 @@
-export {default} from './Boardroom';
+export { default } from './Boardroom';

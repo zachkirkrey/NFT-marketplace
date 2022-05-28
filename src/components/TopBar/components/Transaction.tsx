@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {CheckCircle, Triangle} from 'react-feather';
+import { CheckCircle, Triangle } from 'react-feather';
 
 import MiniLoader from '../../MiniLoader';
-import {TransactionDetails} from '../../../state/transactions/reducer';
+import { TransactionDetails } from '../../../state/transactions/reducer';
 import config from '../../../config';
-import {RowFixed} from '../../Row';
+import { RowFixed } from '../../Row';
 
 const TransactionWrapper = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const TransactionStatusText = styled.div`
   }
 `;
 
-const TransactionState = styled.a<{pending: boolean; success?: boolean}>`
+const TransactionState = styled.a<{ pending: boolean; success?: boolean }>`
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -34,22 +34,27 @@ const TransactionState = styled.a<{pending: boolean; success?: boolean}>`
   color: ${(props) => props.theme.color.grey[400]};
 `;
 
-const IconWrapper = styled.div<{pending: boolean; success?: boolean}>`
-  color: ${({pending, success, theme}) => (pending ? theme.primary1 : success ? theme.green1 : theme.red1)};
+const IconWrapper = styled.div<{ pending: boolean; success?: boolean }>`
+  color: ${({ pending, success, theme }) => (pending ? theme.primary1 : success ? theme.green1 : theme.red1)};
 `;
 
 interface TransactionProps {
   tx: TransactionDetails;
 }
 
-const Transaction: React.FC<TransactionProps> = ({tx}) => {
+const Transaction: React.FC<TransactionProps> = ({ tx }) => {
   const summary = tx.summary;
   const pending = !tx.receipt;
   const success = !pending && tx && (tx.receipt?.status === 1 || typeof tx.receipt?.status === 'undefined');
 
   return (
     <TransactionWrapper>
-      <TransactionState href={`${config.cronoscanUrl}/tx/${tx.hash}`} target="_blank" pending={pending} success={success}>
+      <TransactionState
+        href={`${config.cronoscanUrl}/tx/${tx.hash}`}
+        target="_blank"
+        pending={pending}
+        success={success}
+      >
         <RowFixed>
           <TransactionStatusText>{summary ?? tx.hash} ↗</TransactionStatusText>
         </RowFixed>

@@ -1,1 +1,1 @@
-export {default} from './PercentInput';
+export { default } from './PercentInput';

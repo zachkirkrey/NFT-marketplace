@@ -1,10 +1,10 @@
-import React, {useCallback, useContext, useEffect} from 'react';
-import {X} from 'react-feather';
-import {useSpring} from 'react-spring/web';
-import styled, {ThemeContext} from 'styled-components';
-import {animated} from 'react-spring';
-import {PopupContent} from '../../state/application/actions';
-import {useRemovePopup} from '../../state/application/hooks';
+import React, { useCallback, useContext, useEffect } from 'react';
+import { X } from 'react-feather';
+import { useSpring } from 'react-spring/web';
+import styled, { ThemeContext } from 'styled-components';
+import { animated } from 'react-spring';
+import { PopupContent } from '../../state/application/actions';
+import { useRemovePopup } from '../../state/application/hooks';
 import TransactionPopup from './TransactionPopup';
 import ErrorPopup from './ErrorPopup';
 
@@ -21,7 +21,7 @@ export const Popup = styled.div`
   display: inline-block;
   width: 100%;
   padding: 1em;
-  background-color: ${({theme}) => theme.color.grey[700]};
+  background-color: ${({ theme }) => theme.color.grey[700]};
   position: relative;
   border-radius: 10px;
   padding: 20px;
@@ -38,7 +38,7 @@ const Fader = styled.div`
   left: 0px;
   width: 100%;
   height: 2px;
-  background-color: ${({theme}) => theme.color.grey[400]};
+  background-color: ${({ theme }) => theme.color.grey[400]};
 `;
 
 const AnimatedFader = animated(Fader);
@@ -71,21 +71,21 @@ export default function PopupItem({
   let popupContent;
   if ('txn' in content) {
     const {
-      txn: {hash, success, summary},
+      txn: { hash, success, summary },
     } = content;
     popupContent = <TransactionPopup hash={hash} success={success} summary={summary} />;
   }
   if ('error' in content) {
     const {
-      error: {message, stack},
+      error: { message, stack },
     } = content;
     popupContent = <ErrorPopup message={message} stack={stack} />;
   }
 
   const faderStyle = useSpring({
-    from: {width: '100%'},
-    to: {width: '0%'},
-    config: {duration: removeAfterMs ?? undefined},
+    from: { width: '100%' },
+    to: { width: '0%' },
+    config: { duration: removeAfterMs ?? undefined },
   });
 
   return (

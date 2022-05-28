@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import config from '../../config';
 import Dial from '../Dial';
-import Countdown, {CountdownRenderProps} from 'react-countdown';
+import Countdown, { CountdownRenderProps } from 'react-countdown';
 import Button from '../Button';
 
 interface LaunchCountdownProps {
@@ -11,12 +11,12 @@ interface LaunchCountdownProps {
   descriptionLink: string;
 }
 
-const LaunchCountdown: React.FC<LaunchCountdownProps> = ({deadline, description, descriptionLink}) => {
+const LaunchCountdown: React.FC<LaunchCountdownProps> = ({ deadline, description, descriptionLink }) => {
   const percentage =
     ((Date.now() - config.baseLaunchDate.getTime()) / (deadline.getTime() - config.baseLaunchDate.getTime())) * 100;
 
   const countdownRenderer = (countdownProps: CountdownRenderProps) => {
-    const {days, hours, minutes, seconds} = countdownProps;
+    const { days, hours, minutes, seconds } = countdownProps;
     const h = String(days * 24 + hours);
     const m = String(minutes);
     const s = String(seconds);

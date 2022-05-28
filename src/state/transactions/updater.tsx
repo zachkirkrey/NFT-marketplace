@@ -1,14 +1,14 @@
-import {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useWallet} from 'use-wallet';
-import {useAddPopup, useBlockNumber} from '../application/hooks';
-import {AppDispatch, AppState} from '../index';
-import {checkedTransaction, finalizeTransaction} from './actions';
-import {getDefaultProvider} from '../../utils/provider';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useWallet } from 'use-wallet';
+import { useAddPopup, useBlockNumber } from '../application/hooks';
+import { AppDispatch, AppState } from '../index';
+import { checkedTransaction, finalizeTransaction } from './actions';
+import { getDefaultProvider } from '../../utils/provider';
 
 export function shouldCheck(
   lastBlockNumber: number,
-  tx: {addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number},
+  tx: { addedTime: number; receipt?: {}; lastCheckedBlockNumber?: number },
 ): boolean {
   if (tx.receipt) return false;
   if (!tx.lastCheckedBlockNumber) return true;
@@ -28,7 +28,7 @@ export function shouldCheck(
 }
 
 export default function Updater(): null {
-  const {chainId, ethereum} = useWallet();
+  const { chainId, ethereum } = useWallet();
 
   const lastBlockNumber = useBlockNumber();
 
@@ -81,7 +81,7 @@ export default function Updater(): null {
                 hash,
               );
             } else {
-              dispatch(checkedTransaction({chainId, hash, blockNumber: lastBlockNumber}));
+              dispatch(checkedTransaction({ chainId, hash, blockNumber: lastBlockNumber }));
             }
           })
           .catch((error) => {

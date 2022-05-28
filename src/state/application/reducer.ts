@@ -1,5 +1,12 @@
-import {createReducer, nanoid} from '@reduxjs/toolkit';
-import {addPopup, PopupContent, removePopup, toggleWalletModal, toggleSettingsMenu, updateBlockNumber} from './actions';
+import { createReducer, nanoid } from '@reduxjs/toolkit';
+import {
+  addPopup,
+  PopupContent,
+  removePopup,
+  toggleWalletModal,
+  toggleSettingsMenu,
+  updateBlockNumber,
+} from './actions';
 
 type PopupList = Array<{
   key: string;
@@ -9,7 +16,7 @@ type PopupList = Array<{
 }>;
 
 export interface ApplicationState {
-  blockNumber: {[chainId: number]: number};
+  blockNumber: { [chainId: number]: number };
   popupList: PopupList;
   walletModalOpen: boolean;
   settingsMenuOpen: boolean;
@@ -25,7 +32,7 @@ const initialState: ApplicationState = {
 export default createReducer(initialState, (builder) =>
   builder
     .addCase(updateBlockNumber, (state, action) => {
-      const {chainId, blockNumber} = action.payload;
+      const { chainId, blockNumber } = action.payload;
       if (typeof state.blockNumber[chainId] !== 'number') {
         state.blockNumber[chainId] = blockNumber;
       } else {
@@ -38,7 +45,7 @@ export default createReducer(initialState, (builder) =>
     .addCase(toggleSettingsMenu, (state) => {
       state.settingsMenuOpen = !state.settingsMenuOpen;
     })
-    .addCase(addPopup, (state, {payload: {content, key, removeAfterMs = 15000}}) => {
+    .addCase(addPopup, (state, { payload: { content, key, removeAfterMs = 15000 } }) => {
       state.popupList = (key ? state.popupList.filter((popup) => popup.key !== key) : state.popupList).concat([
         {
           key: key || nanoid(),
@@ -48,7 +55,7 @@ export default createReducer(initialState, (builder) =>
         },
       ]);
     })
-    .addCase(removePopup, (state, {payload: {key}}) => {
+    .addCase(removePopup, (state, { payload: { key } }) => {
       state.popupList.forEach((p) => {
         if (p.key === key) {
           p.show = false;

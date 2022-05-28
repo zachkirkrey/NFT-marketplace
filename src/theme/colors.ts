@@ -35,6 +35,17 @@ export const grey = {
   900: '#212121',
 };
 
+export const mint = {
+  yellow: '#F6D750',
+  white: '#FFFFFF',
+  blue: '#5298FF',
+  gray: '#818181',
+  redeem: '#0C3B81',
+  bg: '#061628',
+  divBg: '#071F3D',
+  divBgDark: '#06101A',
+};
+
 export const bg = '#000000';
 
 export const teal = {

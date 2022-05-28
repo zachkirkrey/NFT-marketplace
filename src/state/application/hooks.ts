@@ -1,11 +1,11 @@
-import {useCallback, useMemo} from 'react';
-import {addPopup, PopupContent, removePopup, toggleWalletModal, toggleSettingsMenu} from './actions';
-import {useSelector, useDispatch} from 'react-redux';
-import {AppState} from '../index';
-import {useWallet} from 'use-wallet';
+import { useCallback, useMemo } from 'react';
+import { addPopup, PopupContent, removePopup, toggleWalletModal, toggleSettingsMenu } from './actions';
+import { useSelector, useDispatch } from 'react-redux';
+import { AppState } from '../index';
+import { useWallet } from 'use-wallet';
 
 export function useBlockNumber(): number | undefined {
-  const {chainId} = useWallet();
+  const { chainId } = useWallet();
   return useSelector((state: AppState) => state.application.blockNumber[chainId ?? -1]);
 }
 
@@ -33,7 +33,7 @@ export function useAddPopup(): (content: PopupContent, key?: string) => void {
 
   return useCallback(
     (content: PopupContent, key?: string) => {
-      dispatch(addPopup({content, key}));
+      dispatch(addPopup({ content, key }));
     },
     [dispatch],
   );
@@ -44,7 +44,7 @@ export function useRemovePopup(): (key: string) => void {
   const dispatch = useDispatch();
   return useCallback(
     (key: string) => {
-      dispatch(removePopup({key}));
+      dispatch(removePopup({ key }));
     },
     [dispatch],
   );
