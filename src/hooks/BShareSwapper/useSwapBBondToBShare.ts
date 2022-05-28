@@ -13,7 +13,7 @@ const useSwapBBondToBShare = () => {
       const _10BONDAmountBn = parseUnits(_10BONDAmount, 18);
       handleTransactionReceipt(
         bombFinance.swap_10BONDToBShare(_10BONDAmountBn),
-        `Swap ${_10BONDAmount} _10BOND to _10HSHARE`,
+        `Swap ${_10BONDAmount} 10BOND to 10HSHARE`,
       );
     },
     [bombFinance, handleTransactionReceipt],

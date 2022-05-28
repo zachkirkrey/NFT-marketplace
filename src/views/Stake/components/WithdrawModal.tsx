@@ -35,7 +35,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max
 
   return (
     <Modal>
-      <ModalTitle text={`Unstake ${tokenName} and Receive _10MB`} />
+      <ModalTitle text={`Unstake ${tokenName} and Receive 10MB`} />
       <TokenInput
         onSelectMax={handleSelectMax}
         onChange={handleChange}

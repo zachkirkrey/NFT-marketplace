@@ -77,7 +77,7 @@ export const PromotedTokenCard: React.FC<PromotedTokenCardProps> = ({ type }) =>
       <Grid container justifyContent="space-between" spacing={2}>
         <Grid item xs={12} sm="auto">
           <Box display="flex" justifyContent="space-between">
-            <TokenSymbol symbol="_10MB" size={48} />
+            <TokenSymbol symbol="10MB" size={48} />
             <Box display={{ sm: 'none', md: 'none', lg: 'none', xl: 'none' }}>
               <StyledIconButton>
                 <LaunchIcon />

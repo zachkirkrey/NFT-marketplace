@@ -33,13 +33,13 @@ const Bond: React.FC = () => {
 
   const bondsPurchasable = useBondsPurchasable();
 
-  const bondBalance = useTokenBalance(bombFinance?._10BOND);
+  const bondBalance = useTokenBalance(bombFinance["10BOND"]);
 
   const handleBuyBonds = useCallback(
     async (amount: string) => {
       const tx = await bombFinance.buyBonds(amount);
       addTransaction(tx, {
-        summary: `Buy ${Number(amount).toFixed(2)} _10BOND with ${amount} _10MB`,
+        summary: `Buy ${Number(amount).toFixed(2)} 10BOND with ${amount} 10MB`,
       });
     },
     [bombFinance, addTransaction],
@@ -48,7 +48,7 @@ const Bond: React.FC = () => {
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
       const tx = await bombFinance.redeemBonds(amount);
-      addTransaction(tx, { summary: `Redeem ${amount} _10BOND` });
+      addTransaction(tx, { summary: `Redeem ${amount} 10BOND` });
     },
     [bombFinance, addTransaction],
   );
@@ -92,14 +92,14 @@ const Bond: React.FC = () => {
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Purchase"
-                  fromToken={bombFinance._10MB}
-                  fromTokenName="_10MB"
-                  toToken={bombFinance._10BOND}
-                  toTokenName="_10BOND"
+                  fromToken={bombFinance["10MB"]}
+                  fromTokenName="10MB"
+                  toToken={bombFinance["10BOND"]}
+                  toTokenName="10BOND"
                   priceDesc={
                     !isBondPurchasable
-                      ? '_10MB is over peg'
-                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' _10BOND available for purchase'
+                      ? '10MB is over peg'
+                      : getDisplayBalance(bondsPurchasable, 18, 4) + ' 10BOND available for purchase'
                   }
                   onExchange={handleBuyBonds}
                   disabled={!bondStat || isBondRedeemable}
@@ -107,29 +107,29 @@ const Bond: React.FC = () => {
               </StyledCardWrapper>
               <StyledStatsWrapper>
                 <ExchangeStat
-                  tokenName="10 _10MB"
+                  tokenName="10 10MB"
                   description="Last-Hour TWAP Price"
                   //price={Number(bombStat?.tokenInUSDT).toFixed(4) || '-'}
                   price={bondScale || '-'}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
-                  tokenName="10 _10BOND"
-                  description="Current Price: (_10MB)^2"
+                  tokenName="10 10BOND"
+                  description="Current Price: (10MB)^2"
                   price={(Number(bondStat?.tokenInUSDT) * 10).toFixed(2) || '-'}
                 />
               </StyledStatsWrapper>
               <StyledCardWrapper>
                 <ExchangeCard
                   action="Redeem"
-                  fromToken={bombFinance._10BOND}
-                  fromTokenName="_10BOND"
-                  toToken={bombFinance._10MB}
-                  toTokenName="_10MB"
-                  priceDesc={`${getDisplayBalance(bondBalance)} _10BOND Available in wallet`}
+                  fromToken={bombFinance["10BOND"]}
+                  fromTokenName="10BOND"
+                  toToken={bombFinance["10MB"]}
+                  toTokenName="10MB"
+                  priceDesc={`${getDisplayBalance(bondBalance)} 10BOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when 10 _10MB > ${BOND_REDEEM_PRICE}USDT` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when 10 10MB > ${BOND_REDEEM_PRICE}USDT` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

@@ -39,7 +39,7 @@ const Sbs: React.FC = () => {
   const [_10BONDAmount, set_10BONDAmount] = useState('');
   const [bshareAmount, setBshareAmount] = useState('');
 
-  const [approveStatus, approve] = useApprove(bombFinance._10BOND, bombFinance.contracts.BShareSwapper.address);
+  const [approveStatus, approve] = useApprove(bombFinance["10BOND"], bombFinance.contracts.BShareSwapper.address);
   const { onSwapBShare } = useSwapBBondToBShare();
   const bshareSwapperStat = useBShareSwapperStats(account);
 
@@ -105,7 +105,7 @@ const Sbs: React.FC = () => {
         {!!account ? (
           <>
             <Route exact path={path}>
-              <PageHeader title="_10BOND -> _10HSHARE Swap" subtitle="Swap _10BOND to _10HSHARE" />
+              <PageHeader title="10BOND -> 10HSHARE Swap" subtitle="Swap 10BOND to 10HSHARE" />
             </Route>
             <Box mt={5}>
               <Grid container justify="center" spacing={6}>
@@ -115,11 +115,11 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>_10BONDs</StyledCardTitle>
+                            <StyledCardTitle>10BONDs</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={bombFinance._10BOND.symbol} size={54} />
+                                  <TokenSymbol symbol={bombFinance["10BOND"].symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
@@ -129,10 +129,10 @@ const Sbs: React.FC = () => {
                                 onChange={handle_10BONDChange}
                                 value={_10BONDAmount}
                                 max={bondBalance}
-                                symbol="_10BOND"
+                                symbol="10BOND"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${bondBalance} _10BOND Available in Wallet`}</StyledDesc>
+                            <StyledDesc>{`${bondBalance} 10BOND Available in Wallet`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -142,11 +142,11 @@ const Sbs: React.FC = () => {
                       <Card>
                         <CardContent>
                           <StyledCardContentInner>
-                            <StyledCardTitle>_10HSHARE</StyledCardTitle>
+                            <StyledCardTitle>10HSHARE</StyledCardTitle>
                             <StyledExchanger>
                               <StyledToken>
                                 <StyledCardIcon>
-                                  <TokenSymbol symbol={bombFinance._10SHARE.symbol} size={54} />
+                                  <TokenSymbol symbol={bombFinance["10SHARE"].symbol} size={54} />
                                 </StyledCardIcon>
                               </StyledToken>
                             </StyledExchanger>
@@ -156,10 +156,10 @@ const Sbs: React.FC = () => {
                                 onChange={handleBShareChange}
                                 value={bshareAmount}
                                 max={bshareBalance}
-                                symbol="_10HSHARE"
+                                symbol="10HSHARE"
                               ></TokenInput>
                             </Grid>
-                            <StyledDesc>{`${bshareBalance} _10SHARE Available in Swapper`}</StyledDesc>
+                            <StyledDesc>{`${bshareBalance} 10SHARE Available in Swapper`}</StyledDesc>
                           </StyledCardContentInner>
                         </CardContent>
                       </Card>
@@ -183,7 +183,7 @@ const Sbs: React.FC = () => {
                             onClick={approve}
                             size="medium"
                           >
-                            Approve _10BOND
+                            Approve 10BOND
                           </Button>
                         ) : (
                           <Button

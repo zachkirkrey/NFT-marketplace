@@ -1,8 +1,32 @@
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Wrapper, PriceWrapper, InputWrapper } from './MintRedeem.styles';
 import triangle from '../../../assets/img/triangle.svg';
-import { Button} from '@material-ui/core';
 
+import useApprove, { ApprovalState } from '../../../hooks/useApprove';
+import useModal from '../../../hooks/useModal';
+import useCatchError from '../../../hooks/useCatchError';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { useWallet } from 'use-wallet';
+import UnlockWallet from '../../../components/UnlockWallet';
+import ExchangeModal from './ExchangeModal';
+import PageHeader from '../../../components/PageHeader';
+import ExchangeCard from './ExchangeCard';
+import styled from 'styled-components';
+import Spacer from '../../../components/Spacer';
+import useBondStats from '../../../hooks/useBondStats';
+import useBombFinance from '../../../hooks/useBombFinance';
+import useCashPriceInLastTWAP from '../../../hooks/useCashPriceInLastTWAP';
+import { useTransactionAdder } from '../../../state/transactions/hooks';
+import ExchangeStat from './ExchangeStat';
+import useTokenBalance from '../../../hooks/useTokenBalance';
+import useBondsPurchasable from '../../../hooks/useBondsPurchasable';
+import { getDisplayBalance } from '../../../utils/formatBalance';
+import { BOND_REDEEM_PRICE, BOND_REDEEM_PRICE_BN } from '../../../bomb-finance/constants';
+import { Alert } from '@material-ui/lab';
+
+import { Box, Grid, Button, Card } from '@material-ui/core';
+import { Helmet } from 'react-helmet';
+import { BigNumber } from 'ethers';
 
 type MorR = 'mint' | 'redeem';
 
@@ -11,6 +35,56 @@ export default function MintRedeem() {
   const [redeem, setRedeem] = useState('');
   const [mintUsdt, setMintUsdt] = useState('');
   const [mintShare, setMintShare] = useState('');
+
+    const { account } = useWallet();
+    const { path } = useRouteMatch();
+    const bombFinance = useBombFinance();
+    const addTransaction = useTransactionAdder();
+    const bondStat = useBondStats();
+    const cashPrice = useCashPriceInLastTWAP();
+  
+    const { Pool } = bombFinance.contracts;
+  
+    const catchError = useCatchError();
+  
+  
+    const handleMint10MB = useCallback(async () => {
+      const usdtString = BigNumber.from(Math.floor(Number(mintUsdt) * Math.pow(10, 6))).toString()
+      const _10SHAREString = BigNumber.from(Math.floor(Number(mintShare) * Math.pow(10, 9))).mul(Math.pow(10, 9)).toString()
+
+      console.log("usdtString ", usdtString)
+      console.log("_10SHAREString ", _10SHAREString)
+
+      const tx = await Pool.mint(usdtString, _10SHAREString, '0');
+      addTransaction(tx, { summary: `Mint 10MB` });
+    }, [mintUsdt, Pool, mintShare, addTransaction]);
+    const handleRedeem10MB = useCallback(async () => {
+      const _10MBString = BigNumber.from(Math.floor(Number(redeem) * Math.pow(10, 9))).mul(Math.pow(10, 9)).toString()
+
+      const tx = await Pool.redeem(_10MBString, '0', '0');
+      addTransaction(tx, { summary: `Redeem 10MB` });
+    }, [Pool, redeem, addTransaction]);
+  
+    const handleCollectRedeem10MB = useCallback(async () => {
+      const tx = await Pool.collectRedemption();
+      addTransaction(tx, { summary: `Redeem 10MB` });
+    }, [Pool, addTransaction]);
+  
+    const isBondRedeemable = cashPrice.gt(BOND_REDEEM_PRICE_BN);
+  
+    console.log('bondStat ', bondStat);
+  
+    const bondScale = (Number(cashPrice) / 100000).toFixed(2);
+  
+    console.log('bondStat ', bondStat);
+    console.log('isBondRedeemable ', isBondRedeemable);
+  
+    const [approveShareForMintStatus, approveShareForMint] = useApprove(bombFinance["10SHARE"], Pool.address);
+    const [approveUSDTForMintStatus, approveUSDTForMint] = useApprove(bombFinance.USDT, Pool.address);
+  
+    const [approve10MBForRedeemStatus, approve10MBForRedeem] = useApprove(bombFinance["10MB"], Pool.address);
+  
+    const _10SHAREbalance = useTokenBalance(bombFinance["10SHARE"]);
 
   return (
     <Wrapper>
@@ -36,7 +110,7 @@ export default function MintRedeem() {
             </div>
             <div className="mintTo">
               <PriceContent
-                value={Number((Number(+mintUsdt * 0.77) + Number(+mintShare * 0.77)).toFixed(2))}
+                value={0}
                 type="10MB"
                 border="divBgDark"
                 color="blue"
@@ -51,10 +125,10 @@ export default function MintRedeem() {
               <img src={triangle} alt="triangle icon" />
             </div>
             <div className="redeemTo">
-              <PriceContent value={+(Number(redeem) * 0.77).toFixed(2)} type="USDT" border="divBgDark" color="blue" />
+              <PriceContent value={+(Number(0)).toFixed(2)} type="USDT" border="divBgDark" color="blue" />
               <span>+</span>
               <PriceContent
-                value={+(Number(redeem) * 0.77).toFixed(2)}
+                value={+(Number(0)).toFixed(2)}
                 type="10SHARE"
                 border="divBgDark"
                 color="blue"
@@ -63,10 +137,10 @@ export default function MintRedeem() {
             <div className="amountCollect">
               <p>Amount to collect</p>
               <div>
-                <PriceContent value={+(Number(redeem) * 0.77).toFixed(2)} type="USDT" border="yellow" color="white" />
+                <PriceContent value={+(Number(0)).toFixed(2)} type="USDT" border="yellow" color="white" />
                 <span>+</span>
                 <PriceContent
-                  value={+(Number(redeem) * 0.77).toFixed(2)}
+                  value={+(Number(0)).toFixed(2)}
                   type="10SHARE"
                   border="yellow"
                   color="white"
@@ -77,27 +151,49 @@ export default function MintRedeem() {
         )}
         <div className="info">
           <div>
-            <p>10_10MB = 0.77 USDT</p>
+            <p>10 10MB = 0.77 USDT</p>
             <p>Last-Hour TWAP Price</p>
           </div>
           <div>
-            <p>10_10BOND = 0.77 USDT</p>
-            <p>Current Price: (_10MB)*2</p>
+            <p>10 10BOND = 0.77 USDT</p>
+            <p>Current Price: (10MB)*2</p>
           </div>
         </div>
       </div>
 
       {mintOrRedeem === 'mint' ? (
+         approveUSDTForMintStatus === ApprovalState.APPROVED && approveShareForMintStatus === ApprovalState.APPROVED ? (
         <div className="mintButton">
-          <Button disabled={mintUsdt === '' && mintShare === '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
+          <Button 
+          onClick={() => catchError(handleMint10MB(), `Unable to mint 10MB`)}
+          disabled={mintUsdt === '' && mintShare === '' } className={mintUsdt || mintShare ? null : 'loadingBg'}>MINT</Button>
+        </div>
+      ) : (
+        <div className="mintButton">
+        <Button 
+        onClick={() => catchError(approveUSDTForMint() && approveShareForMint(), `Unable to approve 10MB + USDT`)}
+        >{`APPROVE ${approveUSDTForMintStatus !== ApprovalState.APPROVED ? 'USDT' : ''}${approveUSDTForMintStatus !== ApprovalState.APPROVED  && approveShareForMintStatus !== ApprovalState.APPROVED ? ' + ' : ''}${approveShareForMintStatus !== ApprovalState.APPROVED ? '10SHARE' : ''}`}</Button>
+      </div>
+       )
+      ) : approve10MBForRedeemStatus === ApprovalState.APPROVED ? (
+        <div className="redeemButtons">
+          <Button 
+          onClick={() => catchError(handleRedeem10MB(), `Unable to redeem`)}
+          disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>
+            REDEEM
+          </Button>
+          <Button 
+          onClick={() => catchError(handleCollectRedeem10MB(), `Unable to collect`)}
+          disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>COLLECT</Button>
         </div>
       ) : (
         <div className="redeemButtons">
-          <Button disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>
-            REDEEM
-          </Button>
-          <Button disabled={redeem === ''} className={redeem ? null : 'loadingBg'}>COLLECT</Button>
-        </div>
+        <Button 
+        onClick={() => catchError(approve10MBForRedeem(), `Unable to approve 10MB`)}
+        >
+          APPROVE 10MB
+        </Button>
+      </div>
       )}
     </Wrapper>
   );

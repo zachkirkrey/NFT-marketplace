@@ -10,7 +10,7 @@ const useWithdrawFromBoardroom = () => {
     (amount: string) => {
       handleTransactionReceipt(
         bombFinance.withdrawShareFromBoardroom(amount),
-        `Withdraw ${amount} _10SHARE from the boardroom`,
+        `Withdraw ${amount} 10SHARE from the boardroom`,
       );
     },
     [bombFinance, handleTransactionReceipt],

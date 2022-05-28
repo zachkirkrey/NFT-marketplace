@@ -46,9 +46,9 @@ const Bank: React.FC = () => {
   const statsOnPool = useStatsForPool(bank);
 
   let vaultUrl: string;
-  if (bank.depositTokenName.includes('_10MB-USDT')) {
+  if (bank.depositTokenName.includes('10MB-USDT')) {
     vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
-  } else if (bank.depositTokenName.includes('_10MB-_10SHARE')) {
+  } else if (bank.depositTokenName.includes('10MB-_10SHARE')) {
     vaultUrl = 'https://www.bomb.farm/#/bsc/';
   } else {
     vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-wbnb';
@@ -146,24 +146,24 @@ const Bank: React.FC = () => {
 
 const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const bombFinance = useBombFinance();
-  const bombAddr = bombFinance._10MB.address;
-  const bshareAddr = bombFinance._10SHARE.address;
+  const bombAddr = bombFinance["10MB"].address;
+  const bshareAddr = bombFinance["10SHARE"].address;
 
   let pairName: string;
   let uniswapUrl: string;
   // let vaultUrl: string;
-  if (bank.depositTokenName.includes('_10MB-USDT')) {
-    pairName = '_10MB-USDT pair';
+  if (bank.depositTokenName.includes('10MB-USDT')) {
+    pairName = '10MB-USDT pair';
     uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
     //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
-  } else if (bank.depositTokenName.includes('_10MB-_10SHARE')) {
-    pairName = '_10MB-_10SHARE pair';
+  } else if (bank.depositTokenName.includes('10MB-10SHARE')) {
+    pairName = '10MB-10SHARE pair';
     uniswapUrl = 'https://pancakeswap.finance/add/' + bombAddr + '/' + bshareAddr;
     //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
   } else {
-    pairName = '_10SHARE-CRO pair';
+    pairName = '10SHARE-CRO pair';
     uniswapUrl = 'https://pancakeswap.finance/add/CRO/' + bshareAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-_10SHARE-CRO';
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-10SHARE-CRO';
   }
   return (
     <Paper>

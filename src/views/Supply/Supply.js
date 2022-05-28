@@ -96,8 +96,8 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>_10MB AVAILABLE</Typography>
-                    <Typography>{Number(stakedBombBalance)} _10MB</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>10MB AVAILABLE</Typography>
+                    <Typography>{Number(stakedBombBalance)} 10MB</Typography>
                   </CardContent>
                 </Card>
               </Grid>

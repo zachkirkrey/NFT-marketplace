@@ -28,8 +28,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const bombFinance = useBombFinance();
   const { balance } = useWallet();
   const croBalance = (Number(balance) / 1e18).toFixed(4).toString();
-  const bombBalance = useTokenBalance(bombFinance._10MB);
-  const bshareBalance = useTokenBalance(bombFinance._10SHARE);
+  const bombBalance = useTokenBalance(bombFinance["10MB"]);
+  const bshareBalance = useTokenBalance(bombFinance["10SHARE"]);
   const USDTalance = useTokenBalance(bombFinance.USDT);
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(CRO_TICKER);
@@ -37,8 +37,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be CRO in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
   /*
-  const bombFtmLpStats = useLpStats('_10MB-USDT-LP');
-  const tShareFtmLpStats = useLpStats('_10SHARE-CRO-LP');
+  const bombFtmLpStats = useLpStats('10MB-USDT-LP');
+  const tShareFtmLpStats = useLpStats('10SHARE-CRO-LP');
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const croAmountPerLP = tokenName.startsWith(_10MB_TICKER) ? bombLPStats?.croAmount : bshareLPStats?.croAmount;*/
@@ -98,7 +98,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         value={zappingToken}
       >
         <StyledMenuItem value={CRO_TICKER}>CRO</StyledMenuItem>
-        <StyledMenuItem value={_10SHARE_TICKER}>_10SHARE</StyledMenuItem>
+        <StyledMenuItem value={_10SHARE_TICKER}>10SHARE</StyledMenuItem>
         {/* <StyledMenuItem value={USDT_TICKER}>USDT</StyledMenuItem> */}
         {/* Bomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={_10MB_TICKER}>_10MB</StyledMenuItem> */}

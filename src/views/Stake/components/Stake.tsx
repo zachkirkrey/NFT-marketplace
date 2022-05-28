@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { Box, Button, Card, CardContent, Paper } from '@material-ui/core';
 
+import { BigNumber } from 'ethers';
 // import Button from '../../../components/Button';
 // import Card from '../../../components/Card';
 // import CardContent from '../../../components/CardContent';
@@ -32,11 +33,11 @@ const Stake: React.FC = () => {
   const bombFinance = useBombFinance();
   const bombStats = useBombStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance._10MB, bombFinance.contracts.x_10MB.address);
+  const [approveStatus, approve] = useApprove(bombFinance["10MB"], bombFinance.contracts.x_10MB.address);
 
-  const tokenBalance = useTokenBalance(bombFinance._10MB);
+  const tokenBalance = useTokenBalance(bombFinance["10MB"]);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.X_10MB);
+  const stakedBalance =  BigNumber.from(0)//useTokenBalance(bombFinance.X_10MB);
 
   const xbombBalance = useXbombBalance();
   const xbombRate = Number(xbombBalance) / 1000000000000000000;
@@ -66,7 +67,7 @@ const Stake: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'_10MB'}
+      tokenName={'10MB'}
     />,
   );
 
@@ -101,7 +102,7 @@ const Stake: React.FC = () => {
         </Box>
         <Box mb={5} textAlign="center">
           <Label text={'x_10MB Balance'} variant="yellow" />
-          <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} _10MB / $${tokenPriceInDollars}`} variant="yellow" />
+          <Label text={`≈ ${xbombToBombEquivalent.toFixed(2)} 10MB / $${tokenPriceInDollars}`} variant="yellow" />
         </Box>
         {approveStatus !== ApprovalState.APPROVED ? (
           <Button
@@ -109,7 +110,7 @@ const Stake: React.FC = () => {
             className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
             onClick={approve}
           >
-            Approve _10MB
+            Approve 10MB
           </Button>
         ) : (
           <>

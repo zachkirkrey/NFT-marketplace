@@ -32,7 +32,7 @@ const Banks: React.FC = ({ children }) => {
         ...bankInfo,
         address: config.deployments[bankInfo.contract].address,
         depositToken: bombFinance.externalTokens[bankInfo.depositTokenName],
-        earnToken: bankInfo.earnTokenName === '_10MB' ? bombFinance._10MB : bombFinance._10SHARE,
+        earnToken: bankInfo.earnTokenName === '10MB' ? bombFinance["10MB"] : bombFinance["10SHARE"],
       });
     }
     banks.sort((a, b) => (a.sort > b.sort ? 1 : -1));

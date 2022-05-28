@@ -33,19 +33,12 @@ export class BombFinance {
   externalTokens: { [name: string]: ERC20 };
   boardroomVersionOfUser?: string;
 
-  _10MBUSDT_LP: Contract;
-  _10MB: ERC20;
-  _10SHARE: ERC20;
-  _10BOND: ERC20;
-  X_10MB: ERC20;
+  "10MBUSDT_LP": Contract;
+  "10MB": ERC20;
+  "10SHARE": ERC20;
+  "10BOND": ERC20;
   CRO: ERC20;
   USDT: ERC20;
-  _10MB_BORROWABLE: Contract;
-  USDT_BORROWABLE: Contract;
-  B_10MB__10MB: ERC20;
-  B_10MB_USDT: ERC20;
-  B_10MB_10MB: ERC20;
-  B_10MBUSDT: ERC20;
   Pool: Contract;
 
   constructor(cfg: Configuration) {
@@ -61,31 +54,16 @@ export class BombFinance {
     for (const [symbol, [address, decimal]] of Object.entries(externalTokens)) {
       this.externalTokens[symbol] = new ERC20(address, provider, symbol, decimal);
     }
-    this._10MB = new ERC20(deployments._10MB.address, provider, '_10MB');
-    this._10SHARE = new ERC20(deployments._10SHARE.address, provider, '_10SHARE');
-    this._10BOND = new ERC20(deployments._10BOND.address, provider, '_10BOND');
+    this["10MB"] = new ERC20(deployments["_10MB"].address, provider, '10MB');
+    this["10SHARE"] = new ERC20(deployments["_10SHARE"].address, provider, '10SHARE');
+    this["10BOND"] = new ERC20(deployments["_10BOND"].address, provider, '10BOND');
     this.CRO = this.externalTokens['WCRO'];
     this.USDT = this.externalTokens['USDT'];
     this.Pool = new Contract(deployments['Pool'].address, deployments['Pool'].abi, provider);
     this.Pool = this.Pool.connect(this.signer);
-    //this.X_10MB = new ERC20(deployments.x_10MB.address, provider, 'X_10MB');
-    // this.B_10MB__10MB = new ERC20(deployments._10MBBorrowable.address, provider, 'b_10MB');
-    // this.B_10MB_USDT = new ERC20(deployments.USDTBorrowable.address, provider, 'b_10MB');
-
-    // this.B_10MB__10MB = new Contract(externalTokens['B_10MB-_10MB'][0], IBombBorrowableABI, provider);
-    // this.B_10MB_USDT = new Contract(externalTokens['B_10MB-USDT'][0], IBombBorrowableABI, provider);
-    /*
-    this.B_10MB__10MB = new ERC20(deployments._10MBBorrowable.address, provider, 'b_10MB');
-    this.B_10MB_10MB = this.externalTokens['B_10MB-_10MB'];
-    this.B_10MBUSDT = this.externalTokens['B_10MB-USDT'];
-
-    this.B_10MB_USDT = new ERC20(deployments.USDTBorrowable.address, provider, 'b_10MB');
-    this._10MB_BORROWABLE = new Contract(externalTokens['B_10MB-_10MB'][0], IBombBorrowableABI, provider);
-    this.USDT_BORROWABLE = new Contract(externalTokens['B_10MB-USDT'][0], IBombBorrowableABI, provider);
-*/
     // Uniswap V2 Pair
 
-    this._10MBUSDT_LP = new Contract(externalTokens['_10MB-USDT-LP'][0], IUniswapV2PairABI, provider);
+    this["10MBUSDT_LP"] = new Contract(externalTokens['10MB-USDT-LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -102,11 +80,11 @@ export class BombFinance {
     for (const [name, contract] of Object.entries(this.contracts)) {
       this.contracts[name] = contract.connect(this.signer);
     }
-    const tokens = [this._10MB, this._10SHARE, this._10BOND, ...Object.values(this.externalTokens)];
+    const tokens = [this["10MB"], this["10SHARE"], this["10BOND"], ...Object.values(this.externalTokens)];
     for (const token of tokens) {
       token.connect(this.signer);
     }
-    this._10MBUSDT_LP = this._10MBUSDT_LP.connect(this.signer);
+    this["10MBUSDT_LP"] = this["10MBUSDT_LP"].connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
     this.fetchBoardroomVersionOfUser()
       .then((version) => (this.boardroomVersionOfUser = version))
@@ -128,12 +106,12 @@ export class BombFinance {
 
   async getBombStat(): Promise<TokenStat> {
     const { _10MBMasterChef } = this.contracts;
-    const supply = await this._10MB.totalSupply();
-    const _10MBMasterchefSupply = await this._10MB.balanceOf(_10MBMasterChef.address);
+    const supply = await this["10MB"].totalSupply();
+    const _10MBMasterchefSupply = await this["10MB"].balanceOf(_10MBMasterChef.address);
     const bombCirculatingSupply = supply.sub(_10MBMasterchefSupply);
-    //const priceInCRO = await this.getTokenPriceFromMMFInCRO(this._10MB);
+    //const priceInCRO = await this.getTokenPriceFromMMFInCRO(this["10MB"]);
     //const priceInCROstring = priceInCRO.toString();
-    const price10MBInCRO = await this.getTokenPriceFromMMFInCRO(this._10MB);
+    const price10MBInCRO = await this.getTokenPriceFromMMFInCRO(this["10MB"]);
     // const priceOfOneBNB = await this.getWBNBPriceFromPancakeswap();
     const priceOfOneFtmInDollars = await this.getWCROPriceFromMMF();
     console.log('price10MBInCRO ', price10MBInCRO);
@@ -145,8 +123,8 @@ export class BombFinance {
       //tokenInUSDT: (Number(priceInCRO) * 100).toString(),
       tokenInUSDT: priceOf10MBInDollars.toString(),
       priceInDollars: priceOf10MBInDollars.toString(),
-      totalSupply: getDisplayBalance(supply, this._10MB.decimal, 0),
-      circulatingSupply: getDisplayBalance(bombCirculatingSupply, this._10MB.decimal, 0),
+      totalSupply: getDisplayBalance(supply, this["10MB"].decimal, 0),
+      circulatingSupply: getDisplayBalance(bombCirculatingSupply, this["10MB"].decimal, 0),
     };
   }
 
@@ -166,9 +144,9 @@ export class BombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('_10MB') ? this._10MB : this._10SHARE;
+    const token0 = name.startsWith('10MB') ? this["10MB"] : this["10SHARE"];
     //console.log('NAME', name);
-    const isBomb = name.startsWith('_10MB');
+    const isBomb = name.startsWith('10MB');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
@@ -192,8 +170,8 @@ export class BombFinance {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
-    const token0 = name.startsWith('_10MB') ? this._10MB : this._10SHARE;
-    const isBomb = name.startsWith('_10MB');
+    const token0 = name.startsWith('10MB') ? this["10MB"] : this["10SHARE"];
+    const isBomb = name.startsWith('10MB');
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
@@ -230,7 +208,7 @@ export class BombFinance {
     const bondBombRatioBN = await Treasury.getBondPremiumRate();
     const modifier = bondBombRatioBN / 1e13 > 1 ? bondBombRatioBN / 1e13 : 1;
     const priceOf_10BONDInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(4);
-    const supply = await this._10BOND.displayedTotalSupply();
+    const supply = await this["10BOND"].displayedTotalSupply();
     return {
       tokenInUSDT: priceOf_10BONDInDollars,
       priceInDollars: priceOf_10BONDInDollars,
@@ -249,36 +227,36 @@ export class BombFinance {
   async getShareStat(): Promise<TokenStat> {
     const { _10MBMasterChef } = this.contracts;
 
-    const supply = await this._10SHARE.totalSupply();
+    const supply = await this["10SHARE"].totalSupply();
 
-    const priceInCRO = await this.getTokenPriceFromMMFInCRO(this._10SHARE);
-    console.log('_10SHARE priceInCRO ', priceInCRO);
-    const _10MBMasterchefSupply = await this._10SHARE.balanceOf(_10MBMasterChef.address);
+    const priceInCRO = await this.getTokenPriceFromMMFInCRO(this["10SHARE"]);
+    console.log('10SHARE priceInCRO ', priceInCRO);
+    const _10MBMasterchefSupply = await this["10SHARE"].balanceOf(_10MBMasterChef.address);
     const tShareCirculatingSupply = supply.sub(_10MBMasterchefSupply);
     const priceOfOneCRO = await this.getWCROPriceFromMMF();
-    console.log('_10SHARE priceOfOneCRO ', priceOfOneCRO);
+    console.log('10SHARE priceOfOneCRO ', priceOfOneCRO);
     const priceOfSharesInDollars = (Number(priceInCRO) * Number(priceOfOneCRO)).toFixed(2);
 
     return {
       tokenInUSDT: priceOfSharesInDollars,
       priceInDollars: priceOfSharesInDollars,
-      totalSupply: getDisplayBalance(supply, this._10SHARE.decimal, 0),
-      circulatingSupply: getDisplayBalance(tShareCirculatingSupply, this._10SHARE.decimal, 0),
+      totalSupply: getDisplayBalance(supply, this["10SHARE"].decimal, 0),
+      circulatingSupply: getDisplayBalance(tShareCirculatingSupply, this["10SHARE"].decimal, 0),
     };
   }
 
   async getBombStatInEstimatedTWAP(): Promise<TokenStat> {
     const { Oracle, _10MBMasterChef } = this.contracts;
-    const expectedPrice = await Oracle.twap(this._10MB.address, ethers.utils.parseEther('10'));
+    const expectedPrice = await Oracle.twap(this["10MB"].address, ethers.utils.parseEther('10'));
 
-    const supply = await this._10MB.totalSupply();
-    const _10MBMasterchefSupply = await this._10MB.balanceOf(_10MBMasterChef.address);
+    const supply = await this["10MB"].totalSupply();
+    const _10MBMasterchefSupply = await this["10MB"].balanceOf(_10MBMasterChef.address);
     const bombCirculatingSupply = supply.sub(_10MBMasterchefSupply);
     return {
       tokenInUSDT: getDisplayBalance(expectedPrice),
       priceInDollars: getDisplayBalance(expectedPrice),
-      totalSupply: getDisplayBalance(supply, this._10MB.decimal, 0),
-      circulatingSupply: getDisplayBalance(bombCirculatingSupply, this._10MB.decimal, 0),
+      totalSupply: getDisplayBalance(supply, this["10MB"].decimal, 0),
+      circulatingSupply: getDisplayBalance(bombCirculatingSupply, this["10MB"].decimal, 0),
     };
   }
 
@@ -312,7 +290,7 @@ export class BombFinance {
     const depositTokenPrice = await this.getDepositTokenPriceInDollars(bank.depositTokenName, depositToken);
     const stakeInPool = await depositToken.balanceOf(bank.address);
     const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    const stat = bank.earnTokenName === '_10MB' ? await this.getBombStat() : await this.getShareStat();
+    const stat = bank.earnTokenName === '10MB' ? await this.getBombStat() : await this.getShareStat();
     const tokenPerSecond = await this.getTokenPerSecond(
       bank.earnTokenName,
       bank.contract,
@@ -335,47 +313,6 @@ export class BombFinance {
     };
   }
 
-  async getXbombAPR(): Promise<PoolStats> {
-    if (this.myAccount === undefined) return;
-    const bombToken = this._10MB;
-    const xbombToken = this.X_10MB;
-
-    const xbombExchange = await this.getXbombExchange();
-    const xbombPercent = await xbombExchange;
-    const xbombPercentTotal = (Number(xbombPercent) / 1000000000000000000) * 100 - 100;
-
-    const depositTokenPrice = await this.getDepositTokenPriceInDollars(bombToken.symbol, bombToken);
-
-    const stakeInPool = await bombToken.balanceOf(xbombToken.address);
-
-    const TVL = Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, bombToken.decimal));
-
-    const startDate = new Date('January 24, 2022');
-    const nowDate = new Date(Date.now());
-    const difference = nowDate.getTime() - startDate.getTime();
-    const days = difference / 60 / 60 / 24 / 1000;
-    const aprPerDay = xbombPercentTotal / days;
-
-    // Determine days between now and a date
-
-    // const tokenPerHour = tokenPerSecond.mul(60).mul(60);
-    // const totalRewardPricePerYear =
-    //   Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24).mul(365)));
-    // const totalRewardPricePerDay = Number(stat.priceInDollars) * Number(getDisplayBalance(tokenPerHour.mul(24)));
-    // const totalStakingTokenInPool =
-    //   Number(depositTokenPrice) * Number(getDisplayBalance(stakeInPool, depositToken.decimal));
-    // const dailyAPR = (totalRewardPricePerDay / totalStakingTokenInPool) * 100;
-    // const yearlyAPR = (totalRewardPricePerYear / totalStakingTokenInPool) * 100;
-
-    const dailyAPR = aprPerDay;
-    const yearlyAPR = aprPerDay * 365;
-    return {
-      dailyAPR: dailyAPR.toFixed(2).toString(),
-      yearlyAPR: yearlyAPR.toFixed(2).toString(),
-      TVL: TVL.toFixed(2).toString(),
-    };
-  }
-
   /**
    * Method to return the amount of tokens the pool yields per second
    * @param earnTokenName the name of the token that the pool is earning
@@ -389,9 +326,9 @@ export class BombFinance {
     poolContract: Contract,
     depositTokenName: string,
   ) {
-    if (earnTokenName === '_10MB') {
+    if (earnTokenName === '10MB') {
       return await poolContract._10MBPerSecond();
-    } else if (earnTokenName === '_10SHARE') {
+    } else if (earnTokenName === '10SHARE') {
       return await poolContract._10SHAREPerSecond();
     }
   }
@@ -412,16 +349,16 @@ export class BombFinance {
     if (tokenName === 'WCRO') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      if (tokenName === '_10MB-USDT-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this._10MB, true);
-      } else if (tokenName === '_10SHARE-CRO-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this._10SHARE, false);
-      } else if (tokenName === '_10MB-_10SHARE-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this._10MB, true);
-      } else if (tokenName === '_10SHARE-USDT-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this._10MB, true);
-      } else if (tokenName === '_10SHARE-CRO-LP') {
-        tokenPrice = await this.getLPTokenPrice(token, this._10SHARE, true);
+      if (tokenName === '10MB-USDT-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
+      } else if (tokenName === '10SHARE-CRO-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this["10SHARE"], false);
+      } else if (tokenName === '10MB-10SHARE-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
+      } else if (tokenName === '10SHARE-USDT-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
+      } else if (tokenName === '10SHARE-CRO-LP') {
+        tokenPrice = await this.getLPTokenPrice(token, this["10SHARE"], true);
       } else if (tokenName === 'USDT-CRO-LP') {
         tokenPrice = await this.getNonNativeLPTokenPrice(token, this.USDT);
       } else {
@@ -483,13 +420,13 @@ export class BombFinance {
     const _10SHAREPrice = (await this.getShareStat()).priceInDollars;
     const _10MBPrice = (await this.getBombStat()).priceInDollars;
 
-    const boardroomtShareBalanceOf = await this._10SHARE.balanceOf(this.currentBoardroom().address);
-    const bombStakeBalanceOf = '0'; //await this._10MB.balanceOf(this.X_10MB.address);
+    const boardroomtShareBalanceOf = await this["10SHARE"].balanceOf(this.currentBoardroom().address);
+    const bombStakeBalanceOf = '0'; //await this["10MB"].balanceOf(this.X_10MB.address);
 
     const boardroomTVL =
-      Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
+      Number(getDisplayBalance(boardroomtShareBalanceOf, this["10SHARE"].decimal)) * Number(_10SHAREPrice);
     const bombTVL =
-      Number(getDisplayBalance(BigNumber.from(bombStakeBalanceOf), this._10MB.decimal)) * Number(_10MBPrice);
+      Number(getDisplayBalance(BigNumber.from(bombStakeBalanceOf), this["10MB"].decimal)) * Number(_10MBPrice);
 
     return totalValue + boardroomTVL + bombTVL;
   }
@@ -535,7 +472,7 @@ export class BombFinance {
   ): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
-      if (earnTokenName === '_10MB') {
+      if (earnTokenName === '10MB') {
         return await pool.pending10MB(poolId, account);
       } else {
         return await pool.pending10SHARE(poolId, account);
@@ -683,7 +620,7 @@ export class BombFinance {
     const ready = await this.provider.ready;
     if (!ready) return;
 
-    return this.getTokenPriceFromMMFInUSD(this._10MB);
+    return this.getTokenPriceFromMMFInUSD(this["10MB"]);
   }
 
   // async getTokenPriceFromSpiritswap(tokenContract: ERC20): Promise<string> {
@@ -791,16 +728,17 @@ export class BombFinance {
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(_10MBPrice) * 4;
     console.log('getBoardroomAPR 7');
-    const boardroomtShareBalanceOf = await this._10SHARE.balanceOf(Boardroom.address);
+    const boardroomtShareBalanceOf = await this["10SHARE"].balanceOf(Boardroom.address);
     console.log('getBoardroomAPR 8');
     const boardroomTVL =
-      Number(getDisplayBalance(boardroomtShareBalanceOf, this._10SHARE.decimal)) * Number(_10SHAREPrice);
+      Number(getDisplayBalance(boardroomtShareBalanceOf, this["10SHARE"].decimal)) * Number(_10SHAREPrice);
     console.log('getBoardroomAPR 9');
     const realAPR = ((amountOfRewardsPerDay * 100) / boardroomTVL) * 365;
     return realAPR;
   }
 
   async getBombStakeAPR() {
+    /*
     const Boardroom = this.currentBoardroom();
     const latestSnapshotIndex = await Boardroom.latestSnapshotIndex();
     const lastHistory = await Boardroom.boardroomHistory(latestSnapshotIndex);
@@ -812,10 +750,13 @@ export class BombFinance {
 
     //Mgod formula
     const amountOfRewardsPerDay = epochRewardsPerShare * Number(_10MBPrice) * 4;
-    const xBombBombBalanceOf = await this._10MB.balanceOf(this.X_10MB.address);
+    const xBombBombBalanceOf = await this["10MB"].balanceOf(this..address);
     const bombTVL = Number(getDisplayBalance(xBombBombBalanceOf, this.X_10MB.decimal)) * Number(_10MBPrice);
     const realAPR = ((amountOfRewardsPerDay * 20) / bombTVL) * 365;
+
     return realAPR;
+    */
+   return 0
   }
 
   /**
@@ -839,7 +780,7 @@ export class BombFinance {
     const canWithdraw = await Boardroom.canWithdraw(this.myAccount);
     console.log('canUserUnstakeFromBoardroom 2');
     const stakedAmount = await this.getStakedSharesOnBoardroom();
-    const notStaked = Number(getDisplayBalance(stakedAmount, this._10SHARE.decimal)) === 0;
+    const notStaked = Number(getDisplayBalance(stakedAmount, this["10SHARE"].decimal)) === 0;
     const result = notStaked ? true : canWithdraw;
     return result;
   }
@@ -857,7 +798,7 @@ export class BombFinance {
 
   async stakeShareToBoardroom(amount: string): Promise<TransactionResponse> {
     if (this.isOldBoardroomMember()) {
-      throw new Error("you're using old boardroom. please withdraw and deposit the _10SHARE again.");
+      throw new Error("you're using old boardroom. please withdraw and deposit the 10SHARE again.");
     }
     const Boardroom = this.currentBoardroom();
     return await Boardroom.stake(decimalToBalance(amount));
@@ -872,7 +813,7 @@ export class BombFinance {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
     return await BombRouter.redeem(
-      this.B_10MB__10MB.address,
+      '',
       decimalToBalance(amount),
       this.myAccount,
       expiry.getTime(),
@@ -884,7 +825,7 @@ export class BombFinance {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
     return await BombRouter.redeem(
-      this.B_10MB_USDT.address,
+      '',
       decimalToBalance(amount),
       this.myAccount,
       expiry.getTime(),
@@ -894,13 +835,13 @@ export class BombFinance {
   async supplyToUSDT(amount: string): Promise<TransactionResponse> {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
-    return await BombRouter.mint(this.B_10MB_USDT.address, decimalToBalance(amount), this.myAccount, expiry.getTime());
+    return await BombRouter.mint('', decimalToBalance(amount), this.myAccount, expiry.getTime());
   }
 
   async supplyToBomb(amount: string): Promise<TransactionResponse> {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
-    return await BombRouter.mint(this.B_10MB__10MB.address, decimalToBalance(amount), this.myAccount, expiry.getTime());
+    return await BombRouter.mint('', decimalToBalance(amount), this.myAccount, expiry.getTime());
   }
 
   async getStakedSharesOnBoardroom(): Promise<BigNumber> {
@@ -918,26 +859,28 @@ export class BombFinance {
 
   async getTotalStakedBomb(): Promise<BigNumber> {
     const Xbomb = this.contracts.x_10MB;
-    const bomb = this._10MB;
+    const bomb = this["10MB"];
     return await bomb.balanceOf(Xbomb.address);
   }
 
   async getTotalSuppliedBomb(): Promise<BigNumber> {
-    const bbombBomb = this._10MB_BORROWABLE;
-    // const bomb = this._10MB;
-    const totalBomb = await bbombBomb.totalBalance();
+    //const bbombBomb = this._10MB_BORROWABLE;
+    // const bomb = this["10MB"];
+    //const totalBomb = await bbombBomb.totalBalance();
     //  const borrowBomb = await bbombBomb.totalBorrows();
     // const totalSupplied = totalBomb + borrowBomb;
-    return totalBomb;
+    //return totalBomb;
+    return BigNumber.from(0)
   }
 
   async getTotalSuppliedUSDT(): Promise<BigNumber> {
-    const bbombBomb = this.USDT_BORROWABLE;
-    // const bomb = this._10MB;
-    const totalUSDT = await bbombBomb.totalBalance();
+    //const bbombBomb = this.USDT_BORROWABLE;
+    // const bomb = this["10MB"];
+    //const totalUSDT = await bbombBomb.totalBalance();
     //const borrowUSDT = await bbombBomb.totalBorrows();
     //  const totalSupplied = totalUSDT + borrowUSDT;
-    return totalUSDT;
+    //return totalUSDT;
+    return BigNumber.from(0)
   }
 
   async getXbombExchange(): Promise<BigNumber> {
@@ -1063,18 +1006,15 @@ export class BombFinance {
     if (ethereum && ethereum.networkVersion === config.chainId.toString()) {
       let asset;
       let assetUrl;
-      if (assetName === '_10MB') {
-        asset = this._10MB;
+      if (assetName === '10MB') {
+        asset = this["10MB"];
         assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bomb-512.png';
-      } else if (assetName === '_10SHARE') {
-        asset = this._10SHARE;
+      } else if (assetName === '10SHARE') {
+        asset = this["10SHARE"];
         assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bshare-512.png';
-      } else if (assetName === '_10BOND') {
-        asset = this._10BOND;
+      } else if (assetName === '10BOND') {
+        asset = this["10BOND"];
         assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/_10BOND-512.png';
-      } else if (assetName === 'X_10MB') {
-        asset = this.X_10MB;
-        assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/xbomb-512.png';
       } else if (assetName === 'USDT') {
         asset = this.USDT;
         assetUrl = 'https://bscscan.com/token/images/USDT_32.png';
@@ -1110,9 +1050,9 @@ export class BombFinance {
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
     const { SpookyRouter } = this.contracts;
-    const { _reserve0, _reserve1 } = await this._10MBUSDT_LP.getReserves();
+    const { _reserve0, _reserve1 } = await this["10MBUSDT_LP"].getReserves();
     let quote;
-    if (tokenName === '_10MB') {
+    if (tokenName === '10MB') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);
     } else {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve1, _reserve0);
@@ -1200,7 +1140,7 @@ export class BombFinance {
     if (tokenName === CRO_TICKER) {
       estimate = await zapper.estimateZapIn(lpToken.address, SPOOKY_ROUTER_ADDR, parseUnits(amount, 18));
     } else {
-      const token = tokenName === _10MB_TICKER ? this._10MB : this._10SHARE;
+      const token = tokenName === _10MB_TICKER ? this["10MB"] : this["10SHARE"];
       estimate = await zapper.estimateZapInToken(
         token.address,
         lpToken.address,
@@ -1219,7 +1159,7 @@ export class BombFinance {
       };
       return await zapper.zapIn(lpToken.address, SPOOKY_ROUTER_ADDR, this.myAccount, overrides);
     } else {
-      const token = tokenName === _10MB_TICKER ? this._10MB : this._10SHARE;
+      const token = tokenName === _10MB_TICKER ? this["10MB"] : this["10SHARE"];
       return await zapper.zapInToken(
         token.address,
         parseUnits(amount, 18),

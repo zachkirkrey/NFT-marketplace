@@ -13,7 +13,7 @@ const useProvideBombFtmLP = () => {
       const bombAmountBn = parseUnits(bombAmount);
       handleTransactionReceipt(
         bombFinance.provideBombFtmLP(croAmount, bombAmountBn),
-        `Provide _10MB-USDT LP ${bombAmount} ${croAmount} using ${TAX_OFFICE_ADDR}`,
+        `Provide 10MB-USDT LP ${bombAmount} ${croAmount} using ${TAX_OFFICE_ADDR}`,
       );
     },
     [bombFinance, handleTransactionReceipt],

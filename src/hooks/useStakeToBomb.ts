@@ -8,7 +8,7 @@ const useStakeToBomb = () => {
 
   const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(bombFinance.stakeToBomb(amount), `Stake ${amount} _10MB for x_10MB`);
+      handleTransactionReceipt(bombFinance.stakeToBomb(amount), `Stake ${amount} 10MB for X10MB`);
     },
     [bombFinance, handleTransactionReceipt],
   );

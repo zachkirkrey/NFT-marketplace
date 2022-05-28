@@ -12,7 +12,7 @@ const useCashPriceInLastTWAP = () => {
   }, [bombFinance]);
 
   useEffect(() => {
-    fetchCashPrice().catch((err) => console.error(`Failed to fetch _10MB price: ${err.stack}`));
+    fetchCashPrice().catch((err) => console.error(`Failed to fetch 10MB price: ${err.stack}`));
     const refreshInterval = setInterval(fetchCashPrice, config.refreshInterval);
     return () => clearInterval(refreshInterval);
   }, [setPrice, bombFinance, fetchCashPrice]);

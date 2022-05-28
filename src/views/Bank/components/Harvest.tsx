@@ -25,8 +25,8 @@ const Harvest: React.FC<HarvestProps> = ({ bank }) => {
   console.log('bombStats ', bombStats);
   console.log('tShareStats ', tShareStats);
 
-  const tokenName = bank.earnTokenName === '_10SHARE' ? '_10SHARE' : '_10MB';
-  const tokenStats = bank.earnTokenName === '_10SHARE' ? tShareStats : bombStats;
+  const tokenName = bank.earnTokenName === '10SHARE' ? '10SHARE' : '10MB';
+  const tokenStats = bank.earnTokenName === '10SHARE' ? tShareStats : bombStats;
   const tokenPriceInDollars = tokenStats ? Number(tokenStats.priceInDollars).toFixed(2) : null;
   console.log('tokenPriceInDollars ', tokenPriceInDollars);
   console.log('earnings ', earnings.toString());
