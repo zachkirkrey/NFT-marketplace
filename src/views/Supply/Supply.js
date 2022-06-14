@@ -8,10 +8,10 @@ import { Alert } from '@material-ui/lab';
 import Spacer from '../../components/Spacer';
 import UnlockWallet from '../../components/UnlockWallet';
 import Page from '../../components/Page';
-// import bombFinance, { _10MB, USDT } from '../../bomb-finance';
+// import bombFinance, { _10MB, USDC } from '../../bomb-finance';
 // import useXbombBalance from '../../hooks/useXbombBalance';
 // import useXbombAPR from '../../hooks/useXbombAPR';
-import useSuppliedUSDTBalance from '../../hooks/useTotalSuppliedUSDTBalance';
+import useSuppliedUSDCBalance from '../../hooks/useTotalSuppliedUSDCBalance';
 import useSuppliedBombBalance from '../../hooks/useTotalSuppliedBombBalance';
 
 import { createGlobalStyle } from 'styled-components';
@@ -19,7 +19,7 @@ import { Helmet } from 'react-helmet';
 import SupplyBomb from './components/SupplyBomb';
 
 import HomeImage from '../../assets/img/background.jpg';
-import SupplyUSDT from './components/SupplyUSDT';
+import SupplyUSDC from './components/SupplyUSDC';
 const BackgroundImage = createGlobalStyle`
   body {
     background: url(${HomeImage}) repeat !important;
@@ -27,7 +27,7 @@ const BackgroundImage = createGlobalStyle`
     background-color: #171923;
   }
 `;
-const TITLE = 'bomb.money | Supply Assets';
+const TITLE = '10mb.finance | Supply Assets';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -43,7 +43,7 @@ const Supply = () => {
   const { account } = useWallet();
   // const { onRedeem } = useRedeemOnBoardroom();
   const stakedBombBalance = Number(useSuppliedBombBalance() / 1000000000000000000).toFixed(2);
-  const stakedUSDTBalance = Number(useSuppliedUSDTBalance() / 1000000000000000000).toFixed(5);
+  const stakedUSDCBalance = Number(useSuppliedUSDCBalance() / 1000000000000000000).toFixed(5);
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance / 1000000000000000000).toFixed(4);
   // const xbombAPR = useXbombAPR();
@@ -88,8 +88,8 @@ const Supply = () => {
               <Grid item xs={12} md={2} lg={2} className={classes.gridItem}>
                 <Card className={classes.gridItem}>
                   <CardContent align="center">
-                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>USDT AVAILABLE</Typography>
-                    <Typography>{Number(stakedUSDTBalance)} USDT</Typography>
+                    <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>USDC AVAILABLE</Typography>
+                    <Typography>{Number(stakedUSDCBalance)} USDC</Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -107,7 +107,7 @@ const Supply = () => {
                     <Typography style={{ textTransform: 'uppercase', color: '#f9d749' }}>
                       _10MB PEG <small>(TWAP)</small>
                     </Typography>
-                    <Typography> USDT</Typography>
+                    <Typography> USDC</Typography>
                     <Typography>
                       <small>per 10 _10MB</small>
                     </Typography>
@@ -156,7 +156,7 @@ const Supply = () => {
                   </StyledCardWrapper> */}
                   {/* <Spacer /> */}
                   <StyledCardWrapper>
-                    <SupplyUSDT />
+                    <SupplyUSDC />
                   </StyledCardWrapper>
                   <Spacer />
                   <StyledCardWrapper>
@@ -177,7 +177,7 @@ const Supply = () => {
                       <Card>
                         <CardContent>
                           <h2>About x_10MB & Rewards</h2>
-                          <p><strong>We are currently depositing 10 _10MB per week into the staking pool until our USDT Single Staking service is launched.</strong></p>
+                          <p><strong>We are currently depositing 10 _10MB per week into the staking pool until our USDC Single Staking service is launched.</strong></p>
                           <p>x_10MB will be the governance token required to cast votes on protocol decisions.</p>
                           <p>20% of all _10MB minted will be deposited into the x_10MB smart contract, increasing the amount of _10MB that can be redeemed for each x_10MB. Rewards will be deposited at random times to prevent abuse.</p>
                           <p>Functionality will be developed around x_10MB including using it as collateral to borrow other assets.</p>

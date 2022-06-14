@@ -46,9 +46,15 @@ export default function MintRedeem() {
     const { Pool } = bombFinance.contracts;
   
     const catchError = useCatchError();
+
+    const isPreview = false
   
   
     const handleMint10MB = useCallback(async () => {
+      if (isPreview) {
+        alert("Please wait for the site to be fully online!")
+        return
+      }
       const usdtString = BigNumber.from(Math.floor(Number(mintUsdt) * Math.pow(10, 6))).toString()
       const _10SHAREString = BigNumber.from(Math.floor(Number(mintShare) * Math.pow(10, 9))).mul(Math.pow(10, 9)).toString()
 
@@ -59,6 +65,10 @@ export default function MintRedeem() {
       addTransaction(tx, { summary: `Mint 10MB` });
     }, [mintUsdt, Pool, mintShare, addTransaction]);
     const handleRedeem10MB = useCallback(async () => {
+      if (isPreview) {
+        alert("Please wait for the site to be fully online!")
+        return
+      }
       const _10MBString = BigNumber.from(Math.floor(Number(redeem) * Math.pow(10, 9))).mul(Math.pow(10, 9)).toString()
 
       const tx = await Pool.redeem(_10MBString, '0', '0');
@@ -66,6 +76,10 @@ export default function MintRedeem() {
     }, [Pool, redeem, addTransaction]);
   
     const handleCollectRedeem10MB = useCallback(async () => {
+      if (isPreview) {
+        alert("Please wait for the site to be fully online!")
+        return
+      }
       const tx = await Pool.collectRedemption();
       addTransaction(tx, { summary: `Redeem 10MB` });
     }, [Pool, addTransaction]);
@@ -80,7 +94,7 @@ export default function MintRedeem() {
     console.log('isBondRedeemable ', isBondRedeemable);
   
     const [approveShareForMintStatus, approveShareForMint] = useApprove(bombFinance["10SHARE"], Pool.address);
-    const [approveUSDTForMintStatus, approveUSDTForMint] = useApprove(bombFinance.USDT, Pool.address);
+    const [approveUSDCForMintStatus, approveUSDCForMint] = useApprove(bombFinance.USDC, Pool.address);
   
     const [approve10MBForRedeemStatus, approve10MBForRedeem] = useApprove(bombFinance["10MB"], Pool.address);
   
@@ -100,7 +114,7 @@ export default function MintRedeem() {
         {mintOrRedeem === 'mint' ? (
           <>
             <div className="prices">
-              <Input type="USDT" inputState={mintUsdt} setInputState={setMintUsdt} />
+              <Input type="USDC" inputState={mintUsdt} setInputState={setMintUsdt} />
               <span>+</span>
               <Input type="10SHARE" inputState={mintShare} setInputState={setMintShare} />
             </div>
@@ -125,7 +139,7 @@ export default function MintRedeem() {
               <img src={triangle} alt="triangle icon" />
             </div>
             <div className="redeemTo">
-              <PriceContent value={+(Number(0)).toFixed(2)} type="USDT" border="divBgDark" color="blue" />
+              <PriceContent value={+(Number(0)).toFixed(2)} type="USDC" border="divBgDark" color="blue" />
               <span>+</span>
               <PriceContent
                 value={+(Number(0)).toFixed(2)}
@@ -137,7 +151,7 @@ export default function MintRedeem() {
             <div className="amountCollect">
               <p>Amount to collect</p>
               <div>
-                <PriceContent value={+(Number(0)).toFixed(2)} type="USDT" border="yellow" color="white" />
+                <PriceContent value={+(Number(0)).toFixed(2)} type="USDC" border="yellow" color="white" />
                 <span>+</span>
                 <PriceContent
                   value={+(Number(0)).toFixed(2)}
@@ -151,18 +165,18 @@ export default function MintRedeem() {
         )}
         <div className="info">
           <div>
-            <p>10 10MB = 0.77 USDT</p>
-            <p>Last-Hour TWAP Price</p>
+            <p>10 10MB = 1.00 USDC</p>
+            <p>TWAP Price</p>
           </div>
           <div>
-            <p>10 10BOND = 0.77 USDT</p>
+            <p>10 10BOND = 1.00 USDC</p>
             <p>Current Price: (10MB)*2</p>
           </div>
         </div>
       </div>
 
       {mintOrRedeem === 'mint' ? (
-         approveUSDTForMintStatus === ApprovalState.APPROVED && approveShareForMintStatus === ApprovalState.APPROVED ? (
+         approveUSDCForMintStatus === ApprovalState.APPROVED && approveShareForMintStatus === ApprovalState.APPROVED ? (
         <div className="mintButton">
           <Button 
           onClick={() => catchError(handleMint10MB(), `Unable to mint 10MB`)}
@@ -171,8 +185,14 @@ export default function MintRedeem() {
       ) : (
         <div className="mintButton">
         <Button 
-        onClick={() => catchError(approveUSDTForMint() && approveShareForMint(), `Unable to approve 10MB + USDT`)}
-        >{`APPROVE ${approveUSDTForMintStatus !== ApprovalState.APPROVED ? 'USDT' : ''}${approveUSDTForMintStatus !== ApprovalState.APPROVED  && approveShareForMintStatus !== ApprovalState.APPROVED ? ' + ' : ''}${approveShareForMintStatus !== ApprovalState.APPROVED ? '10SHARE' : ''}`}</Button>
+        onClick={() => {
+          if (isPreview) {
+            alert("Please wait for the site to be fully online!")
+            return
+          }
+          catchError(approveUSDCForMint() && approveShareForMint(), `Unable to approve 10MB + USDC`)
+        }}
+        >{`APPROVE ${approveUSDCForMintStatus !== ApprovalState.APPROVED ? 'USDC' : ''}${approveUSDCForMintStatus !== ApprovalState.APPROVED  && approveShareForMintStatus !== ApprovalState.APPROVED ? ' + ' : ''}${approveShareForMintStatus !== ApprovalState.APPROVED ? '10SHARE' : ''}`}</Button>
       </div>
        )
       ) : approve10MBForRedeemStatus === ApprovalState.APPROVED ? (
@@ -189,7 +209,13 @@ export default function MintRedeem() {
       ) : (
         <div className="redeemButtons">
         <Button 
-        onClick={() => catchError(approve10MBForRedeem(), `Unable to approve 10MB`)}
+        onClick={() => {
+          if (isPreview) {
+            alert("Please wait for the site to be fully online!")
+            return
+          }
+          catchError(approve10MBForRedeem(), `Unable to approve 10MB`)
+        }}
         >
           APPROVE 10MB
         </Button>

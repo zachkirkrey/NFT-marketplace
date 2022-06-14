@@ -11,6 +11,7 @@ import Spacer from '../../components/Spacer';
 import UnlockWallet from '../../components/UnlockWallet';
 import Harvest from './components/Harvest';
 import Stake from './components/Stake';
+import NFTStake from './components/NFTStake';
 import useBank from '../../hooks/useBank';
 import useStatsForPool from '../../hooks/useStatsForPool';
 import useRedeem from '../../hooks/useRedeem';
@@ -33,6 +34,7 @@ const HighlightedText = withStyles((theme) => ({
   },
 }))(Typography);
 
+
 const Bank: React.FC = () => {
   useEffect(() => window.scrollTo(0, 0));
   const { bankId, poolId } = useParams();
@@ -46,13 +48,15 @@ const Bank: React.FC = () => {
   const statsOnPool = useStatsForPool(bank);
 
   let vaultUrl: string;
-  if (bank.depositTokenName.includes('10MB-USDT')) {
-    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
+  if (bank.depositTokenName.includes('10MB-USDC')) {
+    vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDC';
   } else if (bank.depositTokenName.includes('10MB-_10SHARE')) {
     vaultUrl = 'https://www.bomb.farm/#/bsc/';
   } else {
     vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bshare-wbnb';
   }
+
+  const isPreview = false
 
   return account && bank ? (
     <>
@@ -67,12 +71,12 @@ const Bank: React.FC = () => {
         </Grid>
       </Box>
       <Box display="flex" mb={3} justifyContent="center">
-        <Alert variant="filled" severity="info">
+        {/*<Alert variant="filled" severity="info">
           <h3>Our autocompounding vaults are live!</h3>
           We support zapping tokens, and auto-compound every 2 hours!
           <br />
           Check it out here: <a href={vaultUrl}>{vaultUrl}</a>
-        </Alert>
+  </Alert>*/}
       </Box>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={3}>
@@ -85,7 +89,7 @@ const Bank: React.FC = () => {
                       APR
                     </Typography>
                     <HighlightedText variant="h5">
-                      {bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%
+                      {isPreview ? '0.00' : bank.closedForStaking ? '0.00' : statsOnPool?.yearlyAPR}%
                     </HighlightedText>
                   </Grid>
                   <Grid item xs={6}>
@@ -93,7 +97,7 @@ const Bank: React.FC = () => {
                       Daily APR
                     </Typography>
                     <HighlightedText variant="h5">
-                      {bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%
+                      {isPreview ? '0.00' : bank.closedForStaking ? '0.00' : statsOnPool?.dailyAPR}%
                     </HighlightedText>
                   </Grid>
                 </Grid>
@@ -122,6 +126,15 @@ const Bank: React.FC = () => {
             <Grid item xs={12} sm={6}>
               <Stake bank={bank} />
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <NFTStake bank={bank} slotId={1} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <NFTStake bank={bank} slotId={2} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <NFTStake bank={bank} slotId={3} />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
@@ -130,7 +143,13 @@ const Bank: React.FC = () => {
         {bank.depositTokenName.includes('LP') && <LPTokenHelpText bank={bank} />}
         <Spacer size="lg" />
         <div>
-          <Button onClick={onRedeem} className="shinyButtonSecondary">
+          <Button onClick={() => {
+              if (isPreview) {
+                alert("Please wait for the site to be fully online!")
+                return
+              }
+            onRedeem()
+          }} className="shinyButtonSecondary">
             Claim &amp; Withdraw
           </Button>
         </div>
@@ -149,27 +168,35 @@ const LPTokenHelpText: React.FC<{ bank: BankEntity }> = ({ bank }) => {
   const bombAddr = bombFinance["10MB"].address;
   const bshareAddr = bombFinance["10SHARE"].address;
 
+  const isPreview = false
+
   let pairName: string;
   let uniswapUrl: string;
   // let vaultUrl: string;
-  if (bank.depositTokenName.includes('10MB-USDT')) {
-    pairName = '10MB-USDT pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
+  if (bank.depositTokenName.includes('10MB-USDC')) {
+    pairName = '10MB-USDC pair';
+    uniswapUrl = 'https://mm.finance/add/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/' + bombAddr;
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDC';
   } else if (bank.depositTokenName.includes('10MB-10SHARE')) {
     pairName = '10MB-10SHARE pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/' + bombAddr + '/' + bshareAddr;
-    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDT';
+    uniswapUrl = 'https://mm.finance/add/' + bombAddr + '/' + bshareAddr;
+    //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-bomb-USDC';
   } else {
     pairName = '10SHARE-CRO pair';
-    uniswapUrl = 'https://pancakeswap.finance/add/CRO/' + bshareAddr;
+    uniswapUrl = 'https://mm.finance/add/CRO/' + bshareAddr;
     //   vaultUrl = 'https://www.bomb.farm/#/bsc/vault/bomb-10SHARE-CRO';
   }
   return (
     <Paper>
       <Box p={2}>
-        <StyledLink href={uniswapUrl} target="_blank">
-          {`Provide liquidity for ${pairName} now on PancakeSwap`}
+        <StyledLink onClick={() => {
+              if (isPreview) {
+                alert("Please wait for the site to be fully online!")
+                return
+              }
+        }}
+        href={isPreview ? '' : uniswapUrl} target={isPreview ? '' : "_blank"}>
+          {`Provide liquidity for ${pairName} now on MMF`}
         </StyledLink>
       </Box>
     </Paper>

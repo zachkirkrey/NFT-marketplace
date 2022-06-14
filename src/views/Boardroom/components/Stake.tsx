@@ -79,10 +79,16 @@ const Stake: React.FC = () => {
   const { onWithdraw } = useWithdrawFromBoardroom();
   const canWithdrawFromBoardroom = useWithdrawCheck();
 
+  const isPreview = false
+
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
       onConfirm={(value) => {
+        if (isPreview) {
+          alert("Please wait for the site to be fully online!")
+          return
+        }
         onStake(value);
         onDismissDeposit();
       }}
@@ -94,6 +100,10 @@ const Stake: React.FC = () => {
     <WithdrawModal
       max={stakedBalance}
       onConfirm={(value) => {
+        if (isPreview) {
+          alert("Please wait for the site to be fully online!")
+          return
+        }
         onWithdraw(value);
         onDismissWithdraw();
       }}
@@ -120,7 +130,13 @@ const Stake: React.FC = () => {
             fullWidth
             disabled={approveStatus !== ApprovalState.NOT_APPROVED}
             className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
-            onClick={approve}
+            onClick={() => {
+              if (isPreview) {
+                alert("Please wait for the site to be fully online!")
+                return
+              }
+              approve()
+            }}
           >
             Approve 10SHARE
           </Button>

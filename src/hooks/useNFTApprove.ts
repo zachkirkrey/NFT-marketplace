@@ -1,10 +1,8 @@
 import { BigNumber, ethers } from 'ethers';
 import { useCallback, useMemo } from 'react';
 import { useHasPendingApproval, useTransactionAdder } from '../state/transactions/hooks';
-import useAllowance from './useAllowance';
+import useNFTAllowance from './useNFTAllowance';
 import ERC20 from '../bomb-finance/ERC20';
-import { CRO_TICKER, _10MB_TICKER, _10SHARE_TICKER, USDC_TICKER, ZAPPER_ROUTER_ADDR } from '../utils/constants';
-import useBombFinance from './useBombFinance';
 
 const APPROVE_AMOUNT = ethers.constants.MaxUint256;
 const APPROVE_BASE_AMOUNT = BigNumber.from('1000000000000000000000000');
@@ -17,49 +15,43 @@ export enum ApprovalState {
 }
 
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
-function useApproveZapper(zappingToken: string): [ApprovalState, () => Promise<void>] {
-  const bombFinance = useBombFinance();
-  let token: ERC20;
-  if (zappingToken === CRO_TICKER) token = bombFinance.CRO;
-  else if (zappingToken === _10MB_TICKER) token = bombFinance["10MB"];
-  else if (zappingToken === _10SHARE_TICKER) token = bombFinance["10SHARE"];
-  else if (zappingToken === USDC_TICKER) token = bombFinance.externalTokens[USDC_TICKER];
-  const pendingApproval = useHasPendingApproval(token.address, ZAPPER_ROUTER_ADDR);
-  const currentAllowance = useAllowance(token, ZAPPER_ROUTER_ADDR, pendingApproval);
+function useNFTApprove(token: ERC20, spender: string): [ApprovalState, () => Promise<void>] {
+  const pendingApproval = useHasPendingApproval(token.address, spender);
+  const currentAllowance = useNFTAllowance(token, spender, pendingApproval);
 
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
     // we might not have enough data to know whether or not we need to approve
-    if (token === bombFinance.CRO) return ApprovalState.APPROVED;
-    if (!currentAllowance) return ApprovalState.UNKNOWN;
+    //if (!currentAllowance) return ApprovalState.UNKNOWN;
 
     // amountToApprove will be defined if currentAllowance is
-    return currentAllowance.lt(APPROVE_BASE_AMOUNT)
+    return !currentAllowance
       ? pendingApproval
         ? ApprovalState.PENDING
         : ApprovalState.NOT_APPROVED
       : ApprovalState.APPROVED;
-  }, [currentAllowance, pendingApproval, token, bombFinance]);
+  }, [currentAllowance, pendingApproval]);
 
   const addTransaction = useTransactionAdder();
 
   const approve = useCallback(async (): Promise<void> => {
+    console.log("nft approve!!")
     if (approvalState !== ApprovalState.NOT_APPROVED) {
       console.error('approve was called unnecessarily');
       return;
     }
 
-    const response = await token.approve(ZAPPER_ROUTER_ADDR, APPROVE_AMOUNT);
+    const response = await token.setApprovalForAll(spender, true);
     addTransaction(response, {
       summary: `Approve ${token.symbol}`,
       approval: {
         tokenAddress: token.address,
-        spender: ZAPPER_ROUTER_ADDR,
+        spender: spender,
       },
     });
-  }, [approvalState, token, addTransaction]);
+  }, [approvalState, token, spender, addTransaction]);
 
   return [approvalState, approve];
 }
 
-export default useApproveZapper;
+export default useNFTApprove;

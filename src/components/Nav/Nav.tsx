@@ -4,7 +4,7 @@ import { AppBar, Box, Drawer, IconButton, Toolbar, List, useMediaQuery } from '@
 
 import ListItemLink from '../ListItemLink';
 import useBombStats from '../../hooks/useBombStats';
-import useUSDTStats from '../../hooks/useUSDTStats';
+import useUSDCStats from '../../hooks/useUSDCStats';
 import useShareStats from '../../hooks/usebShareStats';
 
 import MenuIcon from '@material-ui/icons/Menu';
@@ -67,7 +67,7 @@ const Nav = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const bombStats = useBombStats();
-  const USDTStats = useUSDTStats();
+  const USDCStats = useUSDCStats();
   const shareStats = useShareStats();
 
   const [navBackgroundTransparent, setNavBackgroundTransparent] = useState(true);
@@ -96,7 +96,7 @@ const Nav = () => {
     setOpen(false);
   };
 
-  const USDTPriceInDollars = useMemo(() => (USDTStats ? Number(USDTStats).toFixed(2) : null), [USDTStats]);
+  const USDCPriceInDollars = useMemo(() => (USDCStats ? Number(USDCStats).toFixed(2) : null), [USDCStats]);
   const bombPriceInDollars = useMemo(
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
@@ -105,6 +105,8 @@ const Nav = () => {
     () => (shareStats ? Number(shareStats.priceInDollars).toFixed(2) : null),
     [shareStats],
   );
+
+  const isPreview = false
 
   return (
     <AppBar
@@ -116,7 +118,7 @@ const Nav = () => {
         {displayNavWithoutDrawer ? (
           <>
             <Link to="/" style={{ display: 'flex', color: 'inherit', marginTop: '-8px' }}>
-              <img alt="bomb.money" src={bombLogo} height="46px" />
+              <img alt="10mb.finance" src={bombLogo} height="46px" />
             </Link>
             <Box style={{ paddingLeft: '15px', fontSize: '1rem', flexGrow: '1' }}>
               <Link to="/" className={'navLink ' + classes.link}>
@@ -147,12 +149,12 @@ const Nav = () => {
                 Regulations
               </Link> 
               <a
-                href="https://bombUSDT.com"
+                href="https://bombUSDC.com"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
                 //  target="_blank"
               >
-                USDT Staking
+                USDC Staking
               </a>
 
               <a
@@ -164,7 +166,7 @@ const Nav = () => {
                 Vaults
               </a>
               <a
-                href="https://shop.bomb.money"
+                href="https://shop.10mb.finance"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -172,7 +174,7 @@ const Nav = () => {
                 Merch
               </a>
               <a
-                href="https://vote.bomb.money"
+                href="https://vote.10mb.finance"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -180,7 +182,7 @@ const Nav = () => {
                 Vote
               </a>*/}
               <a
-                href="https://docs.bomb.money"
+                href="https://docs.10mb.finance"
                 className={'navLink ' + classes.link}
                 rel="noopener noreferrer"
                 target="_blank"
@@ -202,11 +204,11 @@ const Nav = () => {
               }}
             >
               <div className="navTokenIcon bomb"></div>{' '}
-              <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+              <div className="navTokenPrice">{`${roundAndFormatNumber(isPreview ? 0.1 : Number(bombPriceInDollars), 2)} (1.00 peg)`}</div>
               <div className="navTokenIcon bshare"></div>{' '}
-              <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
-              <div className="navTokenIcon USDT"></div>{' '}
-              <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
+              <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1000 : Number(sharePriceInDollars), 2)}</div>
+              <div className="navTokenIcon USDC"></div>{' '}
+              <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1 : Number(USDCPriceInDollars), 2)}</div>
             </Box>
             <AccountButton text="Connect" />
           </>
@@ -216,17 +218,17 @@ const Nav = () => {
               <MenuIcon />
             </IconButton>
             <Link to="/" style={{ display: 'flex' }}>
-              <img alt="bomb.money" src={bombLogo} className={classes.logo} />
+              <img alt="10mb.finance" src={bombLogo} className={classes.logo} />
             </Link>
             <Box display="flex" alignItems="center" ml="auto">
               {displayRatesInAppbar ? (
                 <Box display="flex" alignItems="center">
                   <div className="navTokenIcon bomb"></div>{' '}
-                  <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+                  <div className="navTokenPrice">{`${roundAndFormatNumber(isPreview ? 0.1 : Number(bombPriceInDollars), 2)} (1.00 peg)`}</div>
                   <div className="navTokenIcon bshare"></div>{' '}
-                  <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
-                  <div className="navTokenIcon USDT"></div>{' '}
-                  <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
+                  <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1000 : Number(sharePriceInDollars), 2)}</div>
+                  <div className="navTokenIcon USDC"></div>{' '}
+                  <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1 : Number(USDCPriceInDollars), 2)}</div>
                 </Box>
               ) : null}
               <AccountButton text="Connect" />
@@ -247,15 +249,15 @@ const Nav = () => {
                   <>
                     <Box display="flex" alignItems="center" mb={2}>
                       <div className="navTokenIcon bomb"></div>{' '}
-                      <div className="navTokenPrice">${roundAndFormatNumber(Number(bombPriceInDollars), 2)}</div>
+                      <div className="navTokenPrice">{`${roundAndFormatNumber(isPreview ? 0.1 : Number(bombPriceInDollars), 2)} (1.00 peg)`}</div>
                     </Box>
                     <Box display="flex" alignItems="center" mb={2}>
                       <div className="navTokenIcon bshare"></div>{' '}
-                      <div className="navTokenPrice">${roundAndFormatNumber(Number(sharePriceInDollars), 2)}</div>
+                      <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1000 : Number(sharePriceInDollars), 2)}</div>
                     </Box>
                     <Box display="flex" alignItems="center" mb={2}>
-                      <div className="navTokenIcon USDT"></div>{' '}
-                      <div className="navTokenPrice">${roundAndFormatNumber(Number(USDTPriceInDollars), 2)}</div>
+                      <div className="navTokenIcon USDC"></div>{' '}
+                      <div className="navTokenPrice">${roundAndFormatNumber(isPreview ? 1 :Number(USDCPriceInDollars), 2)}</div>
                     </Box>
                   </>
                 ) : null}
@@ -265,14 +267,15 @@ const Nav = () => {
                 {/*<ListItemLink primary="x_10MB" to="/xbomb" />*/}
                 <ListItemLink primary="Bond" to="/bond" />
                 <ListItemLink primary="Mint" to="/mint" />
-                {/*<ListItemLink primary="USDT Staking" href="https://bombUSDT.com" />*/}
+                <ListItemLink primary="Docs" href="https://docs.10mb.finance" />
+                {/*<ListItemLink primary="USDC Staking" href="https://bombUSDC.com" />*/}
                 {/*<ListItemLink primary="Vaults" href="https://bomb.farm" />*/}
                 {/* <ListItemLink primary="SBS" to="/sbs" /> */}
                 {/* <ListItemLink primary="Liquidity" to="/liquidity" /> */}
                 {/* <ListItemLink primary="Regulations" to="/regulations" /> */}
-                {/*<ListItemLink primary="Merch" href="https://shop.bomb.money" />*/}
-                {/*<ListItemLink primary="Vote" href="https://vote.bomb.money" />*/}
-                {/*<ListItemLink primary="Docs" href="https://docs.bomb.money" />*/}
+                {/*<ListItemLink primary="Merch" href="https://shop.10mb.finance" />*/}
+                {/*<ListItemLink primary="Vote" href="https://vote.10mb.finance" />*/}
+                {/*<ListItemLink primary="Docs" href="https://docs.10mb.finance" />*/}
               </List>
             </Drawer>
           </>

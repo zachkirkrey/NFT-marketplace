@@ -27,7 +27,7 @@ import { Box, Grid, Button, Card } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 import { BigNumber } from 'ethers';
 
-const TITLE = 'bomb.money | Mint';
+const TITLE = '10mb.finance | Mint';
 
 const Mint: React.FC = () => {
   const { account } = useWallet();

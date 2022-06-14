@@ -12,7 +12,7 @@
         },
         {
           "internalType": "address",
-          "name": "_USDT",
+          "name": "_USDC",
           "type": "address"
         },
         {
@@ -143,11 +143,11 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "_USDT",
+          "name": "_USDC",
           "type": "address"
         }
       ],
-      "name": "setUSDT",
+      "name": "setUSDC",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -167,7 +167,7 @@
     },
     {
       "inputs": [],
-      "name": "USDT",
+      "name": "USDC",
       "outputs": [
         {
           "internalType": "contract IERC20",

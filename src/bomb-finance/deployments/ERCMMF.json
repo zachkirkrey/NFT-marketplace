@@ -1,7 +1,7 @@
 {
   "_format": "hh-sol-artifact-1",
-  "contractName": "ERCUSDT",
-  "sourceName": "contracts/tokens/ERCUSDT.sol",
+  "contractName": "ERCUSDC",
+  "sourceName": "contracts/tokens/ERCUSDC.sol",
   "abi": [
     {
       "inputs": [],

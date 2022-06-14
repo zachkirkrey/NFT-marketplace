@@ -13,7 +13,7 @@ const useXbombAPR = () => {
   useEffect(() => {
     async function fetchBalance() {
       try {
-        setBombAPR(await bombFinance.getXbombAPR());
+        //setBombAPR(await bombFinance.getXbombAPR());
       } catch (e) {
         console.error(e);
       }

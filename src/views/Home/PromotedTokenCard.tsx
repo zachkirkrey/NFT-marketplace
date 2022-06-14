@@ -57,8 +57,8 @@ type PromotedTokenCardProps = {
 };
 
 const labelMap = {
-  treasure: 'Invested',
-  invested: 'Treasure',
+  treasure: 'Supply',
+  invested: 'Collateral',
 };
 
 const classesMap = {
@@ -80,26 +80,45 @@ export const PromotedTokenCard: React.FC<PromotedTokenCardProps> = ({ type }) =>
             <TokenSymbol symbol="10MB" size={48} />
             <Box display={{ sm: 'none', md: 'none', lg: 'none', xl: 'none' }}>
               <StyledIconButton>
-                <LaunchIcon />
+                <a style={{color: 'white'}} href='' target="_blank">
+                  <LaunchIcon />
+                </a>
               </StyledIconButton>
             </Box>
           </Box>
         </Grid>
+        {labelMap[type] == "Supply" ?<>
         <Grid item xs={12} sm="auto">
           <Box textAlign={['center', 'left']}>
-            <Typography variant="body2">Total Balance</Typography>
-            <Value>4,588,436 CRO</Value>
+            <Typography variant="body2">Iron Supply</Typography>
+            <Value>0.00 10MB</Value>
           </Box>
         </Grid>
         <Grid item xs={12} sm="auto">
           <Box textAlign={['center', 'left']}>
-            <Typography variant="body2">Backing per 10SHARE</Typography>
-            <Value>0.27 CRO</Value>
+            <Typography variant="body2">Tomb Supply</Typography>
+            <Value>0.00 10MB</Value>
+          </Box>
+        </Grid></>
+        :<>
+        <Grid item xs={12} sm="auto">
+          <Box textAlign={['center', 'left']}>
+            <Typography variant="body2">Total Supply</Typography>
+            <Value>0.00 10MB</Value>
           </Box>
         </Grid>
+        <Grid item xs={12} sm="auto">
+          <Box textAlign={['center', 'left']}>
+            <Typography variant="body2">Backing Per 10MB</Typography>
+            <Value>0.0000 USDC</Value>
+          </Box>
+        </Grid></>
+  }
         <LinkGridItem item xs={12} sm="auto">
-          <StyledIconButton>
-            <LaunchIcon />
+          <StyledIconButton >
+            <a style={{color: 'white'}} href='' target="_blank">
+              <LaunchIcon />
+            </a>
           </StyledIconButton>
         </LinkGridItem>
       </Grid>

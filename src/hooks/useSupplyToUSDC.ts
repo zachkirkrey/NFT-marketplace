@@ -2,17 +2,17 @@ import { useCallback } from 'react';
 import useBombFinance from './useBombFinance';
 import useHandleTransactionReceipt from './useHandleTransactionReceipt';
 
-const useRedeemFromUSDT = () => {
+const useSupplyToUSDC = () => {
   const bombFinance = useBombFinance();
   const handleTransactionReceipt = useHandleTransactionReceipt();
 
-  const handleWithdraw = useCallback(
+  const handleStake = useCallback(
     (amount: string) => {
-      handleTransactionReceipt(bombFinance.redeemFromUSDT(amount), `Redeem ${amount} USDT from Supply`);
+      handleTransactionReceipt(bombFinance.supplyToUSDC(amount), `Supply  ${amount} USDC`);
     },
     [bombFinance, handleTransactionReceipt],
   );
-  return { onWithdraw: handleWithdraw };
+  return { onStake: handleStake };
 };
 
-export default useRedeemFromUSDT;
+export default useSupplyToUSDC;

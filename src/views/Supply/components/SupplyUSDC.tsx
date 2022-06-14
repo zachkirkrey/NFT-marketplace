@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 
+import { BigNumber } from 'ethers';
+
 import { Box, Button, Card, CardContent, Typography } from '@material-ui/core';
 
 // import Button from '../../../components/Button';
@@ -12,7 +14,7 @@ import IconButton from '../../../components/IconButton';
 import Label from '../../../components/Label';
 import Value from '../../../components/Value';
 //import useXbombBalance from '../../../hooks/useXbombBalance';
-import useUSDTStats from '../../../hooks/useUSDTStats';
+import useUSDCStats from '../../../hooks/useUSDCStats';
 import useApprove, { ApprovalState } from '../../../hooks/useApprove';
 import useModal from '../../../hooks/useModal';
 import useTokenBalance from '../../../hooks/useTokenBalance';
@@ -24,27 +26,26 @@ import WithdrawModal from './WithdrawModal';
 import useBombFinance from '../../../hooks/useBombFinance';
 //import useStakedTokenPriceInDollars from '../../../hooks/useStakedTokenPriceInDollars';   //May not be needed anymore.
 import TokenSymbol from '../../../components/TokenSymbol';
-import useSupplyToUSDT from '../../../hooks/useSupplyToUSDT';
-import useRedeemFromMMF from '../../../hooks/useRedeemFromUSDT';
+import useSupplyToUSDC from '../../../hooks/useSupplyToUSDC';
+import useRedeemFromMMF from '../../../hooks/useRedeemFromUSDC';
 
-const SupplyUSDT: React.FC = () => {
+const SupplyUSDC: React.FC = () => {
   const bombFinance = useBombFinance();
-  const USDTStats = useUSDTStats();
+  const USDCStats = useUSDCStats();
 
-  const [approveStatus, approve] = useApprove(bombFinance.USDT, bombFinance.contracts.BombRouter.address);
-  const [approveStatusW, approveW] = useApprove(bombFinance.B_10MBUSDT, bombFinance.contracts.BombRouter.address);
+  const [approveStatus, approve] = useApprove(bombFinance.USDC, bombFinance.contracts.BombRouter.address);
 
-  const tokenBalance = useTokenBalance(bombFinance.USDT);
+  const tokenBalance = useTokenBalance(bombFinance.USDC);
   //const stakedBalance = useStakedBomb();
-  const stakedBalance = useTokenBalance(bombFinance.B_10MB_USDT);
+  const stakedBalance = BigNumber.from(0)//useTokenBalance(bombFinance.B_10MB_USDC);
 
   // const xbombBalance = useXbombBalance();
   // const xbombRate = Number(xbombBalance) / 1000000000000000000;
   // const xbombToBombEquivalent = Number(getDisplayBalance(stakedBalance)) * xbombRate;
 
-  const USDTPriceInDollars = useMemo(() => (USDTStats ? Number(USDTStats).toFixed(2) : null), [USDTStats]);
+  const USDCPriceInDollars = useMemo(() => (USDCStats ? Number(USDCStats).toFixed(2) : null), [USDCStats]);
 
-  const stakedTokenPriceInDollars = Number(USDTPriceInDollars);
+  const stakedTokenPriceInDollars = Number(USDCPriceInDollars);
 
   const tokenPriceInDollars = useMemo(() => {
     return stakedTokenPriceInDollars
@@ -53,7 +54,7 @@ const SupplyUSDT: React.FC = () => {
   }, [stakedTokenPriceInDollars, stakedBalance]);
   // const isOldBoardroomMember = boardroomVersion !== 'latest';
 
-  const { onStake } = useSupplyToUSDT();
+  const { onStake } = useSupplyToUSDC();
   const { onWithdraw } = useRedeemFromMMF();
 
   const [onPresentDeposit, onDismissDeposit] = useModal(
@@ -63,7 +64,7 @@ const SupplyUSDT: React.FC = () => {
         onStake(value);
         onDismissDeposit();
       }}
-      tokenName={'USDT'}
+      tokenName={'USDC'}
     />,
   );
 
@@ -74,7 +75,7 @@ const SupplyUSDT: React.FC = () => {
         onWithdraw(value);
         onDismissWithdraw();
       }}
-      tokenName={'USDT'}
+      tokenName={'USDC'}
     />,
   );
 
@@ -85,16 +86,16 @@ const SupplyUSDT: React.FC = () => {
           <StyledCardContentInner>
             <StyledCardHeader>
               <Typography variant="h5" component="h2">
-                Supply USDT
+                Supply USDC
               </Typography>
               <CardIcon>
-                <TokenSymbol symbol="USDT" />
+                <TokenSymbol symbol="USDC" />
               </CardIcon>
 
               <Button
                 className={'shinyButton'}
                 onClick={() => {
-                  bombFinance.watchAssetInMetamask('USDT');
+                  bombFinance.watchAssetInMetamask('USDC');
                 }}
                 style={{
                   position: 'static',
@@ -110,7 +111,7 @@ const SupplyUSDT: React.FC = () => {
                 <img alt="metamask fox" style={{ width: '20px', filter: 'grayscale(100%)' }} src={MetamaskFox} />
               </Button>
               <Value value={getDisplayBalance(stakedBalance)} />
-              <Label text={'b_10MB (USDT)'} variant="yellow" />
+              <Label text={'b_10MB (USDC)'} variant="yellow" />
               <Label text={`≈ $${tokenPriceInDollars}`} variant="yellow" />
             </StyledCardHeader>
             <StyledCardActions>
@@ -119,20 +120,20 @@ const SupplyUSDT: React.FC = () => {
                   disabled={approveStatus !== ApprovalState.NOT_APPROVED}
                   className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
                   style={{ marginTop: '20px' }}
-                  onClick={approve}
+                  onClick={() => {
+                    const isPreview = false
+      
+                    if (isPreview) {
+                      alert("Please wait for the site to be fully online!")
+                      return
+                    }
+                    approve()
+                  }}
                 >
-                  Approve USDT
+                  Approve USDC
                 </Button>
               ) : (
                 <>
-                  {approveStatusW !== ApprovalState.APPROVED ? (
-                    <IconButton onClick={approveW}>A</IconButton>
-                  ) : (
-                    <IconButton onClick={onPresentWithdraw}>
-                      <RemoveIcon color={'yellow'} />
-                    </IconButton>
-                  )}
-
                   <StyledActionSpacer />
                   <IconButton onClick={onPresentDeposit}>
                     <AddIcon color={'yellow'} />
@@ -184,4 +185,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `;
 
-export default SupplyUSDT;
+export default SupplyUSDC;

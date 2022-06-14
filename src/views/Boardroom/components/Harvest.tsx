@@ -63,6 +63,8 @@ const Harvest: React.FC = () => {
 
   const { from, to } = useClaimRewardTimerBoardroom();
 
+  const isPreview = false
+
   return (
     <RelativePaper>
       <div className={classes.badge}>
@@ -79,7 +81,13 @@ const Harvest: React.FC = () => {
         </Box>
         <Button
           fullWidth
-          onClick={onReward}
+          onClick={() => {
+            if (isPreview) {
+              alert("Please wait for the site to be fully online!")
+              return
+            }
+            onReward()
+          }}
           className={earnings.eq(0) || !canClaimReward ? 'shinyButtonDisabled' : 'shinyButton'}
           disabled={earnings.eq(0) || !canClaimReward}
         >

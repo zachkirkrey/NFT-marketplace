@@ -52,11 +52,17 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
   const { onZap } = useZap(bank);
   const { onWithdraw } = useWithdraw(bank);
 
+  const isPreview = false
+
   const [onPresentDeposit, onDismissDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
       decimals={bank.depositToken.decimal}
       onConfirm={(amount) => {
+        if (isPreview) {
+          alert("Please wait for the site to be fully online!")
+          return
+        }
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         onStake(amount);
         onDismissDeposit();
@@ -69,6 +75,10 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
     <ZapModal
       decimals={bank.depositToken.decimal}
       onConfirm={(zappingToken, tokenName, amount) => {
+        if (isPreview) {
+          alert("Please wait for the site to be fully online!")
+          return
+        }
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         onZap(zappingToken, tokenName, amount);
         onDissmissZap();
@@ -82,6 +92,10 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
       max={stakedBalance}
       decimals={bank.depositToken.decimal}
       onConfirm={(amount) => {
+        if (isPreview) {
+          alert("Please wait for the site to be fully online!")
+          return
+        }
         if (Number(amount) <= 0 || isNaN(Number(amount))) return;
         onWithdraw(amount);
         onDismissWithdraw();
@@ -113,7 +127,13 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
               approveStatus === ApprovalState.PENDING ||
               approveStatus === ApprovalState.UNKNOWN
             }
-            onClick={approve}
+            onClick={() => {
+              if (isPreview) {
+                alert("Please wait for the site to be fully online!")
+                return
+              }
+              approve()
+            }}
             className={
               bank.closedForStaking ||
               approveStatus === ApprovalState.PENDING ||
@@ -126,15 +146,21 @@ const Stake: React.FC<StakeProps> = ({ bank }) => {
           </Button>
         ) : (
           <>
-            <IconButton onClick={onPresentWithdraw}>
+            <IconButton onClick={() => {
+              if (isPreview) {
+                alert("Please wait for the site to be fully online!")
+                return
+              }
+              onPresentWithdraw()
+            }}>
               <RemoveIcon />
             </IconButton>
             <StyledActionSpacer />
             <IconButton
               disabled={
                 bank.closedForStaking ||
-                bank.depositTokenName === '10MB-10SHARE-LP' ||
-                bank.depositTokenName === '10MB-USDT-LP'
+                bank.depositTokenName === '10MB-10SHARE LP' ||
+                bank.depositTokenName === '10MB-USDC LP'
               }
               onClick={() => (bank.closedForStaking ? null : onPresentZap())}
             >

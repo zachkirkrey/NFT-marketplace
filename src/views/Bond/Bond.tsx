@@ -21,7 +21,7 @@ import { Alert } from '@material-ui/lab';
 import { Box, Grid } from '@material-ui/core';
 import { Helmet } from 'react-helmet';
 
-const TITLE = 'bomb.money | Bonds';
+const TITLE = '10mb.finance | Bonds';
 
 const Bond: React.FC = () => {
   const { path } = useRouteMatch();
@@ -35,8 +35,14 @@ const Bond: React.FC = () => {
 
   const bondBalance = useTokenBalance(bombFinance["10BOND"]);
 
+  const isPreview = false
+
   const handleBuyBonds = useCallback(
     async (amount: string) => {
+      if (isPreview) {
+        alert("Please wait for the site to be fully online!")
+        return
+      }
       const tx = await bombFinance.buyBonds(amount);
       addTransaction(tx, {
         summary: `Buy ${Number(amount).toFixed(2)} 10BOND with ${amount} 10MB`,
@@ -47,6 +53,10 @@ const Bond: React.FC = () => {
 
   const handleRedeemBonds = useCallback(
     async (amount: string) => {
+      if (isPreview) {
+        alert("Please wait for the site to be fully online!")
+        return
+      }
       const tx = await bombFinance.redeemBonds(amount);
       addTransaction(tx, { summary: `Redeem ${amount} 10BOND` });
     },
@@ -56,8 +66,8 @@ const Bond: React.FC = () => {
 
   console.log('bondStat ', bondStat);
 
-  const isBondPurchasable = Number(bondStat?.tokenInUSDT) < 1.01;
-  const isBondPayingPremium = Number(bondStat?.tokenInUSDT) >= 1.01;
+  const isBondPurchasable = Number(bondStat?.tokenInUSDC) < 1.01;
+  const isBondPayingPremium = Number(bondStat?.tokenInUSDC) >= 1.01;
   const bondScale = (Number(cashPrice) / 100000).toFixed(2);
 
   console.log('bondStat ', bondStat);
@@ -82,7 +92,7 @@ const Bond: React.FC = () => {
               <Box>
                 <Box justifyContent="center" style={{ margin: '18px', display: 'flex' }}>
                   <Alert variant="filled" severity="error">
-                    <b>Claiming below 1.1 peg will not receive a redemption bonus, claim wisely!</b>
+                    <b>Claiming below 1.1 Peg receives a proportional redemption bonus. Claim wisely!</b>
                   </Alert>
                 </Box>
               </Box>
@@ -108,15 +118,15 @@ const Bond: React.FC = () => {
               <StyledStatsWrapper>
                 <ExchangeStat
                   tokenName="10 10MB"
-                  description="Last-Hour TWAP Price"
-                  //price={Number(bombStat?.tokenInUSDT).toFixed(4) || '-'}
-                  price={bondScale || '-'}
+                  description="TWAP Price"
+                  //price={Number(bombStat?.tokenInUSDC).toFixed(4) || '-'}
+                  price={isPreview ? '1.00' : bondScale || '-'}
                 />
                 <Spacer size="md" />
                 <ExchangeStat
                   tokenName="10 10BOND"
                   description="Current Price: (10MB)^2"
-                  price={(Number(bondStat?.tokenInUSDT) * 10).toFixed(2) || '-'}
+                  price={(Number(bondStat?.tokenInUSDC) * 10).toFixed(2) || '-'}
                 />
               </StyledStatsWrapper>
               <StyledCardWrapper>
@@ -129,7 +139,7 @@ const Bond: React.FC = () => {
                   priceDesc={`${getDisplayBalance(bondBalance)} 10BOND Available in wallet`}
                   onExchange={handleRedeemBonds}
                   disabled={!bondStat || bondBalance.eq(0) || !isBondRedeemable}
-                  disabledDescription={!isBondRedeemable ? `Enabled when 10 10MB > ${BOND_REDEEM_PRICE}USDT` : null}
+                  disabledDescription={!isBondRedeemable ? `Enabled when 10 10MB > ${BOND_REDEEM_PRICE}USDC` : null}
                 />
               </StyledCardWrapper>
             </StyledBond>

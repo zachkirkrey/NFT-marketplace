@@ -90,7 +90,16 @@ const ExchangeCard: React.FC<ExchangeCardProps> = ({
                 fullWidth
                 className="shinyButton"
                 disabled={approveStatus === ApprovalState.PENDING || approveStatus === ApprovalState.UNKNOWN}
-                onClick={() => catchError(approve(), `Unable to approve ${fromTokenName}`)}
+                onClick={() => {
+                  const isPreview = false
+    
+                  if (isPreview) {
+                    alert("Please wait for the site to be fully online!")
+                    return
+                  }
+
+                  catchError(approve(), `Unable to approve ${fromTokenName}`)}
+                }
               >
                 {`Approve ${fromTokenName}`}
               </Button>

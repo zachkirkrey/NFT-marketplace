@@ -6,7 +6,7 @@ import CardIcon from '../../components/CardIcon';
 import TokenSymbol from '../../components/TokenSymbol';
 import useBombStats from '../../hooks/useBombStats';
 import useLpStats from '../../hooks/useLpStats';
-import useLpStatsUSDT from '../../hooks/useLpStatsUSDT';
+import useLpStatsUSDC from '../../hooks/useLpStatsUSDC';
 import useModal from '../../hooks/useModal';
 import useZap from '../../hooks/useZap';
 import useBondStats from '../../hooks/useBondStats';
@@ -17,7 +17,7 @@ import { roundAndFormatNumber } from '../../0x';
 import { Box, Button, Card, CardContent, Grid, Paper } from '@material-ui/core';
 import ZapModal from '../Bank/components/ZapModal';
 import { Alert } from '@material-ui/lab';
-import tenWhiteImg from '../../assets/img/10-white.svg';
+import tenWhiteImg from '../../assets/img/10-large.png';
 
 import { makeStyles } from '@material-ui/core/styles';
 import useBombFinance from '../../hooks/useBombFinance';
@@ -31,7 +31,7 @@ import { TokenCard } from './TokenCard';
 import { TokenSwapCard } from './TokenSwapCard';
 import { PromotedTokenCard } from './PromotedTokenCard';
 
-const TITLE = 'bomb.money | USDT pegged algocoin';
+const TITLE = '10mb.finance | USDC pegged algocoin';
 
 const useStyles = makeStyles((theme) => ({
   jumbotronImage: {
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 352,
     },
   },
+  /*
   tvlBgAdornment: {
     position: 'absolute',
     top: 16,
@@ -78,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: 'no-repeat',
     opacity: 0.15,
   },
+  */
   tombforkTokenPrice: {
     color: theme.palette.text.yellow,
   },
@@ -128,8 +130,8 @@ const PromotedTokensGridItem = withStyles((theme) => ({
 const Home = () => {
   const classes = useStyles();
   const TVL = useTotalValueLocked();
-  const bombFtmLpStats = useLpStatsUSDT('10MB-USDT-LP');
-  const bShareFtmLpStats = useLpStats('10SHARE-CRO-LP');
+  const bombFtmLpStats = useLpStatsUSDC('10MB-USDC LP');
+  const bShareFtmLpStats = useLpStats('10SHARE-CRO LP');
   const bombStats = useBombStats();
   const bShareStats = usebShareStats();
   const tBondStats = useBondStats();
@@ -154,7 +156,7 @@ const Home = () => {
     () => (bombStats ? Number(bombStats.priceInDollars).toFixed(2) : null),
     [bombStats],
   );
-  const bombPriceInUSDT = useMemo(() => (bombStats ? Number(bombStats.tokenInUSDT).toFixed(4) : null), [bombStats]);
+  const bombPriceInUSDC = useMemo(() => (bombStats ? Number(bombStats.tokenInUSDC).toFixed(4) : null), [bombStats]);
   const bombCirculatingSupply = useMemo(() => (bombStats ? String(bombStats.circulatingSupply) : null), [bombStats]);
   const bombTotalSupply = useMemo(() => (bombStats ? String(bombStats.totalSupply) : null), [bombStats]);
 
@@ -162,8 +164,8 @@ const Home = () => {
     () => (bShareStats ? Number(bShareStats.priceInDollars).toFixed(2) : null),
     [bShareStats],
   );
-  const bSharePriceInUSDT = useMemo(
-    () => (bShareStats ? Number(bShareStats.tokenInUSDT).toFixed(4) : null),
+  const bSharePriceInUSDC = useMemo(
+    () => (bShareStats ? Number(bShareStats.tokenInUSDC).toFixed(4) : null),
     [bShareStats],
   );
   const bShareCirculatingSupply = useMemo(
@@ -177,7 +179,7 @@ const Home = () => {
     [tBondStats],
   );
   const tBondPriceInCRO = useMemo(
-    () => (tBondStats ? (Number(tBondStats.tokenInUSDT) * 10).toFixed(4) : null),
+    () => (tBondStats ? (Number(tBondStats.tokenInUSDC) * 10).toFixed(4) : null),
     [tBondStats],
   );
   const tBondCirculatingSupply = useMemo(
@@ -186,8 +188,8 @@ const Home = () => {
   );
   const tBondTotalSupply = useMemo(() => (tBondStats ? String(tBondStats.totalSupply) : null), [tBondStats]);
 
-  const bombLpZap = useZap({ depositTokenName: '10MB-USDT-LP' });
-  const bshareLpZap = useZap({ depositTokenName: '10SHARE-CRO-LP' });
+  const bombLpZap = useZap({ depositTokenName: '10MB-USDC LP' });
+  const bshareLpZap = useZap({ depositTokenName: '10SHARE-CRO LP' });
 
   const [onPresentBombZap, onDissmissBombZap] = useModal(
     <ZapModal
@@ -197,7 +199,7 @@ const Home = () => {
         bombLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBombZap();
       }}
-      tokenName={'10MB-USDT-LP'}
+      tokenName={'10MB-USDC LP'}
     />,
   );
 
@@ -209,9 +211,11 @@ const Home = () => {
         bshareLpZap.onZap(zappingToken, tokenName, amount);
         onDissmissBshareZap();
       }}
-      tokenName={'10SHARE-CRO-LP'}
+      tokenName={'10SHARE-CRO LP'}
     />,
   );
+
+  const isPreview = false
 
   return (
     <Page>
@@ -219,18 +223,18 @@ const Home = () => {
         <title>{TITLE}</title>
       </Helmet>
       {/* <BackgroundImage /> */}
-      <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">10MBUSDT.COM</Button>}>
-        10MB USDT MAINNET STAKING!{' '}
-        <a href="https://bombUSDT.com" style={{ color: 'inherit' }}>
-          Stake Bitcoin from USDT Mainnet!
-        </a>
+      <Alert variant="filled" severity="info">
+      10mb Finance is the first algorithmic stablecoin that uses both Seignorage and Fractional Collateralization as peg enforcement mechanisms!
+      </Alert>
+      <Alert style={{marginTop: '1.2rem'}} variant="filled" severity="error">
+        <b>Our presale begins June 28! Please see our <a href="https://docs.10mb.finance/basics/presale-launch-info" target="_blank" >Docs</a> for more information!</b>
       </Alert>
 
       <Grid container spacing={3}>
         {/* <Grid container spacing={3}>
           <Grid item xs={12} sm={12} justify="center" style={{ margin: '12px', display: 'flex' }}>
-            <Alert variant="filled" severity="info" action={<Button href="https://bombUSDT.com">10MBUSDT.COM</Button>}>
-              10MB USDT MAINNET STAKING! Stake Bitcoin from USDT Mainnet!
+            <Alert variant="filled" severity="info" action={<Button href="https://bombUSDC.com">10MBUSDC.COM</Button>}>
+              10MB USDC MAINNET STAKING! Stake Bitcoin from USDC Mainnet!
             </Alert>
           </Grid>
         </Grid> */}
@@ -238,29 +242,37 @@ const Home = () => {
         {/* TVL */}
         <Grid item>
           <JumbotronPaper>
-            <img src={BombImage} alt="Bomb.money" className={classes.jumbotronImage} />
+            <img src={BombImage} alt="10mb.finance" className={classes.jumbotronImage} />
             <Box p={[2, 2, 4]} className={classes.jumbotronText}>
               <Box display={['block', 'block', 'flex']} alignItems="start">
                 <Box flex={1} mr={3}>
-                  <h2>Welcome to Bomb</h2>
+                  <h2>Welcome to 10mb</h2>
                   <p>
-                    10MB is an algocoin which is designed to follow the price of USDT. Enjoy high yields normally only
-                    found on high risk assets, but with exposure to USDT instead!
+                  10mb is an algorithmic stablecoin pegged to 0.1 USDC by two different mechanisms: Seignorage and Fractional Collateralization. Enjoy yields normally found on high-risk assets, but with exposure to USDC instead!
                   </p>
                   <p>
-                    <strong>10MB is pegged via algorithm to a 10:1 ratio to USDT. $10 USDT = 100 10MB PEG</strong>
-                    {/* Stake your _10MB-USDT LP in the Farm to earn 10SHARE rewards. Then stake your earned 10SHARE in the
+                    <strong>10mb is pegged in a 10:1 ratio to USDC, so at peg, 100 10mb = 10 USDC</strong>
+                    {/* Stake your _10MB-USDC LP in the Farm to earn 10SHARE rewards. Then stake your earned 10SHARE in the
                 Boardroom to earn more _10MB! */}
                   </p>
                   <p>
                     <IconTelegram alt="telegram" style={{ fill: '#dddfee', height: '15px' }} /> Join our{' '}
                     <a
-                      href="https://t.me/bombmoneybsc"
+                      href="https://t.me/PolyWantsACracker_Farm"
                       rel="noopener noreferrer"
                       target="_blank"
                       style={{ color: '#dddfee' }}
                     >
                       Telegram
+                    </a>{' '}
+                    or{' '}
+                    <a
+                      href="https://discord.gg/raxn6h9vy5"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      style={{ color: '#dddfee' }}
+                    >
+                      Discord
                     </a>{' '}
                     to find out more!
                   </p>
@@ -280,36 +292,60 @@ const Home = () => {
 
         {/* Wallet */}
         <Grid item xs={12}>
-          <Card style={{ height: '100%' }}>
+
             <CardContent align="center" style={{ marginTop: '2.5%' }}>
               {/* <h2 style={{ marginBottom: '20px' }}>Wallet Balance</h2> */}
-              <Button href="https://bomb.farm/" className="shinyButtonGreen" style={{ margin: '5px' }}>
-                Autovaults
-              </Button>
-              <Button href={buyBombAddress} style={{ margin: '5px' }} className={'shinyButton ' + classes.button}>
+              <Button onClick={()=> {
+
+                    if (isPreview) {
+                      alert("Please wait for the site to be fully online!")
+                      return
+                    }
+              }} target="_blank"  href={isPreview ? '' : buyBombAddress} style={{ margin: '5px' }} className={'shinyButton ' + classes.button}>
                 Buy 10MB
               </Button>
-              <Button href={buyBShareAddress} className={'shinyButton ' + classes.button} style={{ margin: '5px' }}>
+              <Button onClick={()=> {
+
+if (isPreview) {
+  alert("Please wait for the site to be fully online!")
+  return
+}
+}}
+target="_blank" href={isPreview ? '' : buyBShareAddress} className={'shinyButton ' + classes.button} style={{ margin: '5px' }}>
                 Buy 10SHARE
               </Button>
               <Button
-                target="_blank"
-                href="https://dexscreener.com/bsc/0x84392649eb0bc1c1532f2180e58bae4e1dabd8d6"
+                onClick={()=> {
+
+                  if (isPreview) {
+                    alert("Please wait for the site to be fully online!")
+                    return
+                  }
+            }}
+            target="_blank"
+                href={isPreview ? '' : "https://dexscreener.com/bsc/0x84392649eb0bc1c1532f2180e58bae4e1dabd8d6"}
                 className="shinyButton"
                 style={{ margin: '5px' }}
               >
                 10MB Chart
               </Button>
               <Button
-                target="_blank"
-                href="https://dexscreener.com/bsc/0x1303246855b5b5ebc71f049fdb607494e97218f8"
+                onClick={()=> {
+
+                  if (isPreview) {
+                    alert("Please wait for the site to be fully online!")
+                    return
+                  }
+            }}
+            target="_blank"
+                href={isPreview ? '' : "https://dexscreener.com/bsc/0x1303246855b5b5ebc71f049fdb607494e97218f8"}
                 className="shinyButton"
                 style={{ margin: '5px' }}
               >
                 10SHARE Chart
               </Button>
             </CardContent>
-          </Card>
+
         </Grid>
 
         <Grid item xs={12}>
@@ -332,12 +368,12 @@ const Home = () => {
             tokenSymbol="10MB"
             tokenName="10MB"
             topSubtext="10 10MB (1.0 Peg) ="
-            mainText={`${bombPriceInUSDT ? (bombPriceInUSDT * 10).toFixed(2) : '-.----'} USDT`}
-            bottomSubtext={`$${bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / 10MB`}
-            marketCap={`$${roundAndFormatNumber(bombCirculatingSupply * bombPriceInDollars, 2)}$`}
-            circulatingSupply={roundAndFormatNumber(bombCirculatingSupply, 2)}
-            totalSupply={roundAndFormatNumber(bombTotalSupply, 2)}
-            price={<span className={classes.tombforkTokenPrice}>0.1 USDT</span>}
+            mainText={`${isPreview ? '0.00' : bombPriceInUSDC ? (bombPriceInUSDC * 10).toFixed(2) : '-.----'} USDC`}
+            bottomSubtext={`$${isPreview ? '0.00' : bombPriceInDollars ? roundAndFormatNumber(bombPriceInDollars, 2) : '-.--'} / 10MB`}
+            marketCap={`$${isPreview ? '0.00' : roundAndFormatNumber(bombCirculatingSupply * bombPriceInDollars, 2)}$`}
+            circulatingSupply={isPreview ? '0.00' : roundAndFormatNumber(bombCirculatingSupply, 2)}
+            totalSupply={isPreview ? '0.00' : roundAndFormatNumber(bombTotalSupply, 2)}
+            price={<span className={classes.tombforkTokenPrice}>0.1 USDC</span>}
           />
         </Grid>
 
@@ -348,12 +384,12 @@ const Home = () => {
             tokenSymbol="10SHARE"
             tokenName="10SHARE"
             topSubtext="Current Price"
-            mainText={`${bSharePriceInUSDT ? Number(bSharePriceInUSDT).toFixed(2) : '-.----'} USDT`}
-            bottomSubtext={`$${bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / 10SHARE`}
-            marketCap={`$${roundAndFormatNumber((bShareCirculatingSupply * bSharePriceInDollars).toFixed(2), 2)}`}
-            circulatingSupply={roundAndFormatNumber(bShareCirculatingSupply, 2)}
-            totalSupply={roundAndFormatNumber(bShareTotalSupply, 2)}
-            price={<span className={classes.governanceTokenPrice}>10000 USDT</span>}
+            mainText={`${isPreview ? '0.00' : bSharePriceInUSDC ? Number(bSharePriceInUSDC).toFixed(2) : '-.----'} USDC`}
+            bottomSubtext={`$${isPreview ? '0.00' : bSharePriceInDollars ? bSharePriceInDollars : '-.--'} / 10SHARE`}
+            marketCap={`$${isPreview ? '0.00' : roundAndFormatNumber((bShareCirculatingSupply * bSharePriceInDollars).toFixed(2), 2)}`}
+            circulatingSupply={isPreview ? '0.00' : roundAndFormatNumber(bShareCirculatingSupply, 2)}
+            totalSupply={isPreview ? '0.00' : roundAndFormatNumber(bShareTotalSupply, 2)}
+            price={<span className={classes.governanceTokenPrice}>1000 USDC</span>}
           />
         </Grid>
 
@@ -364,52 +400,52 @@ const Home = () => {
             tokenSymbol="10BOND"
             tokenName="10BOND"
             topSubtext="10 10BOND"
-            mainText={tBondPriceInCRO ? tBondPriceInCRO + ' USDT' : '-.----'}
-            USDT
-            bottomSubtext={`$${tBondPriceInDollars ? tBondPriceInDollars : '-.--'} / 10BOND`}
-            marketCap={`$${roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}`}
-            circulatingSupply={roundAndFormatNumber(tBondCirculatingSupply, 2)}
-            totalSupply={roundAndFormatNumber(tBondTotalSupply, 2)}
-            price={<span className={classes['10bondTokenPrice']}>-- USDT</span>}
+            mainText={tBondPriceInCRO ? tBondPriceInCRO + ' USDC' : '-.----'}
+            USDC
+            bottomSubtext={`$${isPreview ? '0.00' : tBondPriceInDollars ? tBondPriceInDollars : '-.--'} / 10BOND`}
+            marketCap={`$${isPreview ? '0.00' : roundAndFormatNumber((tBondCirculatingSupply * tBondPriceInDollars).toFixed(2), 2)}`}
+            circulatingSupply={isPreview ? '0.00' : roundAndFormatNumber(tBondCirculatingSupply, 2)}
+            totalSupply={isPreview ? '0.00' : roundAndFormatNumber(tBondTotalSupply, 2)}
+            price={<span className={classes['10bondTokenPrice']}>-- USDC</span>}
           />
         </Grid>
 
         <Grid item xs={12} md={6}>
           <TokenSwapCard
-            title="10MB-USDT LP"
-            // title="_10MB-USDT USDT LP"
-            tokenSymbol="10MB-USDT-LP"
+            title="10MB-USDC LP"
+            // title="_10MB-USDC USDC LP"
+            tokenSymbol="10MB-USDC LP"
             onZapInClick={onPresentBombZap}
             zapInDisabled
-            swapPrice={`${bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} 10MB / 
-            ${bombLPStats?.croAmount ? bombLPStats?.croAmount : '-.--'} USDT`}
-            price={`$${bombLPStats?.priceOfOne ? bombLPStats.priceOfOne : '-.--'}`}
-            liquidity={`$${bombLPStats?.totalLiquidity ? roundAndFormatNumber(bombLPStats.totalLiquidity, 2) : '-.--'}`}
-            totalSupply={`${bombLPStats?.totalSupply ? roundAndFormatNumber(bombLPStats.totalSupply, 2) : '-.--'}`}
+            swapPrice={`${isPreview ? '0.00' : bombLPStats?.tokenAmount ? bombLPStats?.tokenAmount : '-.--'} 10MB / 
+            ${isPreview ? '0.00' : bombLPStats?.croAmount ? bombLPStats?.croAmount : '-.--'} USDC`}
+            price={`$${isPreview ? '0.00' : bombLPStats?.priceOfOne ? bombLPStats.priceOfOne : '-.--'}`}
+            liquidity={`$${isPreview ? '0.00' : bombLPStats?.totalLiquidity ? roundAndFormatNumber(bombLPStats.totalLiquidity, 2) : '-.--'}`}
+            totalSupply={`${isPreview ? '0.00' : bombLPStats?.totalSupply ? roundAndFormatNumber(bombLPStats.totalSupply, 2) : '-.--'}`}
           />
         </Grid>
         <Grid item xs={12} md={6}>
           <TokenSwapCard
-            title="10SHARE-CRO LP"
-            // title="_10SHARE-CRO USDT LP"
-            tokenSymbol="10SHARE-CRO-LP"
+            title="10SHARE-USDC LP"
+            // title="_10SHARE-USDC LP"
+            tokenSymbol="10SHARE-USDC LP"
             onZapInClick={onPresentBombZap}
-            swapPrice={`${bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} 10SHARE /
-            ${bshareLPStats?.croAmount ? bshareLPStats?.croAmount : '-.--'} CRO`}
-            price={`$${bshareLPStats?.priceOfOne ? bshareLPStats.priceOfOne : '-.--'}`}
-            liquidity={`$${
+            swapPrice={`${isPreview ? '0.00' : bshareLPStats?.tokenAmount ? bshareLPStats?.tokenAmount : '-.--'} 10SHARE /
+            ${isPreview ? '0.00' : bshareLPStats?.croAmount ? bshareLPStats?.croAmount : '-.--'} USDC`}
+            price={`$${isPreview ? '0.00' : bshareLPStats?.priceOfOne ? bshareLPStats.priceOfOne : '-.--'}`}
+            liquidity={`$${isPreview ? '0.00' : 
               bshareLPStats?.totalLiquidity ? roundAndFormatNumber(bshareLPStats.totalLiquidity, 2) : '-.--'
             }`}
-            totalSupply={bshareLPStats?.totalSupply ? roundAndFormatNumber(bshareLPStats.totalSupply, 2) : '-.--'}
+            totalSupply={isPreview ? '0.00' : bshareLPStats?.totalSupply ? roundAndFormatNumber(bshareLPStats.totalSupply, 2) : '-.--'}
           />
           {/* <Card>
             <CardContent align="center">
               <Box mt={2}>
                 <CardIcon>
-                  <TokenSymbol symbol="10SHARE-CRO-LP" />
+                  <TokenSymbol symbol="10SHARE-CRO LP" />
                 </CardIcon>
               </Box>
-              <h2>_10SHARE-CRO USDT LP</h2>
+              <h2>_10SHARE-CRO USDC LP</h2>
               <Box mt={2}>
                 <Button onClick={onPresentBshareZap} className="shinyButtonSecondary">
                   Zap In

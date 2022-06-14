@@ -12,8 +12,13 @@ import tBondLogo from '../../assets/img/10mb_bond.png';
 import bombFtmLpLogo from '../../assets/img/bomb-bitcoin-LP.png';
 import bshareFtmLpLogo from '../../assets/img/bshare-bnb-LP.png';
 
+import _10shareUSDCLP from '../../assets/img/10share-USDC-LP.png';
+import _10mbUSDCLP from '../../assets/img/10mb-USDC-LP.png';
+
 import bnbLogo from '../../assets/img/bnb.png';
-import USDTLogo from '../../assets/img/BCTB-icon.png';
+import USDCLogo from '../../assets/img/USDC.png';
+import WSMINOLogo from '../../assets/img/wsmino.svg';
+import MMFLogo from '../../assets/img/mmf.png';
 
 const logosBySymbol: { [title: string]: string } = {
   //Real tokens
@@ -21,28 +26,18 @@ const logosBySymbol: { [title: string]: string } = {
   "10MB": bombLogo,
   "10MBPNG": bombLogoPNG,
   "10SHAREPNG": tShareLogoPNG,
-  X_10MB: xbombLogo,
   "10SHARE": tShareLogo,
   "10BOND": tBondLogo,
   WCRO: bnbLogo,
-  BOO: bnbLogo,
-  SHIBA: bnbLogo,
-  ZOO: bnbLogo,
-  CAKE: bnbLogo,
-  SUSD: bnbLogo,
-  SUSDT: USDTLogo,
-  USDT: USDTLogo,
-  WSMINO: USDTLogo,
-  MMF: USDTLogo,
-  SVL: bnbLogo,
-  '10MB-CRO-LP': bombFtmLpLogo,
-  '10MB-USDT-LP': bombFtmLpLogo,
-  '10SHARE-_10MB-LP': bombFtmLpLogo,
-  '10MB-10SHARE-LP': bombFtmLpLogo,
-  '10SHARE-USDT-LP': bombFtmLpLogo,
-  '10SHARE-CRO-LP': bshareFtmLpLogo,
-  '10SHARE-CRO-APELP': bshareFtmLpLogo,
-  '10MB-USDT-APELP': bombFtmLpLogo,
+  USDC: USDCLogo,
+  WSMINO: WSMINOLogo,
+  MMF: MMFLogo,
+  '10MB-CRO LP': bombFtmLpLogo,
+  '10MB-USDC LP': _10mbUSDCLP,
+  '10SHARE-10MB LP': bombFtmLpLogo,
+  '10MB-10SHARE LP': bombFtmLpLogo,
+  '10SHARE-USDC LP': _10shareUSDCLP,
+  '10SHARE-CRO LP': bshareFtmLpLogo,
 };
 
 type LogoProps = {
@@ -54,7 +49,7 @@ const TokenSymbol: React.FC<LogoProps> = ({ symbol, size = 64 }) => {
   if (!logosBySymbol[symbol]) {
     throw new Error(`Invalid Token Logo symbol: ${symbol}`);
   }
-  return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} width={size} height={size} />;
+  return <img src={logosBySymbol[symbol]} alt={`${symbol} Logo`} height={size} />;
 };
 
 export default TokenSymbol;

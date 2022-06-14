@@ -17,7 +17,7 @@ import { Helmet } from 'react-helmet';
 
 import PageHeader from '../../components/PageHeader';
 
-const TITLE = 'bomb.money | x_10MB - 10MB Staking';
+const TITLE = '10mb.finance | x_10MB - 10MB Staking';
 
 const BorderedPaper = withStyles((theme) => ({
   root: {

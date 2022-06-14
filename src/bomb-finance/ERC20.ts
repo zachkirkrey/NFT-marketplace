@@ -46,6 +46,18 @@ class ERC20 {
     return this.contract.approve(spender, amount);
   }
 
+  walletOfOwner(owner: string): Promise<BigNumber[]> {
+    return this.contract.walletOfOwner(owner);
+  }
+
+  isApprovedForAll(owner: string, spender: string): Promise<boolean> {
+    return this.contract.isApprovedForAll(owner, spender);
+  }
+
+  setApprovalForAll(spender: string, approved: true): Promise<TransactionResponse> {
+    return this.contract.setApprovalForAll(spender, approved);
+  }
+
   transferFrom(sender: string, recipient: string, amount: BigNumber): Promise<TransactionResponse> {
     return this.contract.transferFrom(sender, recipient, amount);
   }
@@ -245,6 +257,67 @@ const ABI = [
     stateMutability: 'view',
     type: 'function',
   },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_owner",
+        "type": "address"
+      }
+    ],
+    "name": "walletOfOwner",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "owner",
+            "type": "address"
+        },
+        {
+            "internalType": "address",
+            "name": "operator",
+            "type": "address"
+        }
+    ],
+    "name": "isApprovedForAll",
+    "outputs": [
+        {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+},
+  {
+    "inputs": [
+        {
+            "internalType": "address",
+            "name": "operator",
+            "type": "address"
+        },
+        {
+            "internalType": "bool",
+            "name": "approved",
+            "type": "bool"
+        }
+    ],
+    "name": "setApprovalForAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+},
   {
     inputs: [
       {

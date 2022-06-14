@@ -77,9 +77,6 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container className={classes.links} justifyContent="flex-end" spacing={10}>
           <Grid item>
-            <a href="/" className={classes.link}>
-              Github
-            </a>
           </Grid>
         </Grid>
       </Container>
@@ -89,14 +86,14 @@ const Footer = () => {
             <Typography variant="body2" color="textPrimary" align="left">
               {'Copyright © '}
               <Link color="inherit" href="/">
-                10MB Money
+              Sugandese Tokens
               </Link>{' '}
               {new Date().getFullYear()}
             </Typography>
           </Grid>
           <Grid item xs={6} style={{ textAlign: 'right', height: '20px' }}>
             <a
-              href="https://twitter.com/BombMoneyBSC"
+              href="https://twitter.com/PolyWantsAFarm"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.iconLink}
@@ -104,17 +101,17 @@ const Footer = () => {
               <IconTwitter style={{ fill: '#dddfee' }} />
             </a>
             <a
-              href="https://github.com/bombmoney"
+              href="https://github.com/LithiumSwapTech"
               rel="noopener noreferrer"
               target="_blank"
               className={classes.iconLink}
             >
               <IconGithub style={{ fill: '#dddfee', height: '20px' }} />
             </a>
-            <a href="https://t.me/bombmoneybsc" rel="noopener noreferrer" target="_blank" className={classes.iconLink}>
+            <a href="https://t.me/PolyWantsACracker_Farm" rel="noopener noreferrer" target="_blank" className={classes.iconLink}>
               <IconTelegram style={{ fill: '#dddfee', height: '20px' }} />
             </a>
-            <a href="http://discord.bomb.money/" rel="noopener noreferrer" target="_blank" className={classes.iconLink}>
+            <a href="https://discord.gg/raxn6h9vy5" rel="noopener noreferrer" target="_blank" className={classes.iconLink}>
               <IconDiscord style={{ fill: '#dddfee', height: '20px' }} />
             </a>
           </Grid>

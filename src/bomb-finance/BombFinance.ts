@@ -33,12 +33,12 @@ export class BombFinance {
   externalTokens: { [name: string]: ERC20 };
   boardroomVersionOfUser?: string;
 
-  "10MBUSDT_LP": Contract;
+  "10MBUSDC_LP": Contract;
   "10MB": ERC20;
   "10SHARE": ERC20;
   "10BOND": ERC20;
   CRO: ERC20;
-  USDT: ERC20;
+  USDC: ERC20;
   Pool: Contract;
 
   constructor(cfg: Configuration) {
@@ -58,12 +58,12 @@ export class BombFinance {
     this["10SHARE"] = new ERC20(deployments["_10SHARE"].address, provider, '10SHARE');
     this["10BOND"] = new ERC20(deployments["_10BOND"].address, provider, '10BOND');
     this.CRO = this.externalTokens['WCRO'];
-    this.USDT = this.externalTokens['USDT'];
+    this.USDC = this.externalTokens['USDC'];
     this.Pool = new Contract(deployments['Pool'].address, deployments['Pool'].abi, provider);
     this.Pool = this.Pool.connect(this.signer);
     // Uniswap V2 Pair
 
-    this["10MBUSDT_LP"] = new Contract(externalTokens['10MB-USDT-LP'][0], IUniswapV2PairABI, provider);
+    this["10MBUSDC_LP"] = new Contract(externalTokens['10MB-USDC LP'][0], IUniswapV2PairABI, provider);
 
     this.config = cfg;
     this.provider = provider;
@@ -84,7 +84,7 @@ export class BombFinance {
     for (const token of tokens) {
       token.connect(this.signer);
     }
-    this["10MBUSDT_LP"] = this["10MBUSDT_LP"].connect(this.signer);
+    this["10MBUSDC_LP"] = this["10MBUSDC_LP"].connect(this.signer);
     console.log(`🔓 Wallet is unlocked. Welcome, ${account}!`);
     this.fetchBoardroomVersionOfUser()
       .then((version) => (this.boardroomVersionOfUser = version))
@@ -120,17 +120,17 @@ export class BombFinance {
     //console.log('priceOfBombInDollars', priceOfBombInDollars);
 
     return {
-      //tokenInUSDT: (Number(priceInCRO) * 100).toString(),
-      tokenInUSDT: priceOf10MBInDollars.toString(),
+      //tokenInUSDC: (Number(priceInCRO) * 100).toString(),
+      tokenInUSDC: priceOf10MBInDollars.toString(),
       priceInDollars: priceOf10MBInDollars.toString(),
       totalSupply: getDisplayBalance(supply, this["10MB"].decimal, 0),
       circulatingSupply: getDisplayBalance(bombCirculatingSupply, this["10MB"].decimal, 0),
     };
   }
 
-  async getUSDTPriceUSD(): Promise<Number> {
-    const priceOfOneUSDT = await this.getUSDTPriceFromMMF();
-    return Number(priceOfOneUSDT);
+  async getUSDCPriceUSD(): Promise<Number> {
+    const priceOfOneUSDC = await this.getUSDCPriceFromMMF();
+    return Number(priceOfOneUSDC);
   }
 
   /**
@@ -166,7 +166,7 @@ export class BombFinance {
     };
   }
 
-  async getLPStatUSDT(name: string): Promise<LPStat> {
+  async getLPStatUSDC(name: string): Promise<LPStat> {
     const lpToken = this.externalTokens[name];
     const lpTokenSupplyBN = await lpToken.totalSupply();
     const lpTokenSupply = getDisplayBalance(lpTokenSupplyBN, 18);
@@ -175,14 +175,14 @@ export class BombFinance {
     const tokenAmountBN = await token0.balanceOf(lpToken.address);
     const tokenAmount = getDisplayBalance(tokenAmountBN, 18);
 
-    const USDTAmountBN = await this.USDT.balanceOf(lpToken.address);
+    const USDCAmountBN = await this.USDC.balanceOf(lpToken.address);
 
     console.log("name ", name)
-    console.log("USDTAmountBN ", USDTAmountBN.toString())
-    const USDTAmount = getDisplayBalance(USDTAmountBN, 6);
-    console.log("USDTAmount ", USDTAmount.toString())
+    console.log("USDCAmountBN ", USDCAmountBN.toString())
+    const USDCAmount = getDisplayBalance(USDCAmountBN, 6);
+    console.log("USDCAmount ", USDCAmount.toString())
     const tokenAmountInOneLP = Number(tokenAmount) / Number(lpTokenSupply);
-    const croAmountInOneLP = Number(USDTAmount) / Number(lpTokenSupply);
+    const croAmountInOneLP = Number(USDCAmount) / Number(lpTokenSupply);
     console.log("croAmountInOneLP ", croAmountInOneLP.toString())
     const lpTokenPrice = await this.getLPTokenPrice(lpToken, token0, isBomb);
 
@@ -215,7 +215,7 @@ export class BombFinance {
     const priceOf_10BONDInDollars = (Number(bombStat.priceInDollars) * modifier).toFixed(4);
     const supply = await this["10BOND"].displayedTotalSupply();
     return {
-      tokenInUSDT: priceOf_10BONDInDollars,
+      tokenInUSDC: priceOf_10BONDInDollars,
       priceInDollars: priceOf_10BONDInDollars,
       totalSupply: supply,
       circulatingSupply: supply,
@@ -243,7 +243,7 @@ export class BombFinance {
     const priceOfSharesInDollars = (Number(priceInCRO) * Number(priceOfOneCRO)).toFixed(2);
 
     return {
-      tokenInUSDT: priceOfSharesInDollars,
+      tokenInUSDC: priceOfSharesInDollars,
       priceInDollars: priceOfSharesInDollars,
       totalSupply: getDisplayBalance(supply, this["10SHARE"].decimal, 0),
       circulatingSupply: getDisplayBalance(tShareCirculatingSupply, this["10SHARE"].decimal, 0),
@@ -258,7 +258,7 @@ export class BombFinance {
     const _10MBMasterchefSupply = await this["10MB"].balanceOf(_10MBMasterChef.address);
     const bombCirculatingSupply = supply.sub(_10MBMasterchefSupply);
     return {
-      tokenInUSDT: getDisplayBalance(expectedPrice),
+      tokenInUSDC: getDisplayBalance(expectedPrice),
       priceInDollars: getDisplayBalance(expectedPrice),
       totalSupply: getDisplayBalance(supply, this["10MB"].decimal, 0),
       circulatingSupply: getDisplayBalance(bombCirculatingSupply, this["10MB"].decimal, 0),
@@ -354,18 +354,18 @@ export class BombFinance {
     if (tokenName === 'WCRO') {
       tokenPrice = priceOfOneFtmInDollars;
     } else {
-      if (tokenName === '10MB-USDT-LP') {
+      if (tokenName === '10MB-USDC LP') {
         tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
-      } else if (tokenName === '10SHARE-CRO-LP') {
+      } else if (tokenName === '10SHARE-CRO LP') {
         tokenPrice = await this.getLPTokenPrice(token, this["10SHARE"], false);
-      } else if (tokenName === '10MB-10SHARE-LP') {
+      } else if (tokenName === '10MB-10SHARE LP') {
         tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
-      } else if (tokenName === '10SHARE-USDT-LP') {
+      } else if (tokenName === '10SHARE-USDC LP') {
         tokenPrice = await this.getLPTokenPrice(token, this["10MB"], true);
-      } else if (tokenName === '10SHARE-CRO-LP') {
+      } else if (tokenName === '10SHARE-CRO LP') {
         tokenPrice = await this.getLPTokenPrice(token, this["10SHARE"], true);
-      } else if (tokenName === 'USDT-CRO-LP') {
-        tokenPrice = await this.getNonNativeLPTokenPrice(token, this.USDT);
+      } else if (tokenName === 'USDC-CRO LP') {
+        tokenPrice = await this.getNonNativeLPTokenPrice(token, this.USDC);
       } else {
         tokenPrice = await this.getTokenPriceFromMMFInCRO(token);
         tokenPrice = (Number(tokenPrice) * Number(priceOfOneFtmInDollars)).toString();
@@ -488,6 +488,18 @@ export class BombFinance {
     }
   }
 
+  async nftsStakedOnBank(poolName: ContractName, poolId: Number, account = this.myAccount): Promise<number[][]> {
+    const pool = this.contracts[poolName];
+    try {
+      let userInfoSlots = await pool.getSlots(account, poolId);
+      let userInfoTokenIds = await pool.getTokenIds(account, poolId);
+      return await [userInfoSlots, userInfoTokenIds];
+    } catch (err) {
+      console.error(`Failed to call userInfo() on pool ${pool.address}: ${err.stack}`);
+      return [];
+    }
+  }
+
   async stakedBalanceOnBank(poolName: ContractName, poolId: Number, account = this.myAccount): Promise<BigNumber> {
     const pool = this.contracts[poolName];
     try {
@@ -502,7 +514,40 @@ export class BombFinance {
   /**
    * Deposits token to given pool.
    * @param poolName A name of pool contract.
-   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDT * 10^18)
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDC * 10^18)
+   * @returns {string} Transaction hash
+   */
+   async nftStake(poolName: ContractName, nftAddress: string, tokenId: Number, slotId: Number, poolId: Number): Promise<TransactionResponse> {
+    const pool = this.contracts[poolName];
+    console.log("nftAddress ", nftAddress)
+    console.log("tokenId ", tokenId)
+    console.log("slotId ", slotId)
+    console.log("poolId ", poolId)
+    return await pool.depositNFT(nftAddress, tokenId, slotId, poolId);
+  }
+
+  /**
+   * Withdraws token from given pool.
+   * @param poolName A name of pool contract.
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDC * 10^18)
+   * @returns {string} Transaction hash
+   */
+  async nftUnstake(poolName: ContractName, slotId: Number, poolId: Number): Promise<TransactionResponse> {
+    const pool = this.contracts[poolName];
+    console.log("slotId ", slotId)
+    console.log("poolId ", poolId)
+    try {
+    return await pool.withdrawNFT(slotId+'', poolId+'');
+    } catch (err) {
+      console.log(err)
+
+    }
+  }
+
+  /**
+   * Deposits token to given pool.
+   * @param poolName A name of pool contract.
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDC * 10^18)
    * @returns {string} Transaction hash
    */
   async stake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
@@ -513,7 +558,7 @@ export class BombFinance {
   /**
    * Withdraws token from given pool.
    * @param poolName A name of pool contract.
-   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDT * 10^18)
+   * @param amount Number of tokens with decimals applied. (e.g. 1.45 USDC * 10^18)
    * @returns {string} Transaction hash
    */
   async unstake(poolName: ContractName, poolId: Number, amount: BigNumber): Promise<TransactionResponse> {
@@ -556,7 +601,12 @@ export class BombFinance {
   }
 
   async getTokenPriceFromMMFInCRO(tokenContract: ERC20): Promise<string> {
-    const { WCRO, USDT } = this.config.externalTokens;
+    const isPreview = false
+
+    if (isPreview) {
+      return "0"
+    }
+    const { WCRO, USDC } = this.config.externalTokens;
 
     const mmfFactoryAddress = '0xd590cC180601AEcD6eeADD9B7f2B7611519544f4';
 
@@ -566,7 +616,7 @@ export class BombFinance {
 
     console.log('tokenContract.address ', tokenContract.address);
     console.log('WCRO[0] ', WCRO[0]);
-    console.log('lpAddress ', lpAddress);
+    console.log('lpAddress1 ', lpAddress);
 
     const pairContract = new ethers.Contract(lpAddress, LpReserveContract, this.provider);
 
@@ -582,7 +632,7 @@ export class BombFinance {
       marketPriceBN = BigNumber.from(reserves[0]).mul(BigNumber.from(10).pow(9)).div(reserves[1]).div('1000000');
     }
 
-    if (tokenContract.address.toLocaleLowerCase() == USDT[0].toLocaleLowerCase()) {
+    if (tokenContract.address.toLocaleLowerCase() == USDC[0].toLocaleLowerCase()) {
       marketPrice = marketPriceBN.div(BigNumber.from(10).pow(12)).toNumber() / 1000;
     } else {
       marketPrice = marketPriceBN.toNumber() / 1000;
@@ -594,16 +644,23 @@ export class BombFinance {
   }
 
   async getTokenPriceFromMMFInUSD(tokenContract: ERC20): Promise<string> {
+    const isPreview = false
+
+    if (isPreview) {
+      return "0"
+    }
     const ready = await this.provider.ready;
     if (!ready) return;
 
-    const { USDT } = this.config.externalTokens;
+    const { USDC } = this.config.externalTokens;
 
     const mmfFactoryAddress = '0xd590cC180601AEcD6eeADD9B7f2B7611519544f4'
 
     const mmfFactory = new ethers.Contract(mmfFactoryAddress, UniswapV2Factory, this.provider);
 
-    const lpAddress = mmfFactory.getPair(tokenContract.address, USDT[0]);
+    const lpAddress = mmfFactory.getPair(tokenContract.address, USDC[0]);
+
+    console.log('lpAddress2 ', lpAddress);
 
     const pairContract = new ethers.Contract(lpAddress, LpReserveContract, this.provider);
 
@@ -622,6 +679,11 @@ export class BombFinance {
   }
 
   async getTokenPriceFromMMF10MBUSD(): Promise<string> {
+    const isPreview = false
+
+    if (isPreview) {
+      return "0"
+    }
     const ready = await this.provider.ready;
     if (!ready) return;
 
@@ -653,54 +715,64 @@ export class BombFinance {
   // }
 
   async getWCROPriceFromMMF(): Promise<string> {
+    const isPreview = false
+
+    if (isPreview) {
+      return "0"
+    }
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { WCRO, USDT } = this.externalTokens;
+    const { WCRO, USDC } = this.externalTokens;
 
     try {
-      const dai_cro_lp_pair = this.externalTokens['USDT-CRO-LP'];
+      const dai_cro_lp_pair = this.externalTokens['USDC-CRO LP'];
       let cro_amount_BN = await WCRO.balanceOf(dai_cro_lp_pair.address);
       let cro_amount = Number(getFullDisplayBalance(cro_amount_BN, WCRO.decimal));
-      let DAI_amount_BN = await USDT.balanceOf(dai_cro_lp_pair.address);
-      let DAI_amount = Number(getFullDisplayBalance(DAI_amount_BN, USDT.decimal));
+      let DAI_amount_BN = await USDC.balanceOf(dai_cro_lp_pair.address);
+      let DAI_amount = Number(getFullDisplayBalance(DAI_amount_BN, USDC.decimal));
       return (DAI_amount / cro_amount).toString();
     } catch (err) {
       console.error(`Failed to fetch token price of WCRO: ${err}`);
     }
   }
 
-  async getUSDTPriceFromMMF(): Promise<string> {
+  async getUSDCPriceFromMMF(): Promise<string> {
+    const isPreview = false
+
+    if (isPreview) {
+      return "0"
+    }
     const ready = await this.provider.ready;
     if (!ready) return;
-    const { USDT } = this.externalTokens;
+    const { USDC } = this.externalTokens;
     try {
-      const USDTPriceInCRO = await this.getTokenPriceFromMMFInCRO(USDT);
+      const USDCPriceInCRO = await this.getTokenPriceFromMMFInCRO(USDC);
 
       const wbnbPrice = await this.getWCROPriceFromMMF();
 
-      const USDTprice = (Number(USDTPriceInCRO) * Number(wbnbPrice)).toFixed(2).toString();
-      //console.log('USDTprice', USDTprice);
-      return USDTprice;
+      const USDCprice = (Number(USDCPriceInCRO) * Number(wbnbPrice)).toFixed(2).toString();
+      //console.log('USDCprice', USDCprice);
+      return USDCprice;
     } catch (err) {
-      console.error(`Failed to fetch token price of USDT: ${err}`);
+      console.error(`Failed to fetch token price of USDC: ${err}`);
     }
   }
 
-  // async getUSDTPriceFromMMF(): Promise<string> {
+  // async getUSDCPriceFromMMF(): Promise<string> {
   //   const ready = await this.provider.ready;
   //   if (!ready) return;
-  //   const { USDT, FUSDT } = this.externalTokens;
+  //   const { USDC, FUSDC } = this.externalTokens;
   //   try {
-  //     const USDT_USDT_lp_pair = this.externalTokens['USDT-USDT-LP'];
-  //     let cro_amount_BN = await USDT.balanceOf(USDT_USDT_lp_pair.address);
-  //     let cro_amount = Number(getFullDisplayBalance(cro_amount_BN, USDT.decimal));
-  //     let USDT_amount_BN = await FUSDT.balanceOf(USDT_USDT_lp_pair.address);
-  //     let USDT_amount = Number(getFullDisplayBalance(USDT_amount_BN, FUSDT.decimal));
-  //     console.log('USDT price', (USDT_amount / cro_amount).toString());
-  //     return (USDT_amount / cro_amount).toString();
-  //     console.log('USDT price');
+  //     const USDC_USDC_lp_pair = this.externalTokens['USDC-USDC LP'];
+  //     let cro_amount_BN = await USDC.balanceOf(USDC_USDC_lp_pair.address);
+  //     let cro_amount = Number(getFullDisplayBalance(cro_amount_BN, USDC.decimal));
+  //     let USDC_amount_BN = await FUSDC.balanceOf(USDC_USDC_lp_pair.address);
+  //     let USDC_amount = Number(getFullDisplayBalance(USDC_amount_BN, FUSDC.decimal));
+  //     console.log('USDC price', (USDC_amount / cro_amount).toString());
+  //     return (USDC_amount / cro_amount).toString();
+  //     console.log('USDC price');
   //   } catch (err) {
-  //     console.error(`Failed to fetch token price of USDT: ${err}`);
+  //     console.error(`Failed to fetch token price of USDC: ${err}`);
   //   }
   // }
 
@@ -711,6 +783,11 @@ export class BombFinance {
   //===================================================================
 
   async getBoardroomAPR() {
+    const isPreview = false
+
+    if (isPreview) {
+      return 0
+    }
     const Boardroom = this.currentBoardroom();
     console.log('getBoardroomAPR 1 ', Boardroom);
     let latestSnapshotIndex;
@@ -826,7 +903,7 @@ export class BombFinance {
     );
   }
 
-  async redeemFromUSDT(amount: string): Promise<TransactionResponse> {
+  async redeemFromUSDC(amount: string): Promise<TransactionResponse> {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
     return await BombRouter.redeem(
@@ -837,7 +914,7 @@ export class BombFinance {
       '0x',
     );
   }
-  async supplyToUSDT(amount: string): Promise<TransactionResponse> {
+  async supplyToUSDC(amount: string): Promise<TransactionResponse> {
     const BombRouter = this.contracts.BombRouter;
     const expiry = new Date(Date.now() + 2880);
     return await BombRouter.mint('', decimalToBalance(amount), this.myAccount, expiry.getTime());
@@ -878,13 +955,13 @@ export class BombFinance {
     return BigNumber.from(0)
   }
 
-  async getTotalSuppliedUSDT(): Promise<BigNumber> {
-    //const bbombBomb = this.USDT_BORROWABLE;
+  async getTotalSuppliedUSDC(): Promise<BigNumber> {
+    //const bbombBomb = this.USDC_BORROWABLE;
     // const bomb = this["10MB"];
-    //const totalUSDT = await bbombBomb.totalBalance();
-    //const borrowUSDT = await bbombBomb.totalBorrows();
-    //  const totalSupplied = totalUSDT + borrowUSDT;
-    //return totalUSDT;
+    //const totalUSDC = await bbombBomb.totalBalance();
+    //const borrowUSDC = await bbombBomb.totalBorrows();
+    //  const totalSupplied = totalUSDC + borrowUSDC;
+    //return totalUSDC;
     return BigNumber.from(0)
   }
 
@@ -1007,6 +1084,13 @@ export class BombFinance {
   }
 
   async watchAssetInMetamask(assetName: string): Promise<boolean> {
+    const isPreview = false
+
+    if (isPreview) {
+      alert("Please wait for the site to be fully online!")
+      return
+    }
+
     const { ethereum } = window as any;
     if (ethereum && ethereum.networkVersion === config.chainId.toString()) {
       let asset;
@@ -1020,9 +1104,9 @@ export class BombFinance {
       } else if (assetName === '10BOND') {
         asset = this["10BOND"];
         assetUrl = 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/_10BOND-512.png';
-      } else if (assetName === 'USDT') {
-        asset = this.USDT;
-        assetUrl = 'https://bscscan.com/token/images/USDT_32.png';
+      } else if (assetName === 'USDC') {
+        asset = this.USDC;
+        assetUrl = 'https://bscscan.com/token/images/USDC_32.png';
       }
       await ethereum.request({
         method: 'wallet_watchAsset',
@@ -1055,7 +1139,8 @@ export class BombFinance {
 
   async quoteFromSpooky(tokenAmount: string, tokenName: string): Promise<string> {
     const { SpookyRouter } = this.contracts;
-    const { _reserve0, _reserve1 } = await this["10MBUSDT_LP"].getReserves();
+    console.log("meow meow meow ", this["10MBUSDC_LP"])
+    const { _reserve0, _reserve1 } = await this["10MBUSDC_LP"].getReserves();
     let quote;
     if (tokenName === '10MB') {
       quote = await SpookyRouter.quote(parseUnits(tokenAmount), _reserve0, _reserve1);
@@ -1139,6 +1224,13 @@ export class BombFinance {
   }
 
   async estimateZapIn(tokenName: string, lpName: string, amount: string): Promise<number[]> {
+    const isPreview = false
+
+    if (isPreview) {
+      alert("Please wait for the site to be fully online!")
+      return
+    }
+
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
     let estimate;
@@ -1156,6 +1248,13 @@ export class BombFinance {
     return [estimate[0] / 1e18, estimate[1] / 1e18];
   }
   async zapIn(tokenName: string, lpName: string, amount: string): Promise<TransactionResponse> {
+    const isPreview = false
+
+    if (isPreview) {
+      alert("Please wait for the site to be fully online!")
+      return
+    }
+
     const { zapper } = this.contracts;
     const lpToken = this.externalTokens[lpName];
     if (tokenName === CRO_TICKER) {

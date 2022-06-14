@@ -3,7 +3,7 @@ import useBombFinance from './useBombFinance';
 import { LPStat } from '../bomb-finance/types';
 import useRefresh from './useRefresh';
 
-const useLpStatsUSDT = (lpTicker: string) => {
+const useLpStatsUSDC = (lpTicker: string) => {
   const [stat, setStat] = useState<LPStat>();
   const { slowRefresh } = useRefresh();
   const bombFinance = useBombFinance();
@@ -11,7 +11,7 @@ const useLpStatsUSDT = (lpTicker: string) => {
   useEffect(() => {
     async function fetchLpPrice() {
       try {
-        setStat(await bombFinance.getLPStatUSDT(lpTicker));
+        setStat(await bombFinance.getLPStatUSDC(lpTicker));
       } catch (err) {
         console.error(err);
       }
@@ -22,4 +22,4 @@ const useLpStatsUSDT = (lpTicker: string) => {
   return stat;
 };
 
-export default useLpStatsUSDT;
+export default useLpStatsUSDC;

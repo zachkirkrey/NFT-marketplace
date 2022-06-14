@@ -22,6 +22,8 @@ const ZapInButton = withStyles({
   },
 })(Button);
 
+const isPreview = false
+
 export const TokenSwapCard: React.FC<TokenSwapCardProps> = ({
   title,
   tokenSymbol,
@@ -49,7 +51,7 @@ export const TokenSwapCard: React.FC<TokenSwapCardProps> = ({
         </Box>
         <ZapInButton
           onClick={onZapInClick}
-          disabled={zapInDisabled}
+          disabled={isPreview || zapInDisabled}
           // className={zapInDisabled ? 'shinyButtonDisabledSecondary' : 'shinyButtonSecondary'}
           color="primary"
           size="large"

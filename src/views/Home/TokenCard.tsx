@@ -106,6 +106,8 @@ export const TokenCard: React.FC<TokenCardProps> = ({
 }) => {
   const classes = useClasses();
 
+  const isPreview = false
+
   return (
     <StyledPaper style={{ position: 'relative' }}>
       <Header display="flex" alignItems="center" p={[2, 3]}>
@@ -115,12 +117,14 @@ export const TokenCard: React.FC<TokenCardProps> = ({
         <div className={classes.tokenNameAndLinks}>
           <TokenName>{tokenName}</TokenName>
           <Box display="flex" alignItems="center">
-            <a href="https://coinmarketcap.com/currencies/darkcrypto/" className={classes.marketLink}>
+            {/*<a href="https://coinmarketcap.com/currencies/darkcrypto/" className={classes.marketLink}>
               <img alt="coinmarket" src={coinmarketIcon} className={classes.marketIcon} />
             </a>
             <a href="https://www.coingecko.com/en/coins/darkcrypto" className={classes.marketLink}>
               <img alt="coingecko" src={coingeckoIcon} className={classes.marketIcon} />
-            </a>
+            </a>*/}
+            <img className={classes.marketLink} alt="coinmarket" src={coinmarketIcon}  />
+            <img className={classes.marketLink} alt="coingecko" src={coingeckoIcon} />
             <button
               className={classes.metamaskFoxButton}
               onClick={() => {
@@ -131,7 +135,9 @@ export const TokenCard: React.FC<TokenCardProps> = ({
               <img alt="metamask fox" src={metamaskIcon} className={classes.marketIcon} />
             </button>
             <StyledIconButton>
-              <LaunchIcon />
+              <a style={{color: 'white'}} href='' target="_blank">
+                <LaunchIcon />
+              </a>
             </StyledIconButton>
           </Box>
         </div>
@@ -162,19 +168,19 @@ export const TokenCard: React.FC<TokenCardProps> = ({
           <Grid item xs={12}>
             <Box display="flex" justifyContent="space-between">
               <span>Market Cap:</span>
-              <span>{marketCap}</span>
+              <span>{isPreview ? '$0.00' : marketCap}</span>
             </Box>
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" justifyContent="space-between">
               <span>Circulating Supply:</span>
-              <span>{circulatingSupply}</span>
+              <span>{isPreview ? '0.00' : circulatingSupply}</span>
             </Box>
           </Grid>
           <Grid item xs={12}>
             <Box display="flex" justifyContent="space-between">
               <span>Total Supply:</span>
-              <span>{totalSupply}</span>
+              <span>{isPreview ? '0.00' : totalSupply}</span>
             </Box>
           </Grid>
         </Grid>

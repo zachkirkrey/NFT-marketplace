@@ -26,7 +26,10 @@ import ProgressCountdown from './components/ProgressCountdown';
 import { Helmet } from 'react-helmet';
 import { withStyles } from '@material-ui/styles';
 
-const TITLE = 'bomb.money | Boardroom';
+import PageHeader from '../../components/PageHeader';
+
+
+const TITLE = '10mb.finance | Boardroom';
 
 const useStyles = makeStyles((theme) => ({
   gridItem: {
@@ -86,6 +89,7 @@ const HighlightedText = withStyles((theme) => ({
   },
 }))(Typography);
 
+
 const Boardroom = () => {
   const classes = useStyles();
   const { account } = useWallet();
@@ -100,12 +104,19 @@ const Boardroom = () => {
   const scalingFactor = useMemo(() => (cashStat ? Number(cashStat.priceInDollars).toFixed(4) : null), [cashStat]);
   const { to } = useTreasuryAllocationTimes();
 
+  const isPreview = false
+
   return (
     <Page>
       <Helmet>
         <title>{TITLE}</title>
       </Helmet>
-      {!!account ? (
+      {!!account ? (<>
+                      <Grid style={{marginBottom: "5rem"}} container justifyContent="center">
+                      <Grid item lg={10}>
+                        <PageHeader title="Boardroom" subtitle="STAKE 10SHARE TO EARN 10MB!" />
+                      </Grid>
+                    </Grid>
         <Grid container spacing={3}>
           <Grid item xs={12} lg={3}>
             <Grid container spacing={3}>
@@ -113,7 +124,7 @@ const Boardroom = () => {
                 <CurrentEpochPaper>
                   <CurrentEpoch>
                     <div>Epoch</div>
-                    <div>{Number(currentEpoch)}</div>
+                    <div>{isPreview ? 0 : Number(currentEpoch)}</div>
                   </CurrentEpoch>
                   <div>
                     <Typography style={{ textTransform: 'uppercase' }}>Next Epoch</Typography>
@@ -155,8 +166,8 @@ const Boardroom = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
                       <Box display="flex" justifyContent="space-between">
-                        <Typography variant="body2">10SHARES Staked</Typography>
-                        <HighlightedText variant="body2">{getDisplayBalance(totalStaked)}</HighlightedText>
+                        <Typography variant="body2">10SHARE Staked</Typography>
+                        <HighlightedText variant="body2">{isPreview ? "0.00" : getDisplayBalance(totalStaked)}</HighlightedText>
                       </Box>
                     </Grid>
                     <Grid item xs={12}>
@@ -167,20 +178,20 @@ const Boardroom = () => {
                           </Typography>
                           <Typography variant="body2">per 10 10MB</Typography>
                         </div>
-                        <HighlightedText variant="body2">{scalingFactor} USDT</HighlightedText>
+                        <HighlightedText variant="body2">{scalingFactor} USDC</HighlightedText>
                       </Box>
                     </Grid>
                   </Grid>
                   {/* 
                     <Box mb={2}>
-                      <Typography style={{ textTransform: 'uppercase' }}>10SHARES Staked</Typography>
+                      <Typography style={{ textTransform: 'uppercase' }}>10SHARE Staked</Typography>
                       <HighlightedText variant="h5">{getDisplayBalance(totalStaked)}</HighlightedText>
                     </Box>
                     <Typography style={{ textTransform: 'uppercase' }}>
                       10MB PEG <small>(TWAP)</small>
                     </Typography>
                     <HighlightedText variant="h5">
-                      {scalingFactor} USDT <small className={classes.HighlightedTextSmall}>per 10 10MB</small>
+                      {scalingFactor} USDC <small className={classes.HighlightedTextSmall}>per 10 10MB</small>
                     </HighlightedText> */}
                 </BorderedPaper>
               </Grid>
@@ -205,7 +216,7 @@ const Boardroom = () => {
                       <Box display="flex" justifyContent="space-between">
                         <Typography variant="body2">Next expansion amount</Typography>
                         <HighlightedText variant="body2" align="right">
-                          276,141 10MB
+                          0 10MB
                         </HighlightedText>
                       </Box>
                     </Grid>
@@ -229,29 +240,26 @@ const Boardroom = () => {
                     Stake &amp; Unstake
                   </HighlightedText>
                   <Typography variant="body2" paragraph>
-                    There is a 2% tax fee per stake. The unstake fee is 0% during expansion, and 2% on contraction
-                    period. These fees will be used to buyback 10MB.
+                  There is a 2% tax fee on staking. The unstaking fee is 0% during expansion and 2% during contraction.
                   </Typography>
                   <Typography variant="body2">
-                    Upon stake, the fund will be locked for 6 epochs. Any time the user claims rewards or stakes more
-                    funds or unstakes fully/partially, both lock and reward counter will be reset.
+                  Upon staking in the Boardroom, 10SHARE will be locked for 6 epochs. Any time the user claims rewards, stakes more 10SHARE, or unstakes fully/partially, both the lock and reward counters will be reset.
                   </Typography>
                 </BorderedPaper>
               </Grid>
               <Grid item lg={6} style={{ display: 'flex' }}>
                 <BorderedPaper>
                   <HighlightedText variant="body2" paragraph>
-                    Claim 10MB reward
+                  Claim 10MB Rewards
                   </HighlightedText>
                   <Typography variant="body2">
-                    Rewards can be claimed after 3 epochs after deposit. Each time rewards claimed, both locked and
-                    reward counter will be reset.
+                  Rewards can be claimed after 3 epochs after deposit. Each time rewards are claimed, both the lock and reward counters will be reset.
                   </Typography>
                 </BorderedPaper>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid></>
       ) : (
         <UnlockWallet />
       )}

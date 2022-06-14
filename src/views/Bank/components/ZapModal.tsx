@@ -15,7 +15,7 @@ import useTokenBalance from '../../../hooks/useTokenBalance';
 import useBombFinance from '../../../hooks/useBombFinance';
 import { useWallet } from 'use-wallet';
 import useApproveZapper, { ApprovalState } from '../../../hooks/useApproveZapper';
-import { _10MB_TICKER, _10SHARE_TICKER, CRO_TICKER, USDT_TICKER } from '../../../utils/constants';
+import { _10MB_TICKER, _10SHARE_TICKER, CRO_TICKER, USDC_TICKER } from '../../../utils/constants';
 import { Alert } from '@material-ui/lab';
 
 interface ZapProps extends ModalProps {
@@ -30,15 +30,15 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   const croBalance = (Number(balance) / 1e18).toFixed(4).toString();
   const bombBalance = useTokenBalance(bombFinance["10MB"]);
   const bshareBalance = useTokenBalance(bombFinance["10SHARE"]);
-  const USDTalance = useTokenBalance(bombFinance.USDT);
+  const USDCalance = useTokenBalance(bombFinance.USDC);
   const [val, setVal] = useState('');
   const [zappingToken, setZappingToken] = useState(CRO_TICKER);
   const [zappingTokenBalance, setZappingTokenBalance] = useState(croBalance);
   const [estimate, setEstimate] = useState({ token0: '0', token1: '0' }); // token0 will always be CRO in this case
   const [approveZapperStatus, approveZapper] = useApproveZapper(zappingToken);
   /*
-  const bombFtmLpStats = useLpStats('10MB-USDT-LP');
-  const tShareFtmLpStats = useLpStats('10SHARE-CRO-LP');
+  const bombFtmLpStats = useLpStats('10MB-USDC LP');
+  const tShareFtmLpStats = useLpStats('10SHARE-CRO LP');
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
   const bshareLPStats = useMemo(() => (tShareFtmLpStats ? tShareFtmLpStats : null), [tShareFtmLpStats]);
   const croAmountPerLP = tokenName.startsWith(_10MB_TICKER) ? bombLPStats?.croAmount : bshareLPStats?.croAmount;*/
@@ -60,8 +60,8 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
     if (event.target.value === _10MB_TICKER) {
       setZappingTokenBalance(getDisplayBalance(bombBalance, decimals));
     }
-    if (event.target.value === USDT_TICKER) {
-      setZappingTokenBalance(getDisplayBalance(USDTalance, decimals));
+    if (event.target.value === USDC_TICKER) {
+      setZappingTokenBalance(getDisplayBalance(USDCalance, decimals));
     }
   };
 
@@ -77,6 +77,13 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
   };
 
   const handleSelectMax = async () => {
+    const isPreview = false
+
+    if (isPreview) {
+      alert("Please wait for the site to be fully online!")
+      return
+    }
+
     setVal(zappingTokenBalance);
     const estimateZap = await bombFinance.estimateZapIn(zappingToken, tokenName, String(zappingTokenBalance));
     setEstimate({ token0: estimateZap[0].toString(), token1: estimateZap[1].toString() });
@@ -99,7 +106,7 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
       >
         <StyledMenuItem value={CRO_TICKER}>CRO</StyledMenuItem>
         <StyledMenuItem value={_10SHARE_TICKER}>10SHARE</StyledMenuItem>
-        {/* <StyledMenuItem value={USDT_TICKER}>USDT</StyledMenuItem> */}
+        {/* <StyledMenuItem value={USDC_TICKER}>USDC</StyledMenuItem> */}
         {/* Bomb as an input for zapping will be disabled due to issues occuring with the Gatekeeper system */}
         {/* <StyledMenuItem value={_10MB_TICKER}>_10MB</StyledMenuItem> */}
       </Select>
@@ -124,9 +131,16 @@ const ZapModal: React.FC<ZapProps> = ({ onConfirm, onDismiss, tokenName = '', de
         <Button
           color="primary"
           variant="contained"
-          onClick={() =>
+          onClick={() =>{
+            const isPreview = false
+
+            if (isPreview) {
+              alert("Please wait for the site to be fully online!")
+              return
+            }
+
             approveZapperStatus !== ApprovalState.APPROVED ? approveZapper() : onConfirm(zappingToken, tokenName, val)
-          }
+          }}
         >
           {approveZapperStatus !== ApprovalState.APPROVED ? 'Approve' : "Let's go"}
         </Button>

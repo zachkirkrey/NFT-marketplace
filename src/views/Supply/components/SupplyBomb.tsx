@@ -123,7 +123,15 @@ const SupplyBomb: React.FC = () => {
                   disabled={approveStatus !== ApprovalState.NOT_APPROVED}
                   className={approveStatus === ApprovalState.NOT_APPROVED ? 'shinyButton' : 'shinyButtonDisabled'}
                   style={{ marginTop: '20px' }}
-                  onClick={approve}
+                  onClick={() => {
+                    const isPreview = false
+      
+                    if (isPreview) {
+                      alert("Please wait for the site to be fully online!")
+                      return
+                    }
+                    approve()
+                  }}
                 >
                   Approve 10MB
                 </Button>

@@ -16,7 +16,7 @@ import { Helmet } from 'react-helmet';
 
 import PageHeader from '../../components/PageHeader';
 
-const TITLE = 'bomb.money | Farms';
+const TITLE = '10mb.finance | Farms';
 
 const Farm = () => {
   const [banks] = useBanks();
@@ -35,7 +35,7 @@ const Farm = () => {
             <Container maxWidth="lg">
               <Grid container justifyContent="center">
                 <Grid item lg={10}>
-                  <PageHeader title="Farm" subtitle="Earn 10MB or 10SHARE by staking USDT LP" />
+                  <PageHeader title="Farm" subtitle="Stake LP tokens to earn 10SHARE. During the genesis period, stake single tokens to earn 10MB!" />
                 </Grid>
               </Grid>
 

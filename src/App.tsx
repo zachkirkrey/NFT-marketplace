@@ -17,7 +17,8 @@ import Loader from './components/Loader';
 import Popups from './components/Popups';
 //import Regulations from './views/Regulations/Regulations';
 import { RefreshContextProvider } from './contexts/RefreshContext';
-import tenWhiteImg from './assets/img/10-white.svg';
+import tenWhiteImg from './assets/img/10-large.png';
+import tenWhiteTransImg from './assets/img/10-large-transparent.png';
 
 const Home = lazy(() => import('./views/Home'));
 const Farm = lazy(() => import('./views/Farm'));
@@ -42,8 +43,8 @@ const BackgroundAdornment = styled.div`
   background-image: url(${tenWhiteImg});
   background-size: 180px;
   background-repeat: no-repeat;
-  background-position: -20px 70%;
-  opacity: 0.1;
+  background-position: 20px calc(30% + 30px);
+  opacity: 0.2;
   z-index: -1;
 `;
 
@@ -51,11 +52,86 @@ const BackgroundAdornment2 = styled.div`
   position: fixed;
   width: 100vw;
   height: 100vh;
-  background-image: url(${tenWhiteImg});
+  background-image: url(${tenWhiteTransImg});
   background-size: 80px;
   background-repeat: no-repeat;
-  background-position: 40px calc(70% + -80px);
+  background-position: 40px calc(30% - 50px);
+  opacity: 0.4;
+  z-index: -1;
+`;
+
+
+const BackgroundAdornment3 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteImg});
+  background-size: 180px;
+  background-repeat: no-repeat;
+  background-position: 90% calc(70% - 340px);
   opacity: 0.2;
+  z-index: -1;
+`;
+
+const BackgroundAdornment4 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteTransImg});
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: calc(90% - 30px) calc(70% - 280px);
+  opacity: 0.4;
+  z-index: -1;
+`;
+
+
+const BackgroundAdornment5 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteImg});
+  background-size: 180px;
+  background-repeat: no-repeat;
+  background-position: calc(30%) 70%;
+  opacity: 0.2;
+  z-index: -1;
+`;
+
+const BackgroundAdornment6 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteTransImg});
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: calc(30% + 20px) calc(70% + -80px);
+  opacity: 0.4;
+  z-index: -1;
+`;
+
+
+const BackgroundAdornment7 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteImg});
+  background-size: 180px;
+  background-repeat: no-repeat;
+  background-position: calc(80% - 80px) 72%;
+  opacity: 0.2;
+  z-index: -1;
+`;
+
+const BackgroundAdornment8 = styled.div`
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(${tenWhiteTransImg});
+  background-size: 80px;
+  background-repeat: no-repeat;
+  background-position: calc(80% - 30px) calc(70% + 80px);
+  opacity: 0.4;
   z-index: -1;
 `;
 
@@ -73,6 +149,12 @@ const App: React.FC = () => {
     <Providers>
       <BackgroundAdornment />
       <BackgroundAdornment2 />
+      <BackgroundAdornment3 />
+      <BackgroundAdornment4 />
+      <BackgroundAdornment5 />
+      <BackgroundAdornment6 />
+      <BackgroundAdornment7 />
+      <BackgroundAdornment8 />
       <Router>
         <Suspense fallback={<Loader />}>
           <Switch>
@@ -126,7 +208,7 @@ const Providers: React.FC = ({ children }) => {
             walletconnect: { rpcUrl: config.defaultProvider },
             walletlink: {
               url: config.defaultProvider,
-              appName: 'bomb.money',
+              appName: '10mb.finance',
               appLogoUrl: 'https://raw.githubusercontent.com/bombmoney/bomb-assets/master/bomb-512.png',
             },
           }}

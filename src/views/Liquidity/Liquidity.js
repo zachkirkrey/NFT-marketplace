@@ -26,7 +26,7 @@ const BackgroundImage = createGlobalStyle`
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 }
-const TITLE = 'bomb.money |';
+const TITLE = '10mb.finance |';
 
 const ProvideLiquidity = () => {
   const [bombAmount, setBombAmount] = useState(0);
@@ -37,15 +37,15 @@ const ProvideLiquidity = () => {
   const bombFinance = useBombFinance();
   const [approveTaxOfficeStatus, approveTaxOffice] = useApproveTaxOffice();
   const bombBalance = useTokenBalance(bombFinance["10MB"]);
-  const USDTalance = useTokenBalance(bombFinance.USDT);
+  const USDCalance = useTokenBalance(bombFinance.USDC);
 
-  const croBalance = (USDTalance / 1e18).toFixed(4);
+  const croBalance = (USDCalance / 1e18).toFixed(4);
   const { onProvideBombFtmLP } = useProvideBombFtmLP();
-  const bombFtmLpStats = useLpStats('10MB-USDT-LP');
+  const bombFtmLpStats = useLpStats('10MB-USDC LP');
 
   const bombLPStats = useMemo(() => (bombFtmLpStats ? bombFtmLpStats : null), [bombFtmLpStats]);
-  const bombPriceInCRO = useMemo(() => (bombStats ? Number(bombStats.tokenInUSDT).toFixed(2) : null), [bombStats]);
-  const croPriceIn_10MB = useMemo(() => (bombStats ? Number(1 / bombStats.tokenInUSDT).toFixed(2) : null), [bombStats]);
+  const bombPriceInCRO = useMemo(() => (bombStats ? Number(bombStats.tokenInUSDC).toFixed(2) : null), [bombStats]);
+  const croPriceIn_10MB = useMemo(() => (bombStats ? Number(1 / bombStats.tokenInUSDC).toFixed(2) : null), [bombStats]);
   // const classes = useStyles();
 
   const handleBombChange = async (e) => {
@@ -65,7 +65,7 @@ const ProvideLiquidity = () => {
     }
     if (!isNumeric(e.currentTarget.value)) return;
     setFtmAmount(e.currentTarget.value);
-    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'USDT');
+    const quoteFromSpooky = await bombFinance.quoteFromSpooky(e.currentTarget.value, 'USDC');
     setBombAmount(quoteFromSpooky);
 
     setLpTokensAmount(quoteFromSpooky / bombLPStats.tokenAmount);
@@ -98,9 +98,9 @@ const ProvideLiquidity = () => {
             <b>
               This and{' '}
               <a href="https://pancakeswap.finance/" rel="noopener noreferrer" target="_blank">
-                USDT
+                USDC
               </a>{' '}
-              are the only ways to provide Liquidity on 10MB-USDT pair without paying tax.
+              are the only ways to provide Liquidity on 10MB-USDC pair without paying tax.
             </b>
           </Alert>
           <Grid item xs={12} sm={12}>
@@ -124,7 +124,7 @@ const ProvideLiquidity = () => {
                           onChange={handleFtmChange}
                           value={croAmount}
                           max={croBalance}
-                          symbol={'USDT'}
+                          symbol={'USDC'}
                         ></TokenInput>
                       </Grid>
                       <Grid item xs={12}>
